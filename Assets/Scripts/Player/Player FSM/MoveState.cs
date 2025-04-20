@@ -12,17 +12,24 @@ public class MoveState : BaseState
     {
         player.PlayerMove();
         player.PlayerRotation();
-        player.PlayerAnimator.SetMove(player.SprintPressed ? 1f : 0.5f);
+        // player.PlayerAnimator.SetMove(player.SprintPressed ? 1f : 0.5f);
+        player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f));
 
-        if (player.InputDirection.magnitude == 0f)
-        {
-            player.ChangeState(new IdleState(player));
-            return;
-        }
+        // if (player.InputDirection.magnitude == 0f)
+        // {
+        //     player.ChangeState(new IdleState(player));
+        //     return;
+        // }
 
         if (player.AttackPressed)
         {
             player.ChangeState(new AttackState(player));
+            return;
+        }
+
+        if (player.SkillPressed)
+        {
+            player.ChangeState(new SkillState(player));
             return;
         }
 

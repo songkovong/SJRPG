@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,10 +15,11 @@ public class Player : MonoBehaviour
     public Vector2 InputDirection { get; private set; }
     public bool DodgePressed { get; private set; }
     public bool AttackPressed { get; private set;}
+    public bool SkillPressed { get; private set; }
     public bool GuardPressed { get; private set; }
     public bool SprintPressed { get; private set; }
-
     public float finalSpeed { get; private set; }
+
     float moveSpeed = 5f;
     float sprintSpeed = 10f;
     float rotationSpeed = 20f;
@@ -40,6 +42,8 @@ public class Player : MonoBehaviour
         playerInput.Player.Dodge.canceled += OnDodge;
         playerInput.Player.Attack.started += OnAttack;
         playerInput.Player.Attack.canceled += OnAttack;
+        playerInput.Player.Skill.started += OnSkill;
+        playerInput.Player.Skill.canceled += OnSkill;
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
@@ -49,7 +53,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        ChangeState(new IdleState(this));
+        // ChangeState(new IdleState(this));
+        ChangeState(new MoveState(this));
     }
 
     void Update()
@@ -58,11 +63,11 @@ public class Player : MonoBehaviour
 
         DodgePressed = false;
         AttackPressed = false;
+        SkillPressed = false;
         // GuardPressed = false;
     }
 
     // Methods
-
     public void PlayerMove()
     {
         // Little Gravity on Player
@@ -77,7 +82,11 @@ public class Player : MonoBehaviour
 
     public void PlayerRotation()
     {
-        Vector3 direction = new Vector3(InputDirection.x, 0, InputDirection.y);
+        Vector3 direction = new Vector3(currentMovement.x, 0, currentMovement.z);
+        
+        // If vector is zero, dont rotate
+        if(direction.sqrMagnitude < 0.001f) return;
+        
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2));
     }
@@ -90,7 +99,6 @@ public class Player : MonoBehaviour
     }
 
     // On event
-
     void OnMovementInput(InputAction.CallbackContext ctx)
     {
         InputDirection = ctx.ReadValue<Vector2>();
@@ -120,11 +128,17 @@ public class Player : MonoBehaviour
         AttackPressed = true;
     }
 
+    private void OnSkill(InputAction.CallbackContext ctx)
+    {
+        SkillPressed = true;
+    }
+
     private void OnGuard(InputAction.CallbackContext ctx)
     {
         GuardPressed = ctx.ReadValue<float>() > 0f;
     }
 
+    // Coroutine
     public void StartCoroutinePlayer(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);

@@ -16,9 +16,10 @@ public class GuardState : BaseState
         if(!player.GuardPressed)
         {
             player.PlayerAnimator.PlayGuard(false);
-            player.ChangeState(
-                player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
-            );
+            // player.ChangeState(
+            //     player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
+            // );
+            player.ChangeState(new MoveState(player));
         }
     }
 

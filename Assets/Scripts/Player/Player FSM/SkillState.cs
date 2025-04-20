@@ -1,20 +1,21 @@
 using UnityEngine;
-public class DodgeState : BaseState
+
+public class SkillState : BaseState
 {
-    public DodgeState(Player player) : base(player) { }
+    public SkillState(Player player) : base(player) { }
 
     float timer;
 
     public override void Enter()
     {
         timer = 0f;
-        Debug.Log("Enter Dodge");
-        player.PlayerAnimator.PlayDodge();
+        Debug.Log("Enter Skill");
+        player.PlayerAnimator.PlaySkill();
     }
 
     public override void Update()
     {
-        var animationDuration = player.PlayerAnimator.GetClipByName("Dodge").length;
+        var animationDuration = player.PlayerAnimator.GetClipByName("Skill").length;
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)
@@ -28,6 +29,6 @@ public class DodgeState : BaseState
 
     public override void Exit()
     {
-        Debug.Log("Exit Dodge");
+        Debug.Log("Exit Skill");
     }
 }

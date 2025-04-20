@@ -20,6 +20,16 @@ public class PlayerAnimator
         animator.SetTrigger("Attack");
     }
 
+    public void PlaySkill()
+    {
+        animator.SetTrigger("Skill");
+    }
+
+    public void PlayHit()
+    {
+        animator.SetTrigger("Hit");
+    }
+
     public void PlayDodge()
     {
         animator.SetTrigger("Dodge");
@@ -30,13 +40,13 @@ public class PlayerAnimator
         animator.SetBool("isGuard", isGuard);
     }
 
-    public AnimationClip GetCurrentClip(string name)
+    public AnimationClip GetClipByName(string name)
+{
+    foreach (var clip in animator.runtimeAnimatorController.animationClips)
     {
-        var clips = animator.GetCurrentAnimatorClipInfo(0);
-        foreach (var clip in clips)
-            if (clip.clip.name == name)
-                return clip.clip;
-
-        return null;
+        if (clip.name == name)
+            return clip;
     }
+    return null;
+}
 }

@@ -41,38 +41,38 @@ using UnityEngine;
 public class AttackState : BaseState
 {
     private float animationDuration;
-    private bool comboAllowed;
-    private bool comboQueued;
-    private int comboStep;
+    private bool canCombo;
+    private bool comboTrigger;
+    private int comboCount;
 
-    public AttackState(Player player, int comboStep = 1) : base(player)
+    public AttackState(Player player, int comboCount = 1) : base(player)
     {
-        this.comboStep = comboStep;
+        this.comboCount = comboCount;
     }
 
     public override void Enter()
     {
-        comboAllowed = false;
-        comboQueued = false;
+        Debug.Log("Enter Attack");
 
-        // 애니메이션 실행
-        player.PlayerAnimator.PlayAttack(comboStep);
+        canCombo = false;
+        comboTrigger = false;
 
-        // 애니메이션 길이 가져오기
-        var clip = player.PlayerAnimator.GetCurrentClip("Attack" + comboStep);
+        player.PlayerAnimator.PlayAttack(comboCount);
+
+        // var clip = player.PlayerAnimator.GetCurrentClip("Attack" + comboCount);
+        var clip = player.PlayerAnimator.GetClipByName("Attack" + comboCount);
         animationDuration = clip != null ? clip.length : 0.5f;
+        Debug.Log("clip length" + animationDuration);
 
-        // combo 허용 타이밍 예약 (70% 시점에 허용)
-        // player.StartCoroutine(AllowComboAfterTime(animationDuration * 0.7f));
-        player.StartCoroutine(AllowComboAfterAnimation(animationDuration));
-        player.StartCoroutine(EndAttackAfterTime(animationDuration));
+        player.StartCoroutinePlayer(AllowComboAfterAnimation(animationDuration));
+        player.StartCoroutinePlayer(EndAttackAfterTime(animationDuration));
     }
 
     public override void Update()
     {
-        if (comboAllowed && player.AttackPressed)
+        if (canCombo && player.AttackPressed)
         {
-            comboQueued = true;
+            comboTrigger = true;
         }
     }
 
@@ -81,37 +81,31 @@ public class AttackState : BaseState
         Debug.Log("Exit Attack");
     }
 
-    private IEnumerator AllowComboAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);
-        comboAllowed = true;
-    }
-
     private IEnumerator AllowComboAfterAnimation(float animationDuration)
     {
-        // 애니메이션 끝날 때까지 기다림
+        yield return new WaitForSeconds(0.3f);
+
+        canCombo = true;
+
         yield return new WaitForSeconds(animationDuration - 0.3f);
 
-        // 그때부터 콤보 입력 허용
-        comboAllowed = true;
-
-        // 콤보 입력을 받을 수 있는 시간 (예: 0.3초) 설정 후 자동 종료
-        yield return new WaitForSeconds(0.5f); // or longer
-        comboAllowed = false;
+        canCombo = false;
     }
 
     private IEnumerator EndAttackAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        if (comboQueued && comboStep < 3)
+        if (comboTrigger && comboCount < 3)
         {
-            player.ChangeState(new AttackState(player, comboStep + 1));
+            player.ChangeState(new AttackState(player, comboCount + 1));
         }
         else
         {
-            player.ChangeState(
-                player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
-            );
+            // player.ChangeState(
+            //     player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
+            // );
+
+            player.ChangeState(new MoveState(player));
         }
     }
 }
