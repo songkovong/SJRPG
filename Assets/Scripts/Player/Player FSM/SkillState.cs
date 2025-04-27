@@ -4,6 +4,7 @@ public class SkillState : BaseState
 {
     public SkillState(Player player) : base(player) { }
 
+    float animationDuration;
     float timer;
 
     public override void Enter()
@@ -11,11 +12,14 @@ public class SkillState : BaseState
         timer = 0f;
         Debug.Log("Enter Skill");
         player.PlayerAnimator.PlaySkill();
+        animationDuration = player.PlayerAnimator.GetClipByName("Skill").length;
+        player.isSkill = true;
     }
 
     public override void Update()
     {
-        var animationDuration = player.PlayerAnimator.GetClipByName("Skill").length;
+        player.PlayerMove();
+        // player.PlayerRotation();
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)
@@ -30,5 +34,6 @@ public class SkillState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit Skill");
+        player.isSkill = false;
     }
 }

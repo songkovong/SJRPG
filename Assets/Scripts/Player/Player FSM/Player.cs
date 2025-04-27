@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
     public bool GuardPressed { get; private set; }
     public bool SprintPressed { get; private set; }
     public float finalSpeed { get; private set; }
+    public bool isSkill { get; set; }
 
+    // Speed value
     float moveSpeed = 5f;
     float sprintSpeed = 10f;
     float rotationSpeed = 20f;
@@ -38,8 +40,8 @@ public class Player : MonoBehaviour
         playerInput.Player.Move.canceled += OnMovementInput;
         playerInput.Player.Sprint.started += OnSprint;
         playerInput.Player.Sprint.canceled += OnSprint;
-        playerInput.Player.Dodge.started += OnDodge;
-        playerInput.Player.Dodge.canceled += OnDodge;
+        // playerInput.Player.Enteraction.started += OnDodge;
+        // playerInput.Player.Enteraction.canceled += OnDodge;
         playerInput.Player.Attack.started += OnAttack;
         playerInput.Player.Attack.canceled += OnAttack;
         playerInput.Player.Skill.started += OnSkill;
@@ -75,9 +77,12 @@ public class Player : MonoBehaviour
 
         // Speed Calculate
         finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
+        
+        // Skill atcivate speed
+        var skillSpeed = isSkill ? (SprintPressed ? 1f : 2f) : 1f;
 
         // Move Player
-        characterController.Move(currentMovement * finalSpeed * Time.deltaTime);
+        characterController.Move(currentMovement * finalSpeed * skillSpeed * Time.deltaTime);
     }
 
     public void PlayerRotation()
@@ -118,10 +123,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnDodge(InputAction.CallbackContext ctx)
-    {
-        DodgePressed = true;
-    }
+    // private void OnDodge(InputAction.CallbackContext ctx)
+    // {
+    //     DodgePressed = true;
+    // }
 
     private void OnAttack(InputAction.CallbackContext ctx)
     {

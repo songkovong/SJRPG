@@ -59,7 +59,6 @@ public class AttackState : BaseState
 
         player.PlayerAnimator.PlayAttack(comboCount);
 
-        // var clip = player.PlayerAnimator.GetCurrentClip("Attack" + comboCount);
         var clip = player.PlayerAnimator.GetClipByName("Attack" + comboCount);
         animationDuration = clip != null ? clip.length : 0.5f;
         Debug.Log("clip length" + animationDuration);
@@ -83,11 +82,11 @@ public class AttackState : BaseState
 
     private IEnumerator AllowComboAfterAnimation(float animationDuration)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
 
         canCombo = true;
 
-        yield return new WaitForSeconds(animationDuration - 0.3f);
+        yield return new WaitForSeconds(animationDuration - 0.2f);
 
         canCombo = false;
     }
@@ -101,10 +100,6 @@ public class AttackState : BaseState
         }
         else
         {
-            // player.ChangeState(
-            //     player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
-            // );
-
             player.ChangeState(new MoveState(player));
         }
     }
