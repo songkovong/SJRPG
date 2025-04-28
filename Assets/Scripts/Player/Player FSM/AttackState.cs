@@ -1,49 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-// public class AttackState : BaseState
-// {
-//     private float timer;
-//     private float attackDuration;
-
-//     public AttackState(Player player) : base(player) { }
-
-//     public override void Enter()
-//     {
-//         Debug.Log("Enter Attack");
-//         player.PlayerAnimator.PlayAttack();
-
-//         // Get Animation Length
-//         AnimatorStateInfo stateInfo = player.Animator.GetCurrentAnimatorStateInfo(0);
-//         attackDuration = stateInfo.length;
-
-//         timer = 0f;
-//     }
-
-//     public override void Update()
-//     {
-//         timer += Time.deltaTime;
-//         if (timer >= attackDuration)
-//         {
-//             player.ChangeState(
-//                 player.InputDirection != Vector2.zero ?
-//                 new MoveState(player) : new IdleState(player)
-//             );
-//         }
-//     }
-
-//     public override void Exit()
-//     {
-//         Debug.Log("Exit Attack");
-//     }
-// }
-
 public class AttackState : BaseState
 {
     private float animationDuration;
     private bool canCombo;
     private bool comboTrigger;
     private int comboCount;
+    private float attackMoveSpeed = 0.3f;
 
     public AttackState(Player player, int comboCount = 1) : base(player)
     {
@@ -57,11 +21,14 @@ public class AttackState : BaseState
         canCombo = false;
         comboTrigger = false;
 
+        // player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f) * attackMoveSpeed, player.localMovement.x, player.localMovement.z);
         player.PlayerAnimator.PlayAttack(comboCount);
 
         var clip = player.PlayerAnimator.GetClipByName("Attack" + comboCount);
         animationDuration = clip != null ? clip.length : 0.5f;
         Debug.Log("clip length" + animationDuration);
+
+        player.StartTrail();
 
         player.StartCoroutinePlayer(AllowComboAfterAnimation(animationDuration));
         player.StartCoroutinePlayer(EndAttackAfterTime(animationDuration));
@@ -69,6 +36,9 @@ public class AttackState : BaseState
 
     public override void Update()
     {
+        player.PlayerMove(attackMoveSpeed);
+        player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f) * attackMoveSpeed, player.localMovement.x, player.localMovement.z);
+
         if (canCombo && player.AttackPressed)
         {
             comboTrigger = true;
@@ -77,16 +47,17 @@ public class AttackState : BaseState
 
     public override void Exit()
     {
+        player.EndTrail();
         Debug.Log("Exit Attack");
     }
 
     private IEnumerator AllowComboAfterAnimation(float animationDuration)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         canCombo = true;
 
-        yield return new WaitForSeconds(animationDuration - 0.2f);
+        yield return new WaitForSeconds(animationDuration - 0.1f);
 
         canCombo = false;
     }

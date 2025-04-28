@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,8 +10,11 @@ public class Player : MonoBehaviour
 
     public PlayerInput playerInput;
     CharacterController characterController;
-    public PlayerAnimator playerAnimator { get; private set; }
+    public PlayerAnimator playerAnimator;
     Animator animator;
+
+    // Effect for Attack and Skill
+    [SerializeField] GameObject trailObject;
 
     public Vector2 InputDirection { get; private set; }
     public bool DodgePressed { get; private set; }
@@ -22,11 +26,18 @@ public class Player : MonoBehaviour
     public bool isSkill { get; set; }
 
     // Speed value
-    float moveSpeed = 5f;
-    float sprintSpeed = 10f;
-    float rotationSpeed = 20f;
+    float moveSpeed = 8f;
+    float sprintSpeed = 12f;
+    float rotationSpeed = 30f;
+
+    // Guard Orbit value
+    [SerializeField] GameObject orbitObject;
+    float orbitRadius = 0.8f; // radius
+    float orbitDegree; // degree
+    float orbitSpeed = 400f; // orbit speed
 
     Vector3 currentMovement;
+    public Vector3 localMovement { get; private set; }
 
     void Awake()
     {
@@ -43,9 +54,9 @@ public class Player : MonoBehaviour
         // playerInput.Player.Enteraction.started += OnDodge;
         // playerInput.Player.Enteraction.canceled += OnDodge;
         playerInput.Player.Attack.started += OnAttack;
-        playerInput.Player.Attack.canceled += OnAttack;
+        // playerInput.Player.Attack.canceled += OnAttack;
         playerInput.Player.Skill.started += OnSkill;
-        playerInput.Player.Skill.canceled += OnSkill;
+        // playerInput.Player.Skill.canceled += OnSkill;
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
@@ -57,6 +68,13 @@ public class Player : MonoBehaviour
     {
         // ChangeState(new IdleState(this));
         ChangeState(new MoveState(this));
+
+        // Initailize TrailObject
+        trailObject = GameObject.FindWithTag("Attack Trail");
+        orbitObject = GameObject.FindWithTag("Guard Trail");
+        
+        EndTrail();
+        EndOrbitTrail();
     }
 
     void Update()
@@ -67,10 +85,12 @@ public class Player : MonoBehaviour
         AttackPressed = false;
         SkillPressed = false;
         // GuardPressed = false;
+
+        LocalMoveDir();
     }
 
     // Methods
-    public void PlayerMove()
+    public void PlayerMove(float multipleSpeed)
     {
         // Little Gravity on Player
         currentMovement.y = -0.5f; 
@@ -82,7 +102,7 @@ public class Player : MonoBehaviour
         var skillSpeed = isSkill ? (SprintPressed ? 1f : 2f) : 1f;
 
         // Move Player
-        characterController.Move(currentMovement * finalSpeed * skillSpeed * Time.deltaTime);
+        characterController.Move(currentMovement * finalSpeed * skillSpeed * multipleSpeed * Time.deltaTime);
     }
 
     public void PlayerRotation()
@@ -93,7 +113,72 @@ public class Player : MonoBehaviour
         if(direction.sqrMagnitude < 0.001f) return;
         
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2));
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f));
+    }
+
+    // https://www.youtube.com/watch?v=XI56ogm7eFI
+    public void PlayerMouseRotation()
+    {
+        Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
+
+        Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
+
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+        if (groundPlane.Raycast(ray, out float distance))
+        {
+            Vector3 direction = ray.GetPoint(distance) - transform.position;
+            direction.y = 0f;
+
+            // If vector is zero, dont rotate
+            if (direction.sqrMagnitude < 0.001f)
+                return;
+
+            // transform.rotation = Quaternion.LookRotation(direction);
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f));
+        }
+    }
+
+    public void LocalMoveDir()
+    {
+        localMovement = this.transform.InverseTransformDirection(new Vector3(currentMovement.x, 0, currentMovement.z));
+    }
+
+    // https://sharp2studio.tistory.com/4
+    public void OrbitRotation()
+    {
+        orbitDegree += Time.deltaTime * orbitSpeed;
+
+        if(orbitRadius >= 360f) orbitDegree -= 360f;
+
+        float rad = Mathf.Deg2Rad * (orbitDegree);
+        float x = orbitRadius * Mathf.Cos(rad);
+        float z = orbitRadius * Mathf.Sin(rad);
+
+        orbitObject.transform.position = this.transform.position + new Vector3(x, 0.5f, z);
+        // orbitObject.transform.rotation = Quaternion.Euler(0, 0, orbitDegree * -1); // 가운데를 바라보게 각도 조절
+        // orbitObject.transform.rotation = Quaternion.LookRotation(this.transform.position - orbitObject.transform.position);
+    }
+
+    public void StartTrail()
+    {
+        trailObject.SetActive(true);
+    }
+
+    public void EndTrail()
+    {
+        trailObject.SetActive(false);
+    }
+
+    public void StartOrbitTrail()
+    {
+        orbitObject.SetActive(true);
+    }
+
+    public void EndOrbitTrail()
+    {
+        orbitObject.SetActive(false);
     }
 
     public void ChangeState(BaseState newState)

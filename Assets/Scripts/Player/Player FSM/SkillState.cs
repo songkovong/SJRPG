@@ -6,6 +6,7 @@ public class SkillState : BaseState
 
     float animationDuration;
     float timer;
+    float skillMoveSpeed = 1f;
 
     public override void Enter()
     {
@@ -14,11 +15,12 @@ public class SkillState : BaseState
         player.PlayerAnimator.PlaySkill();
         animationDuration = player.PlayerAnimator.GetClipByName("Skill").length;
         player.isSkill = true;
+        player.StartTrail();
     }
 
     public override void Update()
     {
-        player.PlayerMove();
+        player.PlayerMove(skillMoveSpeed);
         // player.PlayerRotation();
         timer += Time.deltaTime;
 
@@ -35,5 +37,6 @@ public class SkillState : BaseState
     {
         Debug.Log("Exit Skill");
         player.isSkill = false;
+        player.EndTrail();
     }
 }

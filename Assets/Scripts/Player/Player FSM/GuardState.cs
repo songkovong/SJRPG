@@ -7,11 +7,14 @@ public class GuardState : BaseState
     public override void Enter()
     {
         Debug.Log("Enter Guard");
+        player.StartOrbitTrail();
     }
 
     public override void Update()
     {
         player.PlayerAnimator.PlayGuard(true);
+
+        player.OrbitRotation();
 
         if(!player.GuardPressed)
         {
@@ -26,5 +29,6 @@ public class GuardState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit Guard");
+        player.EndOrbitTrail();
     }
 }

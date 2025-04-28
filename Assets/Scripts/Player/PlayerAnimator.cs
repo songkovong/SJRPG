@@ -9,9 +9,11 @@ public class PlayerAnimator
         this.animator = animator;
     }
 
-    public void SetMove(float movement)
+    public void SetMove(float movement, float moveX, float moveY)
     {
         animator.SetFloat("movement", movement, 0.1f, Time.deltaTime);
+        animator.SetFloat("moveX", moveX, 0.1f, Time.deltaTime);
+        animator.SetFloat("moveY", moveY, 0.1f, Time.deltaTime);
     }
 
     public void PlayAttack(int comboStep)

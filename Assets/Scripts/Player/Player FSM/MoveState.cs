@@ -3,6 +3,8 @@ public class MoveState : BaseState
 {
     public MoveState(Player player) : base(player) { }
 
+    float defaultMoveSpeed = 1f;
+
     public override void Enter()
     {
         Debug.Log("Enter Move");
@@ -10,10 +12,15 @@ public class MoveState : BaseState
 
     public override void Update()
     {
-        player.PlayerMove();
-        player.PlayerRotation();
+        player.PlayerMove(defaultMoveSpeed);
+        // player.PlayerRotation();
+        if(player.SprintPressed) {
+            player.PlayerRotation();
+        } else {
+            player.PlayerMouseRotation();
+        }
         // player.PlayerAnimator.SetMove(player.SprintPressed ? 1f : 0.5f);
-        player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f));
+        player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f), player.localMovement.x, player.localMovement.z);
 
         // if (player.InputDirection.magnitude == 0f)
         // {
@@ -23,14 +30,21 @@ public class MoveState : BaseState
 
         if (player.AttackPressed)
         {
-            player.ChangeState(new AttackState(player));
+            if(!player.SprintPressed)
+            {
+                player.ChangeState(new AttackState(player));
+                return;
+            }
             return;
         }
 
         if (player.SkillPressed)
         {
-            player.ChangeState(new SkillState(player));
+            if(!player.SprintPressed)
+            {
+                player.ChangeState(new SkillState(player));
             return;
+            }
         }
 
         if (player.DodgePressed)
