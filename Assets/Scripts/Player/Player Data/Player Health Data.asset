@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player Health Data
   m_EditorClassIdentifier: 
   maxHealth: 100
-  godmodeDuration: 1
+  godmodeDuration: 2

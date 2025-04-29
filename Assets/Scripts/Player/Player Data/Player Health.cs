@@ -41,7 +41,9 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator GodmodeCoroutine()
     {
         isGodmode = true;
+
         yield return new WaitForSeconds(playerHealthData.godmodeDuration);
+
         isGodmode = false;
     }
 

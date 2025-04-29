@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -242,6 +243,11 @@ public class Player : MonoBehaviour
     public void StartCoroutinePlayer(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);
+    }
+
+    public IEnumerator HitColor()
+    {
+        yield return new WaitForSeconds(0);
     }
 
     public PlayerAnimator PlayerAnimator => playerAnimator;
