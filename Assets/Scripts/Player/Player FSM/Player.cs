@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     public PlayerAnimator playerAnimator;
     Animator animator;
 
+    // Player Datas
+    PlayerHealth playerHealth;
+
     // Effect for Attack and Skill
     [SerializeField] GameObject trailObject;
 
@@ -36,6 +39,9 @@ public class Player : MonoBehaviour
     float orbitDegree; // degree
     float orbitSpeed = 400f; // orbit speed
 
+    // Hit value
+    public bool isHit { get; set; }
+
     Vector3 currentMovement;
     public Vector3 localMovement { get; private set; }
 
@@ -45,6 +51,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         playerAnimator = new PlayerAnimator(animator);
         characterController = GetComponent<CharacterController>();
+        
+        playerHealth = GetComponent<PlayerHealth>();
 
         playerInput.Player.Move.started += OnMovementInput;
         playerInput.Player.Move.performed += OnMovementInput;
@@ -60,6 +68,8 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
+
+        isHit = false;
 
         playerInput.Enable();
     }

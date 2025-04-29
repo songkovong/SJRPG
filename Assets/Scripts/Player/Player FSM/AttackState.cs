@@ -37,7 +37,11 @@ public class AttackState : BaseState
     public override void Update()
     {
         player.PlayerMove(attackMoveSpeed);
-        player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f) * attackMoveSpeed, player.localMovement.x, player.localMovement.z);
+        player.PlayerAnimator.SetMove(
+            player.InputDirection.magnitude * attackMoveSpeed * .75f, 
+            player.localMovement.x, 
+            player.localMovement.z
+        );
 
         if (canCombo && player.AttackPressed)
         {

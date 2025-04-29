@@ -4,6 +4,8 @@ public class GuardState : BaseState
 {
     public GuardState(Player player) : base(player) { }
 
+    float GuardMoveSpeed = 0.1f;
+
     public override void Enter()
     {
         Debug.Log("Enter Guard");
@@ -14,6 +16,13 @@ public class GuardState : BaseState
     {
         player.PlayerAnimator.PlayGuard(true);
 
+        player.PlayerMove(GuardMoveSpeed);
+        player.PlayerAnimator.SetMove(
+            player.InputDirection.magnitude * GuardMoveSpeed * .75f, 
+            player.localMovement.x, 
+            player.localMovement.z
+        );
+        
         player.OrbitRotation();
 
         if(!player.GuardPressed)

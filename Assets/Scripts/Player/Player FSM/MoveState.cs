@@ -20,7 +20,11 @@ public class MoveState : BaseState
             player.PlayerMouseRotation();
         }
         // player.PlayerAnimator.SetMove(player.SprintPressed ? 1f : 0.5f);
-        player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f), player.localMovement.x, player.localMovement.z);
+        player.PlayerAnimator.SetMove(
+            player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f) * defaultMoveSpeed, 
+            player.localMovement.x, 
+            player.localMovement.z
+        );
 
         // if (player.InputDirection.magnitude == 0f)
         // {
@@ -28,34 +32,36 @@ public class MoveState : BaseState
         //     return;
         // }
 
-        if (player.AttackPressed)
+        if(!player.SprintPressed || !player.isHit)
         {
-            if(!player.SprintPressed)
+            if (player.AttackPressed)
             {
                 player.ChangeState(new AttackState(player));
                 return;
             }
-            return;
-        }
 
-        if (player.SkillPressed)
-        {
-            if(!player.SprintPressed)
+            if (player.SkillPressed)
             {
                 player.ChangeState(new SkillState(player));
-            return;
+                return;
+            }
+
+            if (player.DodgePressed)
+            {
+                player.ChangeState(new DodgeState(player));
+                return;
+            }
+
+            if (player.GuardPressed)
+            {
+                player.ChangeState(new GuardState(player));
+                return;
             }
         }
 
-        if (player.DodgePressed)
+        if(player.isHit)
         {
-            player.ChangeState(new DodgeState(player));
-            return;
-        }
-
-        if (player.GuardPressed)
-        {
-            player.ChangeState(new GuardState(player));
+            player.ChangeState(new HitState(player));
             return;
         }
     }
