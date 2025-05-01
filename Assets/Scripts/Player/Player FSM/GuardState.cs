@@ -24,14 +24,9 @@ public class GuardState : BaseState
             player.localMovement.z
         );
         
-        // player.OrbitRotation();
-
         if(!player.GuardPressed)
         {
             player.PlayerAnimator.PlayGuard(false);
-            // player.ChangeState(
-            //     player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
-            // );
             player.ChangeState(new MoveState(player));
         }
     }

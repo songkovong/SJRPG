@@ -14,7 +14,7 @@ public class SkillState : BaseState
 
         var skillNameHash = player.playerStat.SkillName;
         player.playerStat.canSkill = false;
-        player.playerStat.skillCooltime = 0f;
+        player.playerStat.skillCooltimeTimer = 0f;
 
         // Player Skill is empty
         // if(skillNameHash == "" || skillNameHash == null) player.ChangeState(new MoveState(player));
@@ -34,14 +34,10 @@ public class SkillState : BaseState
     public override void Update()
     {
         player.PlayerMove(skillMoveSpeed);
-        // player.PlayerRotation();
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)
         {
-            // player.ChangeState(
-            //     player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
-            // );
             player.ChangeState(new MoveState(player));
         }
     }

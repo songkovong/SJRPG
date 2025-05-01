@@ -19,9 +19,6 @@ public class DodgeState : BaseState
 
         if(timer >= animationDuration)
         {
-            // player.ChangeState(
-            //     player.InputDirection != Vector2.zero ? new MoveState(player) : new IdleState(player)
-            // );
             player.ChangeState(new MoveState(player));
         }
     }

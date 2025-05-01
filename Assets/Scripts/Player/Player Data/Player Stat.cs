@@ -7,40 +7,39 @@ public class PlayerStat : MonoBehaviour
     Player player;
 
     // Health
-    public PlayerHealthData playerHealthData;
+    public float maxHealth { get; set; } = 100f;
     public float currentHealth { get; set; }
+    public float godmodeDuration { get; private set; } = 2f;
     public bool isGodmode { get; set; } = false;
 
     // Damage
-    public PlayerDamageData playerDamageData;
     public float attackDamage { get; private set; }
     public float finalDamage { get; set; }
 
     // Skill
     public List<PlayerSkillData> skills = new List<PlayerSkillData>();
-    public float skillCooltime { get; set; }
+    public float skillCooltimeTimer { get; set; }
     public bool canSkill { get; set; }
     string skillName;
-    float cooltime;
+    float skillCooltime;
     float skillDamage;
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
     string weaponName;
     public float weaponDamage { get; private set; }
-    public GameObject weaponHitbox;
 
     void Start()
     {
         player = GetComponent<Player>();
 
-        currentHealth = playerHealthData.maxHealth;
+        currentHealth = maxHealth;
         isGodmode = false;
 
-        attackDamage = playerDamageData.attackDamageData;
+        attackDamage = 10f;
 
         FindSkills();
-        skillCooltime = cooltime;
+        skillCooltimeTimer = skillCooltime;
         canSkill = true;
 
         FindWeapons();
@@ -50,17 +49,14 @@ public class PlayerStat : MonoBehaviour
     {
         if(!canSkill)
         {
-            skillCooltime += Time.deltaTime;
-            if(skillCooltime >= cooltime)
+            skillCooltimeTimer += Time.deltaTime;
+            if(skillCooltimeTimer >= skillCooltime)
             {
                 canSkill = true;
-                skillCooltime = cooltime;
+                skillCooltimeTimer = skillCooltime;
             }
         }
         Debug.Log("Can Skill = " + canSkill);
-
-
-        // HitValue(weaponHitbox.transform.position, new Vector3(0.2f, 1.2f, 0.1f), weaponHitbox.transform.rotation, "Enemy");
     }
 
     public void TakeDamage(float getDamage)
@@ -70,7 +66,7 @@ public class PlayerStat : MonoBehaviour
         player.isHit = true;
 
         currentHealth -= getDamage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, playerHealthData.maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         if(currentHealth <= 0) 
         {
@@ -93,7 +89,7 @@ public class PlayerStat : MonoBehaviour
     {
         isGodmode = true;
 
-        yield return new WaitForSeconds(playerHealthData.godmodeDuration);
+        yield return new WaitForSeconds(godmodeDuration);
 
         isGodmode = false;
     }
@@ -111,7 +107,7 @@ public class PlayerStat : MonoBehaviour
             if(skill.nameData.Equals(player.skillName))
             {
                 this.skillName = skill.nameData;
-                this.cooltime = skill.cooltimeData;
+                this.skillCooltime = skill.cooltimeData;
                 this.skillDamage = skill.damageData;
                 return;
             }
@@ -133,6 +129,6 @@ public class PlayerStat : MonoBehaviour
 
 
     public string SkillName => this.skillName;
-    public float Cooltime => this.cooltime;
+    public float SkillCooltime => this.skillCooltime;
     public float SkillDamage => this.skillDamage;
 }

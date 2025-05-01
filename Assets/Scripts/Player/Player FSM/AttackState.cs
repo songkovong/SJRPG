@@ -23,7 +23,6 @@ public class AttackState : BaseState
         canCombo = false;
         comboTrigger = false;
 
-        // player.PlayerAnimator.SetMove(player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f) * attackMoveSpeed, player.localMovement.x, player.localMovement.z);
         player.PlayerAnimator.PlayAttack(comboCount);
 
         var clip = player.PlayerAnimator.GetClipByName("Attack" + comboCount);

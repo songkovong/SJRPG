@@ -246,11 +246,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // private void OnDodge(InputAction.CallbackContext ctx)
-    // {
-    //     DodgePressed = true;
-    // }
-
     private void OnAttack(InputAction.CallbackContext ctx)
     {
         AttackPressed = true;
@@ -270,11 +265,6 @@ public class Player : MonoBehaviour
     public void StartCoroutinePlayer(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);
-    }
-
-    public IEnumerator HitColor()
-    {
-        yield return new WaitForSeconds(0);
     }
 
     public PlayerAnimator PlayerAnimator => playerAnimator;
