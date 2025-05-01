@@ -10,12 +10,25 @@ public class SkillState : BaseState
 
     public override void Enter()
     {
+        player.playerStat.finalDamage = player.playerStat.SkillDamage + player.playerStat.weaponDamage;
+
+        var skillNameHash = player.playerStat.SkillName;
+        player.playerStat.canSkill = false;
+        player.playerStat.skillCooltime = 0f;
+
+        // Player Skill is empty
+        // if(skillNameHash == "" || skillNameHash == null) player.ChangeState(new MoveState(player));
+
         timer = 0f;
         Debug.Log("Enter Skill");
         player.PlayerAnimator.PlaySkill();
-        animationDuration = player.PlayerAnimator.GetClipByName("Skill").length;
+        animationDuration = player.PlayerAnimator.GetClipByName(skillNameHash).length;
+
         player.isSkill = true;
+        player.playerStat.isGodmode = true;
+
         player.StartTrail();
+        player.AttackHitboxOn();
     }
 
     public override void Update()
@@ -36,7 +49,11 @@ public class SkillState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit Skill");
+
         player.isSkill = false;
+        player.playerStat.isGodmode = false;
+
         player.EndTrail();
+        player.AttackHitboxOff();
     }
 }

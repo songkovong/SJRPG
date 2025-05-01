@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class PlayerSkillData : MonoBehaviour
+[CreateAssetMenu(fileName = "Player Skill Data", menuName = "Player Data/Player Skill Data")]
+public class PlayerSkillData : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string nameData;
+    public float cooltimeData;
+    public float damageData;
 }

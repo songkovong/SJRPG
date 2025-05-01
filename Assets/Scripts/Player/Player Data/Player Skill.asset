@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 570c67e704699f34d9dbaa12ce177208, type: 3}
-  m_Name: Player Health Data
+  m_Script: {fileID: 11500000, guid: f82a991eefb8a604ea3ebc413ad91e36, type: 3}
+  m_Name: Player Skill
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  godmodeDuration: 2
+  nameData: Skill
+  cooltimeData: 2
+  damageData: 15

@@ -1,16 +1,7 @@
 using UnityEngine;
 
-public class PlayerDamageData : MonoBehaviour
+[CreateAssetMenu(fileName = "Player Damage Data", menuName = "Player Data/Player Damage Data")]
+public class PlayerDamageData : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float attackDamageData;
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
@@ -14,8 +15,8 @@ public class Player : MonoBehaviour
     public PlayerAnimator playerAnimator;
     Animator animator;
 
-    // Player Datas
-    PlayerHealth playerHealth;
+    // Player Stat
+    public PlayerStat playerStat { get; private set; }
 
     // Effect for Attack and Skill
     [SerializeField] GameObject trailObject;
@@ -43,6 +44,15 @@ public class Player : MonoBehaviour
     // Hit value
     public bool isHit { get; set; }
 
+    // Attack value
+    public GameObject attackHitbox { get; private set; }
+
+    // Skill value
+    public string skillName { get; set; }
+
+    // Weapon value
+    public string weaponName { get; set; }
+
     Vector3 currentMovement;
     public Vector3 localMovement { get; private set; }
 
@@ -52,8 +62,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         playerAnimator = new PlayerAnimator(animator);
         characterController = GetComponent<CharacterController>();
-        
-        playerHealth = GetComponent<PlayerHealth>();
+
+        playerStat = GetComponent<PlayerStat>();
 
         playerInput.Player.Move.started += OnMovementInput;
         playerInput.Player.Move.performed += OnMovementInput;
@@ -72,6 +82,9 @@ public class Player : MonoBehaviour
 
         isHit = false;
 
+        skillName = "Skill";
+        weaponName = "Weapon";
+
         playerInput.Enable();
     }
 
@@ -83,9 +96,13 @@ public class Player : MonoBehaviour
         // Initailize TrailObject
         trailObject = GameObject.FindWithTag("Attack Trail");
         orbitObject = GameObject.FindWithTag("Guard Trail");
+
+        attackHitbox = GameObject.FindWithTag("Attack Hitbox");
         
         EndTrail();
         EndOrbitTrail();
+
+        AttackHitboxOff();
     }
 
     void Update()
@@ -98,6 +115,7 @@ public class Player : MonoBehaviour
         // GuardPressed = false;
 
         LocalMoveDir();
+        GodmodeEffect(orbitObject);
     }
 
     // Methods
@@ -192,6 +210,15 @@ public class Player : MonoBehaviour
         orbitObject.SetActive(false);
     }
 
+    public void GodmodeEffect(GameObject obj)
+    {
+        if(playerStat.isGodmode)
+        {
+            obj.SetActive(true);
+            OrbitRotation();
+        } else obj.SetActive(false);
+    }
+
     public void ChangeState(BaseState newState)
     {
         currentState?.Exit();
@@ -252,4 +279,6 @@ public class Player : MonoBehaviour
 
     public PlayerAnimator PlayerAnimator => playerAnimator;
     public Animator Animator => animator;
+    public void AttackHitboxOn() => attackHitbox.SetActive(true);
+    public void AttackHitboxOff() => attackHitbox.SetActive(false);
 }

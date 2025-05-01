@@ -10,6 +10,7 @@ public class GuardState : BaseState
     {
         Debug.Log("Enter Guard");
         player.StartOrbitTrail();
+        player.playerStat.isGodmode = true;
     }
 
     public override void Update()
@@ -23,7 +24,7 @@ public class GuardState : BaseState
             player.localMovement.z
         );
         
-        player.OrbitRotation();
+        // player.OrbitRotation();
 
         if(!player.GuardPressed)
         {
@@ -39,5 +40,6 @@ public class GuardState : BaseState
     {
         Debug.Log("Exit Guard");
         player.EndOrbitTrail();
+        player.playerStat.isGodmode = false;
     }
 }

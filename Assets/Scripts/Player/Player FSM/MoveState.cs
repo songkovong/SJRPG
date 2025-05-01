@@ -32,15 +32,19 @@ public class MoveState : BaseState
         //     return;
         // }
 
-        if(!player.SprintPressed || !player.isHit)
+        if(!player.SprintPressed)
         {
+            // if(!player.isHit)
+            // {
+            //     // player change state in here
+            // }
             if (player.AttackPressed)
             {
                 player.ChangeState(new AttackState(player));
                 return;
             }
 
-            if (player.SkillPressed)
+            if (player.SkillPressed && player.playerStat.canSkill)
             {
                 player.ChangeState(new SkillState(player));
                 return;
