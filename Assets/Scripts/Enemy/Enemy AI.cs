@@ -1,4 +1,3 @@
-using UnityEditor.AI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,7 +5,8 @@ public class EnemyAI : MonoBehaviour
 {
     float detectRadius = 10f;
     float detectAttackRadius = 1.5f;
-    float moveSpeed = 2f;
+    float moveSpeed = 1.2f;
+    float rotationSpeed = 2000f;
     public Transform player;
     NavMeshAgent navMesh;
     bool isDetective = false;
@@ -23,6 +23,14 @@ public class EnemyAI : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player").transform;
         }
+
+        // navMesh.updateRotation = false;
+    }
+
+    void Update()
+    {
+        Debug.Log("detective = " + isDetective);
+        Debug.Log("attack = " + isAttack);
     }
 
     public void DetectPlayer()
@@ -41,6 +49,7 @@ public class EnemyAI : MonoBehaviour
             isAttack = true;
             isDetective = false;
         }
+        else isAttack = false;
     }
 
     public void MoveToPlayer()
@@ -49,6 +58,7 @@ public class EnemyAI : MonoBehaviour
         {
             navMesh.SetDestination(player.position);
             navMesh.speed = moveSpeed;
+            navMesh.angularSpeed = rotationSpeed;
         }
         else 
         {

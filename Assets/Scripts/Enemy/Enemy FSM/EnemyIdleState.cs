@@ -6,15 +6,26 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enemy Idle State Enter");
+        Debug.Log("Idle Enter: " + enemy.GetType().Name);
     }
     public override void Update() 
     {
-        if(enemy.isHit) enemy.ChangeState(new EnemyHitState(enemy));
+        Debug.Log($"[IdleState] isHit 상태: {enemy.isHit}");
 
-        if(enemy.EnemyAI.IsDetective) enemy.ChangeState(new EnemyChaseState(enemy));
+        if(enemy.isHit) {
+            enemy.ChangeState(new EnemyHitState(enemy)); 
+            return;
+        }
 
-        if(enemy.EnemyAI.isAttack) enemy.ChangeState(new EnemyAttackState(enemy));
+        if(enemy.EnemyAI.isAttack) {
+            enemy.ChangeState(new EnemyCoolState(enemy)); 
+            return;
+        }
+
+        if(enemy.EnemyAI.IsDetective) {
+            enemy.ChangeState(new EnemyChaseState(enemy)); 
+            return;
+        }
     }
     public override void Exit()
     {

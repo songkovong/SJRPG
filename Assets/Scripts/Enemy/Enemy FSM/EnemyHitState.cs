@@ -10,7 +10,7 @@ public class EnemyHitState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enemy Hit State Enter");
+        Debug.Log("Hit Enter: " + enemy.GetType().Name);
         timer = 0f;
 
         enemy.EnemyAnimator.PlayHit();
@@ -29,7 +29,7 @@ public class EnemyHitState : EnemyBaseState
     }
     public override void Exit()
     {
-        Debug.Log("Enemy Hit State Enter");
+        Debug.Log("Enemy Hit State Exit");
         enemy.isHit = false;
     }
 }

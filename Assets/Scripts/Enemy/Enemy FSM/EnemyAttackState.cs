@@ -9,7 +9,7 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enemy Attack State Enter");
+        Debug.Log("Attack Enter: " + enemy.GetType().Name);
 
         timer = 0f;
 
@@ -20,6 +20,11 @@ public class EnemyAttackState : EnemyBaseState
     }
     public override void Update() 
     {
+        Debug.Log($"[AttackState] isHit 상태: {enemy.isHit}");
+        if(enemy.isHit) 
+        {
+            enemy.ChangeState(new EnemyHitState(enemy));
+        }
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)
@@ -29,7 +34,7 @@ public class EnemyAttackState : EnemyBaseState
     }
     public override void Exit()
     {
-        Debug.Log("Enemy Attack State Enter");
+        Debug.Log("Enemy Attack State Exit");
         enemy.EnemyAI.isAttack = false;
     }
 }

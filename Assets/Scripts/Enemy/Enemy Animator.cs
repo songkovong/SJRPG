@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAnimator : MonoBehaviour
+public class EnemyAnimator
 {
     private readonly Animator animator;
 
@@ -17,6 +17,16 @@ public class EnemyAnimator : MonoBehaviour
     public void PlayAttack()
     {
         animator.SetTrigger("Attack");
+    }
+
+    public void PlayChase(bool isChase)
+    {
+        animator.SetBool("isChase", isChase);
+    }
+
+    public void PlayCool(bool isCool)
+    {
+        animator.SetBool("isCool", isCool);
     }
 
     public AnimationClip GetClipByName(string name)

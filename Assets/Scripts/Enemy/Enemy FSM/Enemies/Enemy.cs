@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     public EnemyBaseState enemyCurrentState;
 
@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     public float attackCooltime { get; private set; } = 2f;
 
-    public bool isHit { get; set; }
+    public bool isHit { get; set; } = false;
     void Start()
     {
         ChangeState(new EnemyIdleState(this));
@@ -46,10 +46,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float getDamage)
+    public virtual void TakeDamage(float getDamage)
     {
         isHit = true;
         Debug.Log("Damage + " + getDamage);
+        Debug.Log("isHit = " + isHit);
     }
 
     public EnemyAnimator EnemyAnimator => enemyAnimator;
