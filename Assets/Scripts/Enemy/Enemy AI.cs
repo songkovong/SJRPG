@@ -49,7 +49,10 @@ public class EnemyAI : MonoBehaviour
             isAttack = true;
             isDetective = false;
         }
-        else isAttack = false;
+        else 
+        {
+            isAttack = false;
+        }
     }
 
     public void MoveToPlayer()
@@ -62,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         }
         else 
         {
-            navMesh.ResetPath();
+            ResetMove();
         }
     }
 

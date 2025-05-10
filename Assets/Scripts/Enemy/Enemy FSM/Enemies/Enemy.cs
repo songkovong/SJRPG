@@ -13,11 +13,11 @@ public class Enemy : MonoBehaviour, IDamageable
     public bool isHit { get; set; } = false;
     void Start()
     {
-        ChangeState(new EnemyIdleState(this));
-
         animator = GetComponent<Animator>();
         enemyAnimator = new EnemyAnimator(animator);
         enemyAI = GetComponent<EnemyAI>();
+
+        ChangeState(new EnemyIdleState(this));
     }
 
     void Update()

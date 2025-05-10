@@ -70,12 +70,8 @@ public class Player : MonoBehaviour
         playerInput.Player.Move.canceled += OnMovementInput;
         playerInput.Player.Sprint.started += OnSprint;
         playerInput.Player.Sprint.canceled += OnSprint;
-        // playerInput.Player.Enteraction.started += OnDodge;
-        // playerInput.Player.Enteraction.canceled += OnDodge;
         playerInput.Player.Attack.started += OnAttack;
-        // playerInput.Player.Attack.canceled += OnAttack;
         playerInput.Player.Skill.started += OnSkill;
-        // playerInput.Player.Skill.canceled += OnSkill;
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
@@ -90,9 +86,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // ChangeState(new IdleState(this));
-        ChangeState(new MoveState(this));
-
         // Initailize TrailObject
         trailObject = GameObject.FindWithTag("Attack Trail");
         orbitObject = GameObject.FindWithTag("Guard Trail");
@@ -103,6 +96,8 @@ public class Player : MonoBehaviour
         EndOrbitTrail();
 
         AttackHitboxOff();
+        
+        ChangeState(new MoveState(this));
     }
 
     void Update()
@@ -112,7 +107,6 @@ public class Player : MonoBehaviour
         DodgePressed = false;
         AttackPressed = false;
         SkillPressed = false;
-        // GuardPressed = false;
 
         LocalMoveDir();
         GodmodeEffect(orbitObject);
