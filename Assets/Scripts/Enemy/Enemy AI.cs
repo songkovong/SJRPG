@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     float rotationSpeed = 2000f;
     public Transform player;
     NavMeshAgent navMesh;
-    bool isDetective = false;
+    public bool isDetective {get; set;} = false;
     public bool isAttack {get; set;} = false;
     public float attackCooltime {get; private set;} = 2f;
     public float timer {get; private set;} = 0f;
@@ -31,6 +31,8 @@ public class EnemyAI : MonoBehaviour
     {
         Debug.Log("detective = " + isDetective);
         Debug.Log("attack = " + isAttack);
+        DetectPlayer();
+        DetectAttackPlayer();
     }
 
     public void DetectPlayer()
