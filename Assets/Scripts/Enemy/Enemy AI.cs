@@ -1,20 +1,15 @@
+using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    float detectRadius = 10f;
-    float detectAttackRadius = 1.5f;
-    float moveSpeed = 1.2f;
-    float rotationSpeed = 2000f;
+    float rotSpeed = 200f;
     public Transform player;
     NavMeshAgent navMesh;
     public bool isDetective {get; set;} = false;
     public bool isAttack {get; set;} = false;
-    public float attackCooltime {get; private set;} = 2f;
-    public float timer {get; private set;} = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
@@ -23,31 +18,27 @@ public class EnemyAI : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player").transform;
         }
-
-        // navMesh.updateRotation = false;
     }
 
     void Update()
     {
         Debug.Log("detective = " + isDetective);
         Debug.Log("attack = " + isAttack);
-        DetectPlayer();
-        DetectAttackPlayer();
     }
 
-    public void DetectPlayer()
+    public void DetectPlayer(float radius)
     {
         float distToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if(distToPlayer <= detectRadius) isDetective = true;
+        if(distToPlayer <= radius) isDetective = true;
         else isDetective = false;
     }
 
-    public void DetectAttackPlayer()
+    public void DetectAttackPlayer(float attackRadius)
     {
         float distToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distToPlayer <= detectAttackRadius) {
+        if (distToPlayer <= attackRadius) {
             isAttack = true;
             isDetective = false;
         }
@@ -57,17 +48,37 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void MoveToPlayer()
+    public void MoveToPlayer(float moveSpeed, float rotateSpeed)
     {
         if(isDetective)
         {
+            navMesh.isStopped = false;
+            navMesh.updateRotation = true;
             navMesh.SetDestination(player.position);
             navMesh.speed = moveSpeed;
-            navMesh.angularSpeed = rotationSpeed;
+            navMesh.angularSpeed = rotateSpeed;
         }
         else 
         {
             ResetMove();
+        }
+    }
+
+    public void RotateToPlayer()
+    {
+        navMesh.isStopped = true;
+        navMesh.updateRotation = false;
+
+        Vector3 dir = player.position - transform.position;
+        dir.y = 0;
+        if (dir.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRot,
+                rotSpeed * Time.deltaTime
+            );
         }
     }
 

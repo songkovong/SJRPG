@@ -29,6 +29,11 @@ public class EnemyAnimator
         animator.SetBool("isCool", isCool);
     }
 
+    public void PlayDead(bool isDead)
+    {
+        animator.SetBool("isDead", isDead);
+    }
+
     public AnimationClip GetClipByName(string name)
     {
         foreach (var clip in animator.runtimeAnimatorController.animationClips)

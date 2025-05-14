@@ -20,6 +20,11 @@ public class EnemyHitState : EnemyBaseState
     }
     public override void Update() 
     {
+        if(enemy.isDead) 
+        {
+            enemy.ChangeState(new EnemyDeadState(enemy));
+            return;
+        }
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)

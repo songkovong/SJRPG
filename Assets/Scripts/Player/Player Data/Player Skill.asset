@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameData: Skill
   cooltimeData: 2
-  damageData: 15
+  damageData: 5

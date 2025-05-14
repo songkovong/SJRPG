@@ -8,6 +8,7 @@ TagManager:
   - Guard Trail
   - Enemy
   - Attack Hitbox
+  - Enemy Hitbox
   layers:
   - Default
   - TransparentFX

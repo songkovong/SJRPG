@@ -11,8 +11,14 @@ public class EnemyChaseState : EnemyBaseState
     }
     public override void Update() 
     {
-        enemy.EnemyAI.MoveToPlayer();
+        enemy.EnemyAI.MoveToPlayer(enemy.moveSpeed, enemy.rotationSpeed);
         Debug.Log($"[ChaseState] isHit 상태: {enemy.isHit}");
+
+        if(enemy.isDead) 
+        {
+            enemy.ChangeState(new EnemyDeadState(enemy));
+            return;
+        }
 
         if(enemy.isHit) {
             enemy.ChangeState(new EnemyHitState(enemy)); 

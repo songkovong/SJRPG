@@ -12,6 +12,12 @@ public class EnemyIdleState : EnemyBaseState
     {
         Debug.Log($"[IdleState] isHit 상태: {enemy.isHit}");
 
+        if(enemy.isDead)
+        {
+            enemy.ChangeState(new EnemyDeadState(enemy));
+            return;
+        }
+
         if(enemy.isHit) {
             enemy.ChangeState(new EnemyHitState(enemy)); 
             return;

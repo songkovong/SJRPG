@@ -1,69 +1,24 @@
 using UnityEngine;
 
-public class Slime : EnemyBase
+public class Slime : Enemy, IDamageable
 {
-    EnemyAI enemyAI;
-    Animator animator;
-    EnemyAnimator enemyAnimator;
-
-
     protected override void Awake()
     {
         base.Awake();
-
-        animator = GetComponent<Animator>();
-        enemyAnimator = new EnemyAnimator(animator);
-        enemyAI = GetComponent<EnemyAI>();
-
-        ChangeState(ENEMY_STATE.Idle);
+        attackCooltime = 1f;
+        detectRadius = 7f;
+        detectAttackRadius = 1.5f;
+        moveSpeed = 1f;
+        rotationSpeed = 20000f;
+        attackDamage = 2f;
+        maxHealth = 10f;
+        currentHealth = maxHealth;
+        godmodeDuration = 1f;
     }
 
-    private void Update() 
+    public override void TakeDamage(float getDamage)
     {
-        //ChangeState(ENEMY_STATE.Chase);
-
-        HandleState();
-    }
-
-    protected override void OnStateChanged(ENEMY_STATE newState)
-    {
-        base.OnStateChanged(newState);
-
-        switch(newState)
-        {
-            case ENEMY_STATE.Idle:
-                break;
-            case ENEMY_STATE.Chase:
-                enemyAnimator.PlayChase(enemyAI.isDetective);
-                enemyAI.MoveToPlayer();
-                break;
-            case ENEMY_STATE.Cool:
-                break;
-            case ENEMY_STATE.Attack:
-                break;
-            case ENEMY_STATE.Hit:
-                break;
-            case ENEMY_STATE.Dead:
-                break;
-        }
-    }
-
-    private void HandleState()
-    {
-        if(enemyAI.isDetective)
-        {
-            ChangeState(ENEMY_STATE.Chase);
-        }
-
-        else if(enemyAI.isAttack)
-        {
-            ChangeState(ENEMY_STATE.Attack);
-        }
-
-        else 
-        {
-            enemyAI.isDetective = false;
-            ChangeState(ENEMY_STATE.Idle);
-        }
+        base.TakeDamage(getDamage);
+        Debug.Log("Slime Damaged");
     }
 }

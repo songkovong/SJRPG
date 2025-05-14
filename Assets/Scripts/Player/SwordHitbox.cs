@@ -14,12 +14,6 @@ public class SwordHitbox : MonoBehaviour
         if (other.gameObject == gameObject || other.CompareTag("Player"))
         return;
 
-        // if(other.CompareTag("Enemy"))
-        // {
-        //     Enemy enemy = other.GetComponent<Enemy>();
-        //     enemy.TakeDamage(player.playerStat.finalDamage);
-        // }
-
         other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.finalDamage);
     }
 }

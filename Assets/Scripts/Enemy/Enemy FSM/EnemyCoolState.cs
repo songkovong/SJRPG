@@ -6,16 +6,26 @@ public class EnemyCoolState : EnemyBaseState
     public EnemyCoolState(Enemy enemy) : base(enemy) {}
 
     float timer;
-    float cooltime = 1.5f;
+    float cooltime;
 
     public override void Enter()
     {
         timer = 0f;
         Debug.Log("Cool Enter: " + enemy.GetType().Name);
         enemy.EnemyAnimator.PlayCool(true);
+        cooltime = enemy.attackCooltime;
+        Debug.Log("Attack Cooltime " + cooltime);
     }
     public override void Update()
     {
+        enemy.EnemyAI.RotateToPlayer();
+
+        if(enemy.isDead) 
+        {
+            enemy.ChangeState(new EnemyDeadState(enemy));
+            return;
+        }
+
         if(enemy.isHit)
         {
             enemy.ChangeState(new EnemyHitState(enemy));

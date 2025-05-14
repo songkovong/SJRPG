@@ -21,10 +21,17 @@ public class EnemyAttackState : EnemyBaseState
     public override void Update() 
     {
         Debug.Log($"[AttackState] isHit 상태: {enemy.isHit}");
+        if(enemy.isDead)
+        {
+            enemy.ChangeState(new EnemyDeadState(enemy));
+            return;
+        }
+
         if(enemy.isHit) 
         {
             enemy.ChangeState(new EnemyHitState(enemy));
         }
+        
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)

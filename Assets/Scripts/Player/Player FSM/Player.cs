@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     CharacterController characterController;
     public PlayerAnimator playerAnimator;
     Animator animator;
+    
 
     // Player Stat
     public PlayerStat playerStat { get; private set; }
@@ -52,6 +53,9 @@ public class Player : MonoBehaviour
 
     // Weapon value
     public string weaponName { get; set; }
+
+    // Dead Value
+    public bool isDead { get; set; } = false;
 
     Vector3 currentMovement;
     public Vector3 localMovement { get; private set; }

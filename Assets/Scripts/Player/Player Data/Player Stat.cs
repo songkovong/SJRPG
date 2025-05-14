@@ -36,7 +36,7 @@ public class PlayerStat : MonoBehaviour
         currentHealth = maxHealth;
         isGodmode = false;
 
-        attackDamage = 10f;
+        attackDamage = 1f;
 
         FindSkills();
         skillCooltimeTimer = skillCooltime;

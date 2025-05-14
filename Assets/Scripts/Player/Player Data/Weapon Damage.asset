@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Weapon Damage
   m_EditorClassIdentifier: 
   nameData: Weapon
-  damageData: 10
+  damageData: 1
