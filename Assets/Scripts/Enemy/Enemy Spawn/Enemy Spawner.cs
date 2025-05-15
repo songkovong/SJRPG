@@ -9,57 +9,70 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public int spawnCount = 5;
     public float spawnRadius = 10f;
-    bool isSpawn = false;
-    List<GameObject> spawnList = new List<GameObject>();
+    public float spawnTime = 10f;
+    List<GameObject> enemyPool = new List<GameObject>();
 
     void Start()
     {
+        InitializePool();
         SpawnEnemies();
+    }
+
+    void InitializePool()
+    {
+        for (int i = 0; i < spawnCount; i++)
+        {
+            GameObject enemy = Instantiate(enemyPrefab);
+            enemy.GetComponent<Enemy>().spawner = this;
+            enemy.SetActive(false);
+            enemyPool.Add(enemy);
+        }
     }
 
     public void SpawnEnemies()
     {
-        spawnList.Clear();
-
-        for (int i = 0; i < spawnCount; i++)
+        foreach(GameObject enemy in enemyPool)
         {
-            Vector3 spawnPos = GetRandomPosition();
-            float randomY = Random.Range(0f, 360f);
-            Quaternion randomRotation = Quaternion.Euler(0f, randomY, 0f);
-            
-            GameObject enemy = Instantiate(enemyPrefab, spawnPos, randomRotation);
-            spawnList.Add(enemy);
-
-            Enemy enemyInstance = enemy.GetComponent<Enemy>();
-
-            if(enemyInstance != null)
+            if(!enemy.activeInHierarchy) // if enemy setactive false?
             {
-                enemyInstance.spawner = this;
+                Vector3 randomPos = GetRandomPosition();
+                float randomY = Random.Range(0f, 360f);
+                Quaternion randomRot = Quaternion.Euler(0, randomY, 0);
+
+                enemy.transform.SetPositionAndRotation(randomPos, randomRot);
+                enemy.SetActive(true);
             }
         }
     }
 
     public void NotifyEnemyDead(GameObject enemy)
     {
-        spawnList.Remove(enemy);
+        enemy.SetActive(false);
 
-        if(spawnList.Count == 0)
+        if(IsEnemyAllDisable())
         {
             StartCoroutine(SpawnTimer());
         }
     }
 
+    bool IsEnemyAllDisable()
+    {
+        foreach(GameObject enemy in enemyPool)
+        {
+            if(enemy.activeInHierarchy) return false;
+        }
+        return true;
+    }
+
     private Vector3 GetRandomPosition()
     {
         Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPos = new Vector3(randomCircle.x, 0f, randomCircle.y);
-        spawnPos += transform.position;
-        return spawnPos;
+        return transform.position + new Vector3(randomCircle.x, 0f, randomCircle.y); 
     }
 
     IEnumerator SpawnTimer()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(spawnTime);
         SpawnEnemies();
     }
 

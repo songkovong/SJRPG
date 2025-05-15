@@ -48,9 +48,16 @@ public class Enemy : MonoBehaviour, IDamageable
     void Update()
     {
         enemyCurrentState?.Update();
-        // HitValue(transform.position + (Vector3.up * 0.4f), 0.5f, "Player", 1f); // when attack
         enemyAI.DetectPlayer(detectRadius);
         enemyAI.DetectAttackPlayer(detectAttackRadius);
+    }
+
+    void OnEnable() // If object inable
+    {
+        isDead = false;
+        isHit = false;
+        currentHealth = maxHealth;
+        ChangeState(new EnemyIdleState(this));
     }
 
     public void ChangeState(EnemyBaseState newstate)
@@ -58,17 +65,6 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyCurrentState?.Exit();
         enemyCurrentState = newstate;
         enemyCurrentState.Enter();
-    }
-
-    public void HitValue(Vector3 hitPosition, float hitRadius, string hitLayer, float hitDamage)
-    {
-        Collider[] hits = Physics.OverlapSphere(hitPosition, hitRadius, LayerMask.GetMask(hitLayer));
-        foreach (Collider hit in hits)
-        {
-            hit.GetComponent<PlayerStat>()?.TakeDamage(hitDamage);
-            // hit.GetComponent<Player>().isHit = true;
-            // hit.GetComponent<Player>().hitDamage = hitDamage;
-        }
     }
 
     public virtual void TakeDamage(float getDamage)
@@ -84,10 +80,6 @@ public class Enemy : MonoBehaviour, IDamageable
         if(currentHealth <= 0)
         {
             isDead = true;
-            if(spawner != null)
-            {
-                spawner.NotifyEnemyDead(gameObject);
-            }
         }
         else
         {
@@ -95,6 +87,18 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         Debug.Log("Enemy Current Health = " + currentHealth);
+    }
+
+    public void EnemyDie() // In DeadState
+    {
+        if(spawner != null)
+        {
+            spawner.NotifyEnemyDead(gameObject);
+        }
+        else
+        {
+            DestroyEnemy();
+        }
     }
 
     private IEnumerator GodmodeCoroutine()

@@ -188,6 +188,12 @@ public class Player : MonoBehaviour
         // orbitObject.transform.rotation = Quaternion.LookRotation(this.transform.position - orbitObject.transform.position);
     }
 
+    public void ConsumeStamina()
+    {
+        if(SprintPressed) playerStat.currentStamina -= (1 * Time.fixedDeltaTime);
+        else playerStat.currentStamina += (1 * Time.fixedDeltaTime);
+    }
+
     public void StartTrail()
     {
         trailObject.SetActive(true);

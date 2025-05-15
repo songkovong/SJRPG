@@ -18,7 +18,7 @@ public class EnemyDeadState : EnemyBaseState
 
         if(timer >= animationDuration)
         {
-            enemy.DestroyEnemy();
+            enemy.EnemyDie();
         }
     }
     public override void Exit()

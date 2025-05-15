@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Slime : Enemy, IDamageable
+public class TurtleShell : Enemy, IDamageable
 {
     protected override void Awake()
     {
         base.Awake();
-        attackCooltime = 1f;
+        attackCooltime = 1.5f;
         detectRadius = 7f;
-        detectAttackRadius = 1.5f;
-        moveSpeed = 1f;
+        detectAttackRadius = 2.5f;
+        moveSpeed = 2f;
         rotationSpeed = 2000f;
-        attackDamage = 2f;
+        attackDamage = 3f;
         maxHealth = 1f;
         currentHealth = maxHealth;
         godmodeDuration = 1f;
@@ -19,6 +19,6 @@ public class Slime : Enemy, IDamageable
     public override void TakeDamage(float getDamage)
     {
         base.TakeDamage(getDamage);
-        Debug.Log("Slime Damaged");
+        Debug.Log("TurtelShell Damaged");
     }
 }

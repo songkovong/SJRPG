@@ -12,6 +12,10 @@ public class PlayerStat : MonoBehaviour
     public float godmodeDuration { get; private set; } = 2f;
     public bool isGodmode { get; set; } = false;
 
+    // Stamina 
+    public float maxStamina { get; set; } = 100f;
+    public float currentStamina { get; set; }
+
     // Damage
     public float attackDamage { get; private set; }
     public float finalDamage { get; set; }
@@ -35,6 +39,10 @@ public class PlayerStat : MonoBehaviour
 
         currentHealth = maxHealth;
         isGodmode = false;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        currentStamina = maxStamina;
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
 
         attackDamage = 1f;
 
@@ -83,6 +91,11 @@ public class PlayerStat : MonoBehaviour
     public void Heal(float getHealth)
     {
         currentHealth += getHealth;
+    }
+
+    public void AtkDmgUp(float dmgUp)
+    {
+        attackDamage += dmgUp;
     }
 
     private IEnumerator GodmodeCoroutine()
