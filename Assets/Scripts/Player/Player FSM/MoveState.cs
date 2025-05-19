@@ -19,49 +19,44 @@ public class MoveState : BaseState
         } else {
             player.PlayerMouseRotation();
         }
-        // player.PlayerAnimator.SetMove(player.SprintPressed ? 1f : 0.5f);
         player.PlayerAnimator.SetMove(
             player.InputDirection.magnitude * (player.SprintPressed ? 1f : 0.5f) * defaultMoveSpeed, 
             player.localMovement.x, 
             player.localMovement.z
         );
 
-        // if (player.InputDirection.magnitude == 0f)
-        // {
-        //     player.ChangeState(new IdleState(player));
-        //     return;
-        // }
-
-        if(!player.SprintPressed)
+        if (player.playerStat.isLevelUp)
         {
-            // if(!player.isHit)
-            // {
-            //     // player change state in here
-            // }
-            if (player.AttackPressed)
-            {
-                player.ChangeState(new AttackState(player));
-                return;
-            }
-
-            if (player.SkillPressed && player.playerStat.canSkill)
-            {
-                player.ChangeState(new SkillState(player));
-                return;
-            }
-
-            if (player.DodgePressed)
-            {
-                player.ChangeState(new DodgeState(player));
-                return;
-            }
-
-            if (player.GuardPressed)
-            {
-                player.ChangeState(new GuardState(player));
-                return;
-            }
+            player.ChangeState(new LevelUpState(player));
+            return;
         }
+
+        if (!player.SprintPressed)
+            {
+                if (player.AttackPressed)
+                {
+                    player.ChangeState(new AttackState(player));
+                    return;
+                }
+
+                if (player.SkillPressed && player.playerStat.canSkill)
+                {
+                    player.ChangeState(new SkillState(player));
+                    return;
+                }
+
+                if (player.DodgePressed)
+                {
+                    player.ChangeState(new DodgeState(player));
+                    return;
+                }
+
+                if (player.GuardPressed)
+                {
+                    player.ChangeState(new GuardState(player));
+                    return;
+                }
+            }
 
         if(player.isHit)
         {

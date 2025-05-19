@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
-using Unity.Profiling;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    public PlayerStat playerstat;
     public EnemyBaseState enemyCurrentState;
     public EnemySpawner spawner;
 
@@ -21,6 +20,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float maxHealth { get; protected set; } = 100f;
     public float currentHealth { get; protected set;} = 100f;
     public float godmodeDuration { get; protected set; } = 1f;
+    public float dependRate { get; protected set; } = 0.1f;
 
     public bool isGodmode { get; protected set; } = false;
     public bool isHit { get; set; } = false;
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        playerstat = GameObject.FindWithTag("Player").GetComponent<PlayerStat>();
         animator = GetComponent<Animator>();
         enemyAnimator = new EnemyAnimator(animator);
         enemyAI = GetComponent<EnemyAI>();
@@ -74,11 +75,14 @@ public class Enemy : MonoBehaviour, IDamageable
         if(isGodmode) return;
         if(isDead) return;
 
+        getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate)));
+
         isHit = true;
 
         currentHealth -= getDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+        // Damage Text
         GameObject dmgtext = Instantiate(damageText);
         dmgtext.transform.position = damagePos.position;
         dmgtext.GetComponent<DamageText>().damage = getDamage;
@@ -96,9 +100,9 @@ public class Enemy : MonoBehaviour, IDamageable
         Debug.Log("Enemy Current Health = " + currentHealth);
     }
 
-    public void EnemyDie() // In DeadState
+    public virtual void EnemyDie() // In DeadState
     {
-        if(spawner != null)
+        if (spawner != null)
         {
             spawner.NotifyEnemyDead(gameObject);
         }
@@ -106,6 +110,11 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             DestroyEnemy();
         }
+    }
+
+    public virtual void ExpUp()
+    {
+        playerstat.expCount += 1;
     }
 
     private IEnumerator GodmodeCoroutine()

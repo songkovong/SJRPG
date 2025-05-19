@@ -42,6 +42,11 @@ public class PlayerAnimator
         animator.SetBool("isGuard", isGuard);
     }
 
+    public void PlayLevelUp()
+    {
+        animator.SetTrigger("LevelUp");
+    }
+
     public AnimationClip GetClipByName(string name)
     {
         foreach (var clip in animator.runtimeAnimatorController.animationClips)

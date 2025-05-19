@@ -6,6 +6,12 @@ public class PlayerStat : MonoBehaviour
 {
     Player player;
 
+    // Level
+    public int level { get; set; } = 1;
+    public float exp { get; set; } = 100;
+    public float expCount { get; set; } = 0;
+    public bool isLevelUp { get; set; }
+
     // Health
     public float maxHealth { get; set; } = 100f;
     public float currentHealth { get; set; }
@@ -18,7 +24,7 @@ public class PlayerStat : MonoBehaviour
 
     // Damage
     public float attackDamage { get; private set; }
-    public float finalDamage { get; set; }
+    public int finalDamage { get; set; }
 
     // Skill
     public List<PlayerSkillData> skills = new List<PlayerSkillData>();
@@ -37,45 +43,82 @@ public class PlayerStat : MonoBehaviour
     {
         player = GetComponent<Player>();
 
-        currentHealth = maxHealth;
-        isGodmode = false;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        DeleteData();
 
-        currentStamina = maxStamina;
-        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
-
-        attackDamage = 1f;
-
-        FindSkills();
-        skillCooltimeTimer = skillCooltime;
-        canSkill = true;
-
-        FindWeapons();
+        Initialize();
     }
 
     void Update()
     {
-        if(!canSkill)
+        if (!canSkill)
         {
             skillCooltimeTimer += Time.deltaTime;
-            if(skillCooltimeTimer >= skillCooltime)
+            if (skillCooltimeTimer >= skillCooltime)
             {
                 canSkill = true;
                 skillCooltimeTimer = skillCooltime;
             }
         }
-        Debug.Log("Can Skill = " + canSkill);
+
+        LvUp();
+        Debug.Log("Level = " + level);
+    }
+
+    void Initialize()
+    {
+        // Level
+        if (PlayerPrefs.HasKey("Level")) level = PlayerPrefs.GetInt("Level");
+        else level = 1;
+        if(PlayerPrefs.HasKey("EXP")) exp = PlayerPrefs.GetFloat("EXP");
+        else exp = 100;
+        if (PlayerPrefs.HasKey("EXPCount")) expCount = PlayerPrefs.GetFloat("EXPCount");
+        else expCount = 0;
+        isLevelUp = false;
+
+        // Health
+        if (PlayerPrefs.HasKey("MAXHP")) maxHealth = PlayerPrefs.GetFloat("MAXHP");
+        else maxHealth = 100;
+        if(PlayerPrefs.HasKey("CurHP")) currentHealth = PlayerPrefs.GetFloat("CurHP");
+        else currentHealth = maxHealth;
+
+        isGodmode = false;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Stamina
+        if (PlayerPrefs.HasKey("MAXStamina")) maxStamina = PlayerPrefs.GetFloat("MAXStamina");
+        else maxStamina = 100;
+        if(PlayerPrefs.HasKey("CurStamina")) currentStamina = PlayerPrefs.GetFloat("CurStamina");
+        else currentStamina = maxStamina;
+
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+
+        // Damage
+        if(PlayerPrefs.HasKey("ATKDMG")) attackDamage = PlayerPrefs.GetFloat("ATKDMG");
+        else attackDamage = 1f;
+
+        // Skill
+        if (PlayerPrefs.HasKey("SkillName")) player.skillName = PlayerPrefs.GetString("SkillName");
+        else player.skillName = "Skill";
+        FindSkills();
+        skillCooltimeTimer = skillCooltime;
+        canSkill = true;
+
+        // Weapon
+        if (PlayerPrefs.HasKey("WeaponName")) player.skillName = PlayerPrefs.GetString("WeaponName");
+        else player.skillName = "Weapon";
+        FindWeapons();
     }
 
     public void TakeDamage(float getDamage)
     {
-        if(isGodmode) return;
+        if (isGodmode) return;
 
         player.isHit = true;
 
         currentHealth -= getDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        
+
+        // Damage Text
         GameObject dmgtext = Instantiate(player.damageText);
         dmgtext.transform.position = player.damagePos.position;
         dmgtext.GetComponent<DamageText>().damage = getDamage;
@@ -97,10 +140,65 @@ public class PlayerStat : MonoBehaviour
         currentHealth += getHealth;
     }
 
-    public void AtkDmgUp(float dmgUp)
+    public void LvUp()
     {
-        attackDamage += dmgUp;
+        if (expCount >= exp)
+        {
+            isLevelUp = true;
+            
+            level++;
+            exp *= 1.1f;
+            expCount = 0;
+
+            maxHealth *= 1.1f;
+            currentHealth = maxHealth;
+
+            maxStamina *= 1.1f;
+            currentStamina = maxStamina;
+
+            attackDamage *= 1.2f;
+
+            SaveData();
+        }
     }
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    public void SaveData()
+    {
+        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetFloat("EXP", exp);
+        PlayerPrefs.SetFloat("EXPCount", expCount);
+
+        PlayerPrefs.SetFloat("MAXHP", maxHealth);
+        PlayerPrefs.SetFloat("CurHP", currentHealth);
+
+        PlayerPrefs.SetFloat("MAXStamina", maxStamina);
+        PlayerPrefs.SetFloat("CurStamina", currentStamina);
+
+        PlayerPrefs.SetFloat("ATKDMG", attackDamage);
+
+        PlayerPrefs.SetString("SkillName", skillName);
+        PlayerPrefs.SetString("WeaponName", weaponName);
+    }
+
+    public float RandomAtkDmg()
+    {
+        return Random.Range(attackDamage * 0.1f, attackDamage);
+    }
+
+    public int AtkDmg()
+    {
+        return (int)(Mathf.Floor((RandomAtkDmg() + weaponDamage) * 10f));
+    }
+
+    public int SkillDmg()
+    {
+        return (int)(Mathf.Floor((SkillDamage * RandomAtkDmg() + weaponDamage) * 10f));
+    }
+
 
     private IEnumerator GodmodeCoroutine()
     {

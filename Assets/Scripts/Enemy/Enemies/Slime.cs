@@ -11,14 +11,21 @@ public class Slime : Enemy, IDamageable
         moveSpeed = 1f;
         rotationSpeed = 2000f;
         attackDamage = 2f;
-        maxHealth = 1f;
+        maxHealth = 10f;
         currentHealth = maxHealth;
         godmodeDuration = 1f;
+        dependRate = 0.1f;
     }
 
     public override void TakeDamage(float getDamage)
     {
         base.TakeDamage(getDamage);
         Debug.Log("Slime Damaged");
+    }
+
+    public override void ExpUp()
+    {
+        base.ExpUp();
+        playerstat.expCount += 20;
     }
 }

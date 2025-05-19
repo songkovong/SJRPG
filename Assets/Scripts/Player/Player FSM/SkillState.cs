@@ -10,7 +10,8 @@ public class SkillState : BaseState
 
     public override void Enter()
     {
-        player.playerStat.finalDamage = player.playerStat.SkillDamage + player.playerStat.weaponDamage;
+        // player.playerStat.finalDamage = (player.playerStat.SkillDamage * player.playerStat.attackDamage) + player.playerStat.weaponDamage;
+        player.playerStat.finalDamage = player.playerStat.SkillDmg();
 
         var skillNameHash = player.playerStat.SkillName;
         player.playerStat.canSkill = false;

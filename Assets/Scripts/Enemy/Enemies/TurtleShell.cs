@@ -11,14 +11,21 @@ public class TurtleShell : Enemy, IDamageable
         moveSpeed = 2f;
         rotationSpeed = 2000f;
         attackDamage = 3f;
-        maxHealth = 1f;
+        maxHealth = 20f;
         currentHealth = maxHealth;
         godmodeDuration = 1f;
+        dependRate = 0.5f;
     }
 
     public override void TakeDamage(float getDamage)
     {
         base.TakeDamage(getDamage);
         Debug.Log("TurtelShell Damaged");
+    }
+
+    public override void ExpUp()
+    {
+        base.ExpUp();
+        playerstat.expCount += 20;
     }
 }
