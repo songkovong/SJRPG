@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public int spawnCount = 5;
     public float spawnRadius = 10f;
     public float spawnTime = 10f;
+    public bool isSpawn = false;
     List<GameObject> enemyPool = new List<GameObject>();
 
     void Start()
@@ -47,11 +48,23 @@ public class EnemySpawner : MonoBehaviour
 
     public void NotifyEnemyDead(GameObject enemy)
     {
-        enemy.SetActive(false);
-
-        if(IsEnemyAllDisable())
+        if (!isSpawn)
         {
-            StartCoroutine(SpawnTimer());
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            enemy.SetActive(false);
+
+            if (IsEnemyAllDisable())
+            {
+                if (isSpawn)
+                {
+                    StartCoroutine(SpawnTimer());
+                }
+            }
+
         }
     }
 

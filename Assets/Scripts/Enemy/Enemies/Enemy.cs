@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public bool isDead { get; set; }
 
     public GameObject hitbox;
+    public GameObject damageText;
+    public Transform damagePos;
 
 
     protected virtual void Awake() { }
@@ -77,7 +79,12 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHealth -= getDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        if(currentHealth <= 0)
+        GameObject dmgtext = Instantiate(damageText);
+        dmgtext.transform.position = damagePos.position;
+        dmgtext.GetComponent<DamageText>().damage = getDamage;
+        
+
+        if (currentHealth <= 0)
         {
             isDead = true;
         }

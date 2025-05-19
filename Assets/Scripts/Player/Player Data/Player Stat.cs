@@ -25,7 +25,7 @@ public class PlayerStat : MonoBehaviour
     public float skillCooltimeTimer { get; set; }
     public bool canSkill { get; set; }
     string skillName;
-    float skillCooltime;
+    public float skillCooltime { get; private set; }
     float skillDamage;
 
     // Weapon
@@ -75,12 +75,16 @@ public class PlayerStat : MonoBehaviour
 
         currentHealth -= getDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        
+        GameObject dmgtext = Instantiate(player.damageText);
+        dmgtext.transform.position = player.damagePos.position;
+        dmgtext.GetComponent<DamageText>().damage = getDamage;
 
-        if(currentHealth <= 0) 
+        if (currentHealth <= 0)
         {
             PlayerDie();
         }
-        else 
+        else
         {
             StartCoroutine(GodmodeCoroutine());
         }

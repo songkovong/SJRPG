@@ -57,8 +57,14 @@ public class Player : MonoBehaviour
     // Dead Value
     public bool isDead { get; set; } = false;
 
+    // Damage Text
+    public GameObject damageText;
+    public Transform damagePos;
+
     Vector3 currentMovement;
     public Vector3 localMovement { get; private set; }
+
+
 
     void Awake()
     {
