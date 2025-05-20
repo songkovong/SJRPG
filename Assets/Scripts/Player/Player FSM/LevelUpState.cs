@@ -15,6 +15,7 @@ public class LevelUpState : BaseState
 
         Debug.Log("Enter LvUp");
         player.PlayerAnimator.PlayLevelUp();
+        player.playerAnimator.SetMove(0, 0, 0);
         animationDuration = player.PlayerAnimator.GetClipByName("LevelUp").length;
     }
 

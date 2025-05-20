@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Networking.PlayerConnection;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +11,7 @@ public class Player : MonoBehaviour
     CharacterController characterController;
     public PlayerAnimator playerAnimator;
     Animator animator;
+    HitColor playerHitColor;
     
 
     // Player Stat
@@ -74,6 +72,7 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         playerStat = GetComponent<PlayerStat>();
+        playerHitColor = GetComponent<HitColor>();
 
         playerInput.Player.Move.started += OnMovementInput;
         playerInput.Player.Move.performed += OnMovementInput;
@@ -279,6 +278,7 @@ public class Player : MonoBehaviour
 
     public PlayerAnimator PlayerAnimator => playerAnimator;
     public Animator Animator => animator;
+    public HitColor PlayerHitColor => playerHitColor;
     public void AttackHitboxOn() => attackHitbox.SetActive(true);
     public void AttackHitboxOff() => attackHitbox.SetActive(false);
 }

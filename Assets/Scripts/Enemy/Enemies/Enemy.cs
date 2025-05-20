@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
     EnemyAnimator enemyAnimator;
     Animator animator;
     EnemyAI enemyAI;
+    HitColor enemyHitColor;
 
     public float attackCooltime { get; protected set; } = 2f;
     public float detectRadius { get; protected set; } = 10f;
@@ -40,6 +41,8 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyAnimator = new EnemyAnimator(animator);
         enemyAI = GetComponent<EnemyAI>();
 
+        enemyHitColor = GetComponent<HitColor>();
+
         hitbox = GameObject.FindWithTag("Enemy Hitbox");
         HitboxOff();
 
@@ -53,6 +56,15 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyCurrentState?.Update();
         enemyAI.DetectPlayer(detectRadius);
         enemyAI.DetectAttackPlayer(detectAttackRadius);
+
+        if (isGodmode)
+        {
+            enemyHitColor.ChangeColor(enemyHitColor.renderers, new Color(0.3f, 0, 0));
+        }
+        else
+        {
+            enemyHitColor.ReChangeColor(enemyHitColor.renderers, enemyHitColor.originalColors);
+        }
     }
 
     void OnEnable() // If object inable
@@ -73,7 +85,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float getDamage)
     {
         if(isGodmode) return;
-        if(isDead) return;
+        if (isDead) return;
 
         getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate)));
 
@@ -87,7 +99,6 @@ public class Enemy : MonoBehaviour, IDamageable
         dmgtext.transform.position = damagePos.position;
         dmgtext.GetComponent<DamageText>().damage = getDamage;
         
-
         if (currentHealth <= 0)
         {
             isDead = true;
@@ -96,6 +107,8 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             StartCoroutine(GodmodeCoroutine());
         }
+
+        StartCoroutine(HitColorCoroutine());
 
         Debug.Log("Enemy Current Health = " + currentHealth);
     }
@@ -125,6 +138,16 @@ public class Enemy : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(godmodeDuration);
 
         isGodmode = false;
+    }
+
+    public IEnumerator HitColorCoroutine()
+    {
+        Debug.Log("ColorChange");
+        enemyHitColor.ChangeColor(enemyHitColor.renderers, new Color(0.3f, 0, 0));
+
+        yield return new WaitForSeconds(godmodeDuration);
+
+        enemyHitColor.ReChangeColor(enemyHitColor.renderers, enemyHitColor.originalColors);
     }
 
     public void DestroyEnemy()

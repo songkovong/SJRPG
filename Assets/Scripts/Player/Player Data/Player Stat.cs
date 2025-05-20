@@ -43,7 +43,7 @@ public class PlayerStat : MonoBehaviour
     {
         player = GetComponent<Player>();
 
-        DeleteData();
+        // DeleteData();
 
         Initialize();
     }
@@ -147,7 +147,7 @@ public class PlayerStat : MonoBehaviour
             isLevelUp = true;
             
             level++;
-            exp *= 1.1f;
+            exp *= 1.3f;
             expCount = 0;
 
             maxHealth *= 1.1f;
@@ -203,10 +203,15 @@ public class PlayerStat : MonoBehaviour
     private IEnumerator GodmodeCoroutine()
     {
         isGodmode = true;
+        if (player.isHit)
+        {
+            player.PlayerHitColor.ChangeColor(player.PlayerHitColor.renderers, new Color(0.3f, 0, 0));
+        }
 
         yield return new WaitForSeconds(godmodeDuration);
 
         isGodmode = false;
+        player.PlayerHitColor.ReChangeColor(player.PlayerHitColor.renderers, player.PlayerHitColor.originalColors);
     }
 
     public void PlayerDie()

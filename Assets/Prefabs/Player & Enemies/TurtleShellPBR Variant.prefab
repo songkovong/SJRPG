@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
       propertyPath: m_TagString
@@ -482,6 +482,9 @@ PrefabInstance:
       addedObject: {fileID: 3663655928880286039}
     - targetCorrespondingSourceObject: {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1372470719418310373}
+    - targetCorrespondingSourceObject: {fileID: 1524411113276028, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2213903721059217472}
   m_SourcePrefab: {fileID: 100100000, guid: e2aafa8770d34a9591b41bedf4e318ba, type: 3}
 --- !u!4 &2198410787068943901 stripped
@@ -527,6 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ca5a624289b6e4888b9b683d580940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerstat: {fileID: 0}
   spawner: {fileID: 0}
   hitbox: {fileID: 0}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
@@ -544,6 +548,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &1372470719418310373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204261837783771611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e6654afe945c64e916680540b28c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &2213903721059217472
 NavMeshAgent:
   m_ObjectHideFlags: 0
