@@ -56,15 +56,6 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyCurrentState?.Update();
         enemyAI.DetectPlayer(detectRadius);
         enemyAI.DetectAttackPlayer(detectAttackRadius);
-
-        if (isGodmode)
-        {
-            enemyHitColor.ChangeColor(enemyHitColor.renderers, new Color(0.3f, 0, 0));
-        }
-        else
-        {
-            enemyHitColor.ReChangeColor(enemyHitColor.renderers, enemyHitColor.originalColors);
-        }
     }
 
     void OnEnable() // If object inable
@@ -85,7 +76,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float getDamage)
     {
         if(isGodmode) return;
-        if (isDead) return;
+        if(isDead) return;
 
         getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate)));
 
@@ -143,7 +134,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public IEnumerator HitColorCoroutine()
     {
         Debug.Log("ColorChange");
-        enemyHitColor.ChangeColor(enemyHitColor.renderers, new Color(0.3f, 0, 0));
+        enemyHitColor.ChangeColor(enemyHitColor.renderers, Color.grey);
 
         yield return new WaitForSeconds(godmodeDuration);
 

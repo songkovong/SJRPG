@@ -13,7 +13,9 @@ public class SkillState : BaseState
         // player.playerStat.finalDamage = (player.playerStat.SkillDamage * player.playerStat.attackDamage) + player.playerStat.weaponDamage;
         player.playerStat.finalDamage = player.playerStat.SkillDmg();
 
-        var skillNameHash = player.playerStat.SkillName;
+        Debug.Log("player stat skill code = " + player.playerStat.SkillCode);
+
+        var skillCodeHash = player.playerStat.SkillCode.ToString();
         player.playerStat.canSkill = false;
         player.playerStat.skillCooltimeTimer = 0f;
 
@@ -23,7 +25,7 @@ public class SkillState : BaseState
         timer = 0f;
         Debug.Log("Enter Skill");
         player.PlayerAnimator.PlaySkill();
-        animationDuration = player.PlayerAnimator.GetClipByName(skillNameHash).length;
+        animationDuration = player.PlayerAnimator.GetClipByName("Skill " + skillCodeHash).length;
 
         player.isSkill = true;
         player.playerStat.isGodmode = true;

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +7,7 @@ public class Player : MonoBehaviour
     private BaseState currentState;
 
     public PlayerInput playerInput;
+    // public UnityEngine.InputSystem.PlayerInput playerInput;
     CharacterController characterController;
     public PlayerAnimator playerAnimator;
     Animator animator;
@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     public bool SkillPressed { get; private set; }
     public bool GuardPressed { get; private set; }
     public bool SprintPressed { get; private set; }
+    public bool StatPressed { get; private set; }
+    public bool ItemPressed { get; private set; }
     public float finalSpeed { get; private set; }
     public bool isSkill { get; set; }
 
@@ -47,10 +49,10 @@ public class Player : MonoBehaviour
     public GameObject attackHitbox { get; private set; }
 
     // Skill value
-    public string skillName { get; set; }
+    public int skillCode { get; set; }
 
     // Weapon value
-    public string weaponName { get; set; }
+    public int weaponCode { get; set; }
 
     // Dead Value
     public bool isDead { get; set; } = false;
@@ -67,6 +69,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         playerInput = new PlayerInput();
+        // playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
         animator = GetComponent<Animator>();
         playerAnimator = new PlayerAnimator(animator);
         characterController = GetComponent<CharacterController>();
@@ -84,11 +87,13 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
+        playerInput.Player.Stat.started += OnStat;
+        playerInput.Player.Item.started += OnItem;
 
         isHit = false;
 
-        skillName = "Skill";
-        weaponName = "Weapon";
+        // skillCode = 1;
+        // weaponCode = 1;
 
         playerInput.Enable();
     }
@@ -119,6 +124,9 @@ public class Player : MonoBehaviour
 
         LocalMoveDir();
         GodmodeEffect(orbitObject);
+
+        Debug.Log("Stat Pressed = " + StatPressed);
+        Debug.Log("Item Pressed = " + ItemPressed);
     }
 
     // Methods
@@ -268,6 +276,18 @@ public class Player : MonoBehaviour
     private void OnGuard(InputAction.CallbackContext ctx)
     {
         GuardPressed = ctx.ReadValue<float>() > 0f;
+    }
+
+    private void OnStat(InputAction.CallbackContext ctx)
+    {
+        // StatPressed = true;
+        StatPressed = StatPressed ? false : true;
+    }
+
+    private void OnItem(InputAction.CallbackContext ctx)
+    {
+        // ItemPressed = true;
+        ItemPressed = ItemPressed ? false : true;
     }
 
     // Coroutine

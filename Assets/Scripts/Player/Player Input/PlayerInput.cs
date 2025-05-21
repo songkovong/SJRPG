@@ -82,6 +82,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Stat"",
+                    ""type"": ""Button"",
+                    ""id"": ""c5c8eaaf-4b23-43ec-a80d-7a2cd52938f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f0bf9a2-a900-48fc-b088-43b65ab7712b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e509d294-0949-4e38-bb04-71288b655b3c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
@@ -259,12 +286,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""daba33a1-ad0c-4742-a909-43ad1cdfbeb6"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""7fc6f20c-c1fb-433e-939f-dd926342fa43"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Enteraction"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Stat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b02a403a-24d5-4064-8c1e-206162bd5173"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd935bc1-18a7-4270-954e-bc7beeba1110"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -275,17 +324,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Skill"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b3f66d0b-7751-423f-908b-a11c5bd95930"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""Skill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -318,7 +356,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""15cef263-9014-4fd5-94d9-4e4a6234a6ef"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -880,6 +918,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
         m_Player_Skill = m_Player.FindAction("Skill", throwIfNotFound: true);
         m_Player_Enteraction = m_Player.FindAction("Enteraction", throwIfNotFound: true);
+        m_Player_Stat = m_Player.FindAction("Stat", throwIfNotFound: true);
+        m_Player_Item = m_Player.FindAction("Item", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -966,6 +1007,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Guard;
     private readonly InputAction m_Player_Skill;
     private readonly InputAction m_Player_Enteraction;
+    private readonly InputAction m_Player_Stat;
+    private readonly InputAction m_Player_Item;
+    private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
@@ -977,6 +1021,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Guard => m_Wrapper.m_Player_Guard;
         public InputAction @Skill => m_Wrapper.m_Player_Skill;
         public InputAction @Enteraction => m_Wrapper.m_Player_Enteraction;
+        public InputAction @Stat => m_Wrapper.m_Player_Stat;
+        public InputAction @Item => m_Wrapper.m_Player_Item;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -1005,6 +1052,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Enteraction.started += instance.OnEnteraction;
             @Enteraction.performed += instance.OnEnteraction;
             @Enteraction.canceled += instance.OnEnteraction;
+            @Stat.started += instance.OnStat;
+            @Stat.performed += instance.OnStat;
+            @Stat.canceled += instance.OnStat;
+            @Item.started += instance.OnItem;
+            @Item.performed += instance.OnItem;
+            @Item.canceled += instance.OnItem;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -1030,6 +1086,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Enteraction.started -= instance.OnEnteraction;
             @Enteraction.performed -= instance.OnEnteraction;
             @Enteraction.canceled -= instance.OnEnteraction;
+            @Stat.started -= instance.OnStat;
+            @Stat.performed -= instance.OnStat;
+            @Stat.canceled -= instance.OnStat;
+            @Item.started -= instance.OnItem;
+            @Item.performed -= instance.OnItem;
+            @Item.canceled -= instance.OnItem;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -1221,6 +1286,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
         void OnEnteraction(InputAction.CallbackContext context);
+        void OnStat(InputAction.CallbackContext context);
+        void OnItem(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions

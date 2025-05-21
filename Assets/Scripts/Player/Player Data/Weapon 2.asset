@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f82a991eefb8a604ea3ebc413ad91e36, type: 3}
-  m_Name: Default Skill
+  m_Script: {fileID: 11500000, guid: d16a8bb424e65f34d8cb0b194bfb7e91, type: 3}
+  m_Name: Weapon 2
   m_EditorClassIdentifier: 
-  skillCode: 1
-  cooltimeData: 5
-  damageData: 5
+  weaponCode: 2
+  damageData: 3

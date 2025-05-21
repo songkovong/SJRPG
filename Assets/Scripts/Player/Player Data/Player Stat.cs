@@ -30,13 +30,13 @@ public class PlayerStat : MonoBehaviour
     public List<PlayerSkillData> skills = new List<PlayerSkillData>();
     public float skillCooltimeTimer { get; set; }
     public bool canSkill { get; set; }
-    string skillName;
+    int skillCode;
     public float skillCooltime { get; private set; }
     float skillDamage;
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
-    string weaponName;
+    int weaponCode;
     public float weaponDamage { get; private set; }
 
     void Start()
@@ -61,57 +61,46 @@ public class PlayerStat : MonoBehaviour
         }
 
         LvUp();
-        Debug.Log("Level = " + level);
     }
 
     void Initialize()
     {
         // Level
-        if (PlayerPrefs.HasKey("Level")) level = PlayerPrefs.GetInt("Level");
-        else level = 1;
-        if(PlayerPrefs.HasKey("EXP")) exp = PlayerPrefs.GetFloat("EXP");
-        else exp = 100;
-        if (PlayerPrefs.HasKey("EXPCount")) expCount = PlayerPrefs.GetFloat("EXPCount");
-        else expCount = 0;
+        level = PlayerPrefs.HasKey("Level") ? PlayerPrefs.GetInt("Level") : 1;
+        exp = PlayerPrefs.HasKey("EXP") ? PlayerPrefs.GetFloat("EXP") : 100;
+        expCount = PlayerPrefs.HasKey("EXPCount") ? PlayerPrefs.GetFloat("EXPCount") : 0;
+
         isLevelUp = false;
 
         // Health
-        if (PlayerPrefs.HasKey("MAXHP")) maxHealth = PlayerPrefs.GetFloat("MAXHP");
-        else maxHealth = 100;
-        if(PlayerPrefs.HasKey("CurHP")) currentHealth = PlayerPrefs.GetFloat("CurHP");
-        else currentHealth = maxHealth;
-
+        maxHealth = PlayerPrefs.HasKey("MAXHP") ? PlayerPrefs.GetFloat("MAXHP") : 100;
+        currentHealth = PlayerPrefs.HasKey("CurHP") ? PlayerPrefs.GetFloat("CurHP") : maxHealth;
         isGodmode = false;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         // Stamina
-        if (PlayerPrefs.HasKey("MAXStamina")) maxStamina = PlayerPrefs.GetFloat("MAXStamina");
-        else maxStamina = 100;
-        if(PlayerPrefs.HasKey("CurStamina")) currentStamina = PlayerPrefs.GetFloat("CurStamina");
-        else currentStamina = maxStamina;
-
+        maxStamina = PlayerPrefs.HasKey("MAXStamina") ? PlayerPrefs.GetFloat("MAXStamina") : 100;
+        currentStamina = PlayerPrefs.HasKey("CurStamina") ? PlayerPrefs.GetFloat("CurStamina") : maxStamina;
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
 
         // Damage
-        if(PlayerPrefs.HasKey("ATKDMG")) attackDamage = PlayerPrefs.GetFloat("ATKDMG");
-        else attackDamage = 1f;
+        attackDamage = PlayerPrefs.HasKey("ATKDMG") ? PlayerPrefs.GetFloat("ATKDMG") : 1;
 
         // Skill
-        if (PlayerPrefs.HasKey("SkillName")) player.skillName = PlayerPrefs.GetString("SkillName");
-        else player.skillName = "Skill";
+        player.skillCode = PlayerPrefs.HasKey("SkillCode") ? PlayerPrefs.GetInt("SkillCode") : 1;
         FindSkills();
         skillCooltimeTimer = skillCooltime;
         canSkill = true;
 
         // Weapon
-        if (PlayerPrefs.HasKey("WeaponName")) player.skillName = PlayerPrefs.GetString("WeaponName");
-        else player.skillName = "Weapon";
+
+        player.weaponCode = PlayerPrefs.HasKey("WeaponCode") ? PlayerPrefs.GetInt("WeaponCode") : 1;
         FindWeapons();
     }
 
     public void TakeDamage(float getDamage)
     {
-        if (isGodmode) return;
+        if(isGodmode) return;
 
         player.isHit = true;
 
@@ -131,6 +120,8 @@ public class PlayerStat : MonoBehaviour
         {
             StartCoroutine(GodmodeCoroutine());
         }
+
+        StartCoroutine(HitColorCoroutine());
 
         Debug.Log("Player current Health = " + currentHealth);
     }
@@ -180,8 +171,8 @@ public class PlayerStat : MonoBehaviour
 
         PlayerPrefs.SetFloat("ATKDMG", attackDamage);
 
-        PlayerPrefs.SetString("SkillName", skillName);
-        PlayerPrefs.SetString("WeaponName", weaponName);
+        PlayerPrefs.SetInt("SkillCode", skillCode);
+        PlayerPrefs.SetInt("WeaponCode", weaponCode);
     }
 
     public float RandomAtkDmg()
@@ -203,30 +194,33 @@ public class PlayerStat : MonoBehaviour
     private IEnumerator GodmodeCoroutine()
     {
         isGodmode = true;
-        if (player.isHit)
-        {
-            player.PlayerHitColor.ChangeColor(player.PlayerHitColor.renderers, new Color(0.3f, 0, 0));
-        }
 
         yield return new WaitForSeconds(godmodeDuration);
 
         isGodmode = false;
+    }
+
+    private IEnumerator HitColorCoroutine()
+    {
+        player.PlayerHitColor.ChangeColor(player.PlayerHitColor.renderers, Color.grey);
+
+        yield return new WaitForSeconds(godmodeDuration);
+
         player.PlayerHitColor.ReChangeColor(player.PlayerHitColor.renderers, player.PlayerHitColor.originalColors);
     }
 
     public void PlayerDie()
     {
         Debug.Log("Die");
-        // player.ChangeState(new DieState(player));
     }
 
     void FindSkills()
     {
         foreach(PlayerSkillData skill in skills)
         {
-            if(skill.nameData.Equals(player.skillName))
+            if(skill.skillCode.Equals(player.skillCode))
             {
-                this.skillName = skill.nameData;
+                this.skillCode = skill.skillCode;
                 this.skillCooltime = skill.cooltimeData;
                 this.skillDamage = skill.damageData;
                 return;
@@ -238,9 +232,9 @@ public class PlayerStat : MonoBehaviour
     {
         foreach(WeaponDamageData weapon in weapons)
         {
-            if(weapon.nameData.Equals(player.weaponName))
+            if(weapon.weaponCode.Equals(player.weaponCode))
             {
-                this.weaponName = weapon.nameData;
+                this.weaponCode = weapon.weaponCode;
                 this.weaponDamage = weapon.damageData;
                 return;
             }
@@ -248,7 +242,7 @@ public class PlayerStat : MonoBehaviour
     }
 
 
-    public string SkillName => this.skillName;
+    public int SkillCode => this.skillCode;
     public float SkillCooltime => this.skillCooltime;
     public float SkillDamage => this.skillDamage;
 }
