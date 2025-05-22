@@ -1467,8 +1467,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 193550970}
   - {fileID: 1872887863}
+  - {fileID: 193550970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2661,10 +2661,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 590254930394038370, guid: a8415e2279f384242a19466716bae2bc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2792,13 +2788,13 @@ SceneRoots:
   - {fileID: 1139096009}
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 758984803}
   - {fileID: 1691307573}
   - {fileID: 1146885926931996284}
   - {fileID: 2915258810689385735}
   - {fileID: 1307966446604269524}
   - {fileID: 334762607830400169}
   - {fileID: 547985299}
-  - {fileID: 758984803}
   - {fileID: 462929725}
   - {fileID: 1418696610}
   - {fileID: 1540382010}

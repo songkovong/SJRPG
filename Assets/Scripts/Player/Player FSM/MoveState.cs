@@ -13,7 +13,6 @@ public class MoveState : BaseState
     public override void Update()
     {
         player.PlayerMove(defaultMoveSpeed);
-        // player.PlayerRotation();
         if(player.SprintPressed) {
             player.PlayerRotation();
         } else {

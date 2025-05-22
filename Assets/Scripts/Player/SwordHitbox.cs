@@ -12,7 +12,7 @@ public class SwordHitbox : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == gameObject || other.CompareTag("Player"))
-        return;
+            return;
 
         other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.finalDamage);
     }
