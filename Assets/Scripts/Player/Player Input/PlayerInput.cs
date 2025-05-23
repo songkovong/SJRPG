@@ -100,7 +100,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""Close"",
                     ""type"": ""Button"",
                     ""id"": ""e509d294-0949-4e38-bb04-71288b655b3c"",
                     ""expectedControlType"": """",
@@ -313,7 +313,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pause"",
+                    ""action"": ""Close"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -920,7 +920,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Enteraction = m_Player.FindAction("Enteraction", throwIfNotFound: true);
         m_Player_Stat = m_Player.FindAction("Stat", throwIfNotFound: true);
         m_Player_Item = m_Player.FindAction("Item", throwIfNotFound: true);
-        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Close = m_Player.FindAction("Close", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1009,7 +1009,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Enteraction;
     private readonly InputAction m_Player_Stat;
     private readonly InputAction m_Player_Item;
-    private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Close;
     private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
@@ -1023,7 +1023,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Enteraction => m_Wrapper.m_Player_Enteraction;
         public InputAction @Stat => m_Wrapper.m_Player_Stat;
         public InputAction @Item => m_Wrapper.m_Player_Item;
-        public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Close => m_Wrapper.m_Player_Close;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -1058,9 +1058,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Item.started += instance.OnItem;
             @Item.performed += instance.OnItem;
             @Item.canceled += instance.OnItem;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -1092,9 +1092,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Item.started -= instance.OnItem;
             @Item.performed -= instance.OnItem;
             @Item.canceled -= instance.OnItem;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -1288,7 +1288,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnEnteraction(InputAction.CallbackContext context);
         void OnStat(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions

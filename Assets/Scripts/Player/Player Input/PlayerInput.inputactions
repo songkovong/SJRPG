@@ -78,7 +78,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Close",
                     "type": "Button",
                     "id": "e509d294-0949-4e38-bb04-71288b655b3c",
                     "expectedControlType": "",
@@ -291,7 +291,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pause",
+                    "action": "Close",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

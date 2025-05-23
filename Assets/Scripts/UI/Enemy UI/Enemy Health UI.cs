@@ -15,5 +15,8 @@ public class EnemyHealthUI : MonoBehaviour
     void Update()
     {
         gameObject.GetComponent<Image>().fillAmount = enemy.currentHealth / enemy.maxHealth;
+
+        // UI to any angle 
+        transform.forward = Camera.main.transform.forward;
     }
 }

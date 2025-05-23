@@ -29,6 +29,9 @@ public class DamageText : MonoBehaviour
     {
         transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0));
 
+        // UI to any angle 
+        transform.forward = Camera.main.transform.forward;
+
         alpha.a = Mathf.Lerp(alpha.a, 0, alphaSpeed * Time.deltaTime);
         text.color = alpha;
     }

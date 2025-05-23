@@ -22,6 +22,11 @@ public class PlayerStat : MonoBehaviour
     public float maxStamina { get; set; } = 100f;
     public float currentStamina { get; set; }
 
+    // Speed
+    public float moveSpeed { get; set; } = 6f;
+    public float sprintSpeed { get; set; } = 10f;
+    public float rotationSpeed { get; set; } = 30f;
+
     // Damage
     public float attackDamage { get; private set; }
     public int finalDamage { get; set; }
@@ -82,6 +87,11 @@ public class PlayerStat : MonoBehaviour
         maxStamina = PlayerPrefs.HasKey("MAXStamina") ? PlayerPrefs.GetFloat("MAXStamina") : 100;
         currentStamina = PlayerPrefs.HasKey("CurStamina") ? PlayerPrefs.GetFloat("CurStamina") : maxStamina;
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+
+        // Speed
+        moveSpeed = PlayerPrefs.HasKey("Speed") ? PlayerPrefs.GetFloat("Speed") : 6f;
+        sprintSpeed = PlayerPrefs.HasKey("SprintSpeed") ? PlayerPrefs.GetFloat("SprintSpeed") : 10f;
+        rotationSpeed = PlayerPrefs.HasKey("RotationSpeed") ? PlayerPrefs.GetFloat("RotationSpeed") : 30f;
 
         // Damage
         attackDamage = PlayerPrefs.HasKey("ATKDMG") ? PlayerPrefs.GetFloat("ATKDMG") : 1;
@@ -168,6 +178,9 @@ public class PlayerStat : MonoBehaviour
 
         PlayerPrefs.SetFloat("MAXStamina", maxStamina);
         PlayerPrefs.SetFloat("CurStamina", currentStamina);
+
+        PlayerPrefs.SetFloat("Speed", moveSpeed);
+        PlayerPrefs.SetFloat("SprintSpeed", sprintSpeed);
 
         PlayerPrefs.SetFloat("ATKDMG", attackDamage);
 

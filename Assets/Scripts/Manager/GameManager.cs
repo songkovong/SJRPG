@@ -3,7 +3,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject testPanel;
     public bool isPaused;
 
     void Awake()
@@ -11,6 +10,12 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else if (instance != this)
+        {
+            Destroy(gameObject);
         }
 
         isPaused = false;
@@ -25,21 +30,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!isPaused)
-            {
-                isPaused = true;
-                Time.timeScale = 0;
-                testPanel.SetActive(true);
-            }
-            else
-            {
-                isPaused = false;
-                Time.timeScale = 1;
-                testPanel.SetActive(false);
-            }
+        
+    }
 
+    public void PauseGame()
+    {
+        if (!isPaused)
+        {
+            isPaused = true;
+            Time.timeScale = 0;
+        }
+    }
+
+    public void DePauseGame()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 1;
         }
     }
 }

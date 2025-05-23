@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
     public float finalSpeed { get; private set; }
     public bool isSkill { get; set; }
 
-    // Speed value
-    float moveSpeed = 8f;
-    float sprintSpeed = 12f;
-    float rotationSpeed = 30f;
+    // // Speed value
+    // float moveSpeed = 8f;
+    // float sprintSpeed = 12f;
+    // float rotationSpeed = 30f;
 
     // Guard Orbit value
     [SerializeField] GameObject orbitObject;
@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
     public Vector3 localMovement { get; private set; }
 
 
-
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -89,6 +88,7 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.canceled += OnGuard;
         playerInput.Player.Stat.started += OnStat;
         playerInput.Player.Item.started += OnItem;
+        playerInput.Player.Close.started += OnClose;
 
         isHit = false;
 
@@ -133,10 +133,11 @@ public class Player : MonoBehaviour
     public void PlayerMove(float multipleSpeed)
     {
         // Little Gravity on Player
-        currentMovement.y = -0.5f; 
+        currentMovement.y = -0.5f;
 
         // Speed Calculate
-        finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
+        // finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
+        finalSpeed = SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
         
         // Skill atcivate speed
         var skillSpeed = isSkill ? (SprintPressed ? 1f : 2f) : 1f;
@@ -148,12 +149,17 @@ public class Player : MonoBehaviour
     public void PlayerRotation()
     {
         Vector3 direction = new Vector3(currentMovement.x, 0, currentMovement.z);
-        
+
         // If vector is zero, dont rotate
-        if(direction.sqrMagnitude < 0.001f) return;
-        
+        if (direction.sqrMagnitude < 0.001f) return;
+
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f));
+        // this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f));
+        this.transform.rotation = Quaternion.Slerp(
+            this.transform.rotation,
+            targetRotation,
+            Time.deltaTime * (SprintPressed ? playerStat.rotationSpeed : playerStat.rotationSpeed / 2f)
+        );
     }
 
     // https://www.youtube.com/watch?v=XI56ogm7eFI
@@ -176,7 +182,16 @@ public class Player : MonoBehaviour
 
             // transform.rotation = Quaternion.LookRotation(direction);
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f));
+            // this.transform.rotation = Quaternion.Slerp(
+            //     this.transform.rotation,
+            //     targetRotation,
+            //     Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f)
+            // );
+            this.transform.rotation = Quaternion.Slerp(
+                this.transform.rotation,
+                targetRotation,
+                Time.deltaTime * (SprintPressed ? playerStat.rotationSpeed : playerStat.rotationSpeed / 2f)
+            );
         }
     }
 
@@ -238,9 +253,13 @@ public class Player : MonoBehaviour
 
     public void ChangeState(BaseState newState)
     {
-        currentState?.Exit();
-        currentState = newState;
-        currentState.Enter();
+        // If game is pause, dont change state
+        if (!GameManager.instance.isPaused)
+        {
+            currentState?.Exit();
+            currentState = newState;
+            currentState.Enter();
+        }
     }
 
     // On event
@@ -288,6 +307,11 @@ public class Player : MonoBehaviour
     {
         // ItemPressed = true;
         ItemPressed = ItemPressed ? false : true;
+    }
+
+    private void OnClose(InputAction.CallbackContext ctx)
+    {
+        
     }
 
     // Coroutine
