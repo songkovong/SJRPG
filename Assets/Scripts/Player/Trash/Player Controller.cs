@@ -5,13 +5,12 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private BaseState currentState;
-
-    public PlayerInput playerInput;
-    // public UnityEngine.InputSystem.PlayerInput playerInput;
     CharacterController characterController;
     public PlayerAnimator playerAnimator;
     Animator animator;
     HitColor playerHitColor;
+
+    PlayerInputController _input;
     
 
     // Player Stat
@@ -68,8 +67,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        playerInput = new PlayerInput();
-        // playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        _input = GetComponent<PlayerInputController>();
         animator = GetComponent<Animator>();
         playerAnimator = new PlayerAnimator(animator);
         characterController = GetComponent<CharacterController>();
@@ -77,25 +75,7 @@ public class PlayerController : MonoBehaviour
         playerStat = GetComponent<PlayerStat>();
         playerHitColor = GetComponent<HitColor>();
 
-        playerInput.Player.Move.started += OnMovementInput;
-        playerInput.Player.Move.performed += OnMovementInput;
-        playerInput.Player.Move.canceled += OnMovementInput;
-        playerInput.Player.Sprint.started += OnSprint;
-        playerInput.Player.Sprint.canceled += OnSprint;
-        playerInput.Player.Attack.started += OnAttack;
-        playerInput.Player.Skill.started += OnSkill;
-        playerInput.Player.Guard.started += OnGuard;
-        playerInput.Player.Guard.performed += OnGuard;
-        playerInput.Player.Guard.canceled += OnGuard;
-        playerInput.Player.Stat.started += OnStat;
-        playerInput.Player.Item.started += OnItem;
-
         isHit = false;
-
-        // skillCode = 1;
-        // weaponCode = 1;
-
-        playerInput.Enable();
     }
 
     void Start()
@@ -105,7 +85,7 @@ public class PlayerController : MonoBehaviour
         orbitObject = GameObject.FindWithTag("Guard Trail");
 
         attackHitbox = GameObject.FindWithTag("Attack Hitbox");
-        
+
         EndTrail();
         EndOrbitTrail();
 
@@ -129,15 +109,22 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Item Pressed = " + ItemPressed);
     }
 
+    void Movement()
+    {
+        InputDirection = _input.move;
+        currentMovement.x = InputDirection.x;
+        currentMovement.z = InputDirection.y;
+    }
+
     // Methods
     public void PlayerMove(float multipleSpeed)
     {
         // Little Gravity on Player
-        currentMovement.y = -0.5f; 
+        currentMovement.y = -0.5f;
 
         // Speed Calculate
         finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
-        
+
         // Skill atcivate speed
         var skillSpeed = isSkill ? (SprintPressed ? 1f : 2f) : 1f;
 
@@ -241,53 +228,6 @@ public class PlayerController : MonoBehaviour
         currentState?.Exit();
         currentState = newState;
         currentState.Enter();
-    }
-
-    // On event
-    void OnMovementInput(InputAction.CallbackContext ctx)
-    {
-        InputDirection = ctx.ReadValue<Vector2>();
-        currentMovement.x = InputDirection.x;
-        currentMovement.z = InputDirection.y;
-    }
-
-    void OnSprint(InputAction.CallbackContext ctx)
-    {
-        if(ctx.started) 
-        {
-            SprintPressed = true;
-        }
-        else if(ctx.canceled) 
-        {
-            SprintPressed = false;
-        }
-    }
-
-    private void OnAttack(InputAction.CallbackContext ctx)
-    {
-        AttackPressed = true;
-    }
-
-    private void OnSkill(InputAction.CallbackContext ctx)
-    {
-        SkillPressed = true;
-    }
-
-    private void OnGuard(InputAction.CallbackContext ctx)
-    {
-        GuardPressed = ctx.ReadValue<float>() > 0f;
-    }
-
-    private void OnStat(InputAction.CallbackContext ctx)
-    {
-        // StatPressed = true;
-        StatPressed = StatPressed ? false : true;
-    }
-
-    private void OnItem(InputAction.CallbackContext ctx)
-    {
-        // ItemPressed = true;
-        ItemPressed = ItemPressed ? false : true;
     }
 
     // Coroutine

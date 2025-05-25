@@ -5,7 +5,7 @@ public class PlayerInputController : MonoBehaviour
 {
     public Vector2 move;
     public Vector2 look;
-    public bool sprint { get; private set; } = false;
+    public bool sprint = false;
     public bool attack { get; private set; } = false;
     public bool skill { get; private set; } = false;
     public bool guard { get; private set; } = false;
@@ -19,14 +19,15 @@ public class PlayerInputController : MonoBehaviour
             move = ctx.ReadValue<Vector2>();
         }
     }
+    
 
     public void OnSprint(InputAction.CallbackContext ctx)
     {
-        if(ctx.started) 
+        if (ctx.started)
         {
             sprint = true;
         }
-        else if(ctx.canceled)
+        else if (ctx.canceled)
         {
             sprint = false;
         }

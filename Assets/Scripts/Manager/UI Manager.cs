@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
     Player player;
     public GameObject statPanel;
     public GameObject itemPanel;
+    public InputActionAsset inputActions;
 
     void Start()
     {
@@ -15,6 +17,7 @@ public class UIManager : MonoBehaviour
     {
         ShowStat();
         ShowItem();
+        Pause();
     }
 
     void ShowStat()
@@ -22,12 +25,12 @@ public class UIManager : MonoBehaviour
         if (player.StatPressed)
         {
             statPanel.SetActive(true);
-            GameManager.instance.PauseGame();
+            OpenUI();
         }
         else
         {
             statPanel.SetActive(false);
-            GameManager.instance.DePauseGame();
+            CloseUI();
         }
     }
 
@@ -36,12 +39,39 @@ public class UIManager : MonoBehaviour
         if (player.ItemPressed)
         {
             itemPanel.SetActive(true);
-            GameManager.instance.PauseGame();
+            OpenUI();
         }
         else
         {
             itemPanel.SetActive(false);
+            CloseUI();
+        }
+    }
+    void Pause()
+    {
+        if (player.ClosePressed)
+        {
+            GameManager.instance.PauseGame();
+        }
+        else
+        {
             GameManager.instance.DePauseGame();
         }
+    }
+
+    void OpenUI()
+    {
+        // inputActions.FindActionMap("Player").Disable();
+        // inputActions.FindActionMap("UI").Enable();
+        player.playerInput.Player.Disable();
+        player.playerInput.UI.Enable();
+    }
+
+    void CloseUI()
+    {
+        // inputActions.FindActionMap("Player").Enable();
+        // inputActions.FindActionMap("UI").Disable();
+        player.playerInput.Player.Enable();
+        player.playerInput.UI.Disable();
     }
 }

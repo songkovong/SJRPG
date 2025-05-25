@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public PlayerAnimator playerAnimator;
     Animator animator;
     HitColor playerHitColor;
-    
+
 
     // Player Stat
     public PlayerStat playerStat { get; private set; }
@@ -22,19 +22,15 @@ public class Player : MonoBehaviour
 
     public Vector2 InputDirection { get; private set; }
     public bool DodgePressed { get; private set; }
-    public bool AttackPressed { get; private set;}
+    public bool AttackPressed { get; private set; }
     public bool SkillPressed { get; private set; }
     public bool GuardPressed { get; private set; }
     public bool SprintPressed { get; private set; }
     public bool StatPressed { get; private set; }
     public bool ItemPressed { get; private set; }
+    public bool ClosePressed { get; private set; }
     public float finalSpeed { get; private set; }
     public bool isSkill { get; set; }
-
-    // // Speed value
-    // float moveSpeed = 8f;
-    // float sprintSpeed = 12f;
-    // float rotationSpeed = 30f;
 
     // Guard Orbit value
     [SerializeField] GameObject orbitObject;
@@ -105,12 +101,12 @@ public class Player : MonoBehaviour
         orbitObject = GameObject.FindWithTag("Guard Trail");
 
         attackHitbox = GameObject.FindWithTag("Attack Hitbox");
-        
+
         EndTrail();
         EndOrbitTrail();
 
         AttackHitboxOff();
-        
+
         ChangeState(new MoveState(this));
     }
 
@@ -138,7 +134,7 @@ public class Player : MonoBehaviour
         // Speed Calculate
         // finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
         finalSpeed = SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
-        
+
         // Skill atcivate speed
         var skillSpeed = isSkill ? (SprintPressed ? 1f : 2f) : 1f;
 
@@ -205,7 +201,7 @@ public class Player : MonoBehaviour
     {
         orbitDegree += Time.deltaTime * orbitSpeed;
 
-        if(orbitRadius >= 360f) orbitDegree -= 360f;
+        if (orbitRadius >= 360f) orbitDegree -= 360f;
 
         float rad = Mathf.Deg2Rad * (orbitDegree);
         float x = orbitRadius * Mathf.Cos(rad);
@@ -218,7 +214,7 @@ public class Player : MonoBehaviour
 
     public void ConsumeStamina()
     {
-        if(SprintPressed) playerStat.currentStamina -= (1 * Time.fixedDeltaTime);
+        if (SprintPressed) playerStat.currentStamina -= (1 * Time.fixedDeltaTime);
         else playerStat.currentStamina += (1 * Time.fixedDeltaTime);
     }
 
@@ -244,11 +240,12 @@ public class Player : MonoBehaviour
 
     public void GodmodeEffect(GameObject obj)
     {
-        if(playerStat.isGodmode)
+        if (playerStat.isGodmode)
         {
             obj.SetActive(true);
             OrbitRotation();
-        } else obj.SetActive(false);
+        }
+        else obj.SetActive(false);
     }
 
     public void ChangeState(BaseState newState)
@@ -272,11 +269,11 @@ public class Player : MonoBehaviour
 
     void OnSprint(InputAction.CallbackContext ctx)
     {
-        if(ctx.started) 
+        if (ctx.started)
         {
             SprintPressed = true;
         }
-        else if(ctx.canceled) 
+        else if (ctx.canceled)
         {
             SprintPressed = false;
         }
@@ -311,7 +308,7 @@ public class Player : MonoBehaviour
 
     private void OnClose(InputAction.CallbackContext ctx)
     {
-        
+        ClosePressed = ClosePressed ? false : true;
     }
 
     // Coroutine
@@ -326,3 +323,4 @@ public class Player : MonoBehaviour
     public void AttackHitboxOn() => attackHitbox.SetActive(true);
     public void AttackHitboxOff() => attackHitbox.SetActive(false);
 }
+

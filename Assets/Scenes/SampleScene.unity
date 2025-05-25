@@ -3639,6 +3639,7 @@ GameObject:
   - component: {fileID: 1837066810}
   - component: {fileID: 1837066812}
   - component: {fileID: 1837066811}
+  - component: {fileID: 1837066813}
   m_Layer: 5
   m_Name: Player Item Panel
   m_TagString: Untagged
@@ -3703,6 +3704,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837066809}
   m_CullTransparentMesh: 1
+--- !u!114 &1837066813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837066809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb726c0cb476e479a7c71a5fc4f0f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mMoveUiTarget: {fileID: 1837066810}
 --- !u!1 &1840495472
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,6 +3763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statPanel: {fileID: 1919622819}
   itemPanel: {fileID: 1837066809}
+  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &1872887862
 GameObject:
   m_ObjectHideFlags: 0
@@ -4141,6 +4156,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6325139551844506790, guid: a8415e2279f384242a19466716bae2bc, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921842757547461988, guid: a8415e2279f384242a19466716bae2bc, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
