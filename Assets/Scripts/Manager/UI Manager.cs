@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,11 @@ public class UIManager : MonoBehaviour
     Player player;
     public GameObject statPanel;
     public GameObject itemPanel;
-    public InputActionAsset inputActions;
+    bool stat = false;
+    bool item = false;
+    bool close = false;
+    bool pausetime = false;
+    public List<GameObject> floatingUI = new List<GameObject>();
 
     void Start()
     {
@@ -15,22 +20,24 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        // pausetime = stat || item;
+
         ShowStat();
         ShowItem();
         Pause();
+        IsUIFloating();
+        CloseUI();
     }
 
     void ShowStat()
     {
         if (player.StatPressed)
         {
-            statPanel.SetActive(true);
-            OpenUI();
+            floatingUI[0].SetActive(true);
         }
         else
         {
-            statPanel.SetActive(false);
-            CloseUI();
+            floatingUI[0].SetActive(false);
         }
     }
 
@@ -38,18 +45,44 @@ public class UIManager : MonoBehaviour
     {
         if (player.ItemPressed)
         {
-            itemPanel.SetActive(true);
-            OpenUI();
+            floatingUI[1].SetActive(true);
         }
         else
         {
-            itemPanel.SetActive(false);
-            CloseUI();
+            floatingUI[1].SetActive(false);
         }
     }
-    void Pause()
+
+    void CloseUI()
     {
         if (player.ClosePressed)
+        {
+            for (int i = 0; i < floatingUI.Count; i++)
+            {
+                if (floatingUI[i].activeSelf)
+                {
+                    floatingUI[i].SetActive(false);
+                    // return;
+                }
+            }
+            pausetime = false;
+        }
+    }
+
+    void IsUIFloating()
+    {
+        for (int i = 0; i < floatingUI.Count; i++)
+        {
+            if (floatingUI[i].activeSelf)
+            {
+                pausetime = true;
+            }
+        }
+    }
+    
+    void Pause()
+    {
+        if (pausetime)
         {
             GameManager.instance.PauseGame();
         }
@@ -59,19 +92,5 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void OpenUI()
-    {
-        // inputActions.FindActionMap("Player").Disable();
-        // inputActions.FindActionMap("UI").Enable();
-        player.playerInput.Player.Disable();
-        player.playerInput.UI.Enable();
-    }
-
-    void CloseUI()
-    {
-        // inputActions.FindActionMap("Player").Enable();
-        // inputActions.FindActionMap("UI").Disable();
-        player.playerInput.Player.Enable();
-        player.playerInput.UI.Disable();
-    }
+    
 }

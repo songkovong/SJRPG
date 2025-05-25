@@ -10,7 +10,6 @@ public class SkillState : BaseState
 
     public override void Enter()
     {
-        // player.playerStat.finalDamage = (player.playerStat.SkillDamage * player.playerStat.attackDamage) + player.playerStat.weaponDamage;
         player.playerStat.finalDamage = player.playerStat.SkillDmg();
 
         Debug.Log("player stat skill code = " + player.playerStat.SkillCode);

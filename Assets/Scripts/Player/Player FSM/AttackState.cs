@@ -16,7 +16,6 @@ public class AttackState : BaseState
 
     public override void Enter()
     {
-        // player.playerStat.finalDamage = player.playerStat.attackDamage + player.playerStat.weaponDamage;
         player.playerStat.finalDamage = player.playerStat.AtkDmg();
         
         Debug.Log("Enter Attack");
