@@ -17,7 +17,7 @@ public class AttackState : BaseState
     public override void Enter()
     {
         player.playerStat.finalDamage = player.playerStat.AtkDmg();
-        
+
         Debug.Log("Enter Attack");
 
         canCombo = false;
@@ -29,12 +29,11 @@ public class AttackState : BaseState
         animationDuration = clip != null ? clip.length : 0.5f;
         Debug.Log("clip length" + animationDuration);
 
-        player.StartTrail();
+        player.AttackTrail.StartTrail();
+        player.AttackHitbox.HitboxOn();
 
         player.StartCoroutinePlayer(AllowComboAfterAnimation(animationDuration));
         player.StartCoroutinePlayer(EndAttackAfterTime(animationDuration));
-
-        player.AttackHitboxOn();
     }
 
     public override void Update()
@@ -54,10 +53,10 @@ public class AttackState : BaseState
 
     public override void Exit()
     {
-        player.EndTrail();
-        Debug.Log("Exit Attack");
+        player.AttackTrail.EndTrail();
+        player.AttackHitbox.HitboxOff();
 
-        player.AttackHitboxOff();
+        Debug.Log("Exit Attack");
     }
 
     private IEnumerator AllowComboAfterAnimation(float animationDuration)

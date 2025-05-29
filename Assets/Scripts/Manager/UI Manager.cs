@@ -7,9 +7,9 @@ public class UIManager : MonoBehaviour
     Player player;
     public GameObject statPanel;
     public GameObject itemPanel;
-    bool stat = false;
-    bool item = false;
-    bool close = false;
+    // bool stat = false;
+    // bool item = false;
+    // bool close = false;
     bool pausetime = false;
     public List<GameObject> floatingUI = new List<GameObject>();
 

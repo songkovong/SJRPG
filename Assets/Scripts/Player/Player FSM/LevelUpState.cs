@@ -14,8 +14,9 @@ public class LevelUpState : BaseState
         timer = 0f;
 
         Debug.Log("Enter LvUp");
+        
         player.PlayerAnimator.PlayLevelUp();
-        player.playerAnimator.SetMove(0, 0, 0);
+        player.PlayerAnimator.SetMove(0, 0, 0);
         animationDuration = player.PlayerAnimator.GetClipByName("LevelUp").length;
     }
 
@@ -31,8 +32,8 @@ public class LevelUpState : BaseState
 
     public override void Exit()
     {
-        player.playerStat.isGodmode = false;
         Debug.Log("Exit Lvup");
+        player.playerStat.isGodmode = false;
         player.playerStat.isLevelUp = false;
     }
 }

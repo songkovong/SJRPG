@@ -9,7 +9,8 @@ public class GuardState : BaseState
     public override void Enter()
     {
         Debug.Log("Enter Guard");
-        player.StartOrbitTrail();
+        
+        player.GuardTrail.StartTrail();
         player.playerStat.isGodmode = true;
     }
 
@@ -34,7 +35,8 @@ public class GuardState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit Guard");
-        player.EndOrbitTrail();
+
+        player.GuardTrail.EndTrail();
         player.playerStat.isGodmode = false;
     }
 }

@@ -29,8 +29,8 @@ public class SkillState : BaseState
         player.isSkill = true;
         player.playerStat.isGodmode = true;
 
-        player.StartTrail();
-        player.AttackHitboxOn();
+        player.AttackTrail.StartTrail();
+        player.AttackHitbox.HitboxOn();
     }
 
     public override void Update()
@@ -51,7 +51,7 @@ public class SkillState : BaseState
         player.isSkill = false;
         player.playerStat.isGodmode = false;
 
-        player.EndTrail();
-        player.AttackHitboxOff();
+        player.AttackTrail.EndTrail();
+        player.AttackHitbox.HitboxOff();
     }
 }

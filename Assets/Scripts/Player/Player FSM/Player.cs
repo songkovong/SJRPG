@@ -7,19 +7,22 @@ public class Player : MonoBehaviour
     private BaseState currentState;
 
     public PlayerInput playerInput;
-    // public UnityEngine.InputSystem.PlayerInput playerInput;
     CharacterController characterController;
-    public PlayerAnimator playerAnimator;
+    PlayerAnimator playerAnimator;
     Animator animator;
+
+
     HitColor playerHitColor;
+    PlayerGuardTrail _guardTrail;
+    PlayerAttackTrail _attackTrail;
+    SwordHitbox _attackHitbox;
 
 
     // Player Stat
     public PlayerStat playerStat { get; private set; }
 
-    // Effect for Attack and Skill
-    [SerializeField] GameObject trailObject;
 
+    // Player Input Value
     public Vector2 InputDirection { get; private set; }
     public bool DodgePressed { get; private set; }
     public bool AttackPressed { get; private set; }
@@ -29,14 +32,10 @@ public class Player : MonoBehaviour
     public bool StatPressed { get; private set; }
     public bool ItemPressed { get; private set; }
     public bool ClosePressed { get; private set; }
+
+
     public float finalSpeed { get; private set; }
     public bool isSkill { get; set; }
-
-    // Guard Orbit value
-    [SerializeField] GameObject orbitObject;
-    float orbitRadius = 0.8f; // radius
-    float orbitDegree; // degree
-    float orbitSpeed = 400f; // orbit speed
 
     // Hit value
     public bool isHit { get; set; }
@@ -60,17 +59,20 @@ public class Player : MonoBehaviour
     Vector3 currentMovement;
     public Vector3 localMovement { get; private set; }
 
-
     void Awake()
     {
         playerInput = new PlayerInput();
-        // playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
         animator = GetComponent<Animator>();
         playerAnimator = new PlayerAnimator(animator);
         characterController = GetComponent<CharacterController>();
 
         playerStat = GetComponent<PlayerStat>();
+
         playerHitColor = GetComponent<HitColor>();
+        _guardTrail = GetComponentInChildren<PlayerGuardTrail>();
+        _attackTrail = GetComponentInChildren<PlayerAttackTrail>();
+        _attackHitbox = GetComponentInChildren<SwordHitbox>();
+
 
         playerInput.Player.Move.started += OnMovementInput;
         playerInput.Player.Move.performed += OnMovementInput;
@@ -88,25 +90,11 @@ public class Player : MonoBehaviour
 
         isHit = false;
 
-        // skillCode = 1;
-        // weaponCode = 1;
-
         playerInput.Enable();
     }
 
     void Start()
     {
-        // Initailize TrailObject
-        trailObject = GameObject.FindWithTag("Attack Trail");
-        orbitObject = GameObject.FindWithTag("Guard Trail");
-
-        attackHitbox = GameObject.FindWithTag("Attack Hitbox");
-
-        EndTrail();
-        EndOrbitTrail();
-
-        AttackHitboxOff();
-
         ChangeState(new MoveState(this));
     }
 
@@ -119,10 +107,6 @@ public class Player : MonoBehaviour
         SkillPressed = false;
 
         LocalMoveDir();
-        GodmodeEffect(orbitObject);
-
-        Debug.Log("Stat Pressed = " + StatPressed);
-        Debug.Log("Item Pressed = " + ItemPressed);
     }
 
     // Methods
@@ -196,57 +180,11 @@ public class Player : MonoBehaviour
         localMovement = this.transform.InverseTransformDirection(new Vector3(currentMovement.x, 0, currentMovement.z));
     }
 
-    // https://sharp2studio.tistory.com/4
-    public void OrbitRotation()
-    {
-        orbitDegree += Time.deltaTime * orbitSpeed;
-
-        if (orbitRadius >= 360f) orbitDegree -= 360f;
-
-        float rad = Mathf.Deg2Rad * (orbitDegree);
-        float x = orbitRadius * Mathf.Cos(rad);
-        float z = orbitRadius * Mathf.Sin(rad);
-
-        orbitObject.transform.position = this.transform.position + new Vector3(x, 0.5f, z);
-        // orbitObject.transform.rotation = Quaternion.Euler(0, 0, orbitDegree * -1); // 가운데를 바라보게 각도 조절
-        // orbitObject.transform.rotation = Quaternion.LookRotation(this.transform.position - orbitObject.transform.position);
-    }
-
-    public void ConsumeStamina()
-    {
-        if (SprintPressed) playerStat.currentStamina -= (1 * Time.fixedDeltaTime);
-        else playerStat.currentStamina += (1 * Time.fixedDeltaTime);
-    }
-
-    public void StartTrail()
-    {
-        trailObject.SetActive(true);
-    }
-
-    public void EndTrail()
-    {
-        trailObject.SetActive(false);
-    }
-
-    public void StartOrbitTrail()
-    {
-        orbitObject.SetActive(true);
-    }
-
-    public void EndOrbitTrail()
-    {
-        orbitObject.SetActive(false);
-    }
-
-    public void GodmodeEffect(GameObject obj)
-    {
-        if (playerStat.isGodmode)
-        {
-            obj.SetActive(true);
-            OrbitRotation();
-        }
-        else obj.SetActive(false);
-    }
+    // public void ConsumeStamina()
+    // {
+    //     if (SprintPressed) playerStat.currentStamina -= (1 * Time.fixedDeltaTime);
+    //     else playerStat.currentStamina += (1 * Time.fixedDeltaTime);
+    // }
 
     public void ChangeState(BaseState newState)
     {
@@ -320,7 +258,8 @@ public class Player : MonoBehaviour
     public PlayerAnimator PlayerAnimator => playerAnimator;
     public Animator Animator => animator;
     public HitColor PlayerHitColor => playerHitColor;
-    public void AttackHitboxOn() => attackHitbox.SetActive(true);
-    public void AttackHitboxOff() => attackHitbox.SetActive(false);
+    public PlayerGuardTrail GuardTrail => _guardTrail;
+    public PlayerAttackTrail AttackTrail => _attackTrail;
+    public SwordHitbox AttackHitbox => _attackHitbox;
 }
 

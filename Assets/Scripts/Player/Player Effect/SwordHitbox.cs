@@ -7,6 +7,7 @@ public class SwordHitbox : MonoBehaviour
     void Start()
     {
         player = GetComponentInParent<Player>();
+        HitboxOff();
     }
 
     void OnTriggerEnter(Collider other)
@@ -16,4 +17,7 @@ public class SwordHitbox : MonoBehaviour
 
         other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.finalDamage);
     }
+
+    public void HitboxOn() => this.gameObject.SetActive(true);
+    public void HitboxOff() => this.gameObject.SetActive(false);
 }
