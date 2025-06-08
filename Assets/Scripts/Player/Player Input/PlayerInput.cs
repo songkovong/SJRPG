@@ -82,33 +82,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Stat"",
-                    ""type"": ""Button"",
-                    ""id"": ""c5c8eaaf-4b23-43ec-a80d-7a2cd52938f4"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Item"",
-                    ""type"": ""Button"",
-                    ""id"": ""7f0bf9a2-a900-48fc-b088-43b65ab7712b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Close"",
-                    ""type"": ""Button"",
-                    ""id"": ""e509d294-0949-4e38-bb04-71288b655b3c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
@@ -286,39 +259,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7fc6f20c-c1fb-433e-939f-dd926342fa43"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Stat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b02a403a-24d5-4064-8c1e-206162bd5173"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Item"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fd935bc1-18a7-4270-954e-bc7beeba1110"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Close"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1c04ea5f-b012-41d1-a6f7-02e963b52893"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -347,15 +287,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""7607c7b6-cd76-4816-beef-bd0341cfe950"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Cancel"",
+                    ""name"": ""Close"",
                     ""type"": ""Button"",
                     ""id"": ""15cef263-9014-4fd5-94d9-4e4a6234a6ef"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Stat"",
+                    ""type"": ""Button"",
+                    ""id"": ""97eb2257-a9fd-423f-bdd5-86dd1e5fef90"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9b2fb58-b375-4e10-a75f-ee2c126510b0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -704,11 +662,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""82627dcc-3b13-4ba9-841d-e4b746d6553e"",
-                    ""path"": ""*/{Cancel}"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
-                    ""action"": ""Cancel"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15a00573-501b-401e-ae00-c65331e976c3"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Stat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfad39b0-e58e-4fe9-bcc4-ce2325985150"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -918,15 +898,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
         m_Player_Skill = m_Player.FindAction("Skill", throwIfNotFound: true);
         m_Player_Enteraction = m_Player.FindAction("Enteraction", throwIfNotFound: true);
-        m_Player_Stat = m_Player.FindAction("Stat", throwIfNotFound: true);
-        m_Player_Item = m_Player.FindAction("Item", throwIfNotFound: true);
-        m_Player_Close = m_Player.FindAction("Close", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_Close = m_UI.FindAction("Close", throwIfNotFound: true);
+        m_UI_Stat = m_UI.FindAction("Stat", throwIfNotFound: true);
+        m_UI_Item = m_UI.FindAction("Item", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
@@ -1007,9 +986,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Guard;
     private readonly InputAction m_Player_Skill;
     private readonly InputAction m_Player_Enteraction;
-    private readonly InputAction m_Player_Stat;
-    private readonly InputAction m_Player_Item;
-    private readonly InputAction m_Player_Close;
     private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
@@ -1021,9 +997,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Guard => m_Wrapper.m_Player_Guard;
         public InputAction @Skill => m_Wrapper.m_Player_Skill;
         public InputAction @Enteraction => m_Wrapper.m_Player_Enteraction;
-        public InputAction @Stat => m_Wrapper.m_Player_Stat;
-        public InputAction @Item => m_Wrapper.m_Player_Item;
-        public InputAction @Close => m_Wrapper.m_Player_Close;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -1052,15 +1025,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Enteraction.started += instance.OnEnteraction;
             @Enteraction.performed += instance.OnEnteraction;
             @Enteraction.canceled += instance.OnEnteraction;
-            @Stat.started += instance.OnStat;
-            @Stat.performed += instance.OnStat;
-            @Stat.canceled += instance.OnStat;
-            @Item.started += instance.OnItem;
-            @Item.performed += instance.OnItem;
-            @Item.canceled += instance.OnItem;
-            @Close.started += instance.OnClose;
-            @Close.performed += instance.OnClose;
-            @Close.canceled += instance.OnClose;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -1086,15 +1050,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Enteraction.started -= instance.OnEnteraction;
             @Enteraction.performed -= instance.OnEnteraction;
             @Enteraction.canceled -= instance.OnEnteraction;
-            @Stat.started -= instance.OnStat;
-            @Stat.performed -= instance.OnStat;
-            @Stat.canceled -= instance.OnStat;
-            @Item.started -= instance.OnItem;
-            @Item.performed -= instance.OnItem;
-            @Item.canceled -= instance.OnItem;
-            @Close.started -= instance.OnClose;
-            @Close.performed -= instance.OnClose;
-            @Close.canceled -= instance.OnClose;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -1121,7 +1076,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Navigate;
     private readonly InputAction m_UI_Submit;
-    private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_Close;
+    private readonly InputAction m_UI_Stat;
+    private readonly InputAction m_UI_Item;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_RightClick;
@@ -1135,7 +1092,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public UIActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
-        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Close => m_Wrapper.m_UI_Close;
+        public InputAction @Stat => m_Wrapper.m_UI_Stat;
+        public InputAction @Item => m_Wrapper.m_UI_Item;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
@@ -1158,9 +1117,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Submit.started += instance.OnSubmit;
             @Submit.performed += instance.OnSubmit;
             @Submit.canceled += instance.OnSubmit;
-            @Cancel.started += instance.OnCancel;
-            @Cancel.performed += instance.OnCancel;
-            @Cancel.canceled += instance.OnCancel;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
+            @Stat.started += instance.OnStat;
+            @Stat.performed += instance.OnStat;
+            @Stat.canceled += instance.OnStat;
+            @Item.started += instance.OnItem;
+            @Item.performed += instance.OnItem;
+            @Item.canceled += instance.OnItem;
             @Point.started += instance.OnPoint;
             @Point.performed += instance.OnPoint;
             @Point.canceled += instance.OnPoint;
@@ -1192,9 +1157,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Submit.started -= instance.OnSubmit;
             @Submit.performed -= instance.OnSubmit;
             @Submit.canceled -= instance.OnSubmit;
-            @Cancel.started -= instance.OnCancel;
-            @Cancel.performed -= instance.OnCancel;
-            @Cancel.canceled -= instance.OnCancel;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
+            @Stat.started -= instance.OnStat;
+            @Stat.performed -= instance.OnStat;
+            @Stat.canceled -= instance.OnStat;
+            @Item.started -= instance.OnItem;
+            @Item.performed -= instance.OnItem;
+            @Item.canceled -= instance.OnItem;
             @Point.started -= instance.OnPoint;
             @Point.performed -= instance.OnPoint;
             @Point.canceled -= instance.OnPoint;
@@ -1286,16 +1257,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
         void OnEnteraction(InputAction.CallbackContext context);
-        void OnStat(InputAction.CallbackContext context);
-        void OnItem(InputAction.CallbackContext context);
-        void OnClose(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
-        void OnCancel(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
+        void OnStat(InputAction.CallbackContext context);
+        void OnItem(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);

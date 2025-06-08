@@ -12,25 +12,21 @@ public class PlayerInputController : MonoBehaviour
     public bool stat { get; private set; } = false;
     public bool item { get; private set; } = false;
 
-    public void OnMove(InputAction.CallbackContext ctx)
+    void Update()
     {
-        // if (ctx.performed || ctx.canceled)
-        {
-            move = ctx.ReadValue<Vector2>();
-        }
+        Debug.Log("isPressed = " + sprint);
     }
-    
 
-    public void OnSprint(InputAction.CallbackContext ctx)
+    public void OnMove(InputValue value)
     {
-        if (ctx.started)
-        {
-            sprint = true;
-        }
-        else if (ctx.canceled)
-        {
-            sprint = false;
-        }
+        move = value.Get<Vector2>();
+    }
+
+    public void OnSprint(InputValue value)
+    {
+        // if (value.isPressed) sprint = true;
+        // else sprint = false;
+        sprint = value.isPressed;
     }
 
     public void OnAttack(InputAction.CallbackContext ctx)

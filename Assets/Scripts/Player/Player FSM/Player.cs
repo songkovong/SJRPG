@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     public bool ItemPressed { get; private set; }
     public bool ClosePressed { get; private set; }
 
+    public bool DontRotate { get; set; }
+
 
     public float finalSpeed { get; private set; }
     public bool isSkill { get; set; }
@@ -84,13 +86,14 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
-        playerInput.Player.Stat.started += OnStat;
-        playerInput.Player.Item.started += OnItem;
-        playerInput.Player.Close.started += OnClose;
+        // playerInput.Player.Stat.started += OnStat;
+        // playerInput.Player.Item.started += OnItem;
+        // playerInput.Player.Close.started += OnClose;
 
         isHit = false;
 
         playerInput.Enable();
+        // playerInput.Player.Disable();
     }
 
     void Start()
@@ -145,33 +148,36 @@ public class Player : MonoBehaviour
     // https://www.youtube.com/watch?v=XI56ogm7eFI
     public void PlayerMouseRotation()
     {
-        Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
-
-        Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
-
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-
-        if (groundPlane.Raycast(ray, out float distance))
+        if(!DontRotate)
         {
-            Vector3 direction = ray.GetPoint(distance) - transform.position;
-            direction.y = 0f;
+            Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
 
-            // If vector is zero, dont rotate
-            if (direction.sqrMagnitude < 0.001f)
-                return;
+            Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
 
-            // transform.rotation = Quaternion.LookRotation(direction);
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            // this.transform.rotation = Quaternion.Slerp(
-            //     this.transform.rotation,
-            //     targetRotation,
-            //     Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f)
-            // );
-            this.transform.rotation = Quaternion.Slerp(
-                this.transform.rotation,
-                targetRotation,
-                Time.deltaTime * (SprintPressed ? playerStat.rotationSpeed : playerStat.rotationSpeed / 2f)
-            );
+            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+            if (groundPlane.Raycast(ray, out float distance))
+            {
+                Vector3 direction = ray.GetPoint(distance) - transform.position;
+                direction.y = 0f;
+
+                // If vector is zero, dont rotate
+                if (direction.sqrMagnitude < 0.001f)
+                    return;
+
+                // transform.rotation = Quaternion.LookRotation(direction);
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                // this.transform.rotation = Quaternion.Slerp(
+                //     this.transform.rotation,
+                //     targetRotation,
+                //     Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f)
+                // );
+                this.transform.rotation = Quaternion.Slerp(
+                    this.transform.rotation,
+                    targetRotation,
+                    Time.deltaTime * (SprintPressed ? playerStat.rotationSpeed : playerStat.rotationSpeed / 2f)
+                );
+            }
         }
     }
 
@@ -232,22 +238,25 @@ public class Player : MonoBehaviour
         GuardPressed = ctx.ReadValue<float>() > 0f;
     }
 
-    private void OnStat(InputAction.CallbackContext ctx)
-    {
-        // StatPressed = true;
-        StatPressed = StatPressed ? false : true;
-    }
+    // private void OnStat(InputAction.CallbackContext ctx)
+    // {
+    //     // StatPressed = true;
+    //     // StatPressed = StatPressed ? false : true;
+    //     StatPressed = ctx.ReadValue<bool>();
+    // }
 
-    private void OnItem(InputAction.CallbackContext ctx)
-    {
-        // ItemPressed = true;
-        ItemPressed = ItemPressed ? false : true;
-    }
+    // private void OnItem(InputAction.CallbackContext ctx)
+    // {
+    //     // ItemPressed = true;
+    //     // ItemPressed = ItemPressed ? false : true;
+    //     ItemPressed = ctx.ReadValue<bool>();
+    // }
 
-    private void OnClose(InputAction.CallbackContext ctx)
-    {
-        ClosePressed = ClosePressed ? false : true;
-    }
+    // private void OnClose(InputAction.CallbackContext ctx)
+    // {
+    //     // ClosePressed = ClosePressed ? false : true;
+    //     ClosePressed = ctx.ReadValue<bool>();
+    // }
 
     // Coroutine
     public void StartCoroutinePlayer(IEnumerator coroutine)

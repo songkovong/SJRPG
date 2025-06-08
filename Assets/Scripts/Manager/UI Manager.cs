@@ -1,96 +1,91 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
-    Player player;
     public GameObject statPanel;
     public GameObject itemPanel;
-    // bool stat = false;
-    // bool item = false;
-    // bool close = false;
-    bool pausetime = false;
-    public List<GameObject> floatingUI = new List<GameObject>();
 
-    void Start()
+    private Stack<GameObject> openWindows = new Stack<GameObject>();
+
+    Player player;
+
+    void Awake()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     void Update()
     {
-        // pausetime = stat || item;
-
-        ShowStat();
-        ShowItem();
-        Pause();
-        IsUIFloating();
-        CloseUI();
+        IsAnyWindow();
     }
 
-    void ShowStat()
+    void OnEnable()
     {
-        if (player.StatPressed)
+        player.playerInput.UI.Stat.started += OnStat;
+        player.playerInput.UI.Item.started += OnItem;
+        player.playerInput.UI.Close.started += OnClose;
+    }
+
+    void OnDisable()
+    {
+        player.playerInput.UI.Stat.started -= OnStat;
+        player.playerInput.UI.Item.started -= OnItem;
+        player.playerInput.UI.Close.started -= OnClose;
+    }
+
+    void OnStat(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Stat");
+        OpenWindow(statPanel);
+    }
+
+    void OnItem(InputAction.CallbackContext ctx)
+    {
+        OpenWindow(itemPanel);
+    }
+
+    void OnClose(InputAction.CallbackContext ctx)
+    {
+        CloseLastWindow();
+    }
+
+    void OpenWindow(GameObject panel)
+    {
+        if (panel.activeSelf)
         {
-            floatingUI[0].SetActive(true);
+            panel.SetActive(false);
+            openWindows = new Stack<GameObject>(openWindows.Where(p => p != panel).Reverse());
         }
         else
         {
-            floatingUI[0].SetActive(false);
+            panel.SetActive(true);
+            openWindows.Push(panel);
         }
     }
 
-    void ShowItem()
+    void CloseLastWindow()
     {
-        if (player.ItemPressed)
+        if (openWindows.Count > 0)
         {
-            floatingUI[1].SetActive(true);
+            GameObject panel = openWindows.Pop();
+            panel.SetActive(false);
+        }
+    }
+
+    void IsAnyWindow()
+    {
+        if (openWindows.Count > 0)
+        {
+            player.playerInput.Player.Disable();
+            player.DontRotate = true;
         }
         else
         {
-            floatingUI[1].SetActive(false);
+            player.playerInput.Player.Enable();
+            player.DontRotate = false;
         }
     }
-
-    void CloseUI()
-    {
-        if (player.ClosePressed)
-        {
-            for (int i = 0; i < floatingUI.Count; i++)
-            {
-                if (floatingUI[i].activeSelf)
-                {
-                    floatingUI[i].SetActive(false);
-                    // return;
-                }
-            }
-            pausetime = false;
-        }
-    }
-
-    void IsUIFloating()
-    {
-        for (int i = 0; i < floatingUI.Count; i++)
-        {
-            if (floatingUI[i].activeSelf)
-            {
-                pausetime = true;
-            }
-        }
-    }
-    
-    void Pause()
-    {
-        if (pausetime)
-        {
-            GameManager.instance.PauseGame();
-        }
-        else
-        {
-            GameManager.instance.DePauseGame();
-        }
-    }
-
-    
 }

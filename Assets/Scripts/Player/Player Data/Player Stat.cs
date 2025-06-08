@@ -44,6 +44,10 @@ public class PlayerStat : MonoBehaviour
     int weaponCode;
     public float weaponDamage { get; private set; }
 
+    // Stat Point
+    public int statPoint { get; private set; }
+
+
     void Start()
     {
         player = GetComponent<Player>();
@@ -103,9 +107,11 @@ public class PlayerStat : MonoBehaviour
         canSkill = true;
 
         // Weapon
-
         player.weaponCode = PlayerPrefs.HasKey("WeaponCode") ? PlayerPrefs.GetInt("WeaponCode") : 1;
         FindWeapons();
+
+        // Stat Point
+        statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 0;
     }
 
     public void TakeDamage(float getDamage)
@@ -151,17 +157,61 @@ public class PlayerStat : MonoBehaviour
             exp *= 1.3f;
             expCount = 0;
 
-            maxHealth *= 1.1f;
-            currentHealth = maxHealth;
+            statPoint += 3;
 
-            maxStamina *= 1.1f;
-            currentStamina = maxStamina;
+            // maxHealth *= 1.1f;
+            // currentHealth = maxHealth;
 
-            attackDamage *= 1.2f;
+            // maxStamina *= 1.1f;
+            // currentStamina = maxStamina;
+
+            // attackDamage *= 1.2f;
 
             SaveData();
         }
     }
+
+    public void HealthUp()
+    {
+        if (statPoint >= 1)
+        {
+            maxHealth *= 1.1f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
+    public void DamageUp()
+    {
+        if (statPoint >= 1)
+        {
+            attackDamage *= 1.2f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
+    public void SkillDamageUp()
+    {
+        if (statPoint >= 1)
+        {
+            skillDamage *= 1.1f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
+    public void SpeedUp()
+    {
+        if (statPoint >= 1)
+        {
+            moveSpeed += 0.1f;
+            sprintSpeed += 0.1f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
     public void DeleteData()
     {
         PlayerPrefs.DeleteAll();
@@ -186,6 +236,8 @@ public class PlayerStat : MonoBehaviour
 
         PlayerPrefs.SetInt("SkillCode", skillCode);
         PlayerPrefs.SetInt("WeaponCode", weaponCode);
+
+        PlayerPrefs.SetInt("StatPoint", statPoint);
     }
 
     public float RandomAtkDmg()
@@ -200,7 +252,7 @@ public class PlayerStat : MonoBehaviour
 
     public int SkillDmg()
     {
-        return (int)(Mathf.Floor((SkillDamage * RandomAtkDmg() + weaponDamage) * 10f));
+        return (int)(Mathf.Floor((skillDamage * RandomAtkDmg() + weaponDamage) * 10f));
     }
 
 
