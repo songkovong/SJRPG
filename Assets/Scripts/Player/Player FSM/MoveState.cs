@@ -38,7 +38,7 @@ public class MoveState : BaseState
                     return;
                 }
 
-                if (player.SkillPressed && player.playerStat.canSkill)
+                if (player.SkillPressed && player.playerStat.canSkill && player.playerStat.canMagic)
                 {
                     player.ChangeState(new SkillState(player));
                     return;

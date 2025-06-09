@@ -22,9 +22,10 @@ public class PlayerAnimator
         animator.SetTrigger("Attack");
     }
 
-    public void PlaySkill()
+    public void PlaySkill(string skillCode)
     {
-        animator.SetTrigger("Skill");
+        // animator.SetTrigger("Skill");
+        animator.Play("Skill " + skillCode);
     }
 
     public void PlayHit()

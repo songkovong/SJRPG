@@ -17,13 +17,14 @@ public class SkillState : BaseState
         var skillCodeHash = player.playerStat.SkillCode.ToString();
         player.playerStat.canSkill = false;
         player.playerStat.skillCooltimeTimer -= player.playerStat.skillCooltime;
+        player.playerStat.currentMagic -= player.playerStat.SkillMagic;
 
         // Player Skill is empty
         // if(skillNameHash == "" || skillNameHash == null) player.ChangeState(new MoveState(player));
 
         timer = 0f;
         Debug.Log("Enter Skill");
-        player.PlayerAnimator.PlaySkill();
+        player.PlayerAnimator.PlaySkill(skillCodeHash);
         animationDuration = player.PlayerAnimator.GetClipByName("Skill " + skillCodeHash).length;
 
         player.isSkill = true;

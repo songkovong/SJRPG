@@ -18,9 +18,11 @@ public class PlayerStat : MonoBehaviour
     public float godmodeDuration { get; private set; } = 2f;
     public bool isGodmode { get; set; } = false;
 
-    // Stamina 
-    public float maxStamina { get; set; } = 100f;
-    public float currentStamina { get; set; }
+    // Magic
+    public float maxMagic { get; set; } = 100f;
+    public float currentMagic { get; set; }
+    public bool canMagic;
+    public float magicRecoveryRate { get; private set; }
 
     // Speed
     public float moveSpeed { get; set; } = 6f;
@@ -38,6 +40,7 @@ public class PlayerStat : MonoBehaviour
     int skillCode;
     public float skillCooltime { get; private set; }
     float skillDamage;
+    float skillMagic;
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
@@ -62,14 +65,12 @@ public class PlayerStat : MonoBehaviour
 
     void Update()
     {
-        if (!canSkill)
+        SkillCooltimeRecovery();
+        MagicRecovery();
+
+        if (currentMagic >= skillMagic)
         {
-            skillCooltimeTimer += Time.deltaTime;
-            if (skillCooltimeTimer >= skillCooltime)
-            {
-                canSkill = true;
-                skillCooltimeTimer = skillCooltime;
-            }
+            canMagic = true;
         }
 
         LvUp();
@@ -90,10 +91,12 @@ public class PlayerStat : MonoBehaviour
         isGodmode = false;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // Stamina
-        maxStamina = PlayerPrefs.HasKey("MAXStamina") ? PlayerPrefs.GetFloat("MAXStamina") : 100;
-        currentStamina = PlayerPrefs.HasKey("CurStamina") ? PlayerPrefs.GetFloat("CurStamina") : maxStamina;
-        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+        // Magic
+        maxMagic = PlayerPrefs.HasKey("MAXMagic") ? PlayerPrefs.GetFloat("MAXMagic") : 100;
+        currentMagic = PlayerPrefs.HasKey("CurMagic") ? PlayerPrefs.GetFloat("CurMagic") : maxMagic;
+        currentMagic = Mathf.Clamp(currentMagic, 0, maxMagic);
+        magicRecoveryRate = PlayerPrefs.HasKey("MagicRecovery") ? PlayerPrefs.GetFloat("MagicRecovery") : 0.1f;
+        canMagic = true;
 
         // Speed
         moveSpeed = PlayerPrefs.HasKey("Speed") ? PlayerPrefs.GetFloat("Speed") : 6f;
@@ -115,11 +118,14 @@ public class PlayerStat : MonoBehaviour
 
         // Stat Point
         statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 0;
+        strength = PlayerPrefs.HasKey("StrengthPoint") ? PlayerPrefs.GetInt("StrengthPoint") : 1;
+        agility = PlayerPrefs.HasKey("AgilityPoint") ? PlayerPrefs.GetInt("AgilityPoint") : 1;
+        magic = PlayerPrefs.HasKey("MagicPoint") ? PlayerPrefs.GetInt("MagicPoint") : 1;
     }
 
     public void TakeDamage(float getDamage)
     {
-        if(isGodmode) return;
+        if (isGodmode) return;
 
         player.isHit = true;
 
@@ -155,9 +161,9 @@ public class PlayerStat : MonoBehaviour
         if (expCount >= exp)
         {
             isLevelUp = true;
-            
+
             level++;
-            exp *= 1.3f;
+            exp *= 1.4f;
             expCount = 0;
 
             statPoint += 3;
@@ -166,54 +172,14 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    public void HealthUp()
-    {
-        if (statPoint >= 1)
-        {
-            maxHealth *= 1.1f;
-            statPoint -= 1;
-            SaveData();
-        }
-    }
-
-    public void DamageUp()
-    {
-        if (statPoint >= 1)
-        {
-            attackDamage *= 1.2f;
-            statPoint -= 1;
-            SaveData();
-        }
-    }
-
-    public void SkillDamageUp()
-    {
-        if (statPoint >= 1)
-        {
-            skillDamage *= 1.1f;
-            statPoint -= 1;
-            SaveData();
-        }
-    }
-
-    public void SpeedUp()
-    {
-        if (statPoint >= 1)
-        {
-            moveSpeed += 0.1f;
-            sprintSpeed += 0.1f;
-            statPoint -= 1;
-            SaveData();
-        }
-    }
-
     public void StrengthUp()
     {
         if (statPoint >= 1)
         {
-            maxHealth *= 1.1f;
-            attackDamage *= 1.2f;
+            maxHealth *= 1.05f;
+            attackDamage *= 1.05f;
             statPoint -= 1;
+            strength++;
             SaveData();
         }
     }
@@ -222,9 +188,10 @@ public class PlayerStat : MonoBehaviour
     {
         if (statPoint >= 1)
         {
-            moveSpeed += 0.1f;
-            sprintSpeed += 0.1f;
+            moveSpeed += 0.15f;
+            sprintSpeed += 0.3f;
             statPoint -= 1;
+            agility++;
             SaveData();
         }
     }
@@ -233,8 +200,10 @@ public class PlayerStat : MonoBehaviour
     {
         if (statPoint >= 1)
         {
-            maxHealth *= 1.1f;
+            maxMagic *= 1.05f;
+            magicRecoveryRate += 0.02f;
             statPoint -= 1;
+            magic++;
             SaveData();
         }
     }
@@ -253,8 +222,9 @@ public class PlayerStat : MonoBehaviour
         PlayerPrefs.SetFloat("MAXHP", maxHealth);
         PlayerPrefs.SetFloat("CurHP", currentHealth);
 
-        PlayerPrefs.SetFloat("MAXStamina", maxStamina);
-        PlayerPrefs.SetFloat("CurStamina", currentStamina);
+        PlayerPrefs.SetFloat("MAXMagic", maxMagic);
+        PlayerPrefs.SetFloat("CurMagic", currentMagic);
+        PlayerPrefs.SetFloat("MagicRecovery", magicRecoveryRate);
 
         PlayerPrefs.SetFloat("Speed", moveSpeed);
         PlayerPrefs.SetFloat("SprintSpeed", sprintSpeed);
@@ -265,6 +235,9 @@ public class PlayerStat : MonoBehaviour
         PlayerPrefs.SetInt("WeaponCode", weaponCode);
 
         PlayerPrefs.SetInt("StatPoint", statPoint);
+        PlayerPrefs.SetInt("StrengthPoint", strength);
+        PlayerPrefs.SetInt("AgilityPoint", agility);
+        PlayerPrefs.SetInt("MagicPoint", magic);
     }
 
     public float RandomAtkDmg()
@@ -280,6 +253,27 @@ public class PlayerStat : MonoBehaviour
     public int SkillDmg()
     {
         return (int)(Mathf.Floor((skillDamage * RandomAtkDmg() + weaponDamage) * 10f));
+    }
+
+    void MagicRecovery()
+    {
+        if (maxMagic >= currentMagic)
+        {
+            currentMagic += Time.deltaTime * magicRecoveryRate;
+        }
+    }
+
+    void SkillCooltimeRecovery()
+    {
+        if (!canSkill)
+        {
+            skillCooltimeTimer += Time.deltaTime;
+            if (skillCooltimeTimer >= skillCooltime)
+            {
+                canSkill = true;
+                skillCooltimeTimer = skillCooltime;
+            }
+        }
     }
 
 
@@ -308,13 +302,14 @@ public class PlayerStat : MonoBehaviour
 
     void FindSkills()
     {
-        foreach(PlayerSkillData skill in skills)
+        foreach (PlayerSkillData skill in skills)
         {
-            if(skill.skillCode.Equals(player.skillCode))
+            if (skill.skillCode.Equals(player.skillCode))
             {
                 this.skillCode = skill.skillCode;
                 this.skillCooltime = skill.cooltimeData;
                 this.skillDamage = skill.damageData;
+                this.skillMagic = skill.magicData;
                 return;
             }
         }
@@ -322,9 +317,9 @@ public class PlayerStat : MonoBehaviour
 
     void FindWeapons()
     {
-        foreach(WeaponDamageData weapon in weapons)
+        foreach (WeaponDamageData weapon in weapons)
         {
-            if(weapon.weaponCode.Equals(player.weaponCode))
+            if (weapon.weaponCode.Equals(player.weaponCode))
             {
                 this.weaponCode = weapon.weaponCode;
                 this.weaponDamage = weapon.damageData;
@@ -337,4 +332,5 @@ public class PlayerStat : MonoBehaviour
     public int SkillCode => this.skillCode;
     public float SkillCooltime => this.skillCooltime;
     public float SkillDamage => this.skillDamage;
+    public float SkillMagic => this.skillMagic;
 }
