@@ -12,11 +12,11 @@ public class SkillState : BaseState
     {
         player.playerStat.finalDamage = player.playerStat.SkillDmg();
 
-        Debug.Log("player stat skill code = " + player.playerStat.SkillCode);
+        Debug.Log("Player stat skill code = " + player.playerStat.SkillCode);
 
         var skillCodeHash = player.playerStat.SkillCode.ToString();
         player.playerStat.canSkill = false;
-        player.playerStat.skillCooltimeTimer = 0f;
+        player.playerStat.skillCooltimeTimer -= player.playerStat.skillCooltime;
 
         // Player Skill is empty
         // if(skillNameHash == "" || skillNameHash == null) player.ChangeState(new MoveState(player));

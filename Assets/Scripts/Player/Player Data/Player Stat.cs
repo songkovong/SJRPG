@@ -46,6 +46,9 @@ public class PlayerStat : MonoBehaviour
 
     // Stat Point
     public int statPoint { get; private set; }
+    public int strength { get; private set; }
+    public int agility { get; private set; }
+    public int magic { get; private set; }
 
 
     void Start()
@@ -159,14 +162,6 @@ public class PlayerStat : MonoBehaviour
 
             statPoint += 3;
 
-            // maxHealth *= 1.1f;
-            // currentHealth = maxHealth;
-
-            // maxStamina *= 1.1f;
-            // currentStamina = maxStamina;
-
-            // attackDamage *= 1.2f;
-
             SaveData();
         }
     }
@@ -207,6 +202,38 @@ public class PlayerStat : MonoBehaviour
         {
             moveSpeed += 0.1f;
             sprintSpeed += 0.1f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
+    public void StrengthUp()
+    {
+        if (statPoint >= 1)
+        {
+            maxHealth *= 1.1f;
+            attackDamage *= 1.2f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
+    public void AgilityUp()
+    {
+        if (statPoint >= 1)
+        {
+            moveSpeed += 0.1f;
+            sprintSpeed += 0.1f;
+            statPoint -= 1;
+            SaveData();
+        }
+    }
+
+    public void MagicUp()
+    {
+        if (statPoint >= 1)
+        {
+            maxHealth *= 1.1f;
             statPoint -= 1;
             SaveData();
         }

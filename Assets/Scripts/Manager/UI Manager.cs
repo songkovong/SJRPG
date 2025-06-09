@@ -66,6 +66,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void CloseWindow(GameObject panel)
+    {
+        if (panel.activeSelf)
+        {
+            panel.SetActive(false);
+            openWindows = new Stack<GameObject>(openWindows.Where(p => p != panel).Reverse());
+        }
+    }
+
     void CloseLastWindow()
     {
         if (openWindows.Count > 0)
