@@ -120,13 +120,12 @@ public class Player : MonoBehaviour
 
         // Speed Calculate
         // finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
-        finalSpeed = SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
-
-        // Skill atcivate speed
-        var skillSpeed = isSkill ? (SprintPressed ? 1f : 2f) : 1f;
+        // finalSpeed = SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
+        finalSpeed = isSkill ? playerStat.sprintSpeed : SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
+        // if add skillSpeed, fix sprintSpeed part;
 
         // Move Player
-        characterController.Move(currentMovement * finalSpeed * skillSpeed * multipleSpeed * Time.deltaTime);
+        characterController.Move(currentMovement * finalSpeed * multipleSpeed * Time.deltaTime);
     }
 
     public void PlayerRotation()

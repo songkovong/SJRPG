@@ -21,7 +21,7 @@ public class PlayerStat : MonoBehaviour
     // Magic
     public float maxMagic { get; set; } = 100f;
     public float currentMagic { get; set; }
-    public bool canMagic;
+    public bool canMagic { get; private set; }
     public float magicRecoveryRate { get; private set; }
 
     // Speed
@@ -40,7 +40,7 @@ public class PlayerStat : MonoBehaviour
     int skillCode;
     public float skillCooltime { get; private set; }
     float skillDamage;
-    float skillMagic;
+    float useSkillMagic;
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
@@ -68,7 +68,7 @@ public class PlayerStat : MonoBehaviour
         SkillCooltimeRecovery();
         MagicRecovery();
 
-        if (currentMagic >= skillMagic)
+        if (currentMagic >= useSkillMagic)
         {
             canMagic = true;
         }
@@ -309,7 +309,7 @@ public class PlayerStat : MonoBehaviour
                 this.skillCode = skill.skillCode;
                 this.skillCooltime = skill.cooltimeData;
                 this.skillDamage = skill.damageData;
-                this.skillMagic = skill.magicData;
+                this.useSkillMagic = skill.magicData;
                 return;
             }
         }
@@ -332,5 +332,5 @@ public class PlayerStat : MonoBehaviour
     public int SkillCode => this.skillCode;
     public float SkillCooltime => this.skillCooltime;
     public float SkillDamage => this.skillDamage;
-    public float SkillMagic => this.skillMagic;
+    public float UseSkillMagic => this.useSkillMagic;
 }

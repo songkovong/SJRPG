@@ -15,9 +15,11 @@ public class SkillState : BaseState
         Debug.Log("Player stat skill code = " + player.playerStat.SkillCode);
 
         var skillCodeHash = player.playerStat.SkillCode.ToString();
+
+        // Use Skill
         player.playerStat.canSkill = false;
         player.playerStat.skillCooltimeTimer -= player.playerStat.skillCooltime;
-        player.playerStat.currentMagic -= player.playerStat.SkillMagic;
+        player.playerStat.currentMagic -= player.playerStat.UseSkillMagic;
 
         // Player Skill is empty
         // if(skillNameHash == "" || skillNameHash == null) player.ChangeState(new MoveState(player));

@@ -73,7 +73,7 @@ public class AttackState : BaseState
     private IEnumerator EndAttackAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        if (comboTrigger && comboCount < 3)
+        if (comboTrigger && comboCount < 3) // 이부분 바꾸면 콤보 변경 가능 할듯 패시브 스킬로 콤보 여는걸로 해도 괜춘 할듯?
         {
             player.ChangeState(new AttackState(player, comboCount + 1));
         }
