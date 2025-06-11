@@ -44,12 +44,6 @@ public class MoveState : BaseState
                     return;
                 }
 
-                if (player.DodgePressed)
-                {
-                    player.ChangeState(new DodgeState(player));
-                    return;
-                }
-
                 if (player.GuardPressed)
                 {
                     player.ChangeState(new GuardState(player));

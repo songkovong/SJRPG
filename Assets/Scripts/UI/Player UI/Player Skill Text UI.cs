@@ -18,7 +18,6 @@ public class PlayerSkillTextUI : MonoBehaviour
     void Update()
     {
         cooltime = player.playerStat.skillCooltime - player.playerStat.skillCooltimeTimer;
-        // skillText.text = Mathf.FloorToInt(player.playerStat.skillCooltimeTimer).ToString() + "/" + Mathf.FloorToInt(player.playerStat.skillCooltime).ToString();
         if (cooltime == 0)
         {
             skillText.text = " ";

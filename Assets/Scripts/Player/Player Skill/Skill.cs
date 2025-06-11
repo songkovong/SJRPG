@@ -1,40 +1,77 @@
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
     // Skill
-    public List<PlayerSkillData> skills = new List<PlayerSkillData>();
-    int skillCode;
+    int code;
+    int level;
     public float cooltime { get; private set; }
-    float skillDamage;
-    float useSkillMagic;
+    float damage;
+    float cost;
+    float duration;
 
-    Player player;
+    bool canSkill;
+    float timer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    PlayerStat playerStat;
+
+    public virtual void Start()
     {
-        player = GetComponent<Player>();
+        canSkill = true;
+        timer = cooltime;
+
+        playerStat = GetComponent<PlayerStat>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-
+        SkillTimer();
     }
 
-    public void CurrentPlayerSkill()
+    public virtual float UseSkill()
     {
-        foreach (PlayerSkillData skill in skills)
+        canSkill = false;
+        timer -= cooltime;
+        playerStat.currentMagic -= cost;
+
+        return damage;
+    }
+
+    public virtual bool CanActivateSkill()
+    {
+        return (playerStat.currentMagic >= cost) && canSkill;
+    }
+
+    public virtual void SkillTimer()
+    {
+        if (!canSkill)
         {
-            if (skill.skillCode == player.skillCode)
+            timer += Time.deltaTime;
+            if (timer >= cooltime)
             {
-                this.skillCode = skill.skillCode;
-                this.cooltime = skill.cooltimeData;
-                this.skillDamage = skill.damageData;
-                this.useSkillMagic = skill.magicData;
+                canSkill = true;
+                timer = cooltime;
             }
         }
+    }
+
+    public virtual void SaveSkill()
+    {
+        PlayerPrefs.SetInt(code + " Skill Level", level);
+        PlayerPrefs.SetFloat(code + " Skill Cooltime", cooltime);
+        PlayerPrefs.SetFloat(code + " Skill Damage", damage);
+        PlayerPrefs.SetFloat(code + " Skill Cost", cost);
+        PlayerPrefs.SetFloat(code + " Skill Duration", duration);
+    }
+    public virtual void LoadSkill()
+    {
+        level = PlayerPrefs.HasKey(code + " Skill Level") ? PlayerPrefs.GetInt(code + " Skill Level", level) : level;
+        cooltime = PlayerPrefs.HasKey(code + " Skill Cooltime") ? PlayerPrefs.GetFloat(code + " Skill Cooltime", cooltime) : cooltime;
+        cooltime = PlayerPrefs.HasKey(code + " Skill Damage") ? PlayerPrefs.GetFloat(code + " Skill Damage", damage) : damage;
+        cooltime = PlayerPrefs.HasKey(code + " Skill Cost") ? PlayerPrefs.GetFloat(code + " Skill Cost", cost) : cost;
+        cooltime = PlayerPrefs.HasKey(code + " Skill Duration") ? PlayerPrefs.GetFloat(code + " Skill Duration", duration) : duration;
     }
 }

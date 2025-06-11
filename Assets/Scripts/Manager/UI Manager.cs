@@ -38,7 +38,6 @@ public class UIManager : MonoBehaviour
 
     void OnStat(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Stat");
         OpenWindow(statPanel);
     }
 

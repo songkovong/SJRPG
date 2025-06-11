@@ -304,9 +304,9 @@ public class PlayerStat : MonoBehaviour
     {
         foreach (PlayerSkillData skill in skills)
         {
-            if (skill.skillCode.Equals(player.skillCode))
+            if (skill.code.Equals(player.skillCode))
             {
-                this.skillCode = skill.skillCode;
+                this.skillCode = skill.code;
                 this.skillCooltime = skill.cooltimeData;
                 this.skillDamage = skill.damageData;
                 this.useSkillMagic = skill.magicData;

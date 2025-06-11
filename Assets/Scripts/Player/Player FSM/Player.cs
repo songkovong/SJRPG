@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
 
     // Player Input Value
     public Vector2 InputDirection { get; private set; }
-    public bool DodgePressed { get; private set; }
     public bool AttackPressed { get; private set; }
     public bool SkillPressed { get; private set; }
     public bool GuardPressed { get; private set; }
@@ -86,9 +85,6 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
-        // playerInput.Player.Stat.started += OnStat;
-        // playerInput.Player.Item.started += OnItem;
-        // playerInput.Player.Close.started += OnClose;
 
         isHit = false;
 
@@ -105,7 +101,6 @@ public class Player : MonoBehaviour
     {
         currentState?.Update();
 
-        DodgePressed = false;
         AttackPressed = false;
         SkillPressed = false;
 
@@ -236,26 +231,6 @@ public class Player : MonoBehaviour
     {
         GuardPressed = ctx.ReadValue<float>() > 0f;
     }
-
-    // private void OnStat(InputAction.CallbackContext ctx)
-    // {
-    //     // StatPressed = true;
-    //     // StatPressed = StatPressed ? false : true;
-    //     StatPressed = ctx.ReadValue<bool>();
-    // }
-
-    // private void OnItem(InputAction.CallbackContext ctx)
-    // {
-    //     // ItemPressed = true;
-    //     // ItemPressed = ItemPressed ? false : true;
-    //     ItemPressed = ctx.ReadValue<bool>();
-    // }
-
-    // private void OnClose(InputAction.CallbackContext ctx)
-    // {
-    //     // ClosePressed = ClosePressed ? false : true;
-    //     ClosePressed = ctx.ReadValue<bool>();
-    // }
 
     // Coroutine
     public void StartCoroutinePlayer(IEnumerator coroutine)
