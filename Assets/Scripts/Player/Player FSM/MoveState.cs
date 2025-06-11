@@ -38,17 +38,25 @@ public class MoveState : BaseState
                     return;
                 }
 
-                if (player.SkillPressed && player.playerStat.canSkill && player.playerStat.canMagic)
+                if (player.SpaceSkillPressed && player.playerStat.spaceSkill.CanActivateSkill())
                 {
+                    player.playerStat.spaceSkill.UseSkill();
+                    player.ChangeState(new SkillState(player));
+                    return;
+                }
+                
+                if (player.CSkillPressed && player.playerStat.cSkill.CanActivateSkill())
+                {
+                    player.playerStat.cSkill.UseSkill();
                     player.ChangeState(new SkillState(player));
                     return;
                 }
 
                 if (player.GuardPressed)
-                {
-                    player.ChangeState(new GuardState(player));
-                    return;
-                }
+            {
+                player.ChangeState(new GuardState(player));
+                return;
+            }
             }
 
         if(player.isHit)

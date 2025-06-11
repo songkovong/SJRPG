@@ -42,9 +42,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill",
+                    "name": "Skill1",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill2",
+                    "type": "Button",
+                    "id": "88a3c8e4-edbd-4f56-85cd-6d9574816c20",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill3",
+                    "type": "Button",
+                    "id": "921e1855-0fb5-4043-bf1a-576cf7fa27d3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
@@ -242,7 +260,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Skill",
+                    "action": "Skill1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ab38379-9c28-4a97-979b-b58e303ad37f",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Skill2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02433ec0-c246-4f7b-afec-79bf802eaa19",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Skill3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

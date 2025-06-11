@@ -6,19 +6,22 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     // Skill
-    int code;
-    int level;
-    public float cooltime { get; private set; }
-    float damage;
-    float cost;
-    float duration;
+    public int code { get; protected set; }
+    public int level { get; protected set; }
+    public float cooltime { get; protected set; }
+    public float damage { get; protected set; }
+    public float cost { get; protected set; }
+    public float duration { get; protected set; }
+    public float maxLevel { get; protected set; }
 
-    bool canSkill;
-    float timer;
+    public bool canSkill { get; protected set; }
+    public float timer { get; protected set; }
 
-    PlayerStat playerStat;
+    public PlayerStat playerStat { get; protected set; }
 
-    public virtual void Start()
+    protected virtual void Awake() { }
+
+    protected virtual void Start()
     {
         canSkill = true;
         timer = cooltime;
@@ -26,18 +29,16 @@ public class Skill : MonoBehaviour
         playerStat = GetComponent<PlayerStat>();
     }
 
-    public virtual void Update()
+    protected virtual void Update()
     {
         SkillTimer();
     }
 
-    public virtual float UseSkill()
+    public virtual void UseSkill()
     {
         canSkill = false;
         timer -= cooltime;
         playerStat.currentMagic -= cost;
-
-        return damage;
     }
 
     public virtual bool CanActivateSkill()
@@ -45,7 +46,7 @@ public class Skill : MonoBehaviour
         return (playerStat.currentMagic >= cost) && canSkill;
     }
 
-    public virtual void SkillTimer()
+    protected virtual void SkillTimer()
     {
         if (!canSkill)
         {
@@ -58,7 +59,9 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public virtual void SaveSkill()
+    public virtual void SkillLevelUp() { }
+
+    protected virtual void SaveSkill()
     {
         PlayerPrefs.SetInt(code + " Skill Level", level);
         PlayerPrefs.SetFloat(code + " Skill Cooltime", cooltime);
@@ -66,7 +69,7 @@ public class Skill : MonoBehaviour
         PlayerPrefs.SetFloat(code + " Skill Cost", cost);
         PlayerPrefs.SetFloat(code + " Skill Duration", duration);
     }
-    public virtual void LoadSkill()
+    protected virtual void LoadSkill()
     {
         level = PlayerPrefs.HasKey(code + " Skill Level") ? PlayerPrefs.GetInt(code + " Skill Level", level) : level;
         cooltime = PlayerPrefs.HasKey(code + " Skill Cooltime") ? PlayerPrefs.GetFloat(code + " Skill Cooltime", cooltime) : cooltime;

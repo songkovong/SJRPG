@@ -8,29 +8,23 @@ public class SkillState : BaseState
     float timer;
     float skillMoveSpeed = 1f;
 
+    float currentCode;
+
     public override void Enter()
     {
-        player.playerStat.finalDamage = player.playerStat.SkillDmg();
-
-        Debug.Log("Player stat skill code = " + player.playerStat.SkillCode);
-
-        var skillCodeHash = player.playerStat.SkillCode.ToString();
-
-        // Use Skill
-        player.playerStat.canSkill = false;
-        player.playerStat.skillCooltimeTimer -= player.playerStat.skillCooltime;
-        player.playerStat.currentMagic -= player.playerStat.UseSkillMagic;
-
-        // Player Skill is empty
-        // if(skillNameHash == "" || skillNameHash == null) player.ChangeState(new MoveState(player));
-
-        timer = 0f;
-        Debug.Log("Enter Skill");
-        player.PlayerAnimator.PlaySkill(skillCodeHash);
-        animationDuration = player.PlayerAnimator.GetClipByName("Skill " + skillCodeHash).length;
-
         player.isSkill = true;
         player.playerStat.isGodmode = true;
+
+        currentCode = player.skillCode;
+
+        player.playerStat.finalDamage = player.playerStat.SkillDmg(player.skillDamage);
+
+        var skillCodeHash = currentCode.ToString();
+
+        timer = 0f;
+        Debug.Log("Enter Skill " + skillCodeHash);
+        player.PlayerAnimator.PlaySkill(skillCodeHash);
+        animationDuration = player.PlayerAnimator.GetClipByName("Skill " + skillCodeHash).length;
 
         player.AttackTrail.StartTrail();
         player.AttackHitbox.HitboxOn();
@@ -38,7 +32,10 @@ public class SkillState : BaseState
 
     public override void Update()
     {
-        player.PlayerMove(skillMoveSpeed);
+        if (currentCode == 1)
+        {
+            player.PlayerMove(skillMoveSpeed);
+        }
         timer += Time.deltaTime;
 
         if(timer >= animationDuration)

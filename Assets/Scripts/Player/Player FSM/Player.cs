@@ -25,7 +25,9 @@ public class Player : MonoBehaviour
     // Player Input Value
     public Vector2 InputDirection { get; private set; }
     public bool AttackPressed { get; private set; }
-    public bool SkillPressed { get; private set; }
+    public bool SpaceSkillPressed { get; private set; }
+    public bool CSkillPressed { get; private set; }
+    public bool RSkillPressed { get; private set; }
     public bool GuardPressed { get; private set; }
     public bool SprintPressed { get; private set; }
     public bool StatPressed { get; private set; }
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
 
     // Skill value
     public int skillCode { get; set; }
+    public float skillDamage { get; set; }
 
     // Weapon value
     public int weaponCode { get; set; }
@@ -81,7 +84,9 @@ public class Player : MonoBehaviour
         playerInput.Player.Sprint.started += OnSprint;
         playerInput.Player.Sprint.canceled += OnSprint;
         playerInput.Player.Attack.started += OnAttack;
-        playerInput.Player.Skill.started += OnSkill;
+        playerInput.Player.Skill1.started += OnSpaceSkill;
+        playerInput.Player.Skill2.started += OnCSkill;
+        playerInput.Player.Skill3.started += OnRSkill;
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
@@ -102,9 +107,13 @@ public class Player : MonoBehaviour
         currentState?.Update();
 
         AttackPressed = false;
-        SkillPressed = false;
+        SpaceSkillPressed = false;
+        CSkillPressed = false;
+        RSkillPressed = false;
 
         LocalMoveDir();
+
+        Debug.Log("Skill Code = " + skillCode);
     }
 
     // Methods
@@ -180,12 +189,6 @@ public class Player : MonoBehaviour
         localMovement = this.transform.InverseTransformDirection(new Vector3(currentMovement.x, 0, currentMovement.z));
     }
 
-    // public void ConsumeStamina()
-    // {
-    //     if (SprintPressed) playerStat.currentStamina -= (1 * Time.fixedDeltaTime);
-    //     else playerStat.currentStamina += (1 * Time.fixedDeltaTime);
-    // }
-
     public void ChangeState(BaseState newState)
     {
         // If game is pause, dont change state
@@ -222,9 +225,32 @@ public class Player : MonoBehaviour
         AttackPressed = true;
     }
 
-    private void OnSkill(InputAction.CallbackContext ctx)
+    private void OnSpaceSkill(InputAction.CallbackContext ctx)
     {
-        SkillPressed = true;
+        if (!isSkill)
+        {
+            SpaceSkillPressed = true;
+            skillCode = playerStat.spaceSkill.code;
+            skillDamage = playerStat.spaceSkill.damage;
+        }
+    }
+
+    private void OnCSkill(InputAction.CallbackContext ctx)
+    {
+        if (!isSkill)
+        {
+            CSkillPressed = true;
+            skillCode = playerStat.cSkill.code;
+            skillDamage = playerStat.cSkill.damage;
+        }
+    }
+
+    private void OnRSkill(InputAction.CallbackContext ctx)
+    {
+        // RSkillPressed = true;
+        // skillCode = playerStat.cSkill.code;
+        // skillDamage = playerStat.cSkill.damage;
+        Debug.Log("R");
     }
 
     private void OnGuard(InputAction.CallbackContext ctx)

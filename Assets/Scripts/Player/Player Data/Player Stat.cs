@@ -31,16 +31,12 @@ public class PlayerStat : MonoBehaviour
 
     // Damage
     public float attackDamage { get; private set; }
+    public float buffDamage { get; private set; }
     public int finalDamage { get; set; }
 
     // Skill
-    public List<PlayerSkillData> skills = new List<PlayerSkillData>();
-    public float skillCooltimeTimer { get; set; }
-    public bool canSkill { get; set; }
-    int skillCode;
-    public float skillCooltime { get; private set; }
-    float skillDamage;
-    float useSkillMagic;
+    public SpaceSkill spaceSkill { get; set; }
+    public CSkill cSkill { get; set; }
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
@@ -58,6 +54,9 @@ public class PlayerStat : MonoBehaviour
     {
         player = GetComponent<Player>();
 
+        spaceSkill = GetComponent<SpaceSkill>();
+        cSkill = GetComponent<CSkill>();
+
         // DeleteData();
 
         Initialize();
@@ -65,13 +64,7 @@ public class PlayerStat : MonoBehaviour
 
     void Update()
     {
-        SkillCooltimeRecovery();
         MagicRecovery();
-
-        if (currentMagic >= useSkillMagic)
-        {
-            canMagic = true;
-        }
 
         LvUp();
     }
@@ -105,12 +98,6 @@ public class PlayerStat : MonoBehaviour
 
         // Damage
         attackDamage = PlayerPrefs.HasKey("ATKDMG") ? PlayerPrefs.GetFloat("ATKDMG") : 1;
-
-        // Skill
-        player.skillCode = PlayerPrefs.HasKey("SkillCode") ? PlayerPrefs.GetInt("SkillCode") : 1;
-        FindSkills();
-        skillCooltimeTimer = skillCooltime;
-        canSkill = true;
 
         // Weapon
         player.weaponCode = PlayerPrefs.HasKey("WeaponCode") ? PlayerPrefs.GetInt("WeaponCode") : 1;
@@ -231,7 +218,6 @@ public class PlayerStat : MonoBehaviour
 
         PlayerPrefs.SetFloat("ATKDMG", attackDamage);
 
-        PlayerPrefs.SetInt("SkillCode", skillCode);
         PlayerPrefs.SetInt("WeaponCode", weaponCode);
 
         PlayerPrefs.SetInt("StatPoint", statPoint);
@@ -250,9 +236,9 @@ public class PlayerStat : MonoBehaviour
         return (int)(Mathf.Floor((RandomAtkDmg() + weaponDamage) * 10f));
     }
 
-    public int SkillDmg()
+    public int SkillDmg(float skilldmg)
     {
-        return (int)(Mathf.Floor((skillDamage * RandomAtkDmg() + weaponDamage) * 10f));
+        return (int)(Mathf.Floor((skilldmg * RandomAtkDmg() + weaponDamage) * 10f));
     }
 
     void MagicRecovery()
@@ -262,20 +248,6 @@ public class PlayerStat : MonoBehaviour
             currentMagic += Time.deltaTime * magicRecoveryRate;
         }
     }
-
-    void SkillCooltimeRecovery()
-    {
-        if (!canSkill)
-        {
-            skillCooltimeTimer += Time.deltaTime;
-            if (skillCooltimeTimer >= skillCooltime)
-            {
-                canSkill = true;
-                skillCooltimeTimer = skillCooltime;
-            }
-        }
-    }
-
 
     private IEnumerator GodmodeCoroutine()
     {
@@ -295,24 +267,16 @@ public class PlayerStat : MonoBehaviour
         player.PlayerHitColor.ReChangeColor(player.PlayerHitColor.renderers, player.PlayerHitColor.originalColors);
     }
 
+    public IEnumerator BuffDamage()
+    {
+        attackDamage *= 2;
+        yield return new WaitForSeconds(cSkill.duration);
+        attackDamage /= 2;
+    }
+
     public void PlayerDie()
     {
         Debug.Log("Die");
-    }
-
-    void FindSkills()
-    {
-        foreach (PlayerSkillData skill in skills)
-        {
-            if (skill.code.Equals(player.skillCode))
-            {
-                this.skillCode = skill.code;
-                this.skillCooltime = skill.cooltimeData;
-                this.skillDamage = skill.damageData;
-                this.useSkillMagic = skill.magicData;
-                return;
-            }
-        }
     }
 
     void FindWeapons()
@@ -328,9 +292,4 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-
-    public int SkillCode => this.skillCode;
-    public float SkillCooltime => this.skillCooltime;
-    public float SkillDamage => this.skillDamage;
-    public float UseSkillMagic => this.useSkillMagic;
 }
