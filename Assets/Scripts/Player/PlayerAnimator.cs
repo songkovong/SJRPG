@@ -1,3 +1,4 @@
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class PlayerAnimator
@@ -26,7 +27,7 @@ public class PlayerAnimator
     {
         // animator.SetTrigger("Skill");
         // animator.Play("Skill " + skillCode);
-        animator.CrossFade("Skill " + skillCode, 0);
+        animator.CrossFade("Skill " + skillCode, 0.1f);
     }
 
     public void PlayHit()

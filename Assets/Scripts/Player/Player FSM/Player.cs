@@ -43,9 +43,6 @@ public class Player : MonoBehaviour
     // Hit value
     public bool isHit { get; set; }
 
-    // Attack value
-    public GameObject attackHitbox { get; private set; }
-
     // Skill value
     public int skillCode { get; set; }
     public float skillDamage { get; set; }
@@ -247,10 +244,12 @@ public class Player : MonoBehaviour
 
     private void OnRSkill(InputAction.CallbackContext ctx)
     {
-        // RSkillPressed = true;
-        // skillCode = playerStat.cSkill.code;
-        // skillDamage = playerStat.cSkill.damage;
-        Debug.Log("R");
+        if (!isSkill)
+        {
+            RSkillPressed = true;
+            skillCode = playerStat.rSkill.code;
+            skillDamage = playerStat.rSkill.damage;
+        }
     }
 
     private void OnGuard(InputAction.CallbackContext ctx)

@@ -37,6 +37,7 @@ public class PlayerStat : MonoBehaviour
     // Skill
     public SpaceSkill spaceSkill { get; set; }
     public CSkill cSkill { get; set; }
+    public RSkill rSkill { get; set; }
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
@@ -56,6 +57,7 @@ public class PlayerStat : MonoBehaviour
 
         spaceSkill = GetComponent<SpaceSkill>();
         cSkill = GetComponent<CSkill>();
+        rSkill = GetComponent<RSkill>();
 
         // DeleteData();
 

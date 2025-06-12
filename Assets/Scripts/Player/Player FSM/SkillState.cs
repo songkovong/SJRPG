@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SkillState : BaseState
@@ -24,21 +25,38 @@ public class SkillState : BaseState
         timer = 0f;
         Debug.Log("Enter Skill " + skillCodeHash);
         player.PlayerAnimator.PlaySkill(skillCodeHash);
+
         animationDuration = player.PlayerAnimator.GetClipByName("Skill " + skillCodeHash).length;
 
-        player.AttackTrail.StartTrail();
-        player.AttackHitbox.HitboxOn();
+        if (currentCode == 1)
+        {
+            player.AttackTrail.StartTrail();
+            player.playerStat.spaceSkill.HitBox.HitboxOn();
+        }
+        else if (currentCode == 2)
+        {
+            player.playerStat.cSkill.HitBox.HitboxOn();
+        }
+        else if (currentCode == 3)
+        {
+            player.AttackTrail.StartTrail();
+            player.StartCoroutine(DelayHitbox(0.55f));
+            animationDuration += .3f;
+        }
     }
 
     public override void Update()
     {
+        player.PlayerAnimator.SetMove(0, 0, 0);
+
         if (currentCode == 1)
         {
             player.PlayerMove(skillMoveSpeed);
         }
+
         timer += Time.deltaTime;
 
-        if(timer >= animationDuration)
+        if (timer >= animationDuration)
         {
             player.ChangeState(new MoveState(player));
         }
@@ -52,6 +70,15 @@ public class SkillState : BaseState
         player.playerStat.isGodmode = false;
 
         player.AttackTrail.EndTrail();
-        player.AttackHitbox.HitboxOff();
+        // player.AttackHitbox.HitboxOff();
+        player.playerStat.spaceSkill.HitBox.HitboxOff();
+        player.playerStat.cSkill.HitBox.HitboxOff();
+        player.playerStat.rSkill.HitBox.HitboxOff();
+    }
+
+    IEnumerator DelayHitbox(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        player.playerStat.rSkill.HitBox.HitboxOn();
     }
 }

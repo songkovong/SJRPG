@@ -12,11 +12,11 @@ public class CSkill : Skill
     {
         base.Awake();
         code = 2;
-        level = 0;
+        level = 1;
         cooltime = 20f;
         damage = 0f;
         cost = 20f;
-        duration = 5f;
+        duration = 6f;
         maxLevel = 5;
     }
 
@@ -89,4 +89,6 @@ public class CSkill : Skill
         isDuration = true;
         StartCoroutine(player.playerStat.BuffDamage());
     }
+
+    public override SkillHitBox HitBox => this.hitBox;
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
@@ -18,6 +19,7 @@ public class Skill : MonoBehaviour
     public float timer { get; protected set; }
 
     public PlayerStat playerStat { get; protected set; }
+    public SkillHitBox hitBox;
 
     protected virtual void Awake() { }
 
@@ -43,7 +45,7 @@ public class Skill : MonoBehaviour
 
     public virtual bool CanActivateSkill()
     {
-        return (playerStat.currentMagic >= cost) && canSkill;
+        return (playerStat.currentMagic >= cost) && canSkill && !IsLevel0();
     }
 
     protected virtual void SkillTimer()
@@ -61,6 +63,12 @@ public class Skill : MonoBehaviour
 
     public virtual void SkillLevelUp() { }
 
+    public virtual bool IsLevel0()
+    {
+        if (level == 0) return true;
+        else return false;
+    }
+
     protected virtual void SaveSkill()
     {
         PlayerPrefs.SetInt(code + " Skill Level", level);
@@ -77,4 +85,6 @@ public class Skill : MonoBehaviour
         cooltime = PlayerPrefs.HasKey(code + " Skill Cost") ? PlayerPrefs.GetFloat(code + " Skill Cost", cost) : cost;
         cooltime = PlayerPrefs.HasKey(code + " Skill Duration") ? PlayerPrefs.GetFloat(code + " Skill Duration", duration) : duration;
     }
+
+    public virtual SkillHitBox HitBox => hitBox;
 }

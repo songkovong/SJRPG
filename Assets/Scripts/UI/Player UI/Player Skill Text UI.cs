@@ -23,6 +23,7 @@ public class PlayerSkillTextUI : MonoBehaviour
         // cooltime = player.playerStat.skillCooltime - player.playerStat.skillCooltimeTimer;
         cooltime1 = player.playerStat.spaceSkill.cooltime - player.playerStat.spaceSkill.timer;
         cooltime2 = player.playerStat.cSkill.cooltime - player.playerStat.cSkill.timer;
+        cooltime3 = player.playerStat.rSkill.cooltime - player.playerStat.rSkill.timer;
         if (code == 1)
         {
             if (cooltime1 == 0)

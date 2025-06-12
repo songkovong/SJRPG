@@ -52,11 +52,18 @@ public class MoveState : BaseState
                     return;
                 }
 
+                if (player.RSkillPressed && player.playerStat.rSkill.CanActivateSkill())
+                {
+                    player.playerStat.rSkill.UseSkill();
+                    player.ChangeState(new SkillState(player));
+                    return;
+                }
+
                 if (player.GuardPressed)
-            {
-                player.ChangeState(new GuardState(player));
-                return;
-            }
+                {
+                    player.ChangeState(new GuardState(player));
+                    return;
+                }
             }
 
         if(player.isHit)

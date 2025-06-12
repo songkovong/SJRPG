@@ -1,3 +1,4 @@
+using System.Collections;
 using Mono.Cecil.Cil;
 using UnityEngine;
 
@@ -7,9 +8,9 @@ public class SpaceSkill : Skill
     {
         base.Awake();
         code = 1;
-        level = 0;
-        cooltime = 5f;
-        damage = 5f;
+        level = 1;
+        cooltime = 10f;
+        damage = 2f;
         cost = 10f;
         duration = 0f;
         maxLevel = 5;
@@ -35,7 +36,7 @@ public class SpaceSkill : Skill
         if (level < maxLevel)
         {
             level++;
-            cooltime -= .5f;
+            cooltime -= 1f;
             damage++;
             cost -= 1;
         }
@@ -62,4 +63,5 @@ public class SpaceSkill : Skill
         Debug.Log("SpaceSkill");
     }
 
+    public override SkillHitBox HitBox => this.hitBox;
 }
