@@ -14,6 +14,6 @@ public class PlayerHealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Image>().fillAmount = player.playerStat.currentHealth / player.playerStat.maxHealth;
+        gameObject.GetComponent<Image>().fillAmount = player.playerStat.data.currentHealth / player.playerStat.data.maxHealth;
     }
 }

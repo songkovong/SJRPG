@@ -16,6 +16,6 @@ public class PlayerAttackTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackText.text = player.playerStat.attackDamage.ToString();
+        attackText.text = player.playerStat.data.attackDamage.ToString();
     }
 }

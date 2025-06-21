@@ -16,6 +16,6 @@ public class PlayerMagicPointUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        magicPointText.text = player.playerStat.magic.ToString();
+        magicPointText.text = player.playerStat.data.magic.ToString();
     }
 }

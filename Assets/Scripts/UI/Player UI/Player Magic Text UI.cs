@@ -16,6 +16,6 @@ public class PlayerMagicTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        magicText.text = Mathf.FloorToInt(player.playerStat.currentMagic).ToString() + "/" + Mathf.FloorToInt(player.playerStat.maxMagic).ToString();
+        magicText.text = Mathf.FloorToInt(player.playerStat.data.currentMagic).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxMagic).ToString();
     }
 }

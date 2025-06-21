@@ -14,11 +14,11 @@ public class SkillState : BaseState
     public override void Enter()
     {
         player.isSkill = true;
-        player.playerStat.isGodmode = true;
+        player.playerStat.data.isGodmode = true;
 
         currentCode = player.skillCode;
 
-        player.playerStat.finalDamage = player.playerStat.SkillDmg(player.skillDamage);
+        player.playerStat.data.finalDamage = player.playerStat.SkillDmg(player.skillDamage);
 
         var skillCodeHash = currentCode.ToString();
 
@@ -67,7 +67,7 @@ public class SkillState : BaseState
         Debug.Log("Exit Skill");
 
         player.isSkill = false;
-        player.playerStat.isGodmode = false;
+        player.playerStat.data.isGodmode = false;
 
         player.AttackTrail.EndTrail();
         // player.AttackHitbox.HitboxOff();

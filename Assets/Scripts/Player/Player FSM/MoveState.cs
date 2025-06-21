@@ -24,7 +24,7 @@ public class MoveState : BaseState
             player.localMovement.z
         );
 
-        if (player.playerStat.isLevelUp)
+        if (player.playerStat.data.isLevelUp)
         {
             player.ChangeState(new LevelUpState(player));
             return;

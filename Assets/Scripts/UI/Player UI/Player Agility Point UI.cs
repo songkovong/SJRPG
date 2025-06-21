@@ -16,6 +16,7 @@ public class PlayerAgilityPointUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agilityPointText.text = player.playerStat.agility.ToString();
+        // agilityPointText.text = player.playerStat.agility.ToString();
+        agilityPointText.text = player.playerStat.data.agility.ToString();
     }
 }

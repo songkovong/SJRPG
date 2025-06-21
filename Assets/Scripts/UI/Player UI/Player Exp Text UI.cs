@@ -16,6 +16,6 @@ public class PlayerExpTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        expText.text = Mathf.FloorToInt(player.playerStat.expCount).ToString() + "/" + Mathf.FloorToInt(player.playerStat.exp).ToString();
+        expText.text = Mathf.FloorToInt(player.playerStat.data.expCount).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.exp).ToString();
     }
 }

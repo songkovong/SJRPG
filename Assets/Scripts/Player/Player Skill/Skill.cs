@@ -40,12 +40,12 @@ public class Skill : MonoBehaviour
     {
         canSkill = false;
         timer -= cooltime;
-        playerStat.currentMagic -= cost;
+        playerStat.data.currentMagic -= cost;
     }
 
     public virtual bool CanActivateSkill()
     {
-        return (playerStat.currentMagic >= cost) && canSkill && !IsLevel0();
+        return (playerStat.data.currentMagic >= cost) && canSkill && !IsLevel0();
     }
 
     protected virtual void SkillTimer()

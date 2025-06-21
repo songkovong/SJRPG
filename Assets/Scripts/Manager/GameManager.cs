@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isPaused;
+    Player player;
 
     void Awake()
     {
@@ -25,12 +26,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
+
+        // player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        // StartCoroutine(player.playerStat.AutoSaveRoutine()); // Auto Save
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void PauseGame()

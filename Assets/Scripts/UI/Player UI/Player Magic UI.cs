@@ -14,6 +14,6 @@ public class PlayerMagicUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Image>().fillAmount = player.playerStat.currentMagic / player.playerStat.maxMagic;
+        gameObject.GetComponent<Image>().fillAmount = player.playerStat.data.currentMagic / player.playerStat.data.maxMagic;
     }
 }

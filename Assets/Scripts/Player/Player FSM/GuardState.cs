@@ -11,7 +11,7 @@ public class GuardState : BaseState
         Debug.Log("Enter Guard");
         
         player.GuardTrail.StartTrail();
-        player.playerStat.isGodmode = true;
+        player.playerStat.data.isGodmode = true;
     }
 
     public override void Update()
@@ -37,6 +37,6 @@ public class GuardState : BaseState
         Debug.Log("Exit Guard");
 
         player.GuardTrail.EndTrail();
-        player.playerStat.isGodmode = false;
+        player.playerStat.data.isGodmode = false;
     }
 }

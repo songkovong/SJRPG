@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         // Speed Calculate
         // finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;
         // finalSpeed = SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
-        finalSpeed = isSkill ? playerStat.sprintSpeed : SprintPressed ? playerStat.sprintSpeed : playerStat.moveSpeed;
+        finalSpeed = isSkill ? playerStat.data.sprintSpeed : SprintPressed ? playerStat.data.sprintSpeed : playerStat.data.moveSpeed;
         // if add skillSpeed, fix sprintSpeed part;
 
         // Move Player
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.Slerp(
             this.transform.rotation,
             targetRotation,
-            Time.deltaTime * (SprintPressed ? playerStat.rotationSpeed : playerStat.rotationSpeed / 2f)
+            Time.deltaTime * (SprintPressed ? playerStat.data.rotationSpeed : playerStat.data.rotationSpeed / 2f)
         );
     }
 
@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
                 this.transform.rotation = Quaternion.Slerp(
                     this.transform.rotation,
                     targetRotation,
-                    Time.deltaTime * (SprintPressed ? playerStat.rotationSpeed : playerStat.rotationSpeed / 2f)
+                    Time.deltaTime * (SprintPressed ? playerStat.data.rotationSpeed : playerStat.data.rotationSpeed / 2f)
                 );
             }
         }

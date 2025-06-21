@@ -16,6 +16,6 @@ public class PlayerStatPointUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statPointText.text = player.playerStat.statPoint.ToString() + " SP";
+        statPointText.text = player.playerStat.data.statPoint.ToString() + " SP";
     }
 }

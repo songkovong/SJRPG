@@ -16,6 +16,6 @@ public class PlayerHealthTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = Mathf.FloorToInt(player.playerStat.currentHealth).ToString() + "/" + Mathf.FloorToInt(player.playerStat.maxHealth).ToString();
+        healthText.text = Mathf.FloorToInt(player.playerStat.data.currentHealth).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxHealth).ToString();
     }
 }

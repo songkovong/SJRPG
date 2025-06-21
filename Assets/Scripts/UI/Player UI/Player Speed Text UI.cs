@@ -16,6 +16,6 @@ public class PlayerSpeedTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speedText.text = player.playerStat.moveSpeed.ToString();
+        speedText.text = player.playerStat.data.moveSpeed.ToString();
     }
 }

@@ -27,7 +27,7 @@ public class PlayerAnimator
     {
         // animator.SetTrigger("Skill");
         // animator.Play("Skill " + skillCode);
-        animator.CrossFade("Skill " + skillCode, 0.1f);
+        animator.CrossFade("Skill " + skillCode, 0.05f);
     }
 
     public void PlayHit()

@@ -16,6 +16,6 @@ public class PlayerStrengthPointUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        strengthPointText.text = player.playerStat.strength.ToString();
+        strengthPointText.text = player.playerStat.data.strength.ToString();
     }
 }

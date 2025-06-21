@@ -9,7 +9,7 @@ public class LevelUpState : BaseState
 
     public override void Enter()
     {
-        player.playerStat.isGodmode = true;
+        player.playerStat.data.isGodmode = true;
 
         timer = 0f;
 
@@ -33,7 +33,7 @@ public class LevelUpState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit Lvup");
-        player.playerStat.isGodmode = false;
-        player.playerStat.isLevelUp = false;
+        player.playerStat.data.isGodmode = false;
+        player.playerStat.data.isLevelUp = false;
     }
 }

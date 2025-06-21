@@ -26,6 +26,6 @@ public class TurtleShell : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.expCount += 20;
+        playerstat.data.expCount += 20;
     }
 }

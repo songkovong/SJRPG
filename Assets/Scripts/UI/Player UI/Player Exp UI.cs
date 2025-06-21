@@ -14,6 +14,6 @@ public class PlayerExpUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Image>().fillAmount = player.playerStat.expCount / player.playerStat.exp;
+        gameObject.GetComponent<Image>().fillAmount = player.playerStat.data.expCount / player.playerStat.data.exp;
     }
 }

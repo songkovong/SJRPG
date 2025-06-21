@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void ExpUp()
     {
-        playerstat.expCount += 1;
+        playerstat.data.expCount += 1;
     }
 
     private IEnumerator GodmodeCoroutine()

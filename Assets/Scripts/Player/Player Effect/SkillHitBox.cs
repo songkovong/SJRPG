@@ -15,7 +15,7 @@ public class SkillHitBox : MonoBehaviour
         if (other.gameObject == gameObject || other.CompareTag("Player"))
             return;
 
-        other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.finalDamage);
+        other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.data.finalDamage);
     }
 
     public void HitboxOn() => this.gameObject.SetActive(true);

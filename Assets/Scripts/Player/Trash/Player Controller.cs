@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
 
     public void GodmodeEffect(GameObject obj)
     {
-        if(playerStat.isGodmode)
+        if(playerStat.data.isGodmode)
         {
             obj.SetActive(true);
             OrbitRotation();
