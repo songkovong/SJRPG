@@ -20,6 +20,8 @@ public class SkillState : BaseState
 
         player.playerStat.data.finalDamage = player.playerStat.SkillDmg(player.skillDamage);
 
+        Debug.Log("Skill Damage = " + player.skillDamage);
+
         var skillCodeHash = currentCode.ToString();
 
         timer = 0f;

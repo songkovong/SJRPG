@@ -6,34 +6,6 @@ public class PlayerStat : MonoBehaviour
 {
     Player player;
 
-    // // Level
-    // public int level { get; set; } = 1;
-    // public float exp { get; set; } = 100;
-    // public float expCount { get; set; } = 0;
-    // public bool isLevelUp { get; set; }
-
-    // // Health
-    // public float maxHealth { get; set; } = 100f;
-    // public float currentHealth { get; set; }
-    // public float godmodeDuration { get; private set; } = 2f;
-    // public bool isGodmode { get; set; } = false;
-
-    // // Magic
-    // public float maxMagic { get; set; } = 100f;
-    // public float currentMagic { get; set; }
-    // public bool canMagic { get; private set; }
-    // public float magicRecoveryRate { get; private set; }
-
-    // // Speed
-    // public float moveSpeed { get; set; } = 6f;
-    // public float sprintSpeed { get; set; } = 10f;
-    // public float rotationSpeed { get; set; } = 30f;
-
-    // // Damage
-    // public float attackDamage { get; private set; }
-    // public float buffDamage { get; private set; }
-    // public int finalDamage { get; set; }
-
     // Skill
     public SpaceSkill spaceSkill { get; set; }
     public CSkill cSkill { get; set; }
@@ -44,13 +16,10 @@ public class PlayerStat : MonoBehaviour
     int weaponCode;
     public float weaponDamage { get; private set; }
 
-    // // Stat Point
-    // public int statPoint { get; private set; }
-    // public int strength { get; private set; }
-    // public int agility { get; private set; }
-    // public int magic { get; private set; }
-
     public PlayerStatData data;
+
+
+#region Life Cycle
 
     void Start()
     {
@@ -60,11 +29,9 @@ public class PlayerStat : MonoBehaviour
         cSkill = GetComponent<CSkill>();
         rSkill = GetComponent<RSkill>();
 
-        data.Load();
+        // DeleteAllData();
 
-        //DeleteAllData();
-
-        // Load();
+        LoadAllData();
     }
 
     void Update()
@@ -73,11 +40,17 @@ public class PlayerStat : MonoBehaviour
         LvUp();
     }
 
+#endregion
+
+#region Take Damage and Heal (Player Health Methods)
+
     public void TakeDamage(float getDamage)
     {
         if (data.isGodmode) return;
 
         player.isHit = true;
+
+        // getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate))); // 방어력 추가 해도 될듯? enemy도 방어력 있으니깐..
 
         data.currentHealth -= getDamage;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
@@ -106,6 +79,10 @@ public class PlayerStat : MonoBehaviour
         data.currentHealth += getHealth;
     }
 
+#endregion
+
+#region Level Up and Stat Up
+
     public void LvUp()
     {
         if (data.expCount >= data.exp)
@@ -117,6 +94,7 @@ public class PlayerStat : MonoBehaviour
             data.expCount = 0;
 
             data.statPoint += 3;
+            data.skillStatPoint++;
 
             data.Save();
         }
@@ -158,20 +136,58 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    public void SpaceSkillUp()
+    {
+        if (data.skillStatPoint >= 1)
+        {
+            spaceSkill.SkillLevelUp();
+            data.skillStatPoint--;
+        }
+    }
+
+    public void CSkillUp()
+    {
+        if (data.skillStatPoint >= 1)
+        {
+            cSkill.SkillLevelUp();
+            data.skillStatPoint--;
+        }
+    }
+
+    public void RSkillUp()
+    {
+        if (data.skillStatPoint >= 1)
+        {
+            rSkill.SkillLevelUp();
+            data.skillStatPoint--;
+        }
+    }
+
+#endregion
+
+    #region Attack Damage Methods
+
     public float RandomAtkDmg()
     {
         return Random.Range(data.attackDamage * 0.1f, data.attackDamage);
+        // 패시브 스킬에 숙련도 만들어서 올리기
+        // return Random.Range(data.attackDamage * 숙련도(0.1f ~ 0.9f: 1업당 0.16 증가?), data.attackDamage);
     }
 
     public int AtkDmg()
     {
-        return (int)(Mathf.Floor((RandomAtkDmg() + weaponDamage) * 10f));
+        // return (int)(Mathf.Floor((RandomAtkDmg() + weaponDamage) * 10f));
+        return Mathf.FloorToInt((RandomAtkDmg() + weaponDamage) * 10f);
     }
 
     public int SkillDmg(float skilldmg)
     {
-        return (int)(Mathf.Floor((skilldmg * RandomAtkDmg() + weaponDamage) * 10f));
+        return (int)(AtkDmg() * skilldmg);
     }
+
+#endregion
+
+#region Coroutine Methods
 
     void MagicRecovery()
     {
@@ -206,6 +222,8 @@ public class PlayerStat : MonoBehaviour
         data.attackDamage /= 2;
     }
 
+#endregion
+
     public void PlayerDie()
     {
         Debug.Log("Die");
@@ -224,89 +242,30 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    #region Data Save and Load
-    // void Load()
-    // {
-    //     // Level
-    //     level = PlayerPrefs.HasKey("Level") ? PlayerPrefs.GetInt("Level") : 1;
-    //     exp = PlayerPrefs.HasKey("EXP") ? PlayerPrefs.GetFloat("EXP") : 100;
-    //     expCount = PlayerPrefs.HasKey("EXPCount") ? PlayerPrefs.GetFloat("EXPCount") : 0;
+#region Data Save and Load
+    void LoadAllData()
+    {
+        spaceSkill.LoadSkill();
+        cSkill.LoadSkill();
+        rSkill.LoadSkill();
 
-    //     isLevelUp = false;
+        data.Load();
 
-    //     // Health
-    //     maxHealth = PlayerPrefs.HasKey("MAXHP") ? PlayerPrefs.GetFloat("MAXHP") : 100;
-    //     currentHealth = PlayerPrefs.HasKey("CurHP") ? PlayerPrefs.GetFloat("CurHP") : maxHealth;
-    //     isGodmode = false;
-    //     currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        FindWeapons();
+    }
 
-    //     // Magic
-    //     maxMagic = PlayerPrefs.HasKey("MAXMagic") ? PlayerPrefs.GetFloat("MAXMagic") : 100;
-    //     currentMagic = PlayerPrefs.HasKey("CurMagic") ? PlayerPrefs.GetFloat("CurMagic") : maxMagic;
-    //     currentMagic = Mathf.Clamp(currentMagic, 0, maxMagic);
-    //     magicRecoveryRate = PlayerPrefs.HasKey("MagicRecovery") ? PlayerPrefs.GetFloat("MagicRecovery") : 0.1f;
-    //     canMagic = true;
+    void SaveAllData()
+    {
+        spaceSkill.SaveSkill();
+        cSkill.SaveSkill();
+        rSkill.SaveSkill();
 
-    //     // Speed
-    //     moveSpeed = PlayerPrefs.HasKey("Speed") ? PlayerPrefs.GetFloat("Speed") : 6f;
-    //     sprintSpeed = PlayerPrefs.HasKey("SprintSpeed") ? PlayerPrefs.GetFloat("SprintSpeed") : 10f;
-    //     rotationSpeed = PlayerPrefs.HasKey("RotationSpeed") ? PlayerPrefs.GetFloat("RotationSpeed") : 30f;
+        data.Save();
+    }
 
-    //     // Damage
-    //     attackDamage = PlayerPrefs.HasKey("ATKDMG") ? PlayerPrefs.GetFloat("ATKDMG") : 1;
-
-    //     // Weapon
-    //     player.weaponCode = PlayerPrefs.HasKey("WeaponCode") ? PlayerPrefs.GetInt("WeaponCode") : 1;
-    //     FindWeapons();
-
-    //     // Stat Point
-    //     statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 0;
-    //     strength = PlayerPrefs.HasKey("StrengthPoint") ? PlayerPrefs.GetInt("StrengthPoint") : 1;
-    //     agility = PlayerPrefs.HasKey("AgilityPoint") ? PlayerPrefs.GetInt("AgilityPoint") : 1;
-    //     magic = PlayerPrefs.HasKey("MagicPoint") ? PlayerPrefs.GetInt("MagicPoint") : 1;
-    // }
-
-    // public void SaveData()
-    // {
-    //     PlayerPrefs.SetInt("Level", level);
-    //     PlayerPrefs.SetFloat("EXP", exp);
-    //     PlayerPrefs.SetFloat("EXPCount", expCount);
-
-    //     PlayerPrefs.SetFloat("MAXHP", maxHealth);
-    //     PlayerPrefs.SetFloat("CurHP", currentHealth);
-
-    //     PlayerPrefs.SetFloat("MAXMagic", maxMagic);
-    //     PlayerPrefs.SetFloat("CurMagic", currentMagic);
-    //     PlayerPrefs.SetFloat("MagicRecovery", magicRecoveryRate);
-
-    //     PlayerPrefs.SetFloat("Speed", moveSpeed);
-    //     PlayerPrefs.SetFloat("SprintSpeed", sprintSpeed);
-
-    //     PlayerPrefs.SetFloat("ATKDMG", attackDamage);
-
-    //     PlayerPrefs.SetInt("WeaponCode", weaponCode);
-
-    //     PlayerPrefs.SetInt("StatPoint", statPoint);
-    //     PlayerPrefs.SetInt("StrengthPoint", strength);
-    //     PlayerPrefs.SetInt("AgilityPoint", agility);
-    //     PlayerPrefs.SetInt("MagicPoint", magic);
-
-    //     PlayerPrefs.Save();
-    // }
-
-    // public void DeleteAllData()
-    // {
-    //     PlayerPrefs.DeleteAll();
-    // }
-
-    // public IEnumerator AutoSaveRoutine()
-    // {
-    //     while (true)
-    //     {
-    //         yield return new WaitForSeconds(30f);
-    //         SaveData();
-    //         Debug.Log("자동 저장됨");
-    //     }
-    // }
+    void DeleteAllData()
+    {
+        data.DeleteAll();
+    }
 #endregion
 }

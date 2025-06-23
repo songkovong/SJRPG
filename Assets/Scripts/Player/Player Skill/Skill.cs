@@ -69,7 +69,7 @@ public class Skill : MonoBehaviour
         else return false;
     }
 
-    protected virtual void SaveSkill()
+    public virtual void SaveSkill()
     {
         PlayerPrefs.SetInt(code + " Skill Level", level);
         PlayerPrefs.SetFloat(code + " Skill Cooltime", cooltime);
@@ -77,7 +77,7 @@ public class Skill : MonoBehaviour
         PlayerPrefs.SetFloat(code + " Skill Cost", cost);
         PlayerPrefs.SetFloat(code + " Skill Duration", duration);
     }
-    protected virtual void LoadSkill()
+    public virtual void LoadSkill()
     {
         level = PlayerPrefs.HasKey(code + " Skill Level") ? PlayerPrefs.GetInt(code + " Skill Level", level) : level;
         cooltime = PlayerPrefs.HasKey(code + " Skill Cooltime") ? PlayerPrefs.GetFloat(code + " Skill Cooltime", cooltime) : cooltime;

@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject statPanel;
     public GameObject itemPanel;
+    public GameObject skillPanel;
 
     private Stack<GameObject> openWindows = new Stack<GameObject>();
 
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     {
         player.playerInput.UI.Stat.started += OnStat;
         player.playerInput.UI.Item.started += OnItem;
+        player.playerInput.UI.Skill.started += OnSkill;
         player.playerInput.UI.Close.started += OnClose;
     }
 
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour
     {
         player.playerInput.UI.Stat.started -= OnStat;
         player.playerInput.UI.Item.started -= OnItem;
+        player.playerInput.UI.Skill.started -= OnSkill;
         player.playerInput.UI.Close.started -= OnClose;
     }
 
@@ -44,6 +47,11 @@ public class UIManager : MonoBehaviour
     void OnItem(InputAction.CallbackContext ctx)
     {
         OpenWindow(itemPanel);
+    }
+
+    void OnSkill(InputAction.CallbackContext ctx)
+    {
+        OpenWindow(skillPanel);
     }
 
     void OnClose(InputAction.CallbackContext ctx)

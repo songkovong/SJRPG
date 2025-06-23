@@ -12,18 +12,21 @@ public class CSkill : Skill
     {
         base.Awake();
         code = 2;
-        level = 1;
-        cooltime = 20f;
-        damage = 0f;
-        cost = 20f;
-        duration = 6f;
+        // level = 0;
+        // cooltime = 20f;
+        // damage = 0.1f;
+        // cost = 20f;
+        // duration = 6f;
         maxLevel = 5;
+        LoadSkill();
     }
 
     protected override void Start()
     {
         base.Start();
         player = GetComponent<Player>();
+
+        SaveSkill();
     }
 
     protected override void Update()
@@ -59,21 +62,39 @@ public class CSkill : Skill
     {
         if (level < maxLevel)
         {
-            level++;
-            cooltime -= 2;
-            cost -= 4;
-            duration++;
+            if (level == 0)
+            {
+                level++;
+            }
+            else
+            {
+                level++;
+                cooltime -= 2;
+                cost -= 4;
+                duration++;
+                timer = cooltime;
+            }
+            
+            SaveSkill();
         }
     }
 
-    protected override void SaveSkill()
+    public override void SaveSkill()
     {
-        base.SaveSkill();
+        PlayerPrefs.SetInt(this.code + " Skill Level", this.level);
+        PlayerPrefs.SetFloat(this.code + " Skill Cooltime", this.cooltime);
+        PlayerPrefs.SetFloat(this.code + " Skill Damage", this.damage);
+        PlayerPrefs.SetFloat(this.code + " Skill Cost", this.cost);
+        PlayerPrefs.SetFloat(this.code + " Skill Duration", this.duration);
     }
 
-    protected override void LoadSkill()
+    public override void LoadSkill()
     {
-        base.LoadSkill();
+        this.level = PlayerPrefs.HasKey(this.code + " Skill Level") ? PlayerPrefs.GetInt(this.code + " Skill Level", this.level) : 0;
+        this.cooltime = PlayerPrefs.HasKey(this.code + " Skill Cooltime") ? PlayerPrefs.GetFloat(this.code + " Skill Cooltime", this.cooltime) : 20f;
+        this.damage = PlayerPrefs.HasKey(this.code + " Skill Damage") ? PlayerPrefs.GetFloat(this.code + " Skill Damage", this.damage) : 0.1f;
+        this.cost = PlayerPrefs.HasKey(this.code + " Skill Cost") ? PlayerPrefs.GetFloat(this.code + " Skill Cost", this.cost) : 20f;
+        this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 6f;
     }
 
     protected override void SkillTimer()

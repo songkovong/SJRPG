@@ -40,6 +40,9 @@ public class PlayerStatData : ScriptableObject
     public int agility = 1;
     public int magic = 1;
 
+    // Skill Stat Point
+    public int skillStatPoint;
+
     public void Save()
     {
         PlayerPrefs.SetInt("Level", level);
@@ -64,6 +67,8 @@ public class PlayerStatData : ScriptableObject
         PlayerPrefs.SetInt("StrengthPoint", strength);
         PlayerPrefs.SetInt("AgilityPoint", agility);
         PlayerPrefs.SetInt("MagicPoint", magic);
+
+        PlayerPrefs.SetInt("SkillStatPoint", skillStatPoint);
 
         PlayerPrefs.Save();
     }
@@ -107,6 +112,8 @@ public class PlayerStatData : ScriptableObject
         strength = PlayerPrefs.HasKey("StrengthPoint") ? PlayerPrefs.GetInt("StrengthPoint") : 1;
         agility = PlayerPrefs.HasKey("AgilityPoint") ? PlayerPrefs.GetInt("AgilityPoint") : 1;
         magic = PlayerPrefs.HasKey("MagicPoint") ? PlayerPrefs.GetInt("MagicPoint") : 1;
+
+        skillStatPoint = PlayerPrefs.HasKey("SkillStatPoint") ? PlayerPrefs.GetInt("SkillStatPoint") : 0;
     }
 
     public void DeleteAll()
