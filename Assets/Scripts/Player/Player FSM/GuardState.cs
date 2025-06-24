@@ -16,6 +16,8 @@ public class GuardState : BaseState
 
     public override void Update()
     {
+        player.playerStat.data.currentMagic -= player.playerStat.guardSkill.masteryStat * Time.deltaTime;
+
         player.PlayerAnimator.PlayGuard(true);
 
         player.PlayerMove(GuardMoveSpeed);

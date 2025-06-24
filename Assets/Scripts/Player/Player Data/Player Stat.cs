@@ -10,6 +10,8 @@ public class PlayerStat : MonoBehaviour
     public SpaceSkill spaceSkill { get; set; }
     public CSkill cSkill { get; set; }
     public RSkill rSkill { get; set; }
+    public AttackMasterySkill attackMastery { get; set; }
+    public GuardSkill guardSkill { get; set; }
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
@@ -28,8 +30,10 @@ public class PlayerStat : MonoBehaviour
         spaceSkill = GetComponent<SpaceSkill>();
         cSkill = GetComponent<CSkill>();
         rSkill = GetComponent<RSkill>();
+        attackMastery = GetComponent<AttackMasterySkill>();
+        guardSkill = GetComponent<GuardSkill>();
 
-        // DeleteAllData();
+        DeleteAllData();
 
         LoadAllData();
     }
@@ -116,8 +120,8 @@ public class PlayerStat : MonoBehaviour
     {
         if (data.statPoint >= 1)
         {
-            data.moveSpeed += 0.15f;
-            data.sprintSpeed += 0.3f;
+            data.moveSpeed += 0.1f;
+            data.sprintSpeed += 0.18f;
             data.statPoint -= 1;
             data.agility++;
             data.Save();
@@ -138,28 +142,51 @@ public class PlayerStat : MonoBehaviour
 
     public void SpaceSkillUp()
     {
-        if (data.skillStatPoint >= 1)
+        if (data.skillStatPoint >= 1 && spaceSkill.level < spaceSkill.maxLevel)
         {
             spaceSkill.SkillLevelUp();
             data.skillStatPoint--;
+            data.Save();
         }
     }
 
     public void CSkillUp()
     {
-        if (data.skillStatPoint >= 1)
+        if (data.skillStatPoint >= 1 && cSkill.level < cSkill.maxLevel)
         {
             cSkill.SkillLevelUp();
             data.skillStatPoint--;
+            data.Save();
         }
     }
 
     public void RSkillUp()
     {
-        if (data.skillStatPoint >= 1)
+        if (data.skillStatPoint >= 1 && rSkill.level < rSkill.maxLevel)
         {
             rSkill.SkillLevelUp();
             data.skillStatPoint--;
+            data.Save();
+        }
+    }
+
+    public void AtkMasterUp()
+    {
+        if (data.skillStatPoint >= 1 && attackMastery.level < attackMastery.maxLevel)
+        {
+            attackMastery.SkillLevelUp();
+            data.skillStatPoint--;
+            data.Save();
+        }
+    }
+
+    public void GuaudUp()
+    {
+        if (data.skillStatPoint >= 1 && guardSkill.level < guardSkill.maxLevel)
+        {
+            guardSkill.SkillLevelUp();
+            data.skillStatPoint--;
+            data.Save();
         }
     }
 
@@ -169,7 +196,7 @@ public class PlayerStat : MonoBehaviour
 
     public float RandomAtkDmg()
     {
-        return Random.Range(data.attackDamage * 0.1f, data.attackDamage);
+        return Random.Range(data.attackDamage * (0.1f + attackMastery.masteryStat), data.attackDamage);
         // 패시브 스킬에 숙련도 만들어서 올리기
         // return Random.Range(data.attackDamage * 숙련도(0.1f ~ 0.9f: 1업당 0.16 증가?), data.attackDamage);
     }
@@ -243,27 +270,29 @@ public class PlayerStat : MonoBehaviour
     }
 
 #region Data Save and Load
-    void LoadAllData()
+    public void LoadAllData()
     {
         spaceSkill.LoadSkill();
         cSkill.LoadSkill();
         rSkill.LoadSkill();
+        attackMastery.LoadSkill();
 
         data.Load();
 
         FindWeapons();
     }
 
-    void SaveAllData()
+    public void SaveAllData()
     {
         spaceSkill.SaveSkill();
         cSkill.SaveSkill();
         rSkill.SaveSkill();
+        attackMastery.SaveSkill();
 
         data.Save();
     }
 
-    void DeleteAllData()
+    public void DeleteAllData()
     {
         data.DeleteAll();
     }

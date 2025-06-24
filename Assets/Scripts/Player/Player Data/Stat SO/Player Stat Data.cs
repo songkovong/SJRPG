@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerStatData", menuName = "Game/PlayerStatDate")]
+[CreateAssetMenu(fileName = "PlayerStatData", menuName = "Game/PlayerStatData")]
 public class PlayerStatData : ScriptableObject
 {
     // Level

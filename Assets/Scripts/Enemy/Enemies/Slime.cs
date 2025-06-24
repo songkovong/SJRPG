@@ -26,6 +26,6 @@ public class Slime : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 20;
+        playerstat.data.expCount += 20000;
     }
 }

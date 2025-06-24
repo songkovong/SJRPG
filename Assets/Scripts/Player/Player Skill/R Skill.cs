@@ -41,23 +41,20 @@ public class RSkill : Skill
 
     public override void SkillLevelUp()
     {
-        if (level < maxLevel)
+        if (level == 0)
         {
-            if (level == 0)
-            {
-                level++;
-            }
-            else
-            {
-                level++;
-                cooltime -= 2f;
-                damage += 0.1f;
-                cost -= 3f;
-                timer = cooltime;
-            }
-
-            SaveSkill();
+            level++;
         }
+        else
+        {
+            level++;
+            cooltime -= 2f;
+            damage += 0.1f;
+            cost -= 3f;
+            timer = cooltime;
+        }
+
+        SaveSkill();
     }
 
     public override void SaveSkill()
@@ -76,6 +73,8 @@ public class RSkill : Skill
         this.damage = PlayerPrefs.HasKey(this.code + " Skill Damage") ? PlayerPrefs.GetFloat(this.code + " Skill Damage", this.damage) : 1.5f;
         this.cost = PlayerPrefs.HasKey(this.code + " Skill Cost") ? PlayerPrefs.GetFloat(this.code + " Skill Cost", this.cost) : 30f;
         this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 0f;
+
+        timer = cooltime;
     }
 
     protected override void SkillTimer()

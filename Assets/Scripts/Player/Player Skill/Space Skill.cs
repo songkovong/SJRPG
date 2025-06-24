@@ -36,23 +36,20 @@ public class SpaceSkill : Skill
 
     public override void SkillLevelUp()
     {
-        if (level < maxLevel)
+        if (level == 0)
         {
-            if (level == 0)
-            {
-                level++;
-            }
-            else
-            {
-                level++;
-                cooltime -= 1f;
-                damage += 0.1f;
-                cost -= 1;
-                timer = cooltime;
-            }
-
-            SaveSkill();
+            level++;
         }
+        else
+        {
+            level++;
+            cooltime -= 1f;
+            damage += 0.1f;
+            cost -= 1;
+            timer = cooltime;
+        }
+
+        SaveSkill();
     }
 
     public override void SaveSkill()
@@ -71,6 +68,8 @@ public class SpaceSkill : Skill
         this.damage = PlayerPrefs.HasKey(this.code + " Skill Damage") ? PlayerPrefs.GetFloat(this.code + " Skill Damage", this.damage) : 1.2f;
         this.cost = PlayerPrefs.HasKey(this.code + " Skill Cost") ? PlayerPrefs.GetFloat(this.code + " Skill Cost", this.cost) : 10f;
         this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 0f;
+
+        timer = cooltime;
     }
 
     protected override void SkillTimer()
