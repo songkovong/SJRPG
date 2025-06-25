@@ -17,13 +17,14 @@ public class RSkill : Skill
         // cost = 30f; //30
         // duration = 0f;
         maxLevel = 5;
-        LoadSkill();
     }
 
     protected override void Start()
     {
         base.Start();
         effect.SetActive(false);
+
+        LoadSkill();
 
         SaveSkill();
     }
@@ -85,7 +86,7 @@ public class RSkill : Skill
     public override void UseSkill()
     {
         base.UseSkill();
-        StartCoroutine(EffectCoroutine(waitSec, effectDuration));
+        // StartCoroutine(EffectCoroutine(waitSec, effectDuration));
         Debug.Log("RSkill");
     }
 

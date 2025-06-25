@@ -26,6 +26,9 @@ public class PlayerStatData : ScriptableObject
     public float sprintSpeed = 10f;
     public float rotationSpeed = 30f;
 
+    // Depend
+    public float dependRate = 0;
+
     // Damage
     public float attackDamage = 1f;
     public float buffDamage;
@@ -39,6 +42,7 @@ public class PlayerStatData : ScriptableObject
     public int strength = 1;
     public int agility = 1;
     public int magic = 1;
+    public int depend = 1;
 
     // Skill Stat Point
     public int skillStatPoint;
@@ -59,6 +63,8 @@ public class PlayerStatData : ScriptableObject
         PlayerPrefs.SetFloat("Speed", moveSpeed);
         PlayerPrefs.SetFloat("SprintSpeed", sprintSpeed);
 
+        PlayerPrefs.SetFloat("DependRate", dependRate);
+
         PlayerPrefs.SetFloat("ATKDMG", attackDamage);
 
         PlayerPrefs.SetInt("WeaponCode", weaponCode);
@@ -67,6 +73,7 @@ public class PlayerStatData : ScriptableObject
         PlayerPrefs.SetInt("StrengthPoint", strength);
         PlayerPrefs.SetInt("AgilityPoint", agility);
         PlayerPrefs.SetInt("MagicPoint", magic);
+        PlayerPrefs.SetInt("DependPoint", depend);
 
         PlayerPrefs.SetInt("SkillStatPoint", skillStatPoint);
 
@@ -100,6 +107,9 @@ public class PlayerStatData : ScriptableObject
         sprintSpeed = PlayerPrefs.HasKey("SprintSpeed") ? PlayerPrefs.GetFloat("SprintSpeed") : 10f;
         rotationSpeed = PlayerPrefs.HasKey("RotationSpeed") ? PlayerPrefs.GetFloat("RotationSpeed") : 30f;
 
+        // Depend
+        dependRate = PlayerPrefs.HasKey("DependRate") ? PlayerPrefs.GetFloat("DependRate") : 0;
+
         // Damage
         attackDamage = PlayerPrefs.HasKey("ATKDMG") ? PlayerPrefs.GetFloat("ATKDMG") : 1;
 
@@ -108,10 +118,11 @@ public class PlayerStatData : ScriptableObject
         // FindWeapons();
 
         // Stat Point
-        statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 0;
+        statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 1000;
         strength = PlayerPrefs.HasKey("StrengthPoint") ? PlayerPrefs.GetInt("StrengthPoint") : 1;
         agility = PlayerPrefs.HasKey("AgilityPoint") ? PlayerPrefs.GetInt("AgilityPoint") : 1;
         magic = PlayerPrefs.HasKey("MagicPoint") ? PlayerPrefs.GetInt("MagicPoint") : 1;
+        depend = PlayerPrefs.HasKey("DependPoint") ? PlayerPrefs.GetInt("DependPoint") : 1;
 
         skillStatPoint = PlayerPrefs.HasKey("SkillStatPoint") ? PlayerPrefs.GetInt("SkillStatPoint") : 0;
     }

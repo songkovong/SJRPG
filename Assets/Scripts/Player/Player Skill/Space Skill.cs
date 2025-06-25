@@ -14,13 +14,14 @@ public class SpaceSkill : Skill
         // cost = 10f;
         // duration = 0f;
         maxLevel = 5;
-        LoadSkill();
     }
 
     protected override void Start()
     {
         base.Start();
 
+        LoadSkill();
+        
         SaveSkill();
     }
 

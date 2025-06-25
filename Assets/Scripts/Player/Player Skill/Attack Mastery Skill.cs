@@ -8,12 +8,11 @@ public class AttackMasterySkill : Skill
         base.Awake();
         code = 4;
         maxLevel = 20;
-
-        LoadSkill();
     }
 
     protected override void Start()
     {
+        LoadSkill();
         SaveSkill();
 
         canSkill = false;

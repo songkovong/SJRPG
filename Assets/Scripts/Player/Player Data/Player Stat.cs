@@ -21,7 +21,12 @@ public class PlayerStat : MonoBehaviour
     public PlayerStatData data;
 
 
-#region Life Cycle
+    #region Life Cycle
+
+    void Awake()
+    {
+        DeleteAllData();
+    }
 
     void Start()
     {
@@ -33,7 +38,7 @@ public class PlayerStat : MonoBehaviour
         attackMastery = GetComponent<AttackMasterySkill>();
         guardSkill = GetComponent<GuardSkill>();
 
-        DeleteAllData();
+        // DeleteAllData();
 
         LoadAllData();
     }
@@ -55,6 +60,7 @@ public class PlayerStat : MonoBehaviour
         player.isHit = true;
 
         // getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate))); // 방어력 추가 해도 될듯? enemy도 방어력 있으니깐..
+        getDamage = (int)(getDamage * (1 - Random.Range(data.dependRate * 0.5f, data.dependRate)));
 
         data.currentHealth -= getDamage;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
@@ -120,10 +126,29 @@ public class PlayerStat : MonoBehaviour
     {
         if (data.statPoint >= 1)
         {
-            data.moveSpeed += 0.1f;
-            data.sprintSpeed += 0.18f;
-            data.statPoint -= 1;
+            // data.agility++;
+            // data.moveSpeed += 0.1f;
+            // data.sprintSpeed += 0.18f;
+            // data.statPoint -= 1;
+            // data.Save();
+
             data.agility++;
+            data.statPoint--;
+
+            float a = 0.1f;
+
+            float baseMove = 6f;
+            float baseSprint = 10f;
+
+            float maxMove = 8f;
+            float maxSprint = 12f;
+
+            float moveDelta = maxMove - baseMove;
+            float sprintDelta = maxSprint - baseSprint;
+
+            data.moveSpeed = baseMove + moveDelta * (1f - 1f / (1f + a * data.agility));
+            data.sprintSpeed = baseSprint + sprintDelta * (1f - 1f / (1f + a * data.agility));
+
             data.Save();
         }
     }
@@ -136,6 +161,19 @@ public class PlayerStat : MonoBehaviour
             data.magicRecoveryRate += 0.02f;
             data.statPoint -= 1;
             data.magic++;
+            data.Save();
+        }
+    }
+
+    public void DependUp()
+    {
+        if (data.statPoint >= 1)
+        {
+            data.depend++;
+            // data.dependRate = 1f - Mathf.Exp(-data.depend * 0.05f);
+            var a = 0.05f; // 작을수록 증가폭 작아짐.
+            data.dependRate = 1f - 1f / (1f + a * data.depend);
+            data.statPoint -= 1;
             data.Save();
         }
     }
@@ -276,6 +314,7 @@ public class PlayerStat : MonoBehaviour
         cSkill.LoadSkill();
         rSkill.LoadSkill();
         attackMastery.LoadSkill();
+        guardSkill.LoadSkill();
 
         data.Load();
 
@@ -288,6 +327,7 @@ public class PlayerStat : MonoBehaviour
         cSkill.SaveSkill();
         rSkill.SaveSkill();
         attackMastery.SaveSkill();
+        guardSkill.SaveSkill();
 
         data.Save();
     }

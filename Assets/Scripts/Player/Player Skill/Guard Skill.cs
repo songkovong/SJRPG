@@ -11,11 +11,12 @@ public class GuardSkill : Skill
 
         playerStat = GetComponent<PlayerStat>();
 
-        LoadSkill();
     }
 
     protected override void Start()
     {
+        LoadSkill();
+
         SaveSkill();
 
         if (level == 0) canSkill = false;

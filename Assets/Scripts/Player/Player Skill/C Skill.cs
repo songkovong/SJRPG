@@ -18,13 +18,14 @@ public class CSkill : Skill
         // cost = 20f;
         // duration = 6f;
         maxLevel = 5;
-        LoadSkill();
     }
 
     protected override void Start()
     {
         base.Start();
         player = GetComponent<Player>();
+
+        LoadSkill();
 
         SaveSkill();
     }
