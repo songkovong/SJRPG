@@ -28,4 +28,19 @@ public class TurtleShell : Enemy, IDamageable
         base.ExpUp();
         playerstat.data.expCount += 20;
     }
+
+    public override void EnemyDie() // In DeadState
+    {
+        if (spawner != null)
+        {
+            spawner.NotifyEnemyDead(gameObject);
+        }
+        else
+        {
+            DestroyEnemy();
+        }
+
+        // Item Drop
+        Debug.Log("Item Dropped");
+    }
 }

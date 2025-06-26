@@ -10,6 +10,7 @@ TagManager:
   - Attack Hitbox
   - Enemy Hitbox
   - GameManager
+  - Item
   layers:
   - Default
   - TransparentFX

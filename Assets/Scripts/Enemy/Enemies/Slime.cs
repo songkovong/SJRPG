@@ -26,6 +26,21 @@ public class Slime : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 20000;
+        playerstat.data.expCount += 10;
+    }
+
+    public override void EnemyDie() // In DeadState
+    {
+        if (spawner != null)
+        {
+            spawner.NotifyEnemyDead(gameObject);
+        }
+        else
+        {
+            DestroyEnemy();
+        }
+
+        // Item Drop
+        Debug.Log("Item Dropped");
     }
 }
