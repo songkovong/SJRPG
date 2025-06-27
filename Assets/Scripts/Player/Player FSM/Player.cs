@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public bool StatPressed { get; private set; }
     public bool ItemPressed { get; private set; }
     public bool ClosePressed { get; private set; }
+    public bool EnteractionPressed { get; private set; }
 
     public bool DontRotate { get; set; }
 
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
+        playerInput.Player.Enteraction.started += OnEnteraction;
 
         isHit = false;
 
@@ -107,6 +109,7 @@ public class Player : MonoBehaviour
         SpaceSkillPressed = false;
         CSkillPressed = false;
         RSkillPressed = false;
+        EnteractionPressed = false;
 
         LocalMoveDir();
 
@@ -257,11 +260,17 @@ public class Player : MonoBehaviour
         GuardPressed = ctx.ReadValue<float>() > 0f;
     }
 
+    private void OnEnteraction(InputAction.CallbackContext ctx)
+    {
+        EnteractionPressed = ctx.ReadValue<float>() > 0f;
+    }
+
     // Coroutine
     public void StartCoroutinePlayer(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);
     }
+
 
     public PlayerAnimator PlayerAnimator => playerAnimator;
     public Animator Animator => animator;

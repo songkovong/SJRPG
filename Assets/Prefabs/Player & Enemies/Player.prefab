@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: 349a24092e2c2114f8fb25bb49bd5a09, type: 2}
+  data: {fileID: 0}
 --- !u!143 &8423213871780188479
 CharacterController:
   m_ObjectHideFlags: 0
@@ -264,6 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBox: {fileID: 1390072847529699312}
+  waitSec: 0
+  effectDuration: 0
+  effect: {fileID: 0}
 --- !u!1 &2216565816415469761
 GameObject:
   m_ObjectHideFlags: 0

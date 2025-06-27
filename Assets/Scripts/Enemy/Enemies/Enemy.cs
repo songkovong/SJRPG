@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public GameObject hitbox;
     public GameObject damageText;
     public Transform damagePos;
+    
 
 
     protected virtual void Awake() { }
@@ -54,8 +55,12 @@ public class Enemy : MonoBehaviour, IDamageable
     void Update()
     {
         enemyCurrentState?.Update();
-        enemyAI.DetectPlayer(detectRadius);
-        enemyAI.DetectAttackPlayer(detectAttackRadius);
+
+        if (enemyAI != null)
+        {
+            enemyAI.DetectPlayer(detectRadius);
+            enemyAI.DetectAttackPlayer(detectAttackRadius);
+        }
     }
 
     void OnEnable() // If object inable
@@ -86,18 +91,23 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         // Damage Text
-        GameObject dmgtext = Instantiate(damageText);
-        dmgtext.transform.position = damagePos.position;
-        dmgtext.GetComponent<DamageText>().damage = getDamage;
+        // GameObject dmgtext = Instantiate(damageText);
+        // dmgtext.transform.position = damagePos.position;
+        // dmgtext.GetComponent<DamageText>().damage = getDamage;
+        if (damagePos != null && damageText != null)
+        {
+            var dmgText = Instantiate(damageText, damagePos.position, Quaternion.identity);
+            dmgText.GetComponent<DamageText>().damage = getDamage;
+        }
         
         if (currentHealth <= 0)
-        {
-            isDead = true;
-        }
-        else
-        {
-            StartCoroutine(GodmodeCoroutine());
-        }
+            {
+                isDead = true;
+            }
+            else
+            {
+                StartCoroutine(GodmodeCoroutine());
+            }
 
         StartCoroutine(HitColorCoroutine());
 
@@ -115,6 +125,9 @@ public class Enemy : MonoBehaviour, IDamageable
             DestroyEnemy();
         }
     }
+
+    public virtual void DropItem() { }
+    public virtual void DropCoin() { }
 
     public virtual void ExpUp()
     {

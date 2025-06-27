@@ -30,7 +30,19 @@ public class AttackState : BaseState
         Debug.Log("clip length" + animationDuration);
 
         player.AttackTrail.StartTrail();
-        player.AttackHitbox.HitboxOn();
+        // player.AttackHitbox.HitboxOn();
+        if (comboCount == 1)
+        {
+            player.StartCoroutine(AttackHitBoxCoroutine(0.34f));
+        }
+        else if (comboCount == 2)
+        {
+            player.StartCoroutine(AttackHitBoxCoroutine(0.34f));
+        }
+        else if (comboCount == 3)
+        {
+            player.StartCoroutine(AttackHitBoxCoroutine(0.37f));
+        }
 
         player.StartCoroutinePlayer(AllowComboAfterAnimation(animationDuration));
         player.StartCoroutinePlayer(EndAttackAfterTime(animationDuration));
@@ -40,8 +52,8 @@ public class AttackState : BaseState
     {
         player.PlayerMove(attackMoveSpeed);
         player.PlayerAnimator.SetMove(
-            player.InputDirection.magnitude * attackMoveSpeed * .75f, 
-            player.localMovement.x, 
+            player.InputDirection.magnitude * attackMoveSpeed * .75f,
+            player.localMovement.x,
             player.localMovement.z
         );
 
@@ -54,7 +66,7 @@ public class AttackState : BaseState
     public override void Exit()
     {
         player.AttackTrail.EndTrail();
-        player.AttackHitbox.HitboxOff();
+        // player.AttackHitbox.HitboxOff();
 
         Debug.Log("Exit Attack");
     }
@@ -81,5 +93,14 @@ public class AttackState : BaseState
         {
             player.ChangeState(new MoveState(player));
         }
+    }
+    
+    public IEnumerator AttackHitBoxCoroutine(float delayTime)
+    {
+        player.AttackHitbox.HitboxOn();
+
+        yield return new WaitForSeconds(delayTime);
+
+        player.AttackHitbox.HitboxOff();
     }
 }

@@ -534,6 +534,9 @@ MonoBehaviour:
   hitbox: {fileID: 0}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 6901452442251079272}
+  dropItems:
+  - {fileID: 3139048546252957491, guid: a71b6b62b921ac8408b4799929331397, type: 3}
+  - {fileID: 3139048546252957491, guid: 46fec67125d905a44b2b0f881c4d1289, type: 3}
 --- !u!114 &2233455160907854213
 MonoBehaviour:
   m_ObjectHideFlags: 0

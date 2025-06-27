@@ -1399,7 +1399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7c3fb7e3283e54eacde4bdae0f3daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testPanel: {fileID: 1094272795}
   isPaused: 0
 --- !u!4 &2025924359
 Transform:

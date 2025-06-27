@@ -60,7 +60,6 @@ public class MoveState : BaseState
                 }
 
                 if (player.GuardPressed && player.playerStat.guardSkill.CanActivateSkill())
-                // if (player.GuardPressed)
                 {
                     player.ChangeState(new GuardState(player));
                     return;

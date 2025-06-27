@@ -9,6 +9,8 @@ public class EnemyDeadState : EnemyBaseState
 
     public override void Enter()
     {
+        enemy.DropItem();
+        enemy.EnemyAI.ResetMove();
         enemy.EnemyAnimator.PlayDead(true);
         animationDuration = enemy.EnemyAnimator.GetClipByName("Dead").length + 1.5f;
         enemy.ExpUp();
