@@ -11,6 +11,7 @@ TagManager:
   - Enemy Hitbox
   - GameManager
   - Item
+  - Input Number
   layers:
   - Default
   - TransparentFX

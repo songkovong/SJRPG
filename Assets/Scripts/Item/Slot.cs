@@ -8,9 +8,19 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Item item;
     public int itemCount;
     public Image itemImage;
+    private Rect baseRect;
+    Player player;
+    // private InputNumber _inputNumber;
 
     [SerializeField]
     private TMP_Text textCount;
+
+    void Start()
+    {
+        baseRect = transform.parent.GetComponent<RectTransform>().rect;
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        // _inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
+    }
 
     // Set Item Color and Alpha
     private void SetColor(float _alpha)
@@ -124,8 +134,28 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     // End Drag
     public void OnEndDrag(PointerEventData eventData)
     {
-        DragSlot.instance.SetColor(0);
-        DragSlot.instance.dragSlot = null;
+        if (DragSlot.instance.transform.localPosition.x < baseRect.xMin
+        || DragSlot.instance.transform.localPosition.x > baseRect.xMax
+        || DragSlot.instance.transform.localPosition.y < baseRect.yMin
+        || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
+        {
+            for (int i = 0; i < itemCount; i++)
+            {
+                Instantiate(DragSlot.instance.dragSlot.item.itemPrefab,
+                    player.transform.position + player.transform.forward + player.transform.up,
+                    Quaternion.identity);
+            }
+            DragSlot.instance.dragSlot.ClearSlot();
+            // if (DragSlot.instance.dragSlot != null)
+            //     _inputNumber.Call();
+        }
+
+        // else
+        {
+            DragSlot.instance.SetColor(0);
+            DragSlot.instance.dragSlot = null;
+        }
+
     }
 
     // Drop Item
