@@ -7,6 +7,7 @@ public class PlayerEnteraction : MonoBehaviour
     // private RaycastHit hitInfo;
     private Transform pickupItem;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Inventory inventory;
 
     Player player;
 
@@ -22,6 +23,7 @@ public class PlayerEnteraction : MonoBehaviour
 
     public void TryAction()
     {
+        Debug.Log(player.EnteractionPressed);
         if (player.EnteractionPressed)
         {
             if (CheckItem())
@@ -73,6 +75,7 @@ public class PlayerEnteraction : MonoBehaviour
             if (itemPickUp != null)
             {
                 Debug.Log(itemPickUp.item.itemName + " 획득 했습니다.");  // 실제 인벤토리에 넣는 로직으로 대체 필요
+                inventory.AcquireItem(itemPickUp.item);
                 Destroy(pickupItem.gameObject);
             }
             pickupItem = null;

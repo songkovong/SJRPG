@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
         playerInput.Player.Enteraction.started += OnEnteraction;
+        playerInput.Player.Enteraction.canceled += OnEnteraction;
 
         isHit = false;
 
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
         SpaceSkillPressed = false;
         CSkillPressed = false;
         RSkillPressed = false;
-        EnteractionPressed = false;
+        // EnteractionPressed = false;
 
         LocalMoveDir();
 
