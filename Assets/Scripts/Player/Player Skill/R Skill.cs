@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class RSkill : Skill
 {
-    public float waitSec;
-    public float effectDuration;
     public GameObject effect;
+    public GameObject swordPrefab;
+    public GameObject decalPrefab;
+    public float forwardOffset = 2.8f;
+    public float heightOffset = 10f;
 
     protected override void Awake()
     {
@@ -86,17 +88,26 @@ public class RSkill : Skill
     public override void UseSkill()
     {
         base.UseSkill();
-        // StartCoroutine(EffectCoroutine(waitSec, effectDuration));
+
+        StartCoroutine(UseSkillCoroutine());
+
         Debug.Log("RSkill");
     }
 
-    IEnumerator EffectCoroutine(float waitSec, float duration)
+    IEnumerator UseSkillCoroutine()
     {
-        yield return new WaitForSeconds(waitSec);
-        effect.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        effect.SetActive(false);
+        Vector3 spawnPos = transform.position + transform.forward * forwardOffset + Vector3.up * heightOffset;
+
+        ShowAttackRange(spawnPos);
+
+        yield return new WaitForSeconds(0.8f);
+
+        GameObject sword = Instantiate(swordPrefab, spawnPos, Quaternion.identity);
     }
 
-    public override SkillHitBox HitBox => this.hitBox;
+    void ShowAttackRange(Vector3 _pos)
+    {
+        GameObject decal = Instantiate(decalPrefab, _pos, Quaternion.identity);
+        Destroy(decal, 0.8f);
+    }
 }

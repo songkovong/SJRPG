@@ -1,19 +1,15 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InputNumber : MonoBehaviour
 {
     private bool activate = false;
 
     [SerializeField]
-    private Text text_Preview;
+    private TMP_Text text_Preview;
     [SerializeField]
-    private Text text_input;
-    [SerializeField]
-    private InputField if_text;
+    private TMP_InputField text_input;
 
     [SerializeField]
     private GameObject go_Base;
@@ -44,12 +40,13 @@ public class InputNumber : MonoBehaviour
     {
         go_Base.SetActive(true);
         activate = true;
-        if_text.text = "";
+        text_input.text = "";
         text_Preview.text = DragSlot.instance.dragSlot.itemCount.ToString();
     }
 
     public void Cancel()
     {
+        go_Base.SetActive(false);
         activate = false;
         DragSlot.instance.SetColor(0);
         DragSlot.instance.dragSlot = null;
@@ -74,9 +71,13 @@ public class InputNumber : MonoBehaviour
             {
                 num = 1;
             }
-
-            StartCoroutine(DropItemCoroutine(num));
         }
+        else
+        {
+            num = int.Parse(text_Preview.text);
+        }
+
+        StartCoroutine(DropItemCoroutine(num));
     }
 
     IEnumerator DropItemCoroutine(int _num)
@@ -110,6 +111,7 @@ public class InputNumber : MonoBehaviour
             }
             isNumber = false;
         }
+        Debug.Log("isNumber = " + isNumber);
         return isNumber;
     }
 }

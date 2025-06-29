@@ -42,7 +42,6 @@ public class SkillState : BaseState
         else if (currentCode == 3)
         {
             player.AttackTrail.StartTrail();
-            player.StartCoroutine(DelayHitbox(0.55f));
             animationDuration += .3f;
         }
     }
@@ -72,15 +71,7 @@ public class SkillState : BaseState
         player.playerStat.data.isGodmode = false;
 
         player.AttackTrail.EndTrail();
-        // player.AttackHitbox.HitboxOff();
         player.playerStat.spaceSkill.HitBox.HitboxOff();
         player.playerStat.cSkill.HitBox.HitboxOff();
-        player.playerStat.rSkill.HitBox.HitboxOff();
-    }
-
-    IEnumerator DelayHitbox(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-        player.playerStat.rSkill.HitBox.HitboxOn();
     }
 }

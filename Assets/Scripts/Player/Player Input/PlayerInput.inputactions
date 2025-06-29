@@ -347,6 +347,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "cd4fa4c2-8c98-409c-aac9-95936cb0fa90",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Point",
                     "type": "PassThrough",
                     "id": "32b35790-4ed0-4e9a-aa41-69ac6d629449",
@@ -727,6 +736,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
                     "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c24521ea-8afe-4501-aa00-849671a2c95d",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Enter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

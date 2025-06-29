@@ -86,7 +86,7 @@ public class PlayerStat : MonoBehaviour
 
     public void Heal(float getHealth)
     {
-        data.currentHealth += getHealth;
+        data.currentHealth = Mathf.Min(data.currentHealth + getHealth, data.maxHealth);
     }
 
 #endregion

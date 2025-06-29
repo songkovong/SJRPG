@@ -56,7 +56,7 @@ public class Slime : Enemy, IDamageable
                 Rigidbody rb = dropped.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    var randomUp = Random.Range(0, 0.05f);
+                    var randomUp = Random.Range(0, 0.1f);
                     var randomRight = Random.Range(0, 0.05f);
                     rb.AddForce(Vector3.up * randomUp + Vector3.right * randomRight, ForceMode.Impulse);
                 }

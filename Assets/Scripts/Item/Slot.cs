@@ -1,16 +1,18 @@
+using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
     public int itemCount;
     public Image itemImage;
     private Rect baseRect;
     Player player;
-    // private InputNumber _inputNumber;
+    InputNumber _inputNumber;
+    ItemEffectDataBase db;
 
     [SerializeField]
     private TMP_Text textCount;
@@ -19,7 +21,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         baseRect = transform.parent.GetComponent<RectTransform>().rect;
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        // _inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
+        _inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
+        db = GameObject.FindWithTag("DB").GetComponent<ItemEffectDataBase>();
     }
 
     // Set Item Color and Alpha
@@ -94,17 +97,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("Pointer Event!");
             if (item != null)
             {
-                if (item.itemType == Item.ItemType.Equipment)
+                db.UseItem(item);
+
+                if (item.itemType == Item.ItemType.Consumable)
                 {
-                    // Equip 
-                }
-                else
-                {
-                    // Use Item
-                    Debug.Log(item.itemName + " 을 사용했습니다.");
                     SetSlotCount(-1);
                 }
             }
@@ -139,18 +137,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         || DragSlot.instance.transform.localPosition.y < baseRect.yMin
         || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
         {
-            for (int i = 0; i < itemCount; i++)
-            {
-                Instantiate(DragSlot.instance.dragSlot.item.itemPrefab,
-                    player.transform.position + player.transform.forward + player.transform.up,
-                    Quaternion.identity);
-            }
-            DragSlot.instance.dragSlot.ClearSlot();
-            // if (DragSlot.instance.dragSlot != null)
-            //     _inputNumber.Call();
+            if (DragSlot.instance.dragSlot != null)
+                _inputNumber.Call();
         }
 
-        // else
+        else
         {
             DragSlot.instance.SetColor(0);
             DragSlot.instance.dragSlot = null;
@@ -165,5 +156,19 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             ChangeSlot();
         }
+    }
+
+    // Pointer Enter
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            db.ShowTooltip(item, transform.position);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        db.HideTooltip();
     }
 }
