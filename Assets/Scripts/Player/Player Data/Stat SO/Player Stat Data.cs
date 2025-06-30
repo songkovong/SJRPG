@@ -124,7 +124,7 @@ public class PlayerStatData : ScriptableObject
         magic = PlayerPrefs.HasKey("MagicPoint") ? PlayerPrefs.GetInt("MagicPoint") : 1;
         depend = PlayerPrefs.HasKey("DependPoint") ? PlayerPrefs.GetInt("DependPoint") : 1;
 
-        skillStatPoint = PlayerPrefs.HasKey("SkillStatPoint") ? PlayerPrefs.GetInt("SkillStatPoint") : 1000;
+        skillStatPoint = PlayerPrefs.HasKey("SkillStatPoint") ? PlayerPrefs.GetInt("SkillStatPoint") : 0;
     }
 
     public void DeleteAll()

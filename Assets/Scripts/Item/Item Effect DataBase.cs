@@ -38,7 +38,7 @@ public class ItemEffectDataBase : MonoBehaviour
                                 player.playerStat.Heal(effects[i].nums[j]);
                                 break;
                             case MP:
-                                //
+                                player.playerStat.MPHeal(effects[i].nums[j]);
                                 break;
                             case DAMAGE:
                                 //

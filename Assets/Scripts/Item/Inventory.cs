@@ -6,12 +6,16 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private GameObject slotsParent;
+    [SerializeField]
+    private GameObject coinObeject;
 
     private Slot[] slots;
+    private PlayerCoin coin;
 
     void Start()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
+        coin = coinObeject.GetComponentInChildren<PlayerCoin>();
     }
 
     public void AcquireItem(Item _item, int _count = 1)
@@ -39,5 +43,11 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void AcquireCoin(int _amount)
+    {
+        coin.AddCoin(_amount);
+        coin.SetCoinCount();
     }
 }

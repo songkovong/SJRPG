@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public bool StatPressed { get; private set; }
     public bool ItemPressed { get; private set; }
     public bool ClosePressed { get; private set; }
-    public bool EnteractionPressed { get; private set; }
+    public bool EnteractionPressed { get; set; }
 
     public bool DontRotate { get; set; }
 
@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.started += OnGuard;
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
-        playerInput.Player.Enteraction.started += OnEnteraction;
-        playerInput.Player.Enteraction.canceled += OnEnteraction;
+        playerInput.Player.Enteraction.performed += OnEnteraction;
+        
 
         isHit = false;
 
@@ -264,7 +264,8 @@ public class Player : MonoBehaviour
 
     private void OnEnteraction(InputAction.CallbackContext ctx)
     {
-        EnteractionPressed = ctx.ReadValue<float>() > 0f;
+        // EnteractionPressed = ctx.ReadValue<float>() > 0f;
+        EnteractionPressed = true;
     }
 
     // Coroutine

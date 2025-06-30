@@ -10,6 +10,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public int itemCount;
     public Image itemImage;
     private Rect baseRect;
+    private RectTransform baseRectTransform;
     Player player;
     InputNumber _inputNumber;
     ItemEffectDataBase db;
@@ -20,6 +21,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     void Start()
     {
         baseRect = transform.parent.GetComponent<RectTransform>().rect;
+        baseRectTransform = transform.parent.GetComponent<RectTransform>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
         db = GameObject.FindWithTag("DB").GetComponent<ItemEffectDataBase>();
@@ -132,21 +134,39 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     // End Drag
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (DragSlot.instance.transform.localPosition.x < baseRect.xMin
-        || DragSlot.instance.transform.localPosition.x > baseRect.xMax
-        || DragSlot.instance.transform.localPosition.y < baseRect.yMin
-        || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
+        Vector2 localPosition;
+        bool isInside = RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            baseRectTransform,
+            eventData.position,
+            eventData.pressEventCamera,
+            out localPosition
+        );
+
+        if (isInside && baseRectTransform.rect.Contains(localPosition))
+        {
+            DragSlot.instance.SetColor(0);
+            DragSlot.instance.dragSlot = null;
+        }
+        else
         {
             if (DragSlot.instance.dragSlot != null)
                 _inputNumber.Call();
         }
 
-        else
-        {
-            DragSlot.instance.SetColor(0);
-            DragSlot.instance.dragSlot = null;
-        }
+        // if (DragSlot.instance.transform.localPosition.x < baseRect.xMin
+        // || DragSlot.instance.transform.localPosition.x > baseRect.xMax
+        // || DragSlot.instance.transform.localPosition.y < baseRect.yMin
+        // || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
+        // {
+        //     if (DragSlot.instance.dragSlot != null)
+        //         _inputNumber.Call();
+        // }
 
+        // else
+        // {
+        //     DragSlot.instance.SetColor(0);
+        //     DragSlot.instance.dragSlot = null;
+        // }
     }
 
     // Drop Item

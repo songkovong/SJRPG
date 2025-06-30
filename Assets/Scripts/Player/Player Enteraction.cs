@@ -18,12 +18,15 @@ public class PlayerEnteraction : MonoBehaviour
 
     void Update()
     {
-        TryAction();
+        if (player.EnteractionPressed)
+        {
+            TryAction();
+            player.EnteractionPressed = false;
+        }
     }
 
     public void TryAction()
     {
-        Debug.Log(player.EnteractionPressed);
         if (player.EnteractionPressed)
         {
             if (CheckItem())
@@ -36,15 +39,30 @@ public class PlayerEnteraction : MonoBehaviour
     private bool CheckItem()
     {
         Vector3 origin = transform.position + Vector3.up * 0.5f;
-
         Collider[] hits = Physics.OverlapSphere(origin, sphereRadius, layerMask);
+
+        float closeDist = float.MaxValue;
+        Transform closeItem = null;
+
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Item"))
+            if (hit.CompareTag("Item") || hit.CompareTag("Coin"))
             {
-                pickupItem = hit.transform;
-                return true;
+                // pickupItem = hit.transform;
+                // return true;
+                float dist = Vector3.Distance(origin, hit.transform.position);
+                if (dist < closeDist)
+                {
+                    closeDist = dist;
+                    closeItem = hit.transform;
+                }
             }
+        }
+
+        if (closeItem != null)
+        {
+            pickupItem = closeItem;
+            return true;
         }
 
         pickupItem = null;
@@ -55,12 +73,27 @@ public class PlayerEnteraction : MonoBehaviour
     {
         if (pickupItem != null)
         {
-            ItemPickUp itemPickUp = pickupItem.GetComponent<ItemPickUp>();
-            if (itemPickUp != null)
+            Debug.Log("Tag = " + pickupItem.tag);
+            if (pickupItem.tag == "Item")
             {
-                inventory.AcquireItem(itemPickUp.item);
-                Destroy(pickupItem.gameObject);
+                ItemPickUp itemPickUp = pickupItem.GetComponent<ItemPickUp>();
+                if (itemPickUp != null)
+                {
+                    inventory.AcquireItem(itemPickUp.item);
+                    Destroy(pickupItem.gameObject);
+                }
             }
+
+            else if (pickupItem.tag == "Coin")
+            {
+                CoinPickUp coinPickUp = pickupItem.GetComponent<CoinPickUp>();
+                if (coinPickUp != null)
+                {
+                    inventory.AcquireCoin(coinPickUp.CoinRange());
+                    Destroy(pickupItem.gameObject);
+                }
+            }
+
             pickupItem = null;
         }
     }

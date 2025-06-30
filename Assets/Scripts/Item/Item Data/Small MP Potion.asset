@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8929bf2b3a6294cac7184a3756b736, type: 3}
   m_Name: Small MP Potion
   m_EditorClassIdentifier: 
-  itemName: Small Mp Potion
+  itemName: Small MP Potion
   itemDesc: This potion increases Player MP 10.
   itemType: 1
   itemImage: {fileID: 21300000, guid: ed28c0513f0cff047b9caba42e49c000, type: 3}

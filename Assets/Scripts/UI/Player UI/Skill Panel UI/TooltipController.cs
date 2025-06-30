@@ -6,6 +6,7 @@ public class TooltipController : MonoBehaviour
     public static TooltipController instance;
 
     public GameObject tooltipPanel;
+    public TMP_Text skillNameText;
     public TMP_Text tooltipText;
     bool isVisible = false;
 
@@ -15,10 +16,11 @@ public class TooltipController : MonoBehaviour
         tooltipPanel.SetActive(false);
     }
 
-    public void ShowTooltip(string text, Vector2 position)
+    public void ShowTooltip(string _name, string text, Vector2 position)
     {
         if (isVisible) return;
 
+        skillNameText.text = _name;
         tooltipText.text = text;
 
         Vector2 offset = new Vector2(15f, -15f);

@@ -89,9 +89,14 @@ public class PlayerStat : MonoBehaviour
         data.currentHealth = Mathf.Min(data.currentHealth + getHealth, data.maxHealth);
     }
 
+    public void MPHeal(float getMagic)
+    {
+        data.currentMagic = Mathf.Min(data.currentMagic + getMagic, data.maxMagic);
+    }
+
 #endregion
 
-#region Level Up and Stat Up
+    #region Level Up and Stat Up
 
     public void LvUp()
     {

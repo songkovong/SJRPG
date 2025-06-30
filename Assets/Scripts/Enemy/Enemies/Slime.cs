@@ -5,6 +5,7 @@ using UnityEngine;
 public class Slime : Enemy, IDamageable
 {
     [SerializeField] private List<GameObject> dropItems;
+    [SerializeField] private GameObject dropCoin;
     protected override void Awake()
     {
         base.Awake();
@@ -56,8 +57,8 @@ public class Slime : Enemy, IDamageable
                 Rigidbody rb = dropped.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    var randomUp = Random.Range(0, 0.1f);
-                    var randomRight = Random.Range(0, 0.05f);
+                    var randomUp = 0.05f;
+                    var randomRight = Random.Range(-0.05f, 0.05f);
                     rb.AddForce(Vector3.up * randomUp + Vector3.right * randomRight, ForceMode.Impulse);
                 }
                 Debug.Log("Item Dropped");
@@ -67,6 +68,19 @@ public class Slime : Enemy, IDamageable
 
     public override void DropCoin()
     {
-        
+        float rate = Random.Range(0f, 1f);
+        if (dropCoin?.GetComponent<CoinPickUp>().coin.coinDropRate >= rate)
+        {
+            GameObject coindropped = Instantiate(dropCoin, transform.position, Quaternion.identity);
+            Rigidbody rb = coindropped.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                var randomUp = 0.05f;
+                var randomRight = Random.Range(-0.05f, 0.05f);
+                rb.AddForce(Vector3.up * randomUp + Vector3.right * randomRight, ForceMode.Impulse);
+            }
+            Debug.Log("Coin Dropped");
+        }
     }
 }

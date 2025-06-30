@@ -11,6 +11,7 @@ TagManager:
   - Enemy Hitbox
   - GameManager
   - Item
+  - Coin
   - Input Number
   - DB
   layers:
@@ -22,7 +23,7 @@ TagManager:
   - UI
   - PlayerPreview
   - Item
-  - 
+  - Coin
   - 
   - 
   - 
