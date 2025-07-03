@@ -7,15 +7,26 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject slotsParent;
     [SerializeField]
-    private GameObject coinObeject;
+    private GameObject coinObject;
 
     private Slot[] slots;
     private PlayerCoin coin;
 
+    [SerializeField]
+    private GameObject quickSlotParent;
+    private QuickSlot[] quickSlots;
+
     void Start()
     {
-        slots = slotsParent.GetComponentsInChildren<Slot>();
-        coin = coinObeject.GetComponentInChildren<PlayerCoin>();
+        // slots = slotsParent.GetComponentsInChildren<Slot>();
+        coin = coinObject.GetComponentInChildren<PlayerCoin>();
+        InitializeSlot();
+        InitializeQuickSlot();
+    }
+
+    void Update()
+    {
+        
     }
 
     public void AcquireItem(Item _item, int _count = 1)
@@ -49,5 +60,36 @@ public class Inventory : MonoBehaviour
     {
         coin.AddCoin(_amount);
         coin.SetCoinCount();
+    }
+
+    public void UseSlotItem(int _idx)
+    {
+        var idx = _idx - 1;
+
+        if (idx >= 0 && idx <= 3 && idx < slots.Length && slots[idx] != null)
+        {
+            slots[_idx - 1].UseSlotItem();
+        }
+    }
+
+    void InitializeSlot()
+    {
+        slots = new Slot[slotsParent.transform.childCount];
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i] = slotsParent.transform.GetChild(i).GetComponent<Slot>();
+        }
+    }
+
+    void InitializeQuickSlot()
+    {
+        quickSlots = new QuickSlot[4];
+
+        for (int i = 0; i < 4; i++)
+        {
+            quickSlots[i] = quickSlotParent.transform.GetChild(i).GetComponent<QuickSlot>();
+            quickSlots[i].LinkToSlot(slots[i]);
+        }
     }
 }

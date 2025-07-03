@@ -18,6 +18,12 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
+    void Start()
+    {
+        WindowInitialize();
+
+    }
+
     void Update()
     {
         IsAnyWindow();
@@ -103,5 +109,12 @@ public class UIManager : MonoBehaviour
             player.playerInput.Player.Enable();
             player.DontRotate = false;
         }
+    }
+
+    void WindowInitialize()
+    {
+        statPanel.SetActive(false);
+        itemPanel.SetActive(false);
+        skillPanel.SetActive(false);
     }
 }

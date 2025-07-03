@@ -9,7 +9,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Item item;
     public int itemCount;
     public Image itemImage;
-    private Rect baseRect;
     private RectTransform baseRectTransform;
     Player player;
     InputNumber _inputNumber;
@@ -18,9 +17,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     [SerializeField]
     private TMP_Text textCount;
 
-    void Start()
+    void Awake()
     {
-        baseRect = transform.parent.GetComponent<RectTransform>().rect;
         baseRectTransform = transform.parent.GetComponent<RectTransform>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
@@ -94,6 +92,19 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
     }
 
+    public void UseSlotItem()
+    {
+        if (item != null)
+        {
+            db.UseItem(item);
+
+            if (item.itemType == Item.ItemType.Consumable)
+            {
+                SetSlotCount(-1);
+            }
+        }
+    }
+
     // Mouse Right button Click to Use Item or Equip.
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -152,21 +163,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             if (DragSlot.instance.dragSlot != null)
                 _inputNumber.Call();
         }
-
-        // if (DragSlot.instance.transform.localPosition.x < baseRect.xMin
-        // || DragSlot.instance.transform.localPosition.x > baseRect.xMax
-        // || DragSlot.instance.transform.localPosition.y < baseRect.yMin
-        // || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
-        // {
-        //     if (DragSlot.instance.dragSlot != null)
-        //         _inputNumber.Call();
-        // }
-
-        // else
-        // {
-        //     DragSlot.instance.SetColor(0);
-        //     DragSlot.instance.dragSlot = null;
-        // }
     }
 
     // Drop Item

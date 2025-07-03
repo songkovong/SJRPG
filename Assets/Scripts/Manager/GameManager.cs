@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
         }
 
         isPaused = false;
+
+        Application.targetFrameRate = 120;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

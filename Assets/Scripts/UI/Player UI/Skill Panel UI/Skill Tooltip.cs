@@ -5,8 +5,8 @@ public class SkillTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     Player player;
     public int code;
-    string name;
-    string desc;
+    string _name;
+    string _desc;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class SkillTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         GetSkillTooltip();
-        TooltipController.instance?.ShowTooltip(name, desc, Input.mousePosition);
+        TooltipController.instance?.ShowTooltip(_name, _desc, Input.mousePosition);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -35,28 +35,28 @@ public class SkillTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         switch (code)
         {
             case 1:
-                name = "Slash";
-                desc = "Player Spin Attack " + player.playerStat.spaceSkill.damage * 100 + "% damage.";
+                _name = "Slash";
+                _desc = "Player Spin Attack " + player.playerStat.spaceSkill.damage * 100 + "% damage.";
                 break;
             case 2:
-                name = "Rage";
-                desc = "Player attack damage is double and duration is " + player.playerStat.cSkill.duration + "seconds.";
+                _name = "Rage";
+                _desc = "Player attack damage is double and duration is " + player.playerStat.cSkill.duration + "seconds.";
                 break;
             case 3:
-                name = "Strike";
-                desc = "Player Strike in Air " + player.playerStat.rSkill.damage * 100 + "% damage.";
+                _name = "Strike";
+                _desc = "Player Strike in Air " + player.playerStat.rSkill.damage * 100 + "% damage.";
                 break;
             case 4:
-                name = "Attack Mastery";
-                desc = "Player Attack Mastery increase " + player.playerStat.attackMastery.masteryStat * 100 + "%.";
+                _name = "Attack Mastery";
+                _desc = "Player Attack Mastery increase " + player.playerStat.attackMastery.masteryStat * 100 + "%.";
                 break;
             case 5:
-                name = "Guard";
-                desc = "Player can guard to click mouse right button and mana consume " + player.playerStat.guardSkill.masteryStat + " in 1 second.";
+                _name = "Guard";
+                _desc = "Player can guard to click mouse right button and mana consume " + player.playerStat.guardSkill.masteryStat + " in 1 second.";
                 break;
             default:
-                name = "No Skill";
-                desc = "No Skill Information.";
+                _name = "No Skill";
+                _desc = "No Skill Information.";
                 break;
         }
     }

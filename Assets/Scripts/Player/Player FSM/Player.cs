@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class Player : MonoBehaviour
 
     // Player Stat
     public PlayerStat playerStat { get; private set; }
+
+    // Player Inventory
+    [SerializeField] Inventory inventory;
 
 
     // Player Input Value
@@ -90,6 +94,10 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
         playerInput.Player.Enteraction.performed += OnEnteraction;
+        playerInput.Player.Num1.performed += OnNum1;
+        playerInput.Player.Num2.performed += OnNum2;
+        playerInput.Player.Num3.performed += OnNum3;
+        playerInput.Player.Num4.performed += OnNum4;
         
 
         isHit = false;
@@ -97,6 +105,7 @@ public class Player : MonoBehaviour
         playerInput.Enable();
         // playerInput.Player.Disable();
     }
+
 
     void Start()
     {
@@ -266,6 +275,26 @@ public class Player : MonoBehaviour
     {
         // EnteractionPressed = ctx.ReadValue<float>() > 0f;
         EnteractionPressed = true;
+    }
+
+    private void OnNum1(InputAction.CallbackContext ctx)
+    {
+        inventory.UseSlotItem(1);
+    }
+
+    private void OnNum2(InputAction.CallbackContext ctx)
+    {
+        inventory.UseSlotItem(2);
+    }
+
+    private void OnNum3(InputAction.CallbackContext ctx)
+    {
+        inventory.UseSlotItem(3);
+    }
+
+    private void OnNum4(InputAction.CallbackContext ctx)
+    {
+        inventory.UseSlotItem(4);
     }
 
     // Coroutine
