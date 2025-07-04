@@ -14,6 +14,7 @@ TagManager:
   - Coin
   - Input Number
   - DB
+  - ICC
   layers:
   - Default
   - TransparentFX

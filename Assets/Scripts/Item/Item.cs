@@ -17,5 +17,6 @@ public class Item : ScriptableObject
     public ItemType itemType;
     public Sprite itemImage;
     public float itemDropRate;
+    public float cooltime;
     public GameObject itemPrefab;
 }

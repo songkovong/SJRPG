@@ -1,5 +1,6 @@
 using System.Data;
 using TMPro;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,10 +10,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Item item;
     public int itemCount;
     public Image itemImage;
+    public Image cooltimeImage;
     private RectTransform baseRectTransform;
     Player player;
     InputNumber _inputNumber;
     ItemEffectDataBase db;
+    ItemCooltimeController icc;
 
     [SerializeField]
     private TMP_Text textCount;
@@ -23,6 +26,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
         db = GameObject.FindWithTag("DB").GetComponent<ItemEffectDataBase>();
+        icc = GameObject.FindWithTag("ICC").GetComponent<ItemCooltimeController>();
+    }
+
+    void Update()
+    {
+        ItemCooltimeChecker();
     }
 
     // Set Item Color and Alpha
@@ -91,12 +100,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             DragSlot.instance.dragSlot.ClearSlot();
         }
     }
-
-    public void UseSlotItem()
+    
+    void ItemUseBase()
     {
-        if (item != null)
+        if (item != null && icc.CanUseItem(item))
         {
             db.UseItem(item);
+            icc.UseItem(item);
 
             if (item.itemType == Item.ItemType.Consumable)
             {
@@ -105,20 +115,30 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
     }
 
+    public void UseSlotItem()
+    {
+        ItemUseBase();
+    }
+
+    void ItemCooltimeChecker()
+    {
+        if (item == null)
+        {
+            cooltimeImage.fillAmount = 0;
+        }
+        else
+        {
+            var cooltime = icc.GetCoolTime(item);
+            cooltimeImage.fillAmount = cooltime / item.cooltime;
+        }
+    }
+
     // Mouse Right button Click to Use Item or Equip.
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (item != null)
-            {
-                db.UseItem(item);
-
-                if (item.itemType == Item.ItemType.Consumable)
-                {
-                    SetSlotCount(-1);
-                }
-            }
+            ItemUseBase();
         }
     }
 

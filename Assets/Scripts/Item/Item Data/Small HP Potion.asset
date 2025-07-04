@@ -16,5 +16,6 @@ MonoBehaviour:
   itemDesc: This potion increases Player HP 10.
   itemType: 1
   itemImage: {fileID: 21300000, guid: 3d917d48e67bd4a47a7a5412ddd90a31, type: 3}
-  itemDropRate: 0.05
+  itemDropRate: 0.1
+  cooltime: 5
   itemPrefab: {fileID: 3139048546252957491, guid: a71b6b62b921ac8408b4799929331397, type: 3}
