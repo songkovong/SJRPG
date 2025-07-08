@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PickUp",
+                    "type": "Button",
+                    "id": "13ff5bfe-e631-42bc-93e4-8f29b36abee4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Sprint",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
@@ -117,6 +126,15 @@
                     "name": "Num4",
                     "type": "Button",
                     "id": "9a61cff8-5f50-4bc8-ab5f-ef0af200af48",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "b1539113-9c15-4cb1-9b8e-8fb6ddf3b3ad",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -291,33 +309,11 @@
                 },
                 {
                     "name": "",
-                    "id": "35adc07f-4d85-48d7-a6c8-dba4a00c6a2c",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Num1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b77bbc68-0fc9-43ac-b935-9a1eb81c58e6",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Num2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9e5e8d73-be05-4a87-b920-6d47c177de50",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "Num2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -335,17 +331,6 @@
                 },
                 {
                     "name": "",
-                    "id": "01b1a731-4681-4586-a4b9-e0f26cb87fd0",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Num3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "be1e3889-2770-4fd7-ac90-a7b3668cd4ce",
                     "path": "<Keyboard>/4",
                     "interactions": "",
@@ -357,12 +342,12 @@
                 },
                 {
                     "name": "",
-                    "id": "bc9b6681-b58d-4d78-8d9f-e065059bb956",
-                    "path": "<Gamepad>/leftStickPress",
+                    "id": "99fe4d3c-8a6b-4085-ad1e-d0066ebee3c6",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Num4",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -374,6 +359,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Enteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "583f0ddb-85f9-4514-b3bf-942d55ab3055",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "PickUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public bool ItemPressed { get; private set; }
     public bool ClosePressed { get; private set; }
     public bool EnteractionPressed { get; set; }
+    public bool PickupPressed { get; set; }
 
     public bool DontRotate { get; set; }
 
@@ -94,10 +95,12 @@ public class Player : MonoBehaviour
         playerInput.Player.Guard.performed += OnGuard;
         playerInput.Player.Guard.canceled += OnGuard;
         playerInput.Player.Enteraction.performed += OnEnteraction;
+        playerInput.Player.PickUp.performed += OnPickUp;
         playerInput.Player.Num1.performed += OnNum1;
         playerInput.Player.Num2.performed += OnNum2;
         playerInput.Player.Num3.performed += OnNum3;
         playerInput.Player.Num4.performed += OnNum4;
+        playerInput.Player.Pause.performed += OnPause;
         
 
         isHit = false;
@@ -277,6 +280,11 @@ public class Player : MonoBehaviour
         EnteractionPressed = true;
     }
 
+    private void OnPickUp(InputAction.CallbackContext ctx)
+    {
+        PickupPressed = true;
+    }
+
     private void OnNum1(InputAction.CallbackContext ctx)
     {
         inventory.UseSlotItem(1);
@@ -295,6 +303,18 @@ public class Player : MonoBehaviour
     private void OnNum4(InputAction.CallbackContext ctx)
     {
         inventory.UseSlotItem(4);
+    }
+
+    private void OnPause(InputAction.CallbackContext ctx)
+    {
+        if (!GameManager.instance.isPaused)
+        {
+            GameManager.instance.PauseGame();
+        }
+        else
+        {
+            GameManager.instance.DePauseGame();
+        }
     }
 
     // Coroutine

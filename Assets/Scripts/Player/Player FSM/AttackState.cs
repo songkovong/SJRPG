@@ -8,6 +8,7 @@ public class AttackState : BaseState
     private bool comboTrigger;
     private int comboCount;
     private float attackMoveSpeed = 0.3f;
+    private float comboAttackMulti;
 
     public AttackState(Player player, int comboCount = 1) : base(player)
     {
@@ -16,7 +17,21 @@ public class AttackState : BaseState
 
     public override void Enter()
     {
-        player.playerStat.data.finalDamage = player.playerStat.AtkDmg();
+        if (comboCount == 1)
+        {
+            comboAttackMulti = 1f;
+        }
+        else if (comboCount == 2)
+        {
+            comboAttackMulti = 1.25f;
+        }
+        else if (comboCount == 3)
+        {
+            comboAttackMulti = 1.5f;
+        }
+
+
+        player.playerStat.data.finalDamage = (int)(player.playerStat.AtkDmg() * comboAttackMulti);
 
         Debug.Log("Enter Attack");
 
@@ -85,7 +100,7 @@ public class AttackState : BaseState
     private IEnumerator EndAttackAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        if (comboTrigger && comboCount < 3) // 이부분 바꾸면 콤보 변경 가능 할듯 패시브 스킬로 콤보 여는걸로 해도 괜춘 할듯?
+        if (comboTrigger && comboCount < player.playerStat.comboAttackSkill.playerCombo)
         {
             player.ChangeState(new AttackState(player, comboCount + 1));
         }

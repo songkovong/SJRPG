@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isPaused;
+    public GameObject pausePanel;
     Player player;
 
     void Awake()
@@ -19,12 +20,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (pausePanel.activeSelf)
+        {
+            pausePanel.SetActive(false);
+        }
+
         isPaused = false;
 
         Application.targetFrameRate = 120;
+        Screen.SetResolution(1920, 1080, true);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -44,6 +50,7 @@ public class GameManager : MonoBehaviour
         if (!isPaused)
         {
             isPaused = true;
+            pausePanel.SetActive(true);
             Time.timeScale = 0;
         }
     }
@@ -53,7 +60,13 @@ public class GameManager : MonoBehaviour
         if (isPaused)
         {
             isPaused = false;
+            pausePanel.SetActive(false);
             Time.timeScale = 1;
         }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

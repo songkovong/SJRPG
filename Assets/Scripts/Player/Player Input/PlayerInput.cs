@@ -100,6 +100,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""13ff5bfe-e631-42bc-93e4-8f29b36abee4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
@@ -139,6 +148,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Num4"",
                     ""type"": ""Button"",
                     ""id"": ""9a61cff8-5f50-4bc8-ab5f-ef0af200af48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1539113-9c15-4cb1-9b8e-8fb6ddf3b3ad"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -313,33 +331,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""35adc07f-4d85-48d7-a6c8-dba4a00c6a2c"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Num1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b77bbc68-0fc9-43ac-b935-9a1eb81c58e6"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Num2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9e5e8d73-be05-4a87-b920-6d47c177de50"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""Num2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -357,17 +353,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""01b1a731-4681-4586-a4b9-e0f26cb87fd0"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Num3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""be1e3889-2770-4fd7-ac90-a7b3668cd4ce"",
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
@@ -379,12 +364,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bc9b6681-b58d-4d78-8d9f-e065059bb956"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""id"": ""99fe4d3c-8a6b-4085-ad1e-d0066ebee3c6"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Num4"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -396,6 +381,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Enteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""583f0ddb-85f9-4514-b3bf-942d55ab3055"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PickUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1104,11 +1100,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Skill2 = m_Player.FindAction("Skill2", throwIfNotFound: true);
         m_Player_Skill3 = m_Player.FindAction("Skill3", throwIfNotFound: true);
         m_Player_Enteraction = m_Player.FindAction("Enteraction", throwIfNotFound: true);
+        m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Num1 = m_Player.FindAction("Num1", throwIfNotFound: true);
         m_Player_Num2 = m_Player.FindAction("Num2", throwIfNotFound: true);
         m_Player_Num3 = m_Player.FindAction("Num3", throwIfNotFound: true);
         m_Player_Num4 = m_Player.FindAction("Num4", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1200,11 +1198,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Skill2;
     private readonly InputAction m_Player_Skill3;
     private readonly InputAction m_Player_Enteraction;
+    private readonly InputAction m_Player_PickUp;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Num1;
     private readonly InputAction m_Player_Num2;
     private readonly InputAction m_Player_Num3;
     private readonly InputAction m_Player_Num4;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1217,11 +1217,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Skill2 => m_Wrapper.m_Player_Skill2;
         public InputAction @Skill3 => m_Wrapper.m_Player_Skill3;
         public InputAction @Enteraction => m_Wrapper.m_Player_Enteraction;
+        public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Num1 => m_Wrapper.m_Player_Num1;
         public InputAction @Num2 => m_Wrapper.m_Player_Num2;
         public InputAction @Num3 => m_Wrapper.m_Player_Num3;
         public InputAction @Num4 => m_Wrapper.m_Player_Num4;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1255,6 +1257,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Enteraction.started += instance.OnEnteraction;
             @Enteraction.performed += instance.OnEnteraction;
             @Enteraction.canceled += instance.OnEnteraction;
+            @PickUp.started += instance.OnPickUp;
+            @PickUp.performed += instance.OnPickUp;
+            @PickUp.canceled += instance.OnPickUp;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -1270,6 +1275,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Num4.started += instance.OnNum4;
             @Num4.performed += instance.OnNum4;
             @Num4.canceled += instance.OnNum4;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1298,6 +1306,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Enteraction.started -= instance.OnEnteraction;
             @Enteraction.performed -= instance.OnEnteraction;
             @Enteraction.canceled -= instance.OnEnteraction;
+            @PickUp.started -= instance.OnPickUp;
+            @PickUp.performed -= instance.OnPickUp;
+            @PickUp.canceled -= instance.OnPickUp;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -1313,6 +1324,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Num4.started -= instance.OnNum4;
             @Num4.performed -= instance.OnNum4;
             @Num4.canceled -= instance.OnNum4;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1535,11 +1549,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSkill2(InputAction.CallbackContext context);
         void OnSkill3(InputAction.CallbackContext context);
         void OnEnteraction(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnNum1(InputAction.CallbackContext context);
         void OnNum2(InputAction.CallbackContext context);
         void OnNum3(InputAction.CallbackContext context);
         void OnNum4(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -46,6 +46,9 @@ public class PlayerSkillPanelUI : MonoBehaviour
             case 5:
                 text.text = player.playerStat.guardSkill.level.ToString();
                 break;
+            case 6:
+                text.text = player.playerStat.comboAttackSkill.level.ToString();
+                break;
             default:
                 text.text = "Player Skill Not Found";
                 break;

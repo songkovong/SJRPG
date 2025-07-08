@@ -18,16 +18,16 @@ public class PlayerEnteraction : MonoBehaviour
 
     void Update()
     {
-        if (player.EnteractionPressed)
+        if (player.PickupPressed)
         {
             TryAction();
-            player.EnteractionPressed = false;
+            player.PickupPressed = false;
         }
     }
 
     public void TryAction()
     {
-        if (player.EnteractionPressed)
+        if (player.PickupPressed)
         {
             if (CheckItem())
             {

@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4b7928d112ba3488c3131e29db4801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 5340191684417806611}
 --- !u!114 &8045350971672077851
@@ -267,11 +268,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf12727e01f15b4f9784570ef7716e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBox: {fileID: 1390072847529699312}
+  hitBox: {fileID: 0}
   effect: {fileID: 4571530606184442460}
-  swordPrefab: {fileID: 0}
-  decalPrefab: {fileID: 0}
-  forwardOffset: 1.5
+  swordPrefab: {fileID: 3499165881960884221, guid: d8ce208185195de4c86547c9ffdf1b65, type: 3}
+  decalPrefab: {fileID: 5329867820168353761, guid: 46feb33c4ac1ff3408b5be82bd0c1372, type: 3}
+  forwardOffset: 2.8
   heightOffset: 10
 --- !u!114 &1447112667446736074
 MonoBehaviour:
@@ -315,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   inventory: {fileID: 0}
 --- !u!1 &2216565816415469761
 GameObject:
@@ -475,100 +476,6 @@ Transform:
   - {fileID: 5297365764753135079}
   m_Father: {fileID: 2028933385909906452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4765247154021757169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2495207643736595796}
-  - component: {fileID: 2080736182836948226}
-  - component: {fileID: 5164248095548637438}
-  - component: {fileID: 1390072847529699312}
-  m_Layer: 3
-  m_Name: Skill 3 Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2495207643736595796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4765247154021757169}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.72}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1827125084895915503}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2080736182836948226
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4765247154021757169}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.7
-  m_Center: {x: 0, y: 0.5, z: 0}
---- !u!54 &5164248095548637438
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4765247154021757169}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1390072847529699312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4765247154021757169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 221aa42e845408143a67b3209fd849a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6602782962040293869
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +507,6 @@ Transform:
   m_Children:
   - {fileID: 2455788477528918119}
   - {fileID: 3999127714632498248}
-  - {fileID: 2495207643736595796}
   m_Father: {fileID: 73851481626658490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7044823770739724158

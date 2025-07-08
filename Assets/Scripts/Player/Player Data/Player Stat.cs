@@ -12,6 +12,7 @@ public class PlayerStat : MonoBehaviour
     public RSkill rSkill { get; set; }
     public AttackMasterySkill attackMastery { get; set; }
     public GuardSkill guardSkill { get; set; }
+    public ComboAttackSkill comboAttackSkill { get; set; }
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
@@ -37,6 +38,7 @@ public class PlayerStat : MonoBehaviour
         rSkill = GetComponent<RSkill>();
         attackMastery = GetComponent<AttackMasterySkill>();
         guardSkill = GetComponent<GuardSkill>();
+        comboAttackSkill = GetComponent<ComboAttackSkill>();
 
         // DeleteAllData();
 
@@ -59,7 +61,6 @@ public class PlayerStat : MonoBehaviour
 
         player.isHit = true;
 
-        // getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate))); // 방어력 추가 해도 될듯? enemy도 방어력 있으니깐..
         getDamage = (int)(getDamage * (1 - Random.Range(data.dependRate * 0.5f, data.dependRate)));
 
         data.currentHealth -= getDamage;
@@ -110,6 +111,9 @@ public class PlayerStat : MonoBehaviour
 
             data.statPoint += 3;
             data.skillStatPoint++;
+
+            data.currentHealth = data.maxHealth;
+            data.currentMagic = data.maxMagic;
 
             data.Save();
         }
@@ -233,6 +237,16 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    public void ComboAttackUp()
+    {
+        if (data.skillStatPoint >= 1 && comboAttackSkill.level < comboAttackSkill.maxLevel)
+        {
+            comboAttackSkill.SkillLevelUp();
+            data.skillStatPoint--;
+            data.Save();
+        }
+    }
+
 #endregion
 
     #region Attack Damage Methods
@@ -240,13 +254,10 @@ public class PlayerStat : MonoBehaviour
     public float RandomAtkDmg()
     {
         return Random.Range(data.attackDamage * (0.1f + attackMastery.masteryStat), data.attackDamage);
-        // 패시브 스킬에 숙련도 만들어서 올리기
-        // return Random.Range(data.attackDamage * 숙련도(0.1f ~ 0.9f: 1업당 0.16 증가?), data.attackDamage);
     }
 
     public int AtkDmg()
     {
-        // return (int)(Mathf.Floor((RandomAtkDmg() + weaponDamage) * 10f));
         return Mathf.FloorToInt((RandomAtkDmg() + weaponDamage) * 10f);
     }
 
@@ -320,6 +331,7 @@ public class PlayerStat : MonoBehaviour
         rSkill.LoadSkill();
         attackMastery.LoadSkill();
         guardSkill.LoadSkill();
+        comboAttackSkill.LoadSkill();
 
         data.Load();
 
@@ -333,6 +345,7 @@ public class PlayerStat : MonoBehaviour
         rSkill.SaveSkill();
         attackMastery.SaveSkill();
         guardSkill.SaveSkill();
+        comboAttackSkill.SaveSkill();
 
         data.Save();
     }

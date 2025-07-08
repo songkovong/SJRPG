@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject statPanel;
     public GameObject itemPanel;
     public GameObject skillPanel;
+    public SlotTooltip itemTooltipPanel;
 
     private Stack<GameObject> openWindows = new Stack<GameObject>();
 
@@ -22,6 +23,11 @@ public class UIManager : MonoBehaviour
     {
         WindowInitialize();
 
+        player.playerInput.UI.Stat.started += OnStat;
+        player.playerInput.UI.Item.started += OnItem;
+        player.playerInput.UI.Skill.started += OnSkill;
+        player.playerInput.UI.Close.started += OnClose;
+
     }
 
     void Update()
@@ -29,15 +35,7 @@ public class UIManager : MonoBehaviour
         IsAnyWindow();
     }
 
-    void OnEnable()
-    {
-        player.playerInput.UI.Stat.started += OnStat;
-        player.playerInput.UI.Item.started += OnItem;
-        player.playerInput.UI.Skill.started += OnSkill;
-        player.playerInput.UI.Close.started += OnClose;
-    }
-
-    void OnDisable()
+    void OnDestroy()
     {
         player.playerInput.UI.Stat.started -= OnStat;
         player.playerInput.UI.Item.started -= OnItem;
@@ -70,6 +68,7 @@ public class UIManager : MonoBehaviour
         if (panel.activeSelf)
         {
             panel.SetActive(false);
+            TooltipClose(panel);
             openWindows = new Stack<GameObject>(openWindows.Where(p => p != panel).Reverse());
         }
         else
@@ -84,6 +83,7 @@ public class UIManager : MonoBehaviour
         if (panel.activeSelf)
         {
             panel.SetActive(false);
+            TooltipClose(panel);
             openWindows = new Stack<GameObject>(openWindows.Where(p => p != panel).Reverse());
         }
     }
@@ -94,6 +94,7 @@ public class UIManager : MonoBehaviour
         {
             GameObject panel = openWindows.Pop();
             panel.SetActive(false);
+            TooltipClose(panel);
         }
     }
 
@@ -116,5 +117,21 @@ public class UIManager : MonoBehaviour
         statPanel.SetActive(false);
         itemPanel.SetActive(false);
         skillPanel.SetActive(false);
+    }
+
+    void TooltipClose(GameObject panel)
+    {
+        if (panel == itemPanel)
+        {
+            itemTooltipPanel.HideTooltip();
+        }
+        else if (panel == skillPanel)
+        {
+            TooltipController.instance?.HideTooltip();
+        }
+        else if (panel == statPanel)
+        {
+            StatTooltipController.instance?.HideTooltip();
+        }
     }
 }

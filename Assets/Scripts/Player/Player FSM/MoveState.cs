@@ -31,40 +31,41 @@ public class MoveState : BaseState
         }
 
         if (!player.SprintPressed)
+        {
+            if (player.AttackPressed)
             {
-                if (player.AttackPressed)
-                {
-                    player.ChangeState(new AttackState(player));
-                    return;
-                }
-
-                if (player.SpaceSkillPressed && player.playerStat.spaceSkill.CanActivateSkill())
-                {
-                    player.playerStat.spaceSkill.UseSkill();
-                    player.ChangeState(new SkillState(player));
-                    return;
-                }
-                
-                if (player.CSkillPressed && player.playerStat.cSkill.CanActivateSkill())
-                {
-                    player.playerStat.cSkill.UseSkill();
-                    player.ChangeState(new SkillState(player));
-                    return;
-                }
-
-                if (player.RSkillPressed && player.playerStat.rSkill.CanActivateSkill())
-                {
-                    player.playerStat.rSkill.UseSkill();
-                    player.ChangeState(new SkillState(player));
-                    return;
-                }
-
-                if (player.GuardPressed && player.playerStat.guardSkill.CanActivateSkill())
-                {
-                    player.ChangeState(new GuardState(player));
-                    return;
-                }
+                player.ChangeState(new AttackState(player));
+                return;
             }
+
+            if (player.SpaceSkillPressed && player.playerStat.spaceSkill.CanActivateSkill())
+            {
+                player.playerStat.spaceSkill.UseSkill();
+                player.ChangeState(new SkillState(player));
+                return;
+            }
+            
+            if (player.CSkillPressed && player.playerStat.cSkill.CanActivateSkill())
+            {
+                player.playerStat.cSkill.UseSkill();
+                player.ChangeState(new SkillState(player));
+                return;
+            }
+
+            if (player.RSkillPressed && player.playerStat.rSkill.CanActivateSkill())
+            {
+                player.playerStat.rSkill.UseSkill();
+                player.ChangeState(new SkillState(player));
+                return;
+            }
+
+            if (player.GuardPressed && player.playerStat.guardSkill.CanActivateSkill())
+            {
+                Debug.Log("Guard State Enter");
+                player.ChangeState(new GuardState(player));
+                return;
+            }
+        }
 
         if(player.isHit)
         {

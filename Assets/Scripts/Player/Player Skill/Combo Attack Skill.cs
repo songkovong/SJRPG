@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class GuardSkill : Skill
+public class ComboAttackSkill : Skill
 {
-    public float masteryStat;
+    public int playerCombo;
     protected override void Awake()
     {
         base.Awake();
-        code = 5;
-        maxLevel = 20;
+        code = 6;
+        maxLevel = 2;
 
         playerStat = GetComponent<PlayerStat>();
     }
@@ -17,9 +17,6 @@ public class GuardSkill : Skill
         LoadSkill();
 
         SaveSkill();
-
-        if (level == 0) canSkill = false;
-        else canSkill = true;
     }
 
     public override void SaveSkill()
@@ -29,7 +26,7 @@ public class GuardSkill : Skill
         PlayerPrefs.SetFloat(this.code + " Skill Damage", this.damage);
         PlayerPrefs.SetFloat(this.code + " Skill Cost", this.cost);
         PlayerPrefs.SetFloat(this.code + " Skill Duration", this.duration);
-        PlayerPrefs.SetFloat(this.code + " Skill Stat", this.masteryStat);
+        PlayerPrefs.SetFloat(this.code + " Skill Combo", this.playerCombo);
     }
 
     public override void LoadSkill()
@@ -39,29 +36,18 @@ public class GuardSkill : Skill
         this.damage = PlayerPrefs.HasKey(this.code + " Skill Damage") ? PlayerPrefs.GetFloat(this.code + " Skill Damage", this.damage) : 0;
         this.cost = PlayerPrefs.HasKey(this.code + " Skill Cost") ? PlayerPrefs.GetFloat(this.code + " Skill Cost", this.cost) : 0;
         this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 0;
-        this.masteryStat = PlayerPrefs.HasKey(this.code + " Skill Stat") ? PlayerPrefs.GetFloat(this.code + " Skill Stat", this.masteryStat) : 2f;
+        this.playerCombo = PlayerPrefs.HasKey(this.code + " Skill Combo") ? PlayerPrefs.GetInt(this.code + " Skill Combo", this.playerCombo) : 1;
     }
 
     public override void SkillLevelUp()
     {
-        if (level == 0)
-        {
-            level++;
-        }
-        else
-        {
-            level++;
-            masteryStat -= 0.05f;
-        }
+        level++;
 
-        canSkill = true;
+        if (level == 1 || level == 2)
+        {
+            playerCombo++;
+        }
 
         SaveSkill();
-    }
-
-    public override bool CanActivateSkill()
-    {
-        // return base.CanActivateSkill();
-        return (playerStat.data.currentMagic >= masteryStat) && canSkill && !IsLevel0();
     }
 }
