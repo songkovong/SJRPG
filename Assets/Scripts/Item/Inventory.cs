@@ -24,11 +24,6 @@ public class Inventory : MonoBehaviour
         InitializeQuickSlot();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void AcquireItem(Item _item, int _count = 1)
     {
         if (Item.ItemType.Equipment != _item.itemType)

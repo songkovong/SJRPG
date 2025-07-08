@@ -4,7 +4,7 @@ using UnityEngine;
 public class CSkill : Skill
 {
     float durationTimer;
-    bool isDuration;
+    public bool isDuration { get; private set; }
     Player player;
     public GameObject effect;
 
@@ -17,7 +17,7 @@ public class CSkill : Skill
         // damage = 0.1f;
         // cost = 20f;
         // duration = 6f;
-        maxLevel = 5;
+        maxLevel = 10;
     }
 
     protected override void Start()
@@ -68,8 +68,6 @@ public class CSkill : Skill
         else
         {
             level++;
-            cooltime -= 2;
-            cost -= 4;
             duration++;
             timer = cooltime;
         }
@@ -89,10 +87,10 @@ public class CSkill : Skill
     public override void LoadSkill()
     {
         this.level = PlayerPrefs.HasKey(this.code + " Skill Level") ? PlayerPrefs.GetInt(this.code + " Skill Level", this.level) : 0;
-        this.cooltime = PlayerPrefs.HasKey(this.code + " Skill Cooltime") ? PlayerPrefs.GetFloat(this.code + " Skill Cooltime", this.cooltime) : 20f;
+        this.cooltime = PlayerPrefs.HasKey(this.code + " Skill Cooltime") ? PlayerPrefs.GetFloat(this.code + " Skill Cooltime", this.cooltime) : 30f;
         this.damage = PlayerPrefs.HasKey(this.code + " Skill Damage") ? PlayerPrefs.GetFloat(this.code + " Skill Damage", this.damage) : 0.1f;
         this.cost = PlayerPrefs.HasKey(this.code + " Skill Cost") ? PlayerPrefs.GetFloat(this.code + " Skill Cost", this.cost) : 20f;
-        this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 6f;
+        this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 8f;
 
         timer = cooltime;
     }

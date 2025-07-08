@@ -299,7 +299,9 @@ public class PlayerStat : MonoBehaviour
     public IEnumerator BuffDamage()
     {
         data.attackDamage *= 2;
+
         yield return new WaitForSeconds(cSkill.duration);
+
         data.attackDamage /= 2;
     }
 

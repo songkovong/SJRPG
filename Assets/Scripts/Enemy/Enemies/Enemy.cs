@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
-        playerstat = GameObject.FindWithTag("Player").GetComponent<PlayerStat>();
+        playerstat = GameObject.FindWithTag("Player")?.GetComponent<PlayerStat>();
         animator = GetComponent<Animator>();
         enemyAnimator = new EnemyAnimator(animator);
         enemyAI = GetComponent<EnemyAI>();
@@ -99,15 +99,23 @@ public class Enemy : MonoBehaviour, IDamageable
             var dmgText = Instantiate(damageText, damagePos.position, Quaternion.identity);
             dmgText.GetComponent<DamageText>().damage = getDamage;
         }
+
+        if(playerstat != null)
+        {
+            if (playerstat.cSkill.isDuration)
+            {
+                playerstat.Heal(getDamage * 0.05f);
+            }
+        }
         
         if (currentHealth <= 0)
-            {
-                isDead = true;
-            }
-            else
-            {
-                StartCoroutine(GodmodeCoroutine());
-            }
+        {
+            isDead = true;
+        }
+        else
+        {
+            StartCoroutine(GodmodeCoroutine());
+        }
 
         StartCoroutine(HitColorCoroutine());
 

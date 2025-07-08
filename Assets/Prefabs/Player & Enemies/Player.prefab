@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 2717443010778943333}
   - component: {fileID: 1447112667446736074}
   - component: {fileID: 5473855937588605756}
+  - component: {fileID: 4121084414737191162}
   - component: {fileID: 748600019147439458}
   m_Layer: 3
   m_Name: Player
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4b7928d112ba3488c3131e29db4801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
+  inventory: {fileID: 1477016539739125409, guid: bd6ef9b9564e68845b376083f295cd85, type: 3}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 5340191684417806611}
 --- !u!114 &8045350971672077851
@@ -302,6 +303,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitBox: {fileID: 0}
   masteryStat: 0
+--- !u!114 &4121084414737191162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590254930394038370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8a75c0d58d1f041a6f68a3be648992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBox: {fileID: 0}
+  playerCombo: 0
 --- !u!114 &748600019147439458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +332,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 384
-  inventory: {fileID: 0}
+  inventory: {fileID: 1477016539739125409, guid: bd6ef9b9564e68845b376083f295cd85, type: 3}
 --- !u!1 &2216565816415469761
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class SkillTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 break;
             case 2:
                 _name = "Rage";
-                _desc = "Player attack damage is double and duration is " + player.playerStat.cSkill.duration + " seconds.";
+                _desc = "Player attack damage is double and Recover Health 5% of the Damages and duration is " + player.playerStat.cSkill.duration + " seconds.";
                 _master = "Master Level: " + player.playerStat.cSkill.maxLevel.ToString();
                 break;
             case 3:

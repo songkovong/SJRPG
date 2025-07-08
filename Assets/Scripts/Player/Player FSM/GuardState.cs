@@ -7,26 +7,49 @@ public class GuardState : BaseState
     float GuardMoveSpeed = 0.1f;
     float exitMana = 0.1f;
 
+    float manaTickInterval = 1f;
+    float manaTickTimer = 0f;
+
+    bool isExit = false;
+
     public override void Enter()
     {
         Debug.Log("Enter Guard");
+        isExit = false;
+
         if (!player.playerStat.guardSkill.CanActivateSkill())
         {
             player.ChangeState(new MoveState(player));
+            return;
         }
 
         player.GuardTrail.StartTrail();
         player.playerStat.data.isGodmode = true;
+
+        manaTickTimer = manaTickInterval;
     }
 
     public override void Update()
     {
-        if (player.playerStat.data.currentMagic < exitMana)
+        if (isExit)
         {
-            ExitGuard();
+            return;
         }
 
-        player.playerStat.data.currentMagic -= player.playerStat.guardSkill.masteryStat * Time.deltaTime;
+        manaTickTimer -= Time.deltaTime;
+
+        if (manaTickTimer <= 0f)
+        {
+            manaTickTimer = manaTickInterval;
+
+            player.playerStat.data.currentMagic -= player.playerStat.guardSkill.masteryStat;
+
+            if (player.playerStat.data.currentMagic < player.playerStat.guardSkill.masteryStat + exitMana)
+            {
+                ExitGuard();
+                return;
+            }
+        }
 
         player.PlayerAnimator.PlayGuard(true);
 
@@ -54,6 +77,9 @@ public class GuardState : BaseState
 
     void ExitGuard()
     {
+        if (isExit) return;
+        isExit = true;
+
         player.PlayerAnimator.PlayGuard(false);
         player.ChangeState(new MoveState(player));
     }
