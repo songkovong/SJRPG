@@ -59,9 +59,11 @@ public class PlayerStat : MonoBehaviour
     {
         if (data.isGodmode) return;
 
-        player.isHit = true;
-
         getDamage = (int)(getDamage * (1 - Random.Range(data.dependRate * 0.5f, data.dependRate)));
+
+        if (getDamage == 0) return;
+
+        player.isHit = true;
 
         data.currentHealth -= getDamage;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
@@ -227,7 +229,7 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    public void GuaudUp()
+    public void GuardUp()
     {
         if (data.skillStatPoint >= 1 && guardSkill.level < guardSkill.maxLevel)
         {

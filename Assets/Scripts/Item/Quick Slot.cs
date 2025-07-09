@@ -15,7 +15,7 @@ public class QuickSlot : MonoBehaviour
 
     void Awake()
     {
-        icc = GameObject.FindWithTag("ICC").GetComponent<ItemCooltimeController>();
+        icc = GameObject.FindWithTag("ICC")?.GetComponent<ItemCooltimeController>();
     }
 
     public void LinkToSlot(Slot slot)

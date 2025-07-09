@@ -4,22 +4,39 @@ public class Inventory : MonoBehaviour
 {
     public static bool inventoryActivated = false;
 
-    [SerializeField]
+    // [SerializeField]
     private GameObject slotsParent;
-    [SerializeField]
+    // [SerializeField]
     private GameObject coinObject;
 
     private Slot[] slots;
     private PlayerCoin coin;
 
-    [SerializeField]
+    // [SerializeField]
     private GameObject quickSlotParent;
     private QuickSlot[] quickSlots;
 
     void Start()
     {
-        // slots = slotsParent.GetComponentsInChildren<Slot>();
+        
+        // slotsParent = transform.Find("Slot Panel").gameObject;
+        slotsParent = GameObject.Find("Slot Panel");
+        coinObject = GameObject.Find("Coin Panel");
+        quickSlotParent = GameObject.Find("QuickSlot Object");
+
+        if (slotsParent == null) Debug.Log("Slot Parent is null");
+        else Debug.Log(slotsParent.name);
+
+        if (coinObject == null) Debug.Log("Coin Parent is null");
+        else Debug.Log(coinObject.name);
+
+        if (quickSlotParent == null) Debug.Log("QuickSlot Parent is null");
+        else Debug.Log(quickSlotParent.name);
+
         coin = coinObject.GetComponentInChildren<PlayerCoin>();
+
+        // slots = slotsParent.GetComponentsInChildren<Slot>();
+        // coin = coinObject.GetComponentInChildren<PlayerCoin>();
         InitializeSlot();
         InitializeQuickSlot();
     }

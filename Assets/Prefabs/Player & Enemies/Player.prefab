@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 5473855937588605756}
   - component: {fileID: 4121084414737191162}
   - component: {fileID: 748600019147439458}
+  - component: {fileID: 8957910185669589184}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -153,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4b7928d112ba3488c3131e29db4801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1477016539739125409, guid: bd6ef9b9564e68845b376083f295cd85, type: 3}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 5340191684417806611}
 --- !u!114 &8045350971672077851
@@ -332,7 +332,21 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 384
-  inventory: {fileID: 1477016539739125409, guid: bd6ef9b9564e68845b376083f295cd85, type: 3}
+--- !u!114 &8957910185669589184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590254930394038370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22e9653d03f49442846a98a6a2c0da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotsParent: {fileID: 0}
+  coinObject: {fileID: 0}
+  quickSlotParent: {fileID: 0}
 --- !u!1 &2216565816415469761
 GameObject:
   m_ObjectHideFlags: 0

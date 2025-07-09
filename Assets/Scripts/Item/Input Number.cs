@@ -18,7 +18,7 @@ public class InputNumber : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
     }
 
     void Update()

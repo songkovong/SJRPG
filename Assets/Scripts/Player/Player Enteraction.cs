@@ -7,13 +7,14 @@ public class PlayerEnteraction : MonoBehaviour
     // private RaycastHit hitInfo;
     private Transform pickupItem;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private Inventory inventory;
+    private Inventory inventory;
 
     Player player;
 
     void Start()
     {
         player = GetComponent<Player>();
+        inventory = GetComponent<Inventory>();
     }
 
     void Update()

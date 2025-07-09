@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance { get; private set; }
     private BaseState currentState;
 
     public PlayerInput playerInput;
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
     public PlayerStat playerStat { get; private set; }
 
     // Player Inventory
-    [SerializeField] Inventory inventory;
+    Inventory inventory;
 
 
     // Player Input Value
@@ -69,6 +70,15 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
         playerInput = new PlayerInput();
         animator = GetComponent<Animator>();
         playerAnimator = new PlayerAnimator(animator);
@@ -80,6 +90,8 @@ public class Player : MonoBehaviour
         _guardTrail = GetComponentInChildren<PlayerGuardTrail>();
         _attackTrail = GetComponentInChildren<PlayerAttackTrail>();
         _attackHitbox = GetComponentInChildren<SwordHitbox>();
+
+        inventory = GetComponent<Inventory>();
 
 
         playerInput.Player.Move.started += OnMovementInput;
