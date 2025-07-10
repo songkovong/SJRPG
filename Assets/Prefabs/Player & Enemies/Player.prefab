@@ -344,9 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22e9653d03f49442846a98a6a2c0da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotsParent: {fileID: 0}
-  coinObject: {fileID: 0}
-  quickSlotParent: {fileID: 0}
 --- !u!1 &2216565816415469761
 GameObject:
   m_ObjectHideFlags: 0

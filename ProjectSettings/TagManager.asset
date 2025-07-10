@@ -15,6 +15,7 @@ TagManager:
   - Input Number
   - DB
   - ICC
+  - Item Tooltip
   layers:
   - Default
   - TransparentFX

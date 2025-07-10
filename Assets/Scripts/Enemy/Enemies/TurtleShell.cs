@@ -56,7 +56,8 @@ public class TurtleShell : Enemy, IDamageable
             // Item Drop
             if (dropItem?.GetComponent<ItemPickUp>().item.itemDropRate >= rate)
             {
-                GameObject dropped = Instantiate(dropItem, transform.position, Quaternion.identity);
+                var rotation = Random.Range(0f, 90f);
+                GameObject dropped = Instantiate(dropItem, transform.position, Quaternion.Euler(rotation, rotation, rotation));
                 Rigidbody rb = dropped.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
@@ -74,7 +75,8 @@ public class TurtleShell : Enemy, IDamageable
         float rate = Random.Range(0f, 1f);
         if (dropCoin?.GetComponent<CoinPickUp>().coin.coinDropRate >= rate)
         {
-            GameObject coindropped = Instantiate(dropCoin, transform.position, Quaternion.identity);
+            var rotation = Random.Range(0f, 90f);
+            GameObject coindropped = Instantiate(dropCoin, transform.position, Quaternion.Euler(rotation, rotation, rotation));
             Rigidbody rb = coindropped.GetComponent<Rigidbody>();
 
             if (rb != null)

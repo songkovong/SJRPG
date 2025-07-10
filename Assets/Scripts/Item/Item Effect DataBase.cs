@@ -15,6 +15,7 @@ public class ItemEffectDataBase : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        tooltip = GameObject.FindWithTag("Item Tooltip").GetComponent<SlotTooltip>();
     }
 
     public void UseItem(Item _item)

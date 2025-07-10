@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4699206750141888107
+--- !u!1 &5176513536192007966
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1488201119779098952}
-  - component: {fileID: 7816004281761105393}
+  - component: {fileID: 3257268428954738779}
+  - component: {fileID: 3425000695219417132}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Slime Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1488201119779098952
+--- !u!4 &3257268428954738779
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4699206750141888107}
+  m_GameObject: {fileID: 5176513536192007966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,17 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7816004281761105393
+--- !u!114 &3425000695219417132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4699206750141888107}
+  m_GameObject: {fileID: 5176513536192007966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7c3fb7e3283e54eacde4bdae0f3daa, type: 3}
+  m_Script: {fileID: 11500000, guid: 95179078bf0328e4f94b13de1ba4530f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
-  pausePanel: {fileID: 2680312788696996238, guid: 285f9c6771386984084476f49ff57476, type: 3}
+  enemyPrefab: {fileID: 1941297972052188418, guid: 6bc0f8e08f5d0334bb7c7f8d321058e4, type: 3}
+  spawnCount: 5
+  spawnRadius: 7
+  spawnTime: 10
+  isSpawn: 1

@@ -12,7 +12,7 @@ public class CoinPickUp : MonoBehaviour
 
     IEnumerator DestroyTime()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(60f);
         Destroy(gameObject);
     }
 

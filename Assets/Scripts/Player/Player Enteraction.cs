@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerEnteraction : MonoBehaviour
 {
@@ -82,6 +85,8 @@ public class PlayerEnteraction : MonoBehaviour
                 {
                     inventory.AcquireItem(itemPickUp.item);
                     Destroy(pickupItem.gameObject);
+                    // StartCoroutine(MoveToPlayer(pickupItem.gameObject, 0.3f, 1f));
+                    // StartCoroutine(MoveToPlayerUp(pickupItem.gameObject, 1f, 0.1f, 0.2f));
                 }
             }
 
@@ -92,11 +97,73 @@ public class PlayerEnteraction : MonoBehaviour
                 {
                     inventory.AcquireCoin(coinPickUp.CoinRange());
                     Destroy(pickupItem.gameObject);
+                    // StartCoroutine(MoveToPlayer(pickupItem.gameObject, 0.3f, 1f));
+                    // StartCoroutine(MoveToPlayerUp(pickupItem.gameObject, 1f, 0.1f, 0.2f));
                 }
             }
 
             pickupItem = null;
         }
+    }
+
+    IEnumerator MoveToPlayer(GameObject item, float duration, float height)
+    {
+        Transform target = transform;
+
+        Vector3 startPos = item.transform.position;
+        Vector3 endPos = target.position;
+
+        float _time = 0f;
+
+        while (_time < duration)
+        {
+            if(item == null) yield break;
+
+            _time += Time.deltaTime;
+            float t = _time / duration;
+
+            Vector3 flatPos = Vector3.Lerp(startPos, endPos, t);
+
+            float arcY = height * 4f * t * (1f - t);
+
+            item.transform.position = new Vector3(flatPos.x, flatPos.y + arcY, flatPos.z);
+
+            yield return null;
+        }
+
+        Destroy(item);
+    }
+
+    IEnumerator MoveToPlayerUp(GameObject item, float upHeight, float upDuration, float duration)
+    {
+        Vector3 target = transform.position;
+
+        Vector3 startPos = item.transform.position;
+        Vector3 upPos = startPos + Vector3.up * upHeight;
+
+        float _time = 0f;
+
+        while (_time < upDuration)
+        {
+            _time += Time.deltaTime;
+            float t = _time / upDuration;
+            item.transform.position = Vector3.Lerp(startPos, upPos, Mathf.SmoothStep(0f, 1f, t));
+
+            yield return null;
+        }
+
+        _time = 0f;
+
+        while (_time < duration)
+        {
+            _time += Time.deltaTime;
+            float t = _time / duration;
+            item.transform.position = Vector3.Lerp(upPos, target, t);
+
+            yield return null;
+        }
+
+        Destroy(item);
     }
 
     private void OnDrawGizmosSelected()

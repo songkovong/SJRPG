@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set;}
     public GameObject statPanel;
     public GameObject itemPanel;
     public GameObject skillPanel;
     public SlotTooltip itemTooltipPanel;
+
+    InputNumber inputNumber;
 
     private Stack<GameObject> openWindows = new Stack<GameObject>();
 
@@ -17,7 +20,18 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        inputNumber = GameObject.FindWithTag("Input Number").GetComponent<InputNumber>();
+        itemTooltipPanel = GameObject.FindWithTag("Item Tooltip").GetComponent<SlotTooltip>();
     }
 
     void Start()
@@ -125,6 +139,7 @@ public class UIManager : MonoBehaviour
         if (panel == itemPanel)
         {
             itemTooltipPanel.HideTooltip();
+            inputNumber.Cancel();
         }
         else if (panel == skillPanel)
         {

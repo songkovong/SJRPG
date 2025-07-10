@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,7 +6,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool isPaused;
     public GameObject pausePanel;
-    Player player;
+    public GameObject playerPrefab;
+    CinemachineCamera cinemachineCamera;
 
     void Awake()
     {
@@ -29,6 +31,17 @@ public class GameManager : MonoBehaviour
 
         Application.targetFrameRate = 120;
         Screen.SetResolution(1920, 1080, true);
+
+        var player = Instantiate(playerPrefab);
+        // cinemachineCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+        cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
+
+        if (cinemachineCamera != null && player != null)
+        {
+            cinemachineCamera.Follow = player.transform;
+            cinemachineCamera.LookAt = player.transform;
+        }
+
     }
 
     void Start()
