@@ -6,7 +6,7 @@ public class PlayerCoin : MonoBehaviour
     [SerializeField]
     TMP_Text text_currentCoin;
 
-    private int currentCoin = 0;
+    public int currentCoin { get; private set; } = 0;
 
     void Start()
     {
@@ -22,4 +22,5 @@ public class PlayerCoin : MonoBehaviour
     {
         text_currentCoin.text = currentCoin.ToString();
     }
+
 }

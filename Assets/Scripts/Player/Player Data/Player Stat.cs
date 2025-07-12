@@ -26,7 +26,7 @@ public class PlayerStat : MonoBehaviour
 
     void Awake()
     {
-        DeleteAllData();
+        // DeleteAllData();
     }
 
     void Start()
@@ -117,7 +117,7 @@ public class PlayerStat : MonoBehaviour
             data.currentHealth = data.maxHealth;
             data.currentMagic = data.maxMagic;
 
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -129,7 +129,7 @@ public class PlayerStat : MonoBehaviour
             data.attackDamage *= 1.05f;
             data.statPoint -= 1;
             data.strength++;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -160,7 +160,7 @@ public class PlayerStat : MonoBehaviour
             data.moveSpeed = baseMove + moveDelta * (1f - 1f / (1f + a * data.agility));
             data.sprintSpeed = baseSprint + sprintDelta * (1f - 1f / (1f + a * data.agility));
 
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -172,7 +172,7 @@ public class PlayerStat : MonoBehaviour
             data.magicRecoveryRate += 0.02f;
             data.statPoint -= 1;
             data.magic++;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -185,7 +185,7 @@ public class PlayerStat : MonoBehaviour
             var a = 0.05f; // 작을수록 증가폭 작아짐.
             data.dependRate = 1f - 1f / (1f + a * data.depend);
             data.statPoint -= 1;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -195,7 +195,7 @@ public class PlayerStat : MonoBehaviour
         {
             spaceSkill.SkillLevelUp();
             data.skillStatPoint--;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -205,7 +205,7 @@ public class PlayerStat : MonoBehaviour
         {
             cSkill.SkillLevelUp();
             data.skillStatPoint--;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -215,7 +215,7 @@ public class PlayerStat : MonoBehaviour
         {
             rSkill.SkillLevelUp();
             data.skillStatPoint--;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -225,7 +225,7 @@ public class PlayerStat : MonoBehaviour
         {
             attackMastery.SkillLevelUp();
             data.skillStatPoint--;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -235,7 +235,7 @@ public class PlayerStat : MonoBehaviour
         {
             guardSkill.SkillLevelUp();
             data.skillStatPoint--;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -245,7 +245,7 @@ public class PlayerStat : MonoBehaviour
         {
             comboAttackSkill.SkillLevelUp();
             data.skillStatPoint--;
-            data.Save();
+            SaveAllData();
         }
     }
 
@@ -339,6 +339,9 @@ public class PlayerStat : MonoBehaviour
 
         data.Load();
 
+        player.inventory.LoadSlots();
+        player.inventory.LoadCoin();
+
         FindWeapons();
     }
 
@@ -352,6 +355,9 @@ public class PlayerStat : MonoBehaviour
         comboAttackSkill.SaveSkill();
 
         data.Save();
+
+        player.inventory.SaveSlots();
+        player.inventory.SaveCoin();
     }
 
     public void DeleteAllData()

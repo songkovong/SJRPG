@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c87cfd141df0b44a8f7542695d83c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statPanel: {fileID: 0}
-  itemPanel: {fileID: 0}
-  skillPanel: {fileID: 0}
+  statPanel: {fileID: 8541332884540195715, guid: 231980e596890144d909cc66d03e0669, type: 3}
+  itemPanel: {fileID: 5358214344152990723, guid: 682722df4fd121540a90619dc058e908, type: 3}
+  skillPanel: {fileID: 7362983054558820606, guid: 253c7b51e91ddbb46948e97bcd07419e, type: 3}
   itemTooltipPanel: {fileID: 0}

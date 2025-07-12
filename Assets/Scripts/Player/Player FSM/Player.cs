@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public PlayerStat playerStat { get; private set; }
 
     // Player Inventory
-    Inventory inventory;
+    public Inventory inventory { get; private set; }
 
 
     // Player Input Value

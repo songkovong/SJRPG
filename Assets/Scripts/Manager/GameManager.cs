@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     CinemachineCamera cinemachineCamera;
 
+    Player player;
+
     void Awake()
     {
         if (instance == null)
@@ -32,8 +34,13 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 120;
         Screen.SetResolution(1920, 1080, true);
 
-        var player = Instantiate(playerPrefab);
-        // cinemachineCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+    }
+
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+
+        player = Player.instance;
         cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
 
         if (cinemachineCamera != null && player != null)
@@ -41,12 +48,6 @@ public class GameManager : MonoBehaviour
             cinemachineCamera.Follow = player.transform;
             cinemachineCamera.LookAt = player.transform;
         }
-
-    }
-
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Confined;
 
         // player = GameObject.FindWithTag("Player").GetComponent<Player>();
         // StartCoroutine(player.playerStat.AutoSaveRoutine()); // Auto Save
@@ -81,5 +82,15 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void SaveAll()
+    {
+        player.playerStat.SaveAllData();
+    }
+
+    public void LoadAll()
+    {
+        player.playerStat.LoadAllData();
     }
 }

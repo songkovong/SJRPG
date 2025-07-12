@@ -16,10 +16,11 @@ public class Inventory : MonoBehaviour
     private GameObject quickSlotParent;
     private QuickSlot[] quickSlots;
 
-    void Start()
+    private ItemDatabase idb;
+
+
+    void Awake()
     {
-        
-        // slotsParent = transform.Find("Slot Panel").gameObject;
         slotsParent = GameObject.Find("Slot Panel");
         coinObject = GameObject.Find("Coin Panel");
         quickSlotParent = GameObject.Find("QuickSlot Object");
@@ -33,10 +34,14 @@ public class Inventory : MonoBehaviour
         if (quickSlotParent == null) Debug.Log("QuickSlot Parent is null");
         else Debug.Log(quickSlotParent.name);
 
-        coin = coinObject.GetComponentInChildren<PlayerCoin>();
+        coin = coinObject.GetComponentInChildren<PlayerCoin>(true);
 
-        // slots = slotsParent.GetComponentsInChildren<Slot>();
-        // coin = coinObject.GetComponentInChildren<PlayerCoin>();
+    }
+
+    void Start()
+    {
+        idb = GameManager.instance.gameObject.GetComponent<ItemDatabase>();
+
         InitializeSlot();
         InitializeQuickSlot();
     }
@@ -102,6 +107,56 @@ public class Inventory : MonoBehaviour
         {
             quickSlots[i] = quickSlotParent.transform.GetChild(i).GetComponent<QuickSlot>();
             quickSlots[i].LinkToSlot(slots[i]);
+        }
+    }
+
+    public void SaveSlots()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                var itemName = slots[i].item.itemName;
+                var itemCount = slots[i].itemCount;
+
+                PlayerPrefs.SetString("Slot" + i + "Name", itemName);
+                PlayerPrefs.SetInt("Slot" + i + "Count", itemCount);
+            }
+        }
+    }
+
+    public void LoadSlots()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (PlayerPrefs.HasKey("Slot" + i + "Name"))
+            {
+                var itemName = PlayerPrefs.GetString("Slot" + i + "Name");
+                var itemCount = PlayerPrefs.GetInt("Slot" + i + "Count");
+
+                Item item = idb.GetItemByName(itemName);
+
+                if (item != null)
+                {
+                    slots[i].AddItem(item, itemCount);
+                }
+            }
+        }
+    }
+
+    public void SaveCoin()
+    {
+        PlayerPrefs.SetInt("Coin", coin.currentCoin);
+    }
+
+    public void LoadCoin()
+    {
+        if (PlayerPrefs.HasKey("Coin"))
+        {
+            coin.AddCoin(
+                PlayerPrefs.GetInt("Coin")
+            );
+            coin.SetCoinCount();
         }
     }
 }
