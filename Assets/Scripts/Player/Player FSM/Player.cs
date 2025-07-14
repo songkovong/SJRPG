@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
         else
         {
             instance = this;
+            // DontDestroyOnLoad(gameObject);
         }
 
         playerInput = new PlayerInput();
@@ -288,7 +289,6 @@ public class Player : MonoBehaviour
 
     private void OnEnteraction(InputAction.CallbackContext ctx)
     {
-        // EnteractionPressed = ctx.ReadValue<float>() > 0f;
         EnteractionPressed = true;
     }
 

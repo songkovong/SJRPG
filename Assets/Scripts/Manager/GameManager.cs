@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -33,30 +34,21 @@ public class GameManager : MonoBehaviour
 
         Application.targetFrameRate = 120;
         Screen.SetResolution(1920, 1080, true);
-
     }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
 
-        player = Player.instance;
-        cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
+        FindPlayerAndCamera();
 
-        if (cinemachineCamera != null && player != null)
-        {
-            cinemachineCamera.Follow = player.transform;
-            cinemachineCamera.LookAt = player.transform;
-        }
-
-        // player = GameObject.FindWithTag("Player").GetComponent<Player>();
         // StartCoroutine(player.playerStat.AutoSaveRoutine()); // Auto Save
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        FindPlayerAndCamera();
     }
 
     public void PauseGame()
@@ -92,5 +84,23 @@ public class GameManager : MonoBehaviour
     public void LoadAll()
     {
         player.playerStat.LoadAllData();
+    }
+
+    public void FindPlayerAndCamera()
+    {
+
+        player = Player.instance;
+        cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
+
+        if (cinemachineCamera != null && player != null)
+        {
+            cinemachineCamera.Follow = player.transform;
+            cinemachineCamera.LookAt = player.transform;
+        }
+    }
+
+    public void SpawnPlayer(Vector3 position)
+    {
+        Instantiate(playerPrefab, position, Quaternion.identity);
     }
 }
