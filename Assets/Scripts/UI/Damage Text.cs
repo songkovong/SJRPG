@@ -14,14 +14,14 @@ public class DamageText : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moveSpeed = 2.0f;
-        alphaSpeed = 2.0f;
-        destroyTime = 2.0f;
+        // moveSpeed = 2.0f;
+        // alphaSpeed = 2.0f;
+        // destroyTime = 2.0f;
 
-        text = GetComponent<TextMeshPro>();
-        alpha = text.color;
-        text.text = damage.ToString();
-        Invoke("DestroyObject", destroyTime);
+        // text = GetComponent<TextMeshPro>();
+        // alpha = text.color;
+        // text.text = damage.ToString();
+        // Invoke("DestroyObject", destroyTime);
     }
 
     // Update is called once per frame
@@ -39,5 +39,29 @@ public class DamageText : MonoBehaviour
     private void DestroyObject()
     {
         Destroy(gameObject);
+    }
+
+    public void DmgText(float dmg)
+    {
+        moveSpeed = 2.0f;
+        alphaSpeed = 2.0f;
+        destroyTime = 2.0f;
+
+        text = GetComponent<TextMeshPro>();
+        alpha = text.color;
+        text.text = dmg.ToString();
+        Invoke("DestroyObject", destroyTime);
+    }
+
+    public void MissText()
+    {
+        moveSpeed = 2.0f;
+        alphaSpeed = 2.0f;
+        destroyTime = 2.0f;
+
+        text = GetComponent<TextMeshPro>();
+        alpha = text.color;
+        text.text = "Miss";
+        Invoke("DestroyObject", destroyTime);
     }
 }

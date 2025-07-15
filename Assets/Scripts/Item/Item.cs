@@ -11,6 +11,7 @@ public class Item : ScriptableObject
         ETC
     }
 
+    public int itemCode;
     public string itemName;
     [TextArea] // 여러줄 가능
     public string itemDesc;

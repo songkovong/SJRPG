@@ -8,6 +8,7 @@ public class Slime : Enemy, IDamageable
     protected override void Awake()
     {
         base.Awake();
+        thisEnemyCode = 1;
         attackCooltime = 1f;
         detectRadius = 7f;
         detectAttackRadius = 1.5f;

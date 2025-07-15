@@ -26,7 +26,7 @@ public class ComboAttackSkill : Skill
         PlayerPrefs.SetFloat(this.code + " Skill Damage", this.damage);
         PlayerPrefs.SetFloat(this.code + " Skill Cost", this.cost);
         PlayerPrefs.SetFloat(this.code + " Skill Duration", this.duration);
-        PlayerPrefs.SetFloat(this.code + " Skill Combo", this.playerCombo);
+        PlayerPrefs.SetInt(this.code + " Skill Combo", this.playerCombo);
     }
 
     public override void LoadSkill()

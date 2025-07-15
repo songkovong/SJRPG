@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8929bf2b3a6294cac7184a3756b736, type: 3}
   m_Name: Small HP Potion
   m_EditorClassIdentifier: 
+  itemCode: 1
   itemName: Small HP Potion
   itemDesc: This potion increases Player HP 10.
   itemType: 1

@@ -61,7 +61,13 @@ public class PlayerStat : MonoBehaviour
 
         getDamage = (int)(getDamage * (1 - Random.Range(data.dependRate * 0.5f, data.dependRate)));
 
-        if (getDamage == 0) return;
+        if (getDamage == 0)
+        {
+            GameObject missText = Instantiate(player.damageText);
+            missText.transform.position = player.damagePos.position;
+            missText.GetComponent<DamageText>().MissText();
+            return;
+        }
 
         player.isHit = true;
 
@@ -71,7 +77,8 @@ public class PlayerStat : MonoBehaviour
         // Damage Text
         GameObject dmgtext = Instantiate(player.damageText);
         dmgtext.transform.position = player.damagePos.position;
-        dmgtext.GetComponent<DamageText>().damage = getDamage;
+        // dmgtext.GetComponent<DamageText>().damage = getDamage;
+        dmgtext.GetComponent<DamageText>().DmgText(getDamage);
 
         if (data.currentHealth <= 0)
         {

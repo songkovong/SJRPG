@@ -30,6 +30,7 @@ public class AttackState : BaseState
             comboAttackMulti = 1.5f;
         }
 
+        Debug.Log("Player Combo = " + player.playerStat.comboAttackSkill.playerCombo);
 
         player.playerStat.data.finalDamage = (int)(player.playerStat.AtkDmg() * comboAttackMulti);
 

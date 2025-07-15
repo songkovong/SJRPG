@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour, IDamageable
     EnemyAI enemyAI;
     HitColor enemyHitColor;
 
+    public int thisEnemyCode { get; protected set; } = -1;
+
     public float attackCooltime { get; protected set; } = 2f;
     public float detectRadius { get; protected set; } = 10f;
     public float detectAttackRadius { get; protected set; } = 1.5f;
@@ -83,7 +85,17 @@ public class Enemy : MonoBehaviour, IDamageable
         if(isGodmode) return;
         if(isDead) return;
 
-        getDamage = (int)(getDamage * (1 - Random.Range(0, dependRate)));
+        getDamage = (int)(getDamage * (1 - Random.Range(dependRate / 2, dependRate)));
+
+        if (getDamage == 0)
+        {
+            if (damagePos != null && damageText != null)
+            {
+                GameObject missText = Instantiate(damageText, damagePos.position, Quaternion.identity);
+                missText.GetComponent<DamageText>().MissText();
+            }
+            return;
+        }
 
         isHit = true;
 
@@ -97,7 +109,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (damagePos != null && damageText != null)
         {
             var dmgText = Instantiate(damageText, damagePos.position, Quaternion.identity);
-            dmgText.GetComponent<DamageText>().damage = getDamage;
+            dmgText.GetComponent<DamageText>().DmgText(getDamage);
         }
 
         if(playerstat != null)
