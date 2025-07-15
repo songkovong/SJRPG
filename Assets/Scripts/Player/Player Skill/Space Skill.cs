@@ -17,11 +17,9 @@ public class SpaceSkill : Skill
 
     protected override void Start()
     {
-        base.Start();
-
         LoadSkill();
-        
         SaveSkill();
+        base.Start();
     }
 
     protected override void Update()
@@ -59,6 +57,7 @@ public class SpaceSkill : Skill
         PlayerPrefs.SetFloat(this.code + " Skill Damage", this.damage);
         PlayerPrefs.SetFloat(this.code + " Skill Cost", this.cost);
         PlayerPrefs.SetFloat(this.code + " Skill Duration", this.duration);
+        PlayerPrefs.SetFloat(this.code + " Skill Timer", this.timer);
     }
 
     public override void LoadSkill()
@@ -68,8 +67,7 @@ public class SpaceSkill : Skill
         this.damage = PlayerPrefs.HasKey(this.code + " Skill Damage") ? PlayerPrefs.GetFloat(this.code + " Skill Damage", this.damage) : 1.2f;
         this.cost = PlayerPrefs.HasKey(this.code + " Skill Cost") ? PlayerPrefs.GetFloat(this.code + " Skill Cost", this.cost) : 10f;
         this.duration = PlayerPrefs.HasKey(this.code + " Skill Duration") ? PlayerPrefs.GetFloat(this.code + " Skill Duration", this.duration) : 0f;
-
-        timer = cooltime;
+        this.timer = PlayerPrefs.HasKey(this.code + " Skill Timer") ? PlayerPrefs.GetFloat(this.code + " Skill Timer") : cooltime;
     }
 
     protected override void SkillTimer()

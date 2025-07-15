@@ -35,7 +35,6 @@ public class Inventory : MonoBehaviour
         else Debug.Log(quickSlotParent.name);
 
         coin = coinObject.GetComponentInChildren<PlayerCoin>(true);
-
     }
 
     void Start()

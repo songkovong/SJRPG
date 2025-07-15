@@ -25,8 +25,17 @@ public class Skill : MonoBehaviour
 
     protected virtual void Start()
     {
-        canSkill = true;
-        timer = cooltime;
+        // canSkill = true;
+        // timer = cooltime;
+
+        if (timer < cooltime)
+        {
+            canSkill = false;
+        }
+        else
+        {
+            canSkill = true;
+        }
 
         playerStat = GetComponent<PlayerStat>();
     }

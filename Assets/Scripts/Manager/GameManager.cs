@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
         isPaused = false;
 
+        // SpawnPlayer();
+
         Application.targetFrameRate = 120;
         Screen.SetResolution(1920, 1080, true);
     }
@@ -48,7 +50,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FindPlayerAndCamera();
+        // FindPlayerAndCamera();
     }
 
     public void PauseGame()
@@ -88,7 +90,6 @@ public class GameManager : MonoBehaviour
 
     public void FindPlayerAndCamera()
     {
-
         player = Player.instance;
         cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
 
@@ -99,8 +100,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(Vector3 position)
-    {
-        Instantiate(playerPrefab, position, Quaternion.identity);
-    }
+    // public void SpawnPlayer()
+    // {
+    //     Instantiate(playerPrefab);
+    // }
 }
