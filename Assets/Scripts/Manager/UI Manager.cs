@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject statPanel;
     public GameObject itemPanel;
     public GameObject skillPanel;
+    public GameObject shopPanel;
     public SlotTooltip itemTooltipPanel;
 
     InputNumber inputNumber;
@@ -83,7 +84,7 @@ public class UIManager : MonoBehaviour
         CloseLastWindow();
     }
 
-    void OpenWindow(GameObject panel)
+    public void OpenWindow(GameObject panel)
     {
         if (panel.activeSelf)
         {
@@ -139,6 +140,7 @@ public class UIManager : MonoBehaviour
         statPanel.SetActive(false);
         itemPanel.SetActive(false);
         skillPanel.SetActive(false);
+        shopPanel.SetActive(false);
     }
 
     void TooltipClose(GameObject panel)

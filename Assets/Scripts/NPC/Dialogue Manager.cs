@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,7 +7,9 @@ public class DialogueManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TMP_Text npcNameText;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private TMP_Text acceptText;
 
     private DialogueData currentData;
     private int currentIndex = 0;
@@ -42,7 +43,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueData data)
+    public void StartDialogue(string name, DialogueData data)
     {
         if (data == null) return;
 
@@ -50,6 +51,9 @@ public class DialogueManager : MonoBehaviour
         currentIndex = 0;
         isPlaying = true;
         dialoguePanel.SetActive(true);
+
+        npcNameText.text = name;
+        acceptText.text = "Next: E";
 
         ShowLine();
     }
@@ -71,6 +75,10 @@ public class DialogueManager : MonoBehaviour
 
         if (currentIndex < currentData.lines.Count)
         {
+            if (currentIndex == currentData.lines.Count - 1 && (currentData.tirggerQuest || currentData.openShop))
+            {
+                acceptText.text = "Accept: E, Reject: Move";
+            }
             ShowLine();
         }
         else
@@ -87,21 +95,23 @@ public class DialogueManager : MonoBehaviour
         {
             if (currentData.tirggerQuest)
             {
-                // Quest
+                QuestManager.Instance.AcceptQuest(currentData.questID);
             }
 
             if (currentData.openShop)
             {
-                // Shop
+                UIManager.Instance.OpenWindow(UIManager.Instance.shopPanel);
             }
         }
 
+        npcNameText.text = "";
         currentData = null;
         CloseDialogue();
     }
 
-    private void CloseDialogue()
+    public void CloseDialogue()
     {
+        isPlaying = false;
         dialoguePanel.SetActive(false);
     }
 

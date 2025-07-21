@@ -8,7 +8,7 @@ public class DialogueNPC : NPCBase
     {
         if (!DialogueManager.Instance.IsPlaying())
         {
-            DialogueManager.Instance.StartDialogue(dialogueData);
+            DialogueManager.Instance.StartDialogue(this.npcID, dialogueData);
         }
     }
 }
