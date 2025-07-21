@@ -23,4 +23,9 @@ public class PlayerCoin : MonoBehaviour
         text_currentCoin.text = currentCoin.ToString();
     }
 
+    public int GetCoin()
+    {
+        return currentCoin;
+    }
+
 }

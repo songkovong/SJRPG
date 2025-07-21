@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +8,7 @@ public class Player : MonoBehaviour
     private BaseState currentState;
 
     public PlayerInput playerInput;
-    CharacterController characterController;
+    public CharacterController characterController { get; private set; }
     PlayerAnimator playerAnimator;
     Animator animator;
 
@@ -140,10 +138,30 @@ public class Player : MonoBehaviour
 
         LocalMoveDir();
 
+        // if (GameManager.instance.isPaused)
+        // {
+        //     playerInput.Player.Disable();
+        //     DontRotate = true;
+        // }
+        // else
+        // {
+        //     playerInput.Player.Enable();
+        //     DontRotate = false;
+        // }
+
         Debug.Log("Skill Code = " + skillCode);
+
+        // if (DialogueManager.Instance.IsPlaying())
+        // {
+        //     playerInput.Player.Disable();
+        // }
+        // else
+        // {
+        //     playerInput.Player.Enable();
+        // }
     }
 
-    // Methods
+    #region Methods
     public void PlayerMove(float multipleSpeed)
     {
         // Little Gravity on Player
@@ -227,7 +245,49 @@ public class Player : MonoBehaviour
         }
     }
 
-    // On event
+    public void SavePlayerPosAndRot()
+    {
+        Vector3 pos = gameObject.transform.position;
+        Quaternion rot = gameObject.transform.rotation;
+
+        PlayerPrefs.SetFloat("PlayerPosX", pos.x);
+        PlayerPrefs.SetFloat("PlayerPosY", pos.y);
+        PlayerPrefs.SetFloat("PlayerPosZ", pos.z);
+        PlayerPrefs.SetFloat("PlayerRotX", rot.x);
+        PlayerPrefs.SetFloat("PlayerRotY", rot.y);
+        PlayerPrefs.SetFloat("PlayerRotZ", rot.z);
+        PlayerPrefs.SetFloat("PlayerRotW", rot.w);
+
+        PlayerPrefs.Save();
+    }
+
+    public void LoadPlayerPosAndRot()
+    {
+        if (!PlayerPrefs.HasKey("PlayerPosX"))
+        {
+            return;
+        }
+        else
+        {
+            float px = PlayerPrefs.GetFloat("PlayerPosX");
+            float py = PlayerPrefs.GetFloat("PlayerPosY");
+            float pz = PlayerPrefs.GetFloat("PlayerPosZ");
+
+            float rx = PlayerPrefs.GetFloat("PlayerRotX");
+            float ry = PlayerPrefs.GetFloat("PlayerRotY");
+            float rz = PlayerPrefs.GetFloat("PlayerRotZ");
+            float rw = PlayerPrefs.GetFloat("PlayerRotW");
+
+            characterController.enabled = false;
+
+            gameObject.transform.SetPositionAndRotation(new Vector3(px, py, pz), new Quaternion(rx, ry, rz, rw));
+
+            characterController.enabled = true;
+        }
+    }
+    #endregion
+
+    #region On Event
     void OnMovementInput(InputAction.CallbackContext ctx)
     {
         InputDirection = ctx.ReadValue<Vector2>();
@@ -328,12 +388,14 @@ public class Player : MonoBehaviour
             GameManager.instance.DePauseGame();
         }
     }
+    #endregion
 
-    // Coroutine
+    #region Coroutine
     public void StartCoroutinePlayer(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);
     }
+    #endregion
 
 
     public PlayerAnimator PlayerAnimator => playerAnimator;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Accessibility;
 using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
@@ -121,13 +122,15 @@ public class UIManager : MonoBehaviour
     {
         if (openWindows.Count > 0)
         {
-            player.playerInput.Player.Disable();
-            player.DontRotate = true;
+            // player.playerInput.Player.Disable();
+            // player.DontRotate = true;
+            PlayerInputDisable();
         }
         else
         {
-            player.playerInput.Player.Enable();
-            player.DontRotate = false;
+            // player.playerInput.Player.Enable();
+            // player.DontRotate = false;
+            PlayerInputEnable();
         }
     }
 
@@ -153,5 +156,17 @@ public class UIManager : MonoBehaviour
         {
             StatTooltipController.instance?.HideTooltip();
         }
+    }
+
+    public void PlayerInputEnable()
+    {
+        player.playerInput.Player.Enable();
+        player.DontRotate = false;
+    }
+
+    public void PlayerInputDisable()
+    {
+        player.playerInput.Player.Disable();
+        player.DontRotate = true;
     }
 }

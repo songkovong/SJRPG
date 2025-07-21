@@ -9,14 +9,14 @@ public class Inventory : MonoBehaviour
     // [SerializeField]
     private GameObject coinObject;
 
-    private Slot[] slots;
-    private PlayerCoin coin;
+    public Slot[] slots { get; private set; }
+    public PlayerCoin coin { get; private set; }
 
     // [SerializeField]
     private GameObject quickSlotParent;
     private QuickSlot[] quickSlots;
 
-    private ItemDatabase idb;
+    public ItemDatabase idb { get; private set; }
 
 
     void Awake()
@@ -121,7 +121,14 @@ public class Inventory : MonoBehaviour
                 PlayerPrefs.SetString("Slot" + i + "Name", itemName);
                 PlayerPrefs.SetInt("Slot" + i + "Count", itemCount);
             }
+
+            else
+            {
+                PlayerPrefs.DeleteKey("Slot" + i + "Name");
+                PlayerPrefs.DeleteKey("Slot" + i + "Count");
+            }
         }
+        PlayerPrefs.Save();
     }
 
     public void LoadSlots()

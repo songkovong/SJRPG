@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GuardSkill : Skill
 {
-    public float masteryStat;
     protected override void Awake()
     {
         base.Awake();

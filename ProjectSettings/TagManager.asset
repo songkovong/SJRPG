@@ -17,6 +17,7 @@ TagManager:
   - ICC
   - Item Tooltip
   - Portal
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - PlayerPreview
   - Item
   - Coin
-  - Portal
+  - NPC
   - 
   - 
   - 

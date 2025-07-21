@@ -136,7 +136,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     // Mouse Right button Click to Use Item or Equip.
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right && !GameManager.instance.isPaused)
         {
             ItemUseBase();
         }

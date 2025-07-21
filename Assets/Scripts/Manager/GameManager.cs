@@ -1,5 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -32,8 +35,6 @@ public class GameManager : MonoBehaviour
 
         isPaused = false;
 
-        // SpawnPlayer();
-
         Application.targetFrameRate = 120;
         Screen.SetResolution(1920, 1080, true);
     }
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // FindPlayerAndCamera();
+        StartCoroutine(AutoSave());
     }
 
     public void PauseGame()
@@ -88,6 +90,26 @@ public class GameManager : MonoBehaviour
         player.playerStat.LoadAllData();
     }
 
+    public void DeleteAll()
+    {
+        player.playerStat.DeleteAllData();
+    }
+
+    void OnApplicationQuit()
+    {
+        player.playerStat.SaveAllData();
+    }
+
+    IEnumerator AutoSave()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(60f);
+            SaveAll();
+            Debug.Log("Auto Save");
+        }
+    }
+
     public void FindPlayerAndCamera()
     {
         player = Player.instance;
@@ -100,8 +122,4 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // public void SpawnPlayer()
-    // {
-    //     Instantiate(playerPrefab);
-    // }
 }

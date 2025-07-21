@@ -8,15 +8,18 @@ public class Skill : MonoBehaviour
 {
     // Skill
     public int code { get; protected set; }
-    public int level { get; protected set; }
-    public float cooltime { get; protected set; }
-    public float damage { get; protected set; }
-    public float cost { get; protected set; }
-    public float duration { get; protected set; }
+    public int level { get; set; }
+    public float cooltime { get; set; }
+    public float damage { get; set; }
+    public float cost { get; set; }
+    public float duration { get; set; }
+    public float masteryStat { get; set; }
+    public int playerCombo { get; set; }
+
     public float maxLevel { get; protected set; }
 
     public bool canSkill { get; protected set; }
-    public float timer { get; protected set; }
+    public float timer { get; set; }
 
     public PlayerStat playerStat { get; protected set; }
     public SkillHitBox hitBox;

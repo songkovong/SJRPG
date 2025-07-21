@@ -1,18 +1,14 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Video;
 
 public class PlayerEnteraction : MonoBehaviour
 {
     // [SerializeField] private float maxDistance = 0.1f; // Enteraction distance
     private float pickupSphereRadius = 3f;
-    private float enteractiveSphereRadius = 1f;
+    private float enteractiveSphereRadius = 3f;
     // private RaycastHit hitInfo;
     private Transform pickupItem;
     [SerializeField] private LayerMask layerMask;
     private Inventory inventory;
-
     Player player;
 
     void Start()
@@ -29,9 +25,9 @@ public class PlayerEnteraction : MonoBehaviour
             player.PickupPressed = false;
         }
 
-        if (player.EnteractionPressed)
+        if (player.EnteractionPressed && !DialogueManager.Instance.IsPlaying())
         {
-            TryAction();
+            TryEnteraction();
             player.EnteractionPressed = false;
         }
     }
@@ -45,23 +41,21 @@ public class PlayerEnteraction : MonoBehaviour
                 CanPickUp();
             }
         }
-        if (player.EnteractionPressed)
-        {
-            Enteraction();
-        }
     }
 
-    private void Enteraction()
+    public void TryEnteraction()
     {
-        Vector3 origin = transform.position + Vector3.up * 0.5f;
-        Collider[] hits = Physics.OverlapSphere(origin, enteractiveSphereRadius, layerMask);
+        Collider[] hits = Physics.OverlapSphere(transform.position, pickupSphereRadius, layerMask);
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Portal"))
+            if (hit.isTrigger) continue;
+
+            NPCBase npc = hit.GetComponent<NPCBase>();
+            if (npc != null)
             {
-                Debug.Log("Portal");
-                hit.GetComponent<Portal>().ActivatePortal();
+                npc.Enteract();
+                return;
             }
         }
     }

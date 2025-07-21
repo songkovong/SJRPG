@@ -40,8 +40,6 @@ public class PlayerStat : MonoBehaviour
         guardSkill = GetComponent<GuardSkill>();
         comboAttackSkill = GetComponent<ComboAttackSkill>();
 
-        // DeleteAllData();
-
         LoadAllData();
     }
 
@@ -343,9 +341,9 @@ public class PlayerStat : MonoBehaviour
         attackMastery.LoadSkill();
         guardSkill.LoadSkill();
         comboAttackSkill.LoadSkill();
-
         data.Load();
 
+        player.LoadPlayerPosAndRot();
         player.inventory.LoadSlots();
         player.inventory.LoadCoin();
 
@@ -360,9 +358,9 @@ public class PlayerStat : MonoBehaviour
         attackMastery.SaveSkill();
         guardSkill.SaveSkill();
         comboAttackSkill.SaveSkill();
-
         data.Save();
 
+        player.SavePlayerPosAndRot();
         player.inventory.SaveSlots();
         player.inventory.SaveCoin();
     }

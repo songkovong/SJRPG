@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class AreaLoader : MonoBehaviour
 {
     public string sceneNameToLoad;
-
     private bool isLoaded = false;
 
     void OnTriggerEnter(Collider other)

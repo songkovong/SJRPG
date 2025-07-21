@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ComboAttackSkill : Skill
 {
-    public int playerCombo;
     protected override void Awake()
     {
         base.Awake();
