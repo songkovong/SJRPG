@@ -20,3 +20,5 @@ MonoBehaviour:
   itemDropRate: 0.05
   cooltime: 10
   itemPrefab: {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
+  buyPrice: 100
+  sellPrice: 50

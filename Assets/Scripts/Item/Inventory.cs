@@ -45,8 +45,13 @@ public class Inventory : MonoBehaviour
         InitializeQuickSlot();
     }
 
-    public void AcquireItem(Item _item, int _count = 1)
+    public bool AcquireItem(Item _item, int _count = 1)
     {
+        if (IsFull() && CanStack(_item))
+        {
+            return false;
+        }
+
         if (Item.ItemType.Equipment != _item.itemType)
         {
             for (int i = 0; i < slots.Length; i++)
@@ -56,7 +61,7 @@ public class Inventory : MonoBehaviour
                     if (slots[i].item.itemName == _item.itemName)
                     {
                         slots[i].SetSlotCount(_count);
-                        return;
+                        return true;
                     }
                 }
             }
@@ -67,15 +72,47 @@ public class Inventory : MonoBehaviour
             if (slots[i].item == null)
             {
                 slots[i].AddItem(_item, _count);
-                return;
+                return true;
             }
         }
+        
+        return false;
+    }
+
+    public bool SellItem(Item _item, int _count)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null && slots[i].item.itemName == _item.itemName)
+            {
+                if (slots[i].itemCount >= _count)
+                {
+                    var addCoin = _item.sellPrice * _count;
+                    AcquireCoin(addCoin);
+
+                    slots[i].SetSlotCount(-_count);
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void AcquireCoin(int _amount)
     {
         coin.AddCoin(_amount);
         coin.SetCoinCount();
+    }
+
+    public bool SpendCoin(int _amount)
+    {
+        if (coin.currentCoin >= _amount)
+        {
+            AcquireCoin(-_amount);
+            return true;
+        }
+        return false;
     }
 
     public void UseSlotItem(int _idx)
@@ -164,5 +201,32 @@ public class Inventory : MonoBehaviour
             );
             coin.SetCoinCount();
         }
+    }
+
+    private bool IsFull()
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.item == null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private bool CanStack(Item _item)
+    {
+        if (_item.itemType == Item.ItemType.Equipment) return false;
+
+        foreach (var slot in slots)
+        {
+            if (slot.item != null && slot.item.itemName == _item.itemName)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

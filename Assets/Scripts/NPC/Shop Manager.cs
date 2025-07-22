@@ -4,6 +4,7 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance { get; private set; }
     [SerializeField] private GameObject shopPanel;
+    [SerializeField] private ShopUI shopUI;
 
     void Awake()
     {
@@ -15,11 +16,30 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShop(string shopID)
     {
-        shopPanel.SetActive(true);
+        ShopData shopData = FindShopByID(shopID);
+
+        if (shopData == null)
+        {
+            return;
+        }
+
+        // shopPanel.SetActive(true);
+        shopUI.SetShop(shopData);
     }
 
     public void CloseShop()
     {
         shopPanel.SetActive(false);
+    }
+
+    private ShopData FindShopByID(string id)
+    {
+        ShopData[] shops = Resources.LoadAll<ShopData>("Shops");
+        foreach (var shop in shops)
+        {
+            if (shop.shopID == id) return shop;
+        }
+
+        return null;
     }
 }

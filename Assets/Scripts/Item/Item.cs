@@ -20,4 +20,6 @@ public class Item : ScriptableObject
     public float itemDropRate;
     public float cooltime;
     public GameObject itemPrefab;
+    public int buyPrice;
+    public int sellPrice;
 }

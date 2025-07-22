@@ -100,6 +100,7 @@ public class DialogueManager : MonoBehaviour
 
             if (currentData.openShop)
             {
+                ShopManager.Instance.OpenShop(currentData.shopID);
                 UIManager.Instance.OpenWindow(UIManager.Instance.shopPanel);
             }
         }
