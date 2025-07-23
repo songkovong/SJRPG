@@ -8,8 +8,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public bool isPaused;
-    public GameObject pausePanel;
     public GameObject playerPrefab;
     CinemachineCamera cinemachineCamera;
 
@@ -27,13 +25,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (pausePanel.activeSelf)
-        {
-            pausePanel.SetActive(false);
-        }
-
-        isPaused = false;
 
         Application.targetFrameRate = 120;
         Screen.SetResolution(1920, 1080, true);
@@ -53,26 +44,6 @@ public class GameManager : MonoBehaviour
     {
         // FindPlayerAndCamera();
         StartCoroutine(AutoSave());
-    }
-
-    public void PauseGame()
-    {
-        if (!isPaused)
-        {
-            isPaused = true;
-            pausePanel.SetActive(true);
-            Time.timeScale = 0;
-        }
-    }
-
-    public void DePauseGame()
-    {
-        if (isPaused)
-        {
-            isPaused = false;
-            pausePanel.SetActive(false);
-            Time.timeScale = 1;
-        }
     }
 
     public void ExitGame()

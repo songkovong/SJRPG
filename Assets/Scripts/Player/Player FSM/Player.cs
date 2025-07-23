@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public bool ClosePressed { get; private set; }
     public bool EnteractionPressed { get; set; }
     public bool PickupPressed { get; set; }
+    public bool PausePressed { get; set; }
 
     public bool DontRotate { get; set; }
 
@@ -236,13 +237,9 @@ public class Player : MonoBehaviour
 
     public void ChangeState(BaseState newState)
     {
-        // If game is pause, dont change state
-        if (!GameManager.instance.isPaused)
-        {
-            currentState?.Exit();
-            currentState = newState;
-            currentState.Enter();
-        }
+        currentState?.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 
     public void SavePlayerPosAndRot()
@@ -379,14 +376,16 @@ public class Player : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
-        if (!GameManager.instance.isPaused)
-        {
-            GameManager.instance.PauseGame();
-        }
-        else
-        {
-            GameManager.instance.DePauseGame();
-        }
+        // if (!GameManager.instance.isPaused)
+        // {
+        //     GameManager.instance.PauseGame();
+        // }
+        // else
+        // {
+        //     GameManager.instance.DePauseGame();
+        // }
+
+
     }
     #endregion
 

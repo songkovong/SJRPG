@@ -52,7 +52,7 @@ public class SkillTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 break;
             case 4:
                 _name = "Attack Mastery";
-                _desc = "Player Attack Mastery increase " + player.playerStat.attackMastery.masteryStat * 100 + "%.";
+                _desc = "Player mininum attack range increase " + player.playerStat.attackMastery.masteryStat * 100 + "%.";
                 _master = "Master Level: " + player.playerStat.attackMastery.maxLevel.ToString();
                 break;
             case 5:

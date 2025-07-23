@@ -489,6 +489,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""56b92057-0bfa-49ca-8046-c5006239eadb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Enter"",
                     ""type"": ""Button"",
                     ""id"": ""cd4fa4c2-8c98-409c-aac9-95936cb0fa90"",
@@ -883,6 +892,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1c5c7fdb-72b7-43fd-90dc-3de6da14da06"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c24521ea-8afe-4501-aa00-849671a2c95d"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
@@ -1115,6 +1135,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_UI_Stat = m_UI.FindAction("Stat", throwIfNotFound: true);
         m_UI_Item = m_UI.FindAction("Item", throwIfNotFound: true);
         m_UI_Skill = m_UI.FindAction("Skill", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
@@ -1354,6 +1375,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Stat;
     private readonly InputAction m_UI_Item;
     private readonly InputAction m_UI_Skill;
+    private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_Enter;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_Click;
@@ -1372,6 +1394,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Stat => m_Wrapper.m_UI_Stat;
         public InputAction @Item => m_Wrapper.m_UI_Item;
         public InputAction @Skill => m_Wrapper.m_UI_Skill;
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @Enter => m_Wrapper.m_UI_Enter;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @Click => m_Wrapper.m_UI_Click;
@@ -1407,6 +1430,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Skill.started += instance.OnSkill;
             @Skill.performed += instance.OnSkill;
             @Skill.canceled += instance.OnSkill;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
             @Enter.started += instance.OnEnter;
             @Enter.performed += instance.OnEnter;
             @Enter.canceled += instance.OnEnter;
@@ -1453,6 +1479,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Skill.started -= instance.OnSkill;
             @Skill.performed -= instance.OnSkill;
             @Skill.canceled -= instance.OnSkill;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
             @Enter.started -= instance.OnEnter;
             @Enter.performed -= instance.OnEnter;
             @Enter.canceled -= instance.OnEnter;
@@ -1565,6 +1594,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnStat(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnEnter(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);

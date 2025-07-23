@@ -201,6 +201,13 @@ public class Inventory : MonoBehaviour
             );
             coin.SetCoinCount();
         }
+        else
+        {
+            coin.AddCoin(
+                100000
+            );
+            coin.SetCoinCount();
+        }
     }
 
     private bool IsFull()
