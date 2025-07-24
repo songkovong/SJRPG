@@ -10,14 +10,17 @@ public class EnemyAI : MonoBehaviour
     public bool isDetective {get; set;} = false;
     public bool isAttack {get; set;} = false;
 
+    void Awake()
+    {
+        if(player == null)
+        {
+            player = Player.instance.transform;
+        }
+    }
+
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
-
-        if(player == null)
-        {
-            player = GameObject.FindWithTag("Player").transform;
-        }
     }
 
     void Update()

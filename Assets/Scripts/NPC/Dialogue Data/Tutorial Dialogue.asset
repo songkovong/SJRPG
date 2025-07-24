@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9844a25848666544eac47719afd6de4a, type: 3}
+  m_Name: Tutorial Dialogue
+  m_EditorClassIdentifier: 
+  dialougeID: Tutorial Dialogue
+  lines:
+  - Hi! I'm tutorial NPC. I can teach you how to play this game!
+  - First, use W, A, S, D to move, sprint to Shift button.
+  - You can attack by clicking the left mouse button.
+  - When you defeat enemies, you gain experience, level up, and earn both a stat
+    point and a skill point.
+  - Spending stat points increases your abilities, and using skill points unlocks
+    new skills or upgrades existing ones.
+  - Press T to open the stat window.
+  - Press I to open the inventory, and K to open the skill window.
+  - When you defeat enemies, they sometimes drop items or coins. Press Z to pick
+    them up.
+  - If you ever forget any of this, just ask me again anytime!
+  tirggerQuest: 0
+  questID: 
+  openShop: 0
+  shopID: 

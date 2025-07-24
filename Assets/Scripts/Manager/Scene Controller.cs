@@ -34,11 +34,17 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameScene()
     {
-        LoadSceneAsync("SampleScene");
+        LoadSceneAsync("Game Scene");
     }
 
     public void LoadMainScene()
     {
+        Debug.Log("Game manager is = " + GameManager.instance);
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SaveAll();
+        }
+
         LoadSceneAsync("Main Scene");
     }
 }

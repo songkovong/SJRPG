@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,10 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentData;
     private int currentIndex = 0;
     private bool isPlaying = false;
+
+    private Coroutine typingCoroutine;
+    private bool isTyping = false;
+    private bool lineEnd = false;
 
     Player player;
 
@@ -39,7 +44,21 @@ public class DialogueManager : MonoBehaviour
         if (player != null && player.EnteractionPressed)
         {
             player.EnteractionPressed = false;
-            NextLine();
+
+            if (isTyping)
+            {
+                if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+                dialogueText.text = currentData.lines[currentIndex];
+                isTyping = false;
+                lineEnd = true;
+                return;
+            }
+
+            if (lineEnd)
+            {
+                NextLine();
+            }
+
         }
     }
 
@@ -53,7 +72,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         npcNameText.text = name;
-        acceptText.text = "Next: E";
+        acceptText.text = "Next: E, Exit: Move";
 
         ShowLine();
     }
@@ -66,7 +85,44 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        dialogueText.text = currentData.lines[currentIndex];
+        dialogueText.text = "";
+        lineEnd = false;
+
+        if(typingCoroutine != null) StopCoroutine(typingCoroutine);
+        typingCoroutine = StartCoroutine(TypeLine(currentData.lines[currentIndex]));
+    }
+
+    private IEnumerator TypeLine(string line)
+    {
+        isTyping = true;
+
+        // string[] words = line.Split(' ');
+
+        // for (int i = 0; i < words.Length; i++)
+        // {
+        //     dialogueText.text += words[i];
+
+        //     if (i < words.Length - 1)
+        //     {
+        //         dialogueText.text += " ";
+        //     }
+
+        //     yield return new WaitForSeconds(0.1f);
+
+        //     if (!isTyping) yield break;
+        // }
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            dialogueText.text += line[i];
+
+            yield return new WaitForSeconds(0.05f);
+
+            if (!isTyping) yield break;
+        }
+
+        isTyping = false;
+        lineEnd = true;
     }
 
     private void NextLine()
