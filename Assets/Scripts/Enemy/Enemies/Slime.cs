@@ -15,7 +15,7 @@ public class Slime : Enemy, IDamageable
         moveSpeed = 1f;
         rotationSpeed = 2000f;
         attackDamage = 2f;
-        maxHealth = 10f;
+        maxHealth = 5f;
         currentHealth = maxHealth;
         godmodeDuration = 1f;
         dependRate = 0.1f;
@@ -30,7 +30,7 @@ public class Slime : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 10;
+        playerstat.data.expCount += 5;
     }
 
     public override void EnemyDie() // In DeadState

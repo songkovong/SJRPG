@@ -16,8 +16,8 @@ public class PlayerStat : MonoBehaviour
 
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
-    int weaponCode;
-    public float weaponDamage { get; private set; }
+    // int weaponCode;
+    public float weaponDamage { get; private set; } = 1f;
 
     public PlayerStatData data;
 
@@ -26,7 +26,7 @@ public class PlayerStat : MonoBehaviour
 
     void Awake()
     {
-        DeleteAllData();
+        // DeleteAllData();
     }
 
     void Start()
@@ -131,7 +131,7 @@ public class PlayerStat : MonoBehaviour
         if (data.statPoint >= 1)
         {
             data.maxHealth *= 1.05f;
-            data.attackDamage *= 1.05f;
+            data.attackDamage += 0.35f;
             data.statPoint -= 1;
             data.strength++;
             SaveAllData();
@@ -265,7 +265,7 @@ public class PlayerStat : MonoBehaviour
 
     public int AtkDmg()
     {
-        return Mathf.FloorToInt((RandomAtkDmg() + weaponDamage) * 10f);
+        return Mathf.FloorToInt((RandomAtkDmg() + weaponDamage) * 2f);
     }
 
     public int SkillDmg(float skilldmg)
@@ -319,18 +319,18 @@ public class PlayerStat : MonoBehaviour
         Debug.Log("Die");
     }
 
-    void FindWeapons()
-    {
-        foreach (WeaponDamageData weapon in weapons)
-        {
-            if (weapon.weaponCode.Equals(data.weaponCode))
-            {
-                this.weaponCode = weapon.weaponCode;
-                this.weaponDamage = weapon.damageData;
-                return;
-            }
-        }
-    }
+    // void FindWeapons()
+    // {
+    //     foreach (WeaponDamageData weapon in weapons)
+    //     {
+    //         if (weapon.weaponCode.Equals(data.weaponCode))
+    //         {
+    //             this.weaponCode = weapon.weaponCode;
+    //             this.weaponDamage = weapon.damageData;
+    //             return;
+    //         }
+    //     }
+    // }
 
 #region Data Save and Load
     public void LoadAllData()
@@ -347,7 +347,7 @@ public class PlayerStat : MonoBehaviour
         player.inventory.LoadSlots();
         player.inventory.LoadCoin();
 
-        FindWeapons();
+        // FindWeapons();
     }
 
     public void SaveAllData()

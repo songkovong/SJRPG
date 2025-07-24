@@ -68,7 +68,7 @@ public class StatPanelController : MonoBehaviour
         curHealth.text = Mathf.FloorToInt(player.playerStat.data.currentHealth).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxHealth).ToString();
         curMagic.text = Mathf.FloorToInt(player.playerStat.data.currentMagic).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxMagic).ToString();
         curAttack.text = player.playerStat.data.attackDamage.ToString();
-        curAttackRange.text = Mathf.FloorToInt((damage * (0.1f + mastery) + weaponDamage) * 10).ToString() + " ~ " + Mathf.FloorToInt((damage + weaponDamage) * 10).ToString();
+        curAttackRange.text = Mathf.FloorToInt((damage * (0.1f + mastery) + weaponDamage) * 2).ToString() + " ~ " + Mathf.FloorToInt((damage + weaponDamage) * 2).ToString();
         curSpeed.text = player.playerStat.data.moveSpeed.ToString();
         curSprintSpeed.text = player.playerStat.data.sprintSpeed.ToString();
         curDepend.text = player.playerStat.data.dependRate.ToString();

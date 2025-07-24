@@ -16,10 +16,10 @@ public class TurtleShell : Enemy, IDamageable
         moveSpeed = 2f;
         rotationSpeed = 2000f;
         attackDamage = 3f;
-        maxHealth = 20f;
+        maxHealth = 10f;
         currentHealth = maxHealth;
         godmodeDuration = 1f;
-        dependRate = 0.5f;
+        dependRate = 0.7f;
     }
 
     public override void TakeDamage(float getDamage)
@@ -31,7 +31,7 @@ public class TurtleShell : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 20;
+        playerstat.data.expCount += 15;
     }
 
     public override void EnemyDie() // In DeadState

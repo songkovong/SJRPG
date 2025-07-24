@@ -23,6 +23,7 @@ MonoBehaviour:
     new skills or upgrades existing ones.
   - Press T to open the stat window.
   - Press I to open the inventory, and K to open the skill window.
+  - Press P to return main or quit this game.
   - When you defeat enemies, they sometimes drop items or coins. Press Z to pick
     them up.
   - If you ever forget any of this, just ask me again anytime!

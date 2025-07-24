@@ -420,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4047972025199878, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4047972025199878, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -536,7 +536,6 @@ MonoBehaviour:
   damagePos: {fileID: 6901452442251079272}
   dropItems:
   - {fileID: 3139048546252957491, guid: a71b6b62b921ac8408b4799929331397, type: 3}
-  - {fileID: 3139048546252957491, guid: 46fec67125d905a44b2b0f881c4d1289, type: 3}
   dropCoin: {fileID: 100719015017695889, guid: 84c54630b9800e5419439dbfa74de6db, type: 3}
 --- !u!114 &2233455160907854213
 MonoBehaviour:
