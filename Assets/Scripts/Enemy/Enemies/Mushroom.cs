@@ -30,7 +30,7 @@ public class Mushroom : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 8;
+        playerstat.data.expCount += 9;
     }
 
     public override void EnemyDie() // In DeadState

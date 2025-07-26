@@ -3,7 +3,14 @@ using UnityEngine;
 public class SwordDrop : MonoBehaviour
 {
     [SerializeField] private float dropSpeed = 40f;
-    [SerializeField] private float targetY = 2f;
+    [SerializeField] private float dropDistance = 8f;
+
+    private float targetY;
+
+    void Start()
+    {
+        targetY = transform.position.y - dropDistance;   
+    }
 
     void Update()
     {

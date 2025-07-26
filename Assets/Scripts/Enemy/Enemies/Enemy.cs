@@ -65,12 +65,15 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    void OnEnable() // If object inable
+    void OnEnable() // If object Enable
     {
-        isDead = false;
-        isHit = false;
-        currentHealth = maxHealth;
-        ChangeState(new EnemyIdleState(this));
+        if (isDead)
+        {
+            isDead = false;
+            isHit = false;
+            currentHealth = maxHealth;
+            ChangeState(new EnemyIdleState(this));
+        }
     }
 
     public void ChangeState(EnemyBaseState newstate)

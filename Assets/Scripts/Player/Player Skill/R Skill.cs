@@ -97,6 +97,8 @@ public class RSkill : Skill
     {
         Vector3 spawnPos = transform.position + transform.forward * forwardOffset + Vector3.up * heightOffset;
 
+        Debug.Log("Spawn Pos = " + spawnPos);
+
         ShowAttackRange(spawnPos);
 
         yield return new WaitForSeconds(0.8f);

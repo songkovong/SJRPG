@@ -197,35 +197,50 @@ public class Player : MonoBehaviour
     // https://www.youtube.com/watch?v=XI56ogm7eFI
     public void PlayerMouseRotation()
     {
-        if(!DontRotate)
+        if (!DontRotate)
         {
             Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
 
             Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
 
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+            // Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
 
-            if (groundPlane.Raycast(ray, out float distance))
+            // if (groundPlane.Raycast(ray, out float distance))
+            // {
+            //     Vector3 direction = ray.GetPoint(distance) - transform.position;
+            //     direction.y = 0f;
+
+            //     // If vector is zero, dont rotate
+            //     if (direction.sqrMagnitude < 0.001f)
+            //         return;
+
+            //     Quaternion targetRotation = Quaternion.LookRotation(direction);
+            //     this.transform.rotation = Quaternion.Slerp(
+            //         this.transform.rotation,
+            //         targetRotation,
+            //         Time.deltaTime * (SprintPressed ? playerStat.data.rotationSpeed : playerStat.data.rotationSpeed / 2f)
+            //     );
+            // }
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100f))
             {
-                Vector3 direction = ray.GetPoint(distance) - transform.position;
-                direction.y = 0f;
+                if (hit.collider.CompareTag("Camera Target") || hit.collider.CompareTag("NPC") || hit.collider.CompareTag("Enemy"))
+                {
+                    Vector3 direction = hit.point - transform.position;
+                    direction.y = 0f;
 
-                // If vector is zero, dont rotate
-                if (direction.sqrMagnitude < 0.001f)
-                    return;
+                    // If vector is zero, dont rotate
+                    if (direction.sqrMagnitude < 0.001f)
+                        return;
 
-                // transform.rotation = Quaternion.LookRotation(direction);
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                // this.transform.rotation = Quaternion.Slerp(
-                //     this.transform.rotation,
-                //     targetRotation,
-                //     Time.deltaTime * (SprintPressed ? rotationSpeed : rotationSpeed / 2f)
-                // );
-                this.transform.rotation = Quaternion.Slerp(
-                    this.transform.rotation,
-                    targetRotation,
-                    Time.deltaTime * (SprintPressed ? playerStat.data.rotationSpeed : playerStat.data.rotationSpeed / 2f)
-                );
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    this.transform.rotation = Quaternion.Slerp(
+                        this.transform.rotation,
+                        targetRotation,
+                        Time.deltaTime * (SprintPressed ? playerStat.data.rotationSpeed : playerStat.data.rotationSpeed / 2f)
+                    );
+                }
             }
         }
     }

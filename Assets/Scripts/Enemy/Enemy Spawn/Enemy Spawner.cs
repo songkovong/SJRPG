@@ -12,10 +12,52 @@ public class EnemySpawner : MonoBehaviour
     public bool isSpawn = false;
     List<GameObject> enemyPool = new List<GameObject>();
 
+    Player player;
+    float playerDistance = 30f;
+
     void Start()
     {
+        if (player == null)
+        {
+            player = Player.instance;
+        }
+
         InitializePool();
         SpawnEnemies();
+    }
+
+    void Update()
+    {
+        if (player != null)
+        {
+            var dist = Vector3.Distance(player.transform.position, transform.position);
+
+            if (dist < playerDistance)
+            {
+                foreach (GameObject enemy in enemyPool)
+                {
+                    if (!enemy.activeInHierarchy)
+                    {
+                        var e = enemy.GetComponent<Enemy>();
+
+                        if (e != null && e.isDead == false)
+                        {
+                            enemy.SetActive(true);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (GameObject enemy in enemyPool)
+                {
+                    if (enemy.activeInHierarchy)
+                    {
+                        enemy.SetActive(false);
+                    }
+                }
+            }
+        }
     }
 
     void InitializePool()
@@ -33,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach(GameObject enemy in enemyPool)
         {
-            if(!enemy.activeInHierarchy) // if enemy setactive false?
+            if(!enemy.activeInHierarchy)
             {
                 Vector3 randomPos = GetRandomPosition();
                 float randomY = Random.Range(0f, 360f);

@@ -31,7 +31,7 @@ public class TurtleShell : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 15;
+        playerstat.data.expCount += 18;
     }
 
     public override void EnemyDie() // In DeadState

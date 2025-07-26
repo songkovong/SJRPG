@@ -30,7 +30,7 @@ public class Slime : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 5;
+        playerstat.data.expCount += 7;
     }
 
     public override void EnemyDie() // In DeadState

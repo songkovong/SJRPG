@@ -30,7 +30,7 @@ public class Cactus : Enemy, IDamageable
     public override void ExpUp()
     {
         base.ExpUp();
-        playerstat.data.expCount += 20;
+        playerstat.data.expCount += 22;
     }
 
     public override void EnemyDie() // In DeadState
