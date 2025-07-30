@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4202488714802023618}
   - component: {fileID: 2790275796766312682}
   - component: {fileID: 2343089244956852569}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3604274183285564942}
   - component: {fileID: 3937710677705785535}
   - component: {fileID: 3573402109646877120}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Portal01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 7223862111373848523}
   - component: {fileID: 126333452046599437}
   - component: {fileID: 5585739930605718966}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

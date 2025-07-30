@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2994551233274764343}
   - component: {fileID: 3315899497888850638}
   - component: {fileID: 3315899497888850639}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Waterfall01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2438700325860341499}
   - component: {fileID: 4409922556806853331}
   - component: {fileID: 4255461293129284448}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 9208291616002102770}
   - component: {fileID: 1894590081229438772}
   - component: {fileID: 6201092618444355471}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 342332310515835088}
   - component: {fileID: 5080706592593746896}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MeshCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 7661895120067650135}
   - component: {fileID: 3392114048547854983}
   - component: {fileID: 827619509377068141}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

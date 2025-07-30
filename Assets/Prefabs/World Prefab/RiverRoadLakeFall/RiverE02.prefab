@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3909364508262383612}
   - component: {fileID: 3074808986449689556}
   - component: {fileID: 3212953536192213607}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4473784390307779888}
   - component: {fileID: 4127172368228669698}
   - component: {fileID: 1747499700267265895}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RiverE02
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1394125923117705687}
   - component: {fileID: 5844142835984388823}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MeshCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 7517272109806263541}
   - component: {fileID: 995916656395941427}
   - component: {fileID: 4726087632849436296}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

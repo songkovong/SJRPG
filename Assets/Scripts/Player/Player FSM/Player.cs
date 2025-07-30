@@ -223,7 +223,9 @@ public class Player : MonoBehaviour
             // }
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100f))
+            int layerMask = ~(1 << LayerMask.NameToLayer("IgnoreWall"));
+
+            if (Physics.Raycast(ray, out hit, 100f, layerMask))
             {
                 if (hit.collider.CompareTag("Camera Target") || hit.collider.CompareTag("NPC") || hit.collider.CompareTag("Enemy"))
                 {

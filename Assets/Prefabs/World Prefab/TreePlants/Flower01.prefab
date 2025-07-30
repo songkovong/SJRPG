@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3063450851153204193}
   - component: {fileID: 3245170275576689676}
   - component: {fileID: 6198871936877929949}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Flower01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2510010416807999789}
   - component: {fileID: 4485137836036750597}
   - component: {fileID: 4036130531626398902}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8991212654321556004}
   - component: {fileID: 1821626396728799458}
   - component: {fileID: 6126000278358079577}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

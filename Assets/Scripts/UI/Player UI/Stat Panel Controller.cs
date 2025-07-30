@@ -12,7 +12,7 @@ public class StatPanelController : MonoBehaviour
     public TMP_Text curHealth;
     public TMP_Text curMagic;
     public TMP_Text curAttack;
-    public TMP_Text curAttackRange;
+    public TMP_Text curSkillDamage;
     public TMP_Text curSpeed;
     public TMP_Text curSprintSpeed;
     public TMP_Text curDepend;
@@ -62,13 +62,17 @@ public class StatPanelController : MonoBehaviour
         var damage = player.playerStat.data.attackDamage;
         var weaponDamage = player.playerStat.weaponDamage;
         var mastery = player.playerStat.attackMastery.masteryStat;
+        var minDamage = (damage + weaponDamage) * (0.1f + mastery);
+        var maxDamage = damage + weaponDamage;
+        var skillDamage = player.playerStat.data.magic;
 
         curLevel.text = player.playerStat.data.level.ToString();
         curExp.text = Mathf.FloorToInt(player.playerStat.data.expCount).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.exp).ToString();
         curHealth.text = Mathf.FloorToInt(player.playerStat.data.currentHealth).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxHealth).ToString();
         curMagic.text = Mathf.FloorToInt(player.playerStat.data.currentMagic).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxMagic).ToString();
-        curAttack.text = player.playerStat.data.attackDamage.ToString();
-        curAttackRange.text = Mathf.FloorToInt((damage * (0.1f + mastery) + weaponDamage) * 2).ToString() + " ~ " + Mathf.FloorToInt((damage + weaponDamage) * 2).ToString();
+        curAttack.text = Mathf.FloorToInt(minDamage).ToString() + " ~ " + Mathf.FloorToInt(maxDamage).ToString();
+        // curSkillDamage.text = Mathf.FloorToInt(minDamage + (skillDamage * 0.5f)).ToString() + " ~ " + Mathf.FloorToInt(maxDamage + (skillDamage * 0.5f)).ToString();
+        curSkillDamage.text = Mathf.FloorToInt(minDamage + skillDamage).ToString() + " ~ " + Mathf.FloorToInt(maxDamage + skillDamage).ToString();
         curSpeed.text = player.playerStat.data.moveSpeed.ToString();
         curSprintSpeed.text = player.playerStat.data.sprintSpeed.ToString();
         curDepend.text = player.playerStat.data.dependRate.ToString();

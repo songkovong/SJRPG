@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2587156182966324022}
   - component: {fileID: 8886892461033762160}
   - component: {fileID: 5908432479913078772}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Grass01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3148479767388217850}
   - component: {fileID: 3988664930463213010}
   - component: {fileID: 3560038140330650721}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8476839666189222643}
   - component: {fileID: 1162855628059551797}
   - component: {fileID: 6658308501225939086}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2162545340288926027}
   - component: {fileID: 209936018552751459}
   - component: {fileID: 348054799028374736}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1608962618542599047}
   - component: {fileID: 9087784489275313076}
   - component: {fileID: 4917548608252845671}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Stair02
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4616342376721588802}
   - component: {fileID: 2706673431050012804}
   - component: {fileID: 7625810644465205311}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

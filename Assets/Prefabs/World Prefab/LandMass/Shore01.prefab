@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1593744134413738485}
   - component: {fileID: 8331270166603893555}
   - component: {fileID: 4601206946752136072}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4637223053558310960}
   - component: {fileID: 2280475644813310857}
   - component: {fileID: 1915478702158912234}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shore01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5191648379286602492}
   - component: {fileID: 6117929554886575828}
   - component: {fileID: 5970118103176154983}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

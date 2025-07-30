@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3139312668466556747}
   - component: {fileID: 2513208493066507413}
   - component: {fileID: 5172276798656829830}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rock01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2578272581581866375}
   - component: {fileID: 4552274412256985519}
   - component: {fileID: 4112264995645736988}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 9067347118340613774}
   - component: {fileID: 1753364676515810376}
   - component: {fileID: 6057738042783155443}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

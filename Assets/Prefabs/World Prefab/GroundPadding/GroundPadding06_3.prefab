@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 262397163519151147}
   - component: {fileID: 5905556481838303393}
   - component: {fileID: 857008841970855929}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: GroundPadding06_3
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 861016190894810855}
   - component: {fileID: 1664574414086841039}
   - component: {fileID: 1235287915870350204}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6188118238747854318}
   - component: {fileID: 3485820245602823976}
   - component: {fileID: 8945349865236457363}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

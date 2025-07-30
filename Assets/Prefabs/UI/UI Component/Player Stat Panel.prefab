@@ -3047,7 +3047,7 @@ GameObject:
   - component: {fileID: 4499408203031032800}
   - component: {fileID: 1815428366167541213}
   m_Layer: 5
-  m_Name: Current Attack Range Text
+  m_Name: Current Skill Damage Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8181,7 +8181,7 @@ GameObject:
   - component: {fileID: 8553970843317833268}
   - component: {fileID: 3936698607193345843}
   m_Layer: 5
-  m_Name: Attack Range Panel
+  m_Name: Skill Damage Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9878,7 +9878,7 @@ GameObject:
   - component: {fileID: 3544488452714069128}
   - component: {fileID: 264056762598786357}
   m_Layer: 5
-  m_Name: Attack Range Text
+  m_Name: Skill Damage Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9931,7 +9931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Attack Range
+  m_text: 'Skill
 
 '
   m_isRightToLeft: 0
@@ -9960,10 +9960,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 23.3
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -10238,7 +10238,7 @@ MonoBehaviour:
   curHealth: {fileID: 1407997435812137563}
   curMagic: {fileID: 9089126459664455099}
   curAttack: {fileID: 8157632287800523919}
-  curAttackRange: {fileID: 1815428366167541213}
+  curSkillDamage: {fileID: 1815428366167541213}
   curSpeed: {fileID: 4050311124130271624}
   curSprintSpeed: {fileID: 8494449014010300630}
   curDepend: {fileID: 875793827699784408}

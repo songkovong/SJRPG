@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1218975844088011989}
   - component: {fileID: 865144297724926205}
   - component: {fileID: 737678203803930958}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1782411084060292633}
   - component: {fileID: 7513681493966189934}
   - component: {fileID: 4388934914784648270}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ramp02
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5690510863277916124}
   - component: {fileID: 3132326868788024602}
   - component: {fileID: 7438849226068532641}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

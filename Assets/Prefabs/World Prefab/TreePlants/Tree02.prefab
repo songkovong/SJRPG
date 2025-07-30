@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2108801109521803317}
   - component: {fileID: 119564581550140445}
   - component: {fileID: 546511252953949614}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1519188697402770169}
   - component: {fileID: 1528461591941738450}
   - component: {fileID: 4993149912950423741}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree02
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 4850827627678960444}
   - component: {fileID: 2797045212719833594}
   - component: {fileID: 7680117893913897281}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

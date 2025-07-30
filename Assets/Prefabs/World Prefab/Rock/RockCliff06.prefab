@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2909486181879403931}
   - component: {fileID: 5611504444123365213}
   - component: {fileID: 118301722475706342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8535164812716406418}
   - component: {fileID: 7681398345077846714}
   - component: {fileID: 7828541844013333257}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 9089449667797441630}
   - component: {fileID: 2548612611351249364}
   - component: {fileID: 3777759281558022769}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RockCliff06
   m_TagString: Camera Target
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3678523051578626543}
   - component: {fileID: 6236428793939360553}
   - component: {fileID: 1929904279510938514}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7298110878197585962}
   - component: {fileID: 183830392949556128}
   - component: {fileID: 1136205352608667511}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Gate01
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 7862951044402492134}
   - component: {fileID: 8211716222091867854}
   - component: {fileID: 8631357772631932797}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

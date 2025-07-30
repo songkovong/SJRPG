@@ -17,7 +17,7 @@ public class PlayerStat : MonoBehaviour
     // Weapon
     public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
     // int weaponCode;
-    public float weaponDamage { get; private set; } = 1f;
+    public float weaponDamage { get; private set; } = 10f;
 
     public PlayerStatData data;
 
@@ -26,7 +26,7 @@ public class PlayerStat : MonoBehaviour
 
     void Awake()
     {
-        // DeleteAllData();
+        DeleteAllData();
     }
 
     void Start()
@@ -131,7 +131,7 @@ public class PlayerStat : MonoBehaviour
         if (data.statPoint >= 1)
         {
             data.maxHealth *= 1.05f;
-            data.attackDamage += 0.35f;
+            data.attackDamage += 1.1f;
             data.statPoint -= 1;
             data.strength++;
             SaveAllData();
@@ -260,17 +260,18 @@ public class PlayerStat : MonoBehaviour
 
     public float RandomAtkDmg()
     {
-        return Random.Range(data.attackDamage * (0.1f + attackMastery.masteryStat), data.attackDamage);
+        return Random.Range((data.attackDamage + weaponDamage) * (0.1f + attackMastery.masteryStat), data.attackDamage + weaponDamage);
     }
 
     public int AtkDmg()
     {
-        return Mathf.FloorToInt((RandomAtkDmg() + weaponDamage) * 2f);
+        return Mathf.FloorToInt(RandomAtkDmg());
     }
 
     public int SkillDmg(float skilldmg)
     {
-        return (int)(AtkDmg() * skilldmg);
+        // return (int)((AtkDmg() + (data.magic * 0.5f)) * skilldmg);
+        return (int)((AtkDmg() + data.magic) * skilldmg);
     }
 
 #endregion
