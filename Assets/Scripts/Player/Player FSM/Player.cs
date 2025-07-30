@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
     public void PlayerMove(float multipleSpeed)
     {
         // Little Gravity on Player
-        currentMovement.y = -0.5f;
+        currentMovement.y = -1f;
 
         // Speed Calculate
         // finalSpeed = SprintPressed ? sprintSpeed : moveSpeed;

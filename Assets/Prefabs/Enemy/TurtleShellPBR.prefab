@@ -518,8 +518,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4544219117696442}
   - component: {fileID: 95706204029656638}
-  - component: {fileID: 564695085580484811}
-  - component: {fileID: 6759080360679966758}
   - component: {fileID: 7840409273457709485}
   - component: {fileID: 7876798230306444252}
   - component: {fileID: 9031237627736407483}
@@ -575,47 +573,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!135 &564695085580484811
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524411113276028}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.7
-  m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &6759080360679966758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524411113276028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ca5a624289b6e4888b9b683d580940, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
-  spawner: {fileID: 0}
-  hitbox: {fileID: 0}
-  damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
-  damagePos: {fileID: 4515107650340609799, guid: e3bd0125eecb7da4fb01d825887d215c, type: 3}
-  dropItems:
-  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
-  dropCoin: {fileID: 4136489873265671971, guid: 1d458be3d78e0714683227df836f4ed4, type: 3}
 --- !u!135 &7840409273457709485
 SphereCollider:
   m_ObjectHideFlags: 0
