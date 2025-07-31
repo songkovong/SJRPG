@@ -45,7 +45,7 @@ public class ItemEffectDataBase : MonoBehaviour
                                 //
                                 break;
                             default:
-                                Debug.Log("잘못된 Status 부위. HP, SP, DP, HUNGRY, THIRSTY, SATISFY 만 가능합니다.");
+                                // Debug.Log("잘못된 Status 부위. HP, SP, DP, HUNGRY, THIRSTY, SATISFY 만 가능합니다.");
                                 break;
                         }
                         Debug.Log(_item.itemName + " 을 사용했습니다.");

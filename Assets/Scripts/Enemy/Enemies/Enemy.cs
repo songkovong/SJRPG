@@ -85,8 +85,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float getDamage)
     {
-        if(isGodmode) return;
-        if(isDead) return;
+        // GodMode
+        // if(isGodmode) return; 
+        if (isDead) return;
 
         getDamage = (int)(getDamage * (1 - Random.Range(dependRate / 2, dependRate)));
 

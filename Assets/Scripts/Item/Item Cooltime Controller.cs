@@ -21,10 +21,10 @@ public class ItemCooltimeController : MonoBehaviour
         {
             lastUseTime[item] = Time.time;
         }
-        else
-        {
-            float remainTime = item.cooltime - (Time.time - lastUseTime[item]);
-        }
+        // else
+        // {
+        //     float remainTime = item.cooltime - (Time.time - lastUseTime[item]);
+        // }
     }
 
     public float GetCoolTime(Item item)

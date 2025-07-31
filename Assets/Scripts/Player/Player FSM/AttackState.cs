@@ -39,11 +39,13 @@ public class AttackState : BaseState
         canCombo = false;
         comboTrigger = false;
 
-        player.PlayerAnimator.PlayAttack(comboCount);
-
         var clip = player.PlayerAnimator.GetClipByName("Attack" + comboCount);
-        animationDuration = clip != null ? clip.length : 0.5f;
+        var attackSpeed = player.playerStat.data.attackSpeed;
+        animationDuration = clip != null ? clip.length / attackSpeed : 0.5f;
+        // animationDuration = clip != null ? clip.length: 0.5f;
         Debug.Log("clip length" + animationDuration);
+
+        player.PlayerAnimator.PlayAttack(comboCount, attackSpeed);
 
         player.AttackTrail.StartTrail();
         // player.AttackHitbox.HitboxOn();

@@ -16,9 +16,10 @@ public class PlayerAnimator
         animator.SetFloat("moveY", moveY, 0.1f, Time.deltaTime);
     }
 
-    public void PlayAttack(int comboStep)
+    public void PlayAttack(int comboStep, float attackSpeed)
     {
         animator.SetInteger("ComboStep", comboStep);
+        animator.SetFloat("Attack Speed", attackSpeed);
         animator.SetTrigger("Attack");
     }
 

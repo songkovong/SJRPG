@@ -85,7 +85,29 @@ public class ShopInputNumber : MonoBehaviour
             int totalPrice = currentPrice * num;
             if (Player.instance.inventory.SpendCoin(totalPrice))
             {
-                Player.instance.inventory.AcquireItem(currentItem, num);
+                if (currentItem.itemType == Item.ItemType.Equipment)
+                {
+                    for (int i = 0; i < num; i++)
+                    {
+                        if (Player.instance.inventory.IsFull())
+                        {
+                            Player.instance.inventory.AcquireCoin(currentPrice);
+                            continue;
+                        }
+                        Player.instance.inventory.AcquireItem(currentItem);
+                    }
+                }
+                else
+                {
+                    if (Player.instance.inventory.CanStack(currentItem))
+                    {
+                        Player.instance.inventory.AcquireItem(currentItem, num);
+                    }
+                    else
+                    {
+                        Player.instance.inventory.AcquireCoin(totalPrice);
+                    }
+                }
             }
         }
         else

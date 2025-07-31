@@ -53,7 +53,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
         else
         {
-            textCount.text = "0";
+            textCount.text = " ";
         }
 
         SetColor(1);
@@ -110,6 +110,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 SetSlotCount(-1);
             }
+
+            // else if (item.itemType == Item.ItemType.Equipment)
+            // {
+            //     SetSlotCount(-1);
+            // }
         }
     }
 

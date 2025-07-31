@@ -26,7 +26,7 @@ public class PlayerStat : MonoBehaviour
 
     void Awake()
     {
-        DeleteAllData();
+        // DeleteAllData();
     }
 
     void Start()
@@ -155,15 +155,19 @@ public class PlayerStat : MonoBehaviour
 
             float baseMove = 6f;
             float baseSprint = 10f;
+            float baseAttackSpeed = 1f;
 
             float maxMove = 8f;
             float maxSprint = 12f;
+            float maxAttackSpeed = 1.5f;
 
             float moveDelta = maxMove - baseMove;
             float sprintDelta = maxSprint - baseSprint;
+            float attackSpeedDelta = maxAttackSpeed - baseAttackSpeed;
 
             data.moveSpeed = baseMove + moveDelta * (1f - 1f / (1f + a * data.agility));
             data.sprintSpeed = baseSprint + sprintDelta * (1f - 1f / (1f + a * data.agility));
+            data.attackSpeed = baseAttackSpeed + attackSpeedDelta * (1f - 1f / (1f + a * data.agility));
 
             SaveAllData();
         }

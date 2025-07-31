@@ -103,8 +103,10 @@ public class PlayerEnteraction : MonoBehaviour
                 ItemPickUp itemPickUp = pickupItem.GetComponent<ItemPickUp>();
                 if (itemPickUp != null)
                 {
-                    inventory.AcquireItem(itemPickUp.item);
-                    Destroy(pickupItem.gameObject);
+                    if (inventory.AcquireItem(itemPickUp.item))
+                    {
+                        Destroy(pickupItem.gameObject);
+                    }
                     // StartCoroutine(MoveToPlayer(pickupItem.gameObject, 0.3f, 1f));
                     // StartCoroutine(MoveToPlayerUp(pickupItem.gameObject, 1f, 0.1f, 0.2f));
                 }

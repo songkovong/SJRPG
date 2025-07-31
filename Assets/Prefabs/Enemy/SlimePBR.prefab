@@ -522,6 +522,7 @@ MonoBehaviour:
   damagePos: {fileID: 6629933267053534}
   dropItems:
   - {fileID: 3139048546252957491, guid: a71b6b62b921ac8408b4799929331397, type: 3}
+  - {fileID: 5610884078883986163, guid: a7df2afa06133a84991f8a6dbd8a71c5, type: 3}
   dropCoin: {fileID: 100719015017695889, guid: 84c54630b9800e5419439dbfa74de6db, type: 3}
 --- !u!114 &4024826285207151231
 MonoBehaviour:

@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 5732695094068825648}
   - component: {fileID: 8132162784909257461}
   m_Layer: 5
-  m_Name: Sprint Speed Panel
+  m_Name: Speed Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2026,7 +2026,7 @@ GameObject:
   - component: {fileID: 5573281734749124664}
   - component: {fileID: 1288341850225750105}
   m_Layer: 5
-  m_Name: Speed Text
+  m_Name: Attack Speed Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2682,7 +2682,7 @@ GameObject:
   - component: {fileID: 4456204773264964190}
   - component: {fileID: 4050311124130271624}
   m_Layer: 5
-  m_Name: Current Speed Text
+  m_Name: Current Attack Speed Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4685,7 +4685,7 @@ GameObject:
   - component: {fileID: 1105755394451238012}
   - component: {fileID: 3307560744827101805}
   m_Layer: 5
-  m_Name: Speed Panel
+  m_Name: Attack Speed Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7268,7 +7268,7 @@ GameObject:
   - component: {fileID: 4470647357765513627}
   - component: {fileID: 8494449014010300630}
   m_Layer: 5
-  m_Name: Current Sprint Speed Text
+  m_Name: Current Speed Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8858,7 +8858,7 @@ GameObject:
   - component: {fileID: 7424112095449151920}
   - component: {fileID: 7664771685154766659}
   m_Layer: 5
-  m_Name: Sprint Speed Text
+  m_Name: Speed Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10239,8 +10239,8 @@ MonoBehaviour:
   curMagic: {fileID: 9089126459664455099}
   curAttack: {fileID: 8157632287800523919}
   curSkillDamage: {fileID: 1815428366167541213}
-  curSpeed: {fileID: 4050311124130271624}
-  curSprintSpeed: {fileID: 8494449014010300630}
+  curAttackSpeed: {fileID: 4050311124130271624}
+  curSpeed: {fileID: 8494449014010300630}
   curDepend: {fileID: 875793827699784408}
   curStatPoint: {fileID: 5325595569747086962}
   curStrengthPoint: {fileID: 6416551216982628605}

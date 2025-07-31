@@ -47,7 +47,7 @@ public class Inventory : MonoBehaviour
 
     public bool AcquireItem(Item _item, int _count = 1)
     {
-        if (IsFull() && CanStack(_item))
+        if (IsFull() && !CanStack(_item))
         {
             return false;
         }
@@ -210,7 +210,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private bool IsFull()
+    public bool IsFull()
     {
         foreach (var slot in slots)
         {
@@ -222,7 +222,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    private bool CanStack(Item _item)
+    public bool CanStack(Item _item)
     {
         if (_item.itemType == Item.ItemType.Equipment) return false;
 

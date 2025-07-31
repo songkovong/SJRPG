@@ -36,7 +36,7 @@ public class StatTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 _desc = "Player Max Health and Attack Damage is Up.";
                 break;
             case 2:
-                _desc = "Player Speed and Sprint Speed is Up.";
+                _desc = "Player Speed and Sprint Speed and Attack Speed is Up.";
                 break;
             case 3:
                 _desc = "Player Skill Damage Up and Max Mana and Mana Recovery Rate Up.";
