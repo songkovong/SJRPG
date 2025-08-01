@@ -25,7 +25,7 @@ public class PlayerStatData : ScriptableObject
     public float moveSpeed = 6f;
     public float sprintSpeed = 10f;
     public float rotationSpeed = 30f;
-    public float attackSpeed = 1f;
+    public float attackSpeed = 0.8f;
 
     // Depend
     public float dependRate = 0;
@@ -108,7 +108,7 @@ public class PlayerStatData : ScriptableObject
         moveSpeed = PlayerPrefs.HasKey("Speed") ? PlayerPrefs.GetFloat("Speed") : 6f;
         sprintSpeed = PlayerPrefs.HasKey("SprintSpeed") ? PlayerPrefs.GetFloat("SprintSpeed") : 10f;
         rotationSpeed = PlayerPrefs.HasKey("RotationSpeed") ? PlayerPrefs.GetFloat("RotationSpeed") : 30f;
-        attackSpeed = PlayerPrefs.HasKey("AttackSpeed") ? PlayerPrefs.GetFloat ("AttackSpeed") : 1f;
+        attackSpeed = PlayerPrefs.HasKey("AttackSpeed") ? PlayerPrefs.GetFloat ("AttackSpeed") : 0.8f;
 
         // Depend
         dependRate = PlayerPrefs.HasKey("DependRate") ? PlayerPrefs.GetFloat("DependRate") : 0;

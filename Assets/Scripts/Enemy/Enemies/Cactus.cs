@@ -17,7 +17,7 @@ public class Cactus : Enemy, IDamageable
         attackDamage = 5f;
         maxHealth = 30f;
         currentHealth = maxHealth;
-        godmodeDuration = 1f;
+        godmodeDuration = 0.8f;
         dependRate = 0.35f;
     }
 

@@ -99,12 +99,16 @@ public class ShopInputNumber : MonoBehaviour
                 }
                 else
                 {
-                    if (Player.instance.inventory.CanStack(currentItem))
+                    if (!Player.instance.inventory.IsFull())
                     {
                         Player.instance.inventory.AcquireItem(currentItem, num);
                     }
                     else
                     {
+                        if (Player.instance.inventory.CanStack(currentItem))
+                        {
+                            Player.instance.inventory.AcquireItem(currentItem, num);
+                        }
                         Player.instance.inventory.AcquireCoin(totalPrice);
                     }
                 }

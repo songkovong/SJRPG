@@ -22,7 +22,7 @@ public class ItemEffectDataBase : MonoBehaviour
     {
         if (_item.itemType == Item.ItemType.Equipment)
         {
-            // Equip
+            WeaponManager.Instance.EquipWeapon(_item);
         }
 
         if (_item.itemType == Item.ItemType.Consumable)

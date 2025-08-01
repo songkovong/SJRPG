@@ -32,7 +32,7 @@ public class MoveState : BaseState
 
         if (!player.SprintPressed)
         {
-            if (player.AttackPressed)
+            if (player.AttackPressed && WeaponManager.Instance.currentWeaponItem != null)
             {
                 player.ChangeState(new AttackState(player));
                 return;

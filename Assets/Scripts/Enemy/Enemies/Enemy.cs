@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float attackDamage { get; protected set; } = 1f;
     public float maxHealth { get; protected set; } = 100f;
     public float currentHealth { get; protected set;} = 100f;
-    public float godmodeDuration { get; protected set; } = 1f;
+    public float godmodeDuration { get; protected set; } = 0.5f;
     public float dependRate { get; protected set; } = 0.1f;
 
     public bool isGodmode { get; protected set; } = false;
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float getDamage)
     {
         // GodMode
-        // if(isGodmode) return; 
+        if(isGodmode) return; 
         if (isDead) return;
 
         getDamage = (int)(getDamage * (1 - Random.Range(dependRate / 2, dependRate)));
@@ -98,6 +98,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 GameObject missText = Instantiate(damageText, damagePos.position, Quaternion.identity);
                 missText.GetComponent<DamageText>().MissText();
             }
+            StartCoroutine(GodmodeCoroutine());
             return;
         }
 

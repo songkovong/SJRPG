@@ -111,10 +111,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
                 SetSlotCount(-1);
             }
 
-            // else if (item.itemType == Item.ItemType.Equipment)
-            // {
-            //     SetSlotCount(-1);
-            // }
+            else if (item.itemType == Item.ItemType.Equipment)
+            {
+                // WeaponManager.Instance.EquipWeapon(item);
+                SetSlotCount(-1);
+                var newWeapon = WeaponManager.Instance.swapWeaponItem;
+                if (newWeapon != null)
+                {
+                    AddItem(newWeapon);
+                }
+            }
         }
     }
 

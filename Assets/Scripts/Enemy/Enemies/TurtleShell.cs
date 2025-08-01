@@ -18,7 +18,7 @@ public class TurtleShell : Enemy, IDamageable
         attackDamage = 3f;
         maxHealth = 10f;
         currentHealth = maxHealth;
-        godmodeDuration = 1f;
+        godmodeDuration = 1.2f;
         dependRate = 0.7f;
     }
 

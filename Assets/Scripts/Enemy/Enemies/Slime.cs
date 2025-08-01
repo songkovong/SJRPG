@@ -17,7 +17,7 @@ public class Slime : Enemy, IDamageable
         attackDamage = 2f;
         maxHealth = 5f;
         currentHealth = maxHealth;
-        godmodeDuration = 1f;
+        godmodeDuration = 0.3f;
         dependRate = 0.1f;
     }
 

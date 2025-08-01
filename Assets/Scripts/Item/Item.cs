@@ -22,4 +22,6 @@ public class Item : ScriptableObject
     public GameObject itemPrefab;
     public int buyPrice;
     public int sellPrice;
+
+    public WeaponData weaponData;
 }

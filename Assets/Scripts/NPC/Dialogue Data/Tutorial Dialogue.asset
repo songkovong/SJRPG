@@ -16,7 +16,7 @@ MonoBehaviour:
   lines:
   - Hi! I'm tutorial NPC. I can teach you how to play this game!
   - First, use W, A, S, D to move, sprint to Shift button.
-  - You can attack by clicking the left mouse button.
+  - You can attack by clicking the left mouse click.
   - When you defeat enemies, you gain experience, level up, and earn both a stat
     point and a skill point.
   - Spending stat points increases your abilities, and using skill points unlocks
@@ -26,6 +26,8 @@ MonoBehaviour:
   - Press P to return main or quit this game.
   - When you defeat enemies, they sometimes drop items or coins. Press Z to pick
     them up.
+  - Press Z to pick up the left sword. Then open your inventory by pressing I and
+    right mouse click the weapon to equip it.
   - If you ever forget any of this, just ask me again anytime!
   tirggerQuest: 0
   questID: 

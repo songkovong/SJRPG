@@ -17,7 +17,7 @@ public class Mushroom : Enemy, IDamageable
         attackDamage = 4f;
         maxHealth = 9f;
         currentHealth = maxHealth;
-        godmodeDuration = 1f;
+        godmodeDuration = 0.8f;
         dependRate = 0.2f;
     }
 

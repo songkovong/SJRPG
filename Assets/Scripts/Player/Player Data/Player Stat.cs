@@ -15,9 +15,7 @@ public class PlayerStat : MonoBehaviour
     public ComboAttackSkill comboAttackSkill { get; set; }
 
     // Weapon
-    public List<WeaponDamageData> weapons = new List<WeaponDamageData>();
-    // int weaponCode;
-    public float weaponDamage { get; private set; } = 10f;
+    public float weaponDamage { get; set; } = 1f;
 
     public PlayerStatData data;
 
@@ -26,7 +24,7 @@ public class PlayerStat : MonoBehaviour
 
     void Awake()
     {
-        // DeleteAllData();
+        DeleteAllData();
     }
 
     void Start()
@@ -155,11 +153,11 @@ public class PlayerStat : MonoBehaviour
 
             float baseMove = 6f;
             float baseSprint = 10f;
-            float baseAttackSpeed = 1f;
+            float baseAttackSpeed = 0.8f;
 
             float maxMove = 8f;
             float maxSprint = 12f;
-            float maxAttackSpeed = 1.5f;
+            float maxAttackSpeed = 1.4f;
 
             float moveDelta = maxMove - baseMove;
             float sprintDelta = maxSprint - baseSprint;
@@ -264,7 +262,9 @@ public class PlayerStat : MonoBehaviour
 
     public float RandomAtkDmg()
     {
-        return Random.Range((data.attackDamage + weaponDamage) * (0.1f + attackMastery.masteryStat), data.attackDamage + weaponDamage);
+        var minDamage = (data.attackDamage + weaponDamage) * (0.1f + attackMastery.masteryStat) + 1;
+        var maxDamage = data.attackDamage + weaponDamage;
+        return Random.Range(minDamage, maxDamage);
     }
 
     public int AtkDmg()

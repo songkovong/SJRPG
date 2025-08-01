@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: cf7769b71ca91d045b5c503f690e872a, type: 2}
+  isDestroy: 1
 --- !u!1 &1607007609283235587
 GameObject:
   m_ObjectHideFlags: 0

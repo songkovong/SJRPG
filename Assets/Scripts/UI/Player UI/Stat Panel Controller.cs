@@ -62,7 +62,7 @@ public class StatPanelController : MonoBehaviour
         var damage = player.playerStat.data.attackDamage;
         var weaponDamage = player.playerStat.weaponDamage;
         var mastery = player.playerStat.attackMastery.masteryStat;
-        var minDamage = (damage + weaponDamage) * (0.1f + mastery);
+        var minDamage = (damage + weaponDamage) * (0.1f + mastery) + 1;
         var maxDamage = damage + weaponDamage;
         var skillDamage = player.playerStat.data.magic;
 

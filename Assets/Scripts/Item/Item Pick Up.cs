@@ -4,10 +4,14 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public Item item;
+    public bool isDestroy = true;
 
     void Start()
     {
-        StartCoroutine(DestroyTime());
+        if (isDestroy)
+        {
+            StartCoroutine(DestroyTime());
+        }
     }
 
     IEnumerator DestroyTime()
