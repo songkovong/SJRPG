@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba8929bf2b3a6294cac7184a3756b736, type: 3}
-  m_Name: Sword
+  m_Name: Hero Sword
   m_EditorClassIdentifier: 
   itemCode: 101
-  itemName: Sword
-  itemDesc: Just Sword
+  itemName: Hero Sword
+  itemDesc: It is hero's sword.
   itemType: 0
   itemImage: {fileID: 21300000, guid: ffa9c656cac7ffb458e861b457ea3ef9, type: 3}
   itemDropRate: 1

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba8929bf2b3a6294cac7184a3756b736, type: 3}
-  m_Name: Sword 3 Green
+  m_Name: Ailen Sword
   m_EditorClassIdentifier: 
   itemCode: 103
-  itemName: Sword 3 Green
-  itemDesc: Strong Sword
+  itemName: Ailen Sword
+  itemDesc: It is a long and powerful alien sword.
   itemType: 0
   itemImage: {fileID: 21300000, guid: b787897229502e7438ede358f84bdfcb, type: 3}
   itemDropRate: 0

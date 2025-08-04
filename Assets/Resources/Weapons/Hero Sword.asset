@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f329c5fe7eb6d4d8d2858ed60b3650, type: 3}
-  m_Name: Sword
+  m_Name: Hero Sword
   m_EditorClassIdentifier: 
   weaponCode: 101
-  weaponName: Sword
+  weaponName: Hero Sword
   weaponPrefab: {fileID: 5610884078883986163, guid: ce029bff6fd4fbd47bec36b877b3151a, type: 3}
   weaponDamage: 5
   weaponSpeed: 1

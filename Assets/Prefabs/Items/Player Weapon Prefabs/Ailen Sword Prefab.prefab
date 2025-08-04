@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 6227592417385070143}
   - component: {fileID: 8180838231713499893}
   m_Layer: 7
-  m_Name: Sword 3 Green Prefab
+  m_Name: Ailen Sword Prefab
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

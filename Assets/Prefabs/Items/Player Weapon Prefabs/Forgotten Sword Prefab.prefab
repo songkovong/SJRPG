@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 708529145083992416}
   - component: {fileID: 3328657967434100138}
   m_Layer: 7
-  m_Name: Sword 2 Prefab
+  m_Name: Forgotten Sword Prefab
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

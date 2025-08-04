@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f329c5fe7eb6d4d8d2858ed60b3650, type: 3}
-  m_Name: Sword 2
+  m_Name: Forgotten Sword
   m_EditorClassIdentifier: 
   weaponCode: 102
-  weaponName: Sword 2
+  weaponName: Forgotten Sword
   weaponPrefab: {fileID: 3832907126045494399, guid: 8db3e4640de7c81428d29e7d33ce9afc, type: 3}
   weaponDamage: 8
   weaponSpeed: 1

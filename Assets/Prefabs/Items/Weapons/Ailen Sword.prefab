@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4805306590901889250}
   - component: {fileID: -1672774768247129912}
   m_Layer: 7
-  m_Name: Sword 3 Green
+  m_Name: Ailen Sword
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
