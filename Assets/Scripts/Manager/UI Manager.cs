@@ -153,7 +153,7 @@ public class UIManager : MonoBehaviour
 
     void TooltipClose(GameObject panel)
     {
-        if (panel == itemPanel)
+        if (panel == itemPanel || panel == shopPanel)
         {
             itemTooltipPanel.HideTooltip();
             inputNumber.Cancel();

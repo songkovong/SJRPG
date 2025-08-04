@@ -72,7 +72,7 @@ public class StatPanelController : MonoBehaviour
         curMagic.text = Mathf.FloorToInt(player.playerStat.data.currentMagic).ToString() + "/" + Mathf.FloorToInt(player.playerStat.data.maxMagic).ToString();
         curAttack.text = Mathf.FloorToInt(minDamage).ToString() + " ~ " + Mathf.FloorToInt(maxDamage).ToString();
         curSkillDamage.text = Mathf.FloorToInt(minDamage + skillDamage).ToString() + " ~ " + Mathf.FloorToInt(maxDamage + skillDamage).ToString();
-        curAttackSpeed.text = player.playerStat.data.attackSpeed.ToString("F2");
+        curAttackSpeed.text = (player.playerStat.data.attackSpeed * player.playerStat.weaponSpeed).ToString("F2");
         curSpeed.text = player.playerStat.data.moveSpeed.ToString("F2") + " ~ " + player.playerStat.data.sprintSpeed.ToString("F2");
         curDepend.text = player.playerStat.data.dependRate.ToString();
 

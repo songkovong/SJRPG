@@ -16,3 +16,4 @@ MonoBehaviour:
   weaponName: Sword 3 Green
   weaponPrefab: {fileID: 7676615874565401376, guid: e0c6cfdd712f0bd43beedc9b6d1e3166, type: 3}
   weaponDamage: 14
+  weaponSpeed: 0.7

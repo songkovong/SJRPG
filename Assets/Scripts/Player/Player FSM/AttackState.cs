@@ -41,26 +41,12 @@ public class AttackState : BaseState
 
         var clip = player.PlayerAnimator.GetClipByName("Attack" + comboCount);
         var attackSpeed = player.playerStat.data.attackSpeed;
-        animationDuration = clip != null ? clip.length / attackSpeed : 0.5f;
+        var weaponSpeed = player.playerStat.weaponSpeed;
+        animationDuration = clip != null ? clip.length / (attackSpeed * weaponSpeed) : 0.5f;
         // animationDuration = clip != null ? clip.length: 0.5f;
         Debug.Log("clip length" + animationDuration);
 
-        player.PlayerAnimator.PlayAttack(comboCount, attackSpeed);
-
-        player.AttackTrail.StartTrail();
-        // player.AttackHitbox.HitboxOn();
-        if (comboCount == 1)
-        {
-            player.StartCoroutine(AttackHitBoxCoroutine(0.34f));
-        }
-        else if (comboCount == 2)
-        {
-            player.StartCoroutine(AttackHitBoxCoroutine(0.34f));
-        }
-        else if (comboCount == 3)
-        {
-            player.StartCoroutine(AttackHitBoxCoroutine(0.37f));
-        }
+        player.PlayerAnimator.PlayAttack(comboCount, attackSpeed * weaponSpeed);
 
         player.StartCoroutinePlayer(AllowComboAfterAnimation(animationDuration));
         player.StartCoroutinePlayer(EndAttackAfterTime(animationDuration));
@@ -83,9 +69,6 @@ public class AttackState : BaseState
 
     public override void Exit()
     {
-        player.AttackTrail.EndTrail();
-        // player.AttackHitbox.HitboxOff();
-
         Debug.Log("Exit Attack");
     }
 
@@ -111,14 +94,5 @@ public class AttackState : BaseState
         {
             player.ChangeState(new MoveState(player));
         }
-    }
-    
-    public IEnumerator AttackHitBoxCoroutine(float delayTime)
-    {
-        player.AttackHitbox.HitboxOn();
-
-        yield return new WaitForSeconds(delayTime);
-
-        player.AttackHitbox.HitboxOff();
     }
 }

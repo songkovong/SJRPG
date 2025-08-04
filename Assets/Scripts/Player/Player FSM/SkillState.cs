@@ -32,7 +32,7 @@ public class SkillState : BaseState
 
         if (currentCode == 1)
         {
-            player.AttackTrail.StartTrail();
+            // player.AttackTrail.StartTrail();
             player.playerStat.spaceSkill.HitBox.HitboxOn();
         }
         else if (currentCode == 2)
@@ -41,7 +41,7 @@ public class SkillState : BaseState
         }
         else if (currentCode == 3)
         {
-            player.AttackTrail.StartTrail();
+            // player.AttackTrail.StartTrail();
             animationDuration += .3f;
         }
     }
@@ -70,7 +70,7 @@ public class SkillState : BaseState
         player.isSkill = false;
         player.playerStat.data.isGodmode = false;
 
-        player.AttackTrail.EndTrail();
+        // player.AttackTrail.EndTrail();
         player.playerStat.spaceSkill.HitBox.HitboxOff();
         player.playerStat.cSkill.HitBox.HitboxOff();
     }

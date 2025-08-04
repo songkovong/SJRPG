@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
 
     HitColor playerHitColor;
     PlayerGuardTrail _guardTrail;
-    PlayerAttackTrail _attackTrail;
-    SwordHitbox _attackHitbox;
 
+    // Effects and Hitbox
+    public SwordHitbox swordHitbox { get; private set; }
+    public PlayerTrail swordTrail { get; private set; }
 
     // Player Stat
     public PlayerStat playerStat { get; private set; }
@@ -88,8 +89,6 @@ public class Player : MonoBehaviour
 
         playerHitColor = GetComponent<HitColor>();
         _guardTrail = GetComponentInChildren<PlayerGuardTrail>();
-        _attackTrail = GetComponentInChildren<PlayerAttackTrail>();
-        _attackHitbox = GetComponentInChildren<SwordHitbox>();
 
         inventory = GetComponent<Inventory>();
 
@@ -299,6 +298,28 @@ public class Player : MonoBehaviour
             characterController.enabled = true;
         }
     }
+
+    public void SetWeaponHitbox(SwordHitbox hitbox)
+    {
+        swordHitbox = hitbox;
+        swordHitbox?.HitboxOff();
+    }
+
+    public void SetWeaponTrail(PlayerTrail trail)
+    {
+        swordTrail = trail;
+        swordTrail?.EndTrail();
+    }
+
+    #region Animation Event
+
+    public void AttackStart() => swordHitbox?.HitboxOn();
+    public void AttackEnd() => swordHitbox?.HitboxOff();
+    public void TrailStart() => swordTrail?.StartTrail();
+    public void TrailEnd() => swordTrail?.EndTrail();
+
+    #endregion
+
     #endregion
 
     #region On Event
@@ -393,16 +414,7 @@ public class Player : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
-        // if (!GameManager.instance.isPaused)
-        // {
-        //     GameManager.instance.PauseGame();
-        // }
-        // else
-        // {
-        //     GameManager.instance.DePauseGame();
-        // }
-
-
+        
     }
     #endregion
 
@@ -418,7 +430,5 @@ public class Player : MonoBehaviour
     public Animator Animator => animator;
     public HitColor PlayerHitColor => playerHitColor;
     public PlayerGuardTrail GuardTrail => _guardTrail;
-    public PlayerAttackTrail AttackTrail => _attackTrail;
-    public SwordHitbox AttackHitbox => _attackHitbox;
 }
 

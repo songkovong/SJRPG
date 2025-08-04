@@ -59,7 +59,7 @@ public class ItemEffectDataBase : MonoBehaviour
 
     public void ShowTooltip(Item _item, Vector3 _pos)
     {
-        tooltip.ShowTooltip(_item, _pos);
+        tooltip.ShowTooltip(_item, _pos, true);
     }
 
     public void HideTooltip()

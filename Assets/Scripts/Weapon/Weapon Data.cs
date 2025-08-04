@@ -8,5 +8,5 @@ public class WeaponData : ScriptableObject
     public string weaponName;
     public GameObject weaponPrefab;
     public float weaponDamage;
-    // public float weaponSpeed;
+    public float weaponSpeed;
 }

@@ -121,6 +121,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
                     AddItem(newWeapon);
                 }
             }
+
+            ShopManager.Instance.RefreshPlayerItem();
         }
     }
 

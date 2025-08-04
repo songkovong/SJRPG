@@ -16,3 +16,4 @@ MonoBehaviour:
   weaponName: Sword
   weaponPrefab: {fileID: 5610884078883986163, guid: ce029bff6fd4fbd47bec36b877b3151a, type: 3}
   weaponDamage: 5
+  weaponSpeed: 1

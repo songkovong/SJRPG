@@ -13,7 +13,7 @@ public class SlotTooltip : MonoBehaviour
     [SerializeField]
     private TMP_Text text_ItemHowtoUse;
 
-    public void ShowTooltip(Item _item, Vector3 _pos)
+    public void ShowTooltip(Item _item, Vector3 _pos, bool isInventory = false)
     {
         tooltipPanel.SetActive(true);
 
@@ -22,15 +22,31 @@ public class SlotTooltip : MonoBehaviour
             0);
         tooltipPanel.transform.position = _pos;
 
-        text_ItemName.text = _item.itemName;
-        text_ItemDesc.text = _item.itemDesc;
+        // string additionalDesc = " (Attack: " + _item.weaponData.weaponDamage + ", Speed: " + _item.weaponData.weaponSpeed + ")";
+        string additionalDesc = "";
 
-        if (_item.itemType == Item.ItemType.Equipment)
-            text_ItemHowtoUse.text = "Mouse Right Click - Equip";
-        else if (_item.itemType == Item.ItemType.Consumable)
-            text_ItemHowtoUse.text = "Mouse Right Click - Consume";
+        if (_item.weaponData != null)
+        {
+            additionalDesc = $"\n(Attack: {_item.weaponData.weaponDamage}, Speed: {_item.weaponData.weaponSpeed})";
+        }
+
+        text_ItemName.text = _item.itemName;
+        text_ItemDesc.text = _item.itemDesc + additionalDesc;
+
+        if (isInventory)
+        {
+            if (_item.itemType == Item.ItemType.Equipment)
+                text_ItemHowtoUse.text = "Mouse Right Click - Equip";
+            else if (_item.itemType == Item.ItemType.Consumable)
+                text_ItemHowtoUse.text = "Mouse Right Click - Consume";
+            else
+                text_ItemHowtoUse.text = "";
+        }
         else
-            text_ItemHowtoUse.text = "";
+        {
+            text_ItemHowtoUse.text = "Mouse Right Click - Buy or Sell";
+        }
+
     }
 
     public void HideTooltip()

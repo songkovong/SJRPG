@@ -29,12 +29,6 @@ public class WeaponManager : MonoBehaviour
             EquipWeapon(currentWeaponItem);
         }
     }
-
-    void Update()
-    {
-
-    }
-
     public void EquipWeapon(Item weapon)
     {
         if (weapon != null && weapon.weaponData != null)
@@ -44,11 +38,27 @@ public class WeaponManager : MonoBehaviour
             {
                 Destroy(weaponPos.GetChild(0).gameObject); // current weapon destroy;
             }
-            Debug.Log("Weapon name = " + weapon.weaponData.weaponName);
+
             swapWeaponItem = currentWeaponItem;
-            Instantiate(weapon.weaponData.weaponPrefab, weaponPos);
+
+            GameObject newWeaponObj = Instantiate(weapon.weaponData.weaponPrefab, weaponPos);
             currentWeaponItem = weapon;
+
             Player.instance.playerStat.weaponDamage = currentWeaponItem.weaponData.weaponDamage;
+            Player.instance.playerStat.weaponSpeed = currentWeaponItem.weaponData.weaponSpeed;
+
+            SwordHitbox hitbox = newWeaponObj.GetComponentInChildren<SwordHitbox>();
+            if (hitbox != null)
+            {
+                Player.instance.SetWeaponHitbox(hitbox);
+            }
+            
+            PlayerTrail trail = newWeaponObj.GetComponentInChildren<PlayerTrail>();
+            if (trail != null)
+            {
+                Player.instance.SetWeaponTrail(trail);
+            }
+
             SaveWeapon();
         }
     }

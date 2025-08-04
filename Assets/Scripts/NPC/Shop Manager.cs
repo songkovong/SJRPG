@@ -32,6 +32,11 @@ public class ShopManager : MonoBehaviour
         shopPanel.SetActive(false);
     }
 
+    public void RefreshPlayerItem()
+    {
+        shopUI.RefreshPlayerItems();
+    }
+
     private ShopData FindShopByID(string id)
     {
         ShopData[] shops = Resources.LoadAll<ShopData>("Shops");

@@ -16,6 +16,7 @@ public class PlayerStat : MonoBehaviour
 
     // Weapon
     public float weaponDamage { get; set; } = 1f;
+    public float weaponSpeed { get; set; } = 1f;
 
     public PlayerStatData data;
 
