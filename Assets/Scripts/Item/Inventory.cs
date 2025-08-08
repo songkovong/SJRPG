@@ -119,7 +119,7 @@ public class Inventory : MonoBehaviour
     {
         var idx = _idx - 1;
 
-        if (idx >= 0 && idx <= 3 && idx < slots.Length && slots[idx] != null)
+        if (idx >= 0 && idx <= 3 && idx < slots.Length && slots[idx] != null && slots[idx].item != null && slots[idx].item.itemType == Item.ItemType.Consumable)
         {
             slots[_idx - 1].UseSlotItem();
         }
@@ -170,21 +170,26 @@ public class Inventory : MonoBehaviour
 
     public void LoadSlots()
     {
-        for (int i = 0; i < slots.Length; i++)
+        if (slots == null || slots.Length == 0)
         {
-            if (PlayerPrefs.HasKey("Slot" + i + "Name"))
+            InitializeSlot();
+        }
+
+        for (int i = 0; i < slots.Length; i++)
             {
-                var itemName = PlayerPrefs.GetString("Slot" + i + "Name");
-                var itemCount = PlayerPrefs.GetInt("Slot" + i + "Count");
-
-                Item item = idb.GetItemByName(itemName);
-
-                if (item != null)
+                if (PlayerPrefs.HasKey("Slot" + i + "Name"))
                 {
-                    slots[i].AddItem(item, itemCount);
+                    var itemName = PlayerPrefs.GetString("Slot" + i + "Name");
+                    var itemCount = PlayerPrefs.GetInt("Slot" + i + "Count");
+
+                    Item item = idb.GetItemByName(itemName);
+
+                    if (item != null)
+                    {
+                        slots[i].AddItem(item, itemCount);
+                    }
                 }
             }
-        }
     }
 
     public void SaveCoin()
@@ -198,13 +203,6 @@ public class Inventory : MonoBehaviour
         {
             coin.AddCoin(
                 PlayerPrefs.GetInt("Coin")
-            );
-            coin.SetCoinCount();
-        }
-        else
-        {
-            coin.AddCoin(
-                100000
             );
             coin.SetCoinCount();
         }

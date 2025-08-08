@@ -21,9 +21,9 @@ public class Cactus : Enemy, IDamageable
         dependRate = 0.35f;
     }
 
-    public override void TakeDamage(float getDamage)
+    public override void TakeDamage(int minDamage, int maxDamage)
     {
-        base.TakeDamage(getDamage);
+        base.TakeDamage(minDamage, maxDamage);
         Debug.Log("Cactus Damaged");
     }
 

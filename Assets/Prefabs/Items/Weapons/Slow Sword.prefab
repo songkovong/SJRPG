@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8789623207750336620}
   - component: {fileID: -4425319515555618748}
   m_Layer: 7
-  m_Name: Sword7_Red
+  m_Name: Slow Sword
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b74058b125a734fbc9a480d929bd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: ffd419c2391e6464ba5f276fcabb0f55, type: 2}
   isDestroy: 1
 --- !u!54 &8789623207750336620
 Rigidbody:
@@ -122,7 +122,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 392
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1

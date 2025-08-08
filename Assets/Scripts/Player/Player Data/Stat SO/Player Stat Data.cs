@@ -34,6 +34,8 @@ public class PlayerStatData : ScriptableObject
     public float attackDamage = 1f;
     public float buffDamage;
     public int finalDamage;
+    public int minFinalDamage;
+    public int maxFinalDamage;
 
     // Weapon
     public int weaponCode;

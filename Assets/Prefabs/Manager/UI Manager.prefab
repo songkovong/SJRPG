@@ -47,4 +47,6 @@ MonoBehaviour:
   statPanel: {fileID: 8541332884540195715, guid: 231980e596890144d909cc66d03e0669, type: 3}
   itemPanel: {fileID: 5358214344152990723, guid: 682722df4fd121540a90619dc058e908, type: 3}
   skillPanel: {fileID: 7362983054558820606, guid: 253c7b51e91ddbb46948e97bcd07419e, type: 3}
+  shopPanel: {fileID: 2741067919458937314, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
+  pausePanel: {fileID: 3765730906385721985, guid: 285f9c6771386984084476f49ff57476, type: 3}
   itemTooltipPanel: {fileID: 0}

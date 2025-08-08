@@ -39,7 +39,8 @@ public class PlayerStat : MonoBehaviour
         guardSkill = GetComponent<GuardSkill>();
         comboAttackSkill = GetComponent<ComboAttackSkill>();
 
-        LoadAllData();
+        // LoadAllData();
+        StartCoroutine(LoadDataCoroutine());
     }
 
     void Update()
@@ -48,9 +49,9 @@ public class PlayerStat : MonoBehaviour
         LvUp();
     }
 
-#endregion
+    #endregion
 
-#region Take Damage and Heal (Player Health Methods)
+    #region Take Damage and Heal (Player Health Methods)
 
     public void TakeDamage(float getDamage)
     {
@@ -101,7 +102,7 @@ public class PlayerStat : MonoBehaviour
         data.currentMagic = Mathf.Min(data.currentMagic + getMagic, data.maxMagic);
     }
 
-#endregion
+    #endregion
 
     #region Level Up and Stat Up
 
@@ -257,31 +258,50 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
     #region Attack Damage Methods
 
-    public float RandomAtkDmg()
+    // public float RandomAtkDmg()
+    // {
+    //     var minDamage = (data.attackDamage + weaponDamage) * (0.1f + attackMastery.masteryStat) + 1;
+    //     var maxDamage = data.attackDamage + weaponDamage;
+    //     return Random.Range(minDamage, maxDamage);
+    // }
+
+    // public int AtkDmg()
+    // {
+    //     return Mathf.FloorToInt(RandomAtkDmg());
+    // }
+
+    // public int SkillDmg(float skilldmg)
+    // {
+    //     // return (int)((AtkDmg() + (data.magic * 0.5f)) * skilldmg);
+    //     return (int)((AtkDmg() + data.magic) * skilldmg);
+    // }
+
+    public (float min, float max) GetAttackDamage()
     {
         var minDamage = (data.attackDamage + weaponDamage) * (0.1f + attackMastery.masteryStat) + 1;
         var maxDamage = data.attackDamage + weaponDamage;
-        return Random.Range(minDamage, maxDamage);
+
+        return (minDamage, maxDamage);
     }
 
-    public int AtkDmg()
+    public (float min, float max) GetSkillDamage(float skillDamage)
     {
-        return Mathf.FloorToInt(RandomAtkDmg());
+        var minDamage = (data.attackDamage + weaponDamage) * (0.1f + attackMastery.masteryStat) + 1;
+        var maxDamage = data.attackDamage + weaponDamage;
+
+        var minSkillDamage = (minDamage + (data.magic * 0.5f) * skillDamage);
+        var maxSkillDamage = (maxDamage + (data.magic * 0.5f) * skillDamage);
+
+        return (minSkillDamage, maxSkillDamage);
     }
 
-    public int SkillDmg(float skilldmg)
-    {
-        // return (int)((AtkDmg() + (data.magic * 0.5f)) * skilldmg);
-        return (int)((AtkDmg() + data.magic) * skilldmg);
-    }
+    #endregion
 
-#endregion
-
-#region Coroutine Methods
+    #region Coroutine Methods
 
     void MagicRecovery()
     {
@@ -318,7 +338,7 @@ public class PlayerStat : MonoBehaviour
         data.attackDamage /= 2;
     }
 
-#endregion
+    #endregion
 
     public void PlayerDie()
     {
@@ -338,7 +358,7 @@ public class PlayerStat : MonoBehaviour
     //     }
     // }
 
-#region Data Save and Load
+    #region Data Save and Load
     public void LoadAllData()
     {
         spaceSkill.LoadSkill();
@@ -374,6 +394,15 @@ public class PlayerStat : MonoBehaviour
     public void DeleteAllData()
     {
         data.DeleteAll();
+    }
+
+    IEnumerator LoadDataCoroutine()
+    {
+        yield return null;
+
+        yield return new WaitUntil(() => player.inventory.slots.Length > 0);
+
+        LoadAllData();
     }
 #endregion
 }

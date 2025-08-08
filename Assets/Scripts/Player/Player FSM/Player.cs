@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         ChangeState(new MoveState(this));
+        inventory.AcquireCoin(100000);
     }
 
     void Update()
@@ -301,14 +302,18 @@ public class Player : MonoBehaviour
 
     public void SetWeaponHitbox(SwordHitbox hitbox)
     {
+        Debug.Log("Sword Hitbox On");
         swordHitbox = hitbox;
-        swordHitbox?.HitboxOff();
+        // swordHitbox?.HitboxOn();
+        // swordHitbox?.HitboxOff();
     }
 
     public void SetWeaponTrail(PlayerTrail trail)
     {
+        Debug.Log("Sword Trail On");
         swordTrail = trail;
-        swordTrail?.EndTrail();
+        // swordTrail?.StartTrail();
+        // swordTrail?.EndTrail();
     }
 
     #region Animation Event

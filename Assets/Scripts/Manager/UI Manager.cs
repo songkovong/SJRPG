@@ -155,8 +155,15 @@ public class UIManager : MonoBehaviour
     {
         if (panel == itemPanel || panel == shopPanel)
         {
-            itemTooltipPanel.HideTooltip();
-            inputNumber.Cancel();
+            if (itemTooltipPanel != null)
+            {
+                itemTooltipPanel.HideTooltip();
+            }
+
+            if (inputNumber != null)
+            {
+                inputNumber.Cancel();
+            }
         }
         else if (panel == skillPanel)
         {

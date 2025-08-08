@@ -18,7 +18,10 @@ public class SkillState : BaseState
 
         currentCode = player.skillCode;
 
-        player.playerStat.data.finalDamage = player.playerStat.SkillDmg(player.skillDamage);
+        // player.playerStat.data.finalDamage = player.playerStat.SkillDmg(player.skillDamage);
+        var (min, max) = player.playerStat.GetSkillDamage(player.skillDamage);
+        player.playerStat.data.minFinalDamage = (int)min;
+        player.playerStat.data.maxFinalDamage = (int)max;
 
         Debug.Log("Skill Damage = " + player.skillDamage);
 

@@ -83,11 +83,13 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyCurrentState.Enter();
     }
 
-    public virtual void TakeDamage(float getDamage)
+    public virtual void TakeDamage(int minDamage, int maxDamage)
     {
         // GodMode
         if(isGodmode) return; 
         if (isDead) return;
+
+        var getDamage = Random.Range(minDamage, maxDamage);
 
         getDamage = (int)(getDamage * (1 - Random.Range(dependRate / 2, dependRate)));
 

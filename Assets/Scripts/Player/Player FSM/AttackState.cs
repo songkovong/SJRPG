@@ -32,7 +32,10 @@ public class AttackState : BaseState
 
         Debug.Log("Player Combo = " + player.playerStat.comboAttackSkill.playerCombo);
 
-        player.playerStat.data.finalDamage = (int)(player.playerStat.AtkDmg() * comboAttackMulti);
+        // player.playerStat.data.finalDamage = (int)(player.playerStat.AtkDmg() * comboAttackMulti);
+        var (min, max) = player.playerStat.GetAttackDamage();
+        player.playerStat.data.minFinalDamage = (int)(min * comboAttackMulti);
+        player.playerStat.data.maxFinalDamage = (int)(max * comboAttackMulti);
 
         Debug.Log("Enter Attack");
 

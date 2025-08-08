@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f329c5fe7eb6d4d8d2858ed60b3650, type: 3}
+  m_Name: Slow Sword
+  m_EditorClassIdentifier: 
+  weaponCode: 104
+  weaponName: Slow Sword
+  weaponPrefab: {fileID: 6013990982369288243, guid: 52e787822ff7ce2448f3c7924d2d99d7, type: 3}
+  weaponDamage: 15
+  weaponSpeed: 0.3

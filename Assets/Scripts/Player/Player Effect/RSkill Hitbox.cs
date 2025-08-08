@@ -13,6 +13,7 @@ public class RSkillHitbox : MonoBehaviour
         if (other.gameObject == gameObject || other.CompareTag("Player"))
             return;
 
-        other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.data.finalDamage);
+        // other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.data.finalDamage);
+        other.GetComponent<IDamageable>()?.TakeDamage(player.playerStat.data.minFinalDamage, player.playerStat.data.maxFinalDamage);
     }
 }

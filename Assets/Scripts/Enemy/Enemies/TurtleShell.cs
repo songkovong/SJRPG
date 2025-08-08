@@ -22,9 +22,9 @@ public class TurtleShell : Enemy, IDamageable
         dependRate = 0.7f;
     }
 
-    public override void TakeDamage(float getDamage)
+    public override void TakeDamage(int minDamage, int maxDamage)
     {
-        base.TakeDamage(getDamage);
+        base.TakeDamage(minDamage, maxDamage);
         Debug.Log("TurtelShell Damaged");
     }
 

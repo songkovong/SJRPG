@@ -21,9 +21,9 @@ public class Slime : Enemy, IDamageable
         dependRate = 0.1f;
     }
 
-    public override void TakeDamage(float getDamage)
+    public override void TakeDamage(int minDamage, int maxDamage)
     {
-        base.TakeDamage(getDamage);
+        base.TakeDamage(minDamage, maxDamage);
         Debug.Log("Slime Damaged");
     }
 

@@ -21,9 +21,9 @@ public class Mushroom : Enemy, IDamageable
         dependRate = 0.2f;
     }
 
-    public override void TakeDamage(float getDamage)
+    public override void TakeDamage(int minDamage, int maxDamage)
     {
-        base.TakeDamage(getDamage);
+        base.TakeDamage(minDamage, maxDamage);
         Debug.Log("Mushroom Damaged");
     }
 
