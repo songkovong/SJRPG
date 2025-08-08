@@ -10,7 +10,7 @@ public class EnemyIdleState : EnemyBaseState
     }
     public override void Update() 
     {
-        Debug.Log($"[IdleState] isHit 상태: {enemy.isHit}");
+        // Debug.Log($"[IdleState] isHit 상태: {enemy.isHit}");
 
         if(enemy.isDead)
         {

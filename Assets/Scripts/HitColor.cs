@@ -7,37 +7,12 @@ public class HitColor : MonoBehaviour
     public Dictionary<Renderer, Color> originalColors = new Dictionary<Renderer, Color>();
     public List<Color> hitColors { get; private set; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Color initailize
-        renderers = GetComponentsInChildren<Renderer>();
-        foreach (var renderer in renderers)
-        {
-            if (renderer is not TrailRenderer)
-            {
-                if (renderer.material != null)
-                    {
-                        var mat = renderer.material;
-                        var shaderName = mat.shader.name;
-
-                        if (mat.HasProperty("_BaseColor"))
-                        {
-                            originalColors[renderer] = mat.GetColor("_BaseColor");
-                        }
-                        else if (mat.HasProperty("_Color"))
-                        {
-                            originalColors[renderer] = mat.GetColor("_Color");
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"[Init] Shader '{shaderName}' on '{renderer.name}' has no _BaseColor or _Color property");
-                        }
-                    }
-            }
-        }
+        SetRenderers();
     }
-public void ChangeColor(Renderer[] renderers, Color color)
+
+    public void ChangeColor(Renderer[] renderers, Color color)
     {
         for (int i = 0; i < renderers.Length; ++i)
         {
@@ -67,7 +42,7 @@ public void ChangeColor(Renderer[] renderers, Color color)
         {
             if (!dics.ContainsKey(renderer))
             {
-                Debug.LogWarning($"[ReChangeColor] Renderer {renderer.name} was not found in original color dictionary.");
+                // Debug.LogWarning($"[ReChangeColor] Renderer {renderer.name} was not found in original color dictionary.");
                 continue;
             }
 
@@ -83,6 +58,38 @@ public void ChangeColor(Renderer[] renderers, Color color)
                     materials[j].SetColor("_Color", dics[renderer]);
                 }
             }
+        }
+    }
+
+    public void SetRenderers()
+    {
+        renderers = GetComponentsInChildren<Renderer>();
+        List<Renderer> validRenderer = new List<Renderer>();
+
+        foreach (var renderer in renderers)
+        {
+            if (renderer is TrailRenderer) continue;
+
+            if (renderer.gameObject.CompareTag("Item")) continue;
+            {
+                if (renderer.material != null)
+                {
+                    var mat = renderer.material;
+
+                    if (mat.HasProperty("_BaseColor"))
+                    {
+                        originalColors[renderer] = mat.GetColor("_BaseColor");
+                    }
+                    else if (mat.HasProperty("_Color"))
+                    {
+                        originalColors[renderer] = mat.GetColor("_Color");
+                    }
+
+                    validRenderer.Add(renderer);
+                }
+            }
+
+            renderers = validRenderer.ToArray();
         }
     }
 }

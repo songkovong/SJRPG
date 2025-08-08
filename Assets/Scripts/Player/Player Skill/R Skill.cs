@@ -33,7 +33,7 @@ public class RSkill : Skill
     protected override void Update()
     {
         base.Update();
-        Debug.Log("Level = " + level);
+        // Debug.Log("Level = " + level);
     }
 
     public override bool CanActivateSkill()

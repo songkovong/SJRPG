@@ -135,31 +135,8 @@ public class Player : MonoBehaviour
         SpaceSkillPressed = false;
         CSkillPressed = false;
         RSkillPressed = false;
-        // EnteractionPressed = false;
 
         LocalMoveDir();
-
-        // if (GameManager.instance.isPaused)
-        // {
-        //     playerInput.Player.Disable();
-        //     DontRotate = true;
-        // }
-        // else
-        // {
-        //     playerInput.Player.Enable();
-        //     DontRotate = false;
-        // }
-
-        Debug.Log("Skill Code = " + skillCode);
-
-        // if (DialogueManager.Instance.IsPlaying())
-        // {
-        //     playerInput.Player.Disable();
-        // }
-        // else
-        // {
-        //     playerInput.Player.Enable();
-        // }
     }
 
     #region Methods

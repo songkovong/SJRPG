@@ -24,8 +24,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("detective = " + isDetective);
-        Debug.Log("attack = " + isAttack);
+        // Debug.Log("detective = " + isDetective);
+        // Debug.Log("attack = " + isAttack);
     }
 
     public void DetectPlayer(float radius)

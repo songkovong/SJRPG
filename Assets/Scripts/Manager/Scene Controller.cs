@@ -32,6 +32,12 @@ public class SceneController : MonoBehaviour
 #endif
     }
 
+    public void NewGameScene()
+    {
+        PlayerPrefs.DeleteAll();
+        LoadSceneAsync("Game Scene");
+    }
+
     public void LoadGameScene()
     {
         LoadSceneAsync("Game Scene");

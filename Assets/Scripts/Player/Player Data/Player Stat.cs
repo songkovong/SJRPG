@@ -25,7 +25,7 @@ public class PlayerStat : MonoBehaviour
 
     void Awake()
     {
-        DeleteAllData();
+        // DeleteAllData();
     }
 
     void Start()

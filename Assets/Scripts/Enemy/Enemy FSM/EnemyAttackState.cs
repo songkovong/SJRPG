@@ -20,7 +20,7 @@ public class EnemyAttackState : EnemyBaseState
     }
     public override void Update() 
     {
-        Debug.Log($"[AttackState] isHit 상태: {enemy.isHit}");
+        // Debug.Log($"[AttackState] isHit 상태: {enemy.isHit}");
         if(enemy.isDead)
         {
             enemy.ChangeState(new EnemyDeadState(enemy));

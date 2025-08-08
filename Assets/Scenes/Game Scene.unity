@@ -20414,18 +20414,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 193550970}
     m_Modifications:
-    - target: {fileID: 890691355143221086, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 890691355143221086, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 890691355143221086, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 940618982995242327, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -20513,18 +20501,6 @@ PrefabInstance:
     - target: {fileID: 2741067919458937314, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
       propertyPath: m_Name
       value: Shop Panel
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789192351843181216, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789192351843181216, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789192351843181216, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3007755676335716231, guid: 9e9175155d96f8548b5d3263a2846fe5, type: 3}
       propertyPath: m_AnchorMax.x
