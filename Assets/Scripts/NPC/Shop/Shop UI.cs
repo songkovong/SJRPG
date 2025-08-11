@@ -80,6 +80,7 @@ public class ShopUI : MonoBehaviour
     void Ok()
     {
         _inputNumber.OK();
+        SoundManager.Instance.Play2DSound("Buy Sell Sound");
     }
 
     void Cancel()

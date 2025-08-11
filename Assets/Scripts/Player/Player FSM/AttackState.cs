@@ -17,6 +17,8 @@ public class AttackState : BaseState
 
     public override void Enter()
     {
+        SoundManager.Instance.Play2DSound("Player Attack Sound");
+
         if (comboCount == 1)
         {
             comboAttackMulti = 1f;

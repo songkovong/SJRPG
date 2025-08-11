@@ -13,6 +13,8 @@ public class LevelUpState : BaseState
 
         timer = 0f;
 
+        SoundManager.Instance.Play2DSound("Heal Sound");
+
         Debug.Log("Enter LvUp");
         
         player.PlayerAnimator.PlayLevelUp();

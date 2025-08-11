@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,7 +34,21 @@ public class GameManager : MonoBehaviour
 
         FindPlayerAndCamera();
 
-        // StartCoroutine(player.playerStat.AutoSaveRoutine()); // Auto Save
+        // SoundManager.Instance.Play2DSound("Game BGM", 0f, true, SoundType.BGM);
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        switch (sceneName)
+        {
+            case "Main Scene":
+                SoundManager.Instance.Play2DSound("Main BGM", 0f, true, SoundType.BGM);
+                break;
+            case "Game Scene":
+                SoundManager.Instance.Play2DSound("Game BGM", 0f, true, SoundType.BGM);
+                break;
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -65,7 +80,10 @@ public class GameManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        player.playerStat.SaveAllData();
+        if (player != null)
+        {
+            player.playerStat.SaveAllData();
+        }
     }
 
     IEnumerator AutoSave()

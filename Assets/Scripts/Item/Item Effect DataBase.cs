@@ -37,9 +37,11 @@ public class ItemEffectDataBase : MonoBehaviour
                         {
                             case HP:
                                 player.playerStat.Heal(effects[i].nums[j]);
+                                SoundManager.Instance.Play2DSound("Item Use Sound");
                                 break;
                             case MP:
                                 player.playerStat.MPHeal(effects[i].nums[j]);
+                                SoundManager.Instance.Play2DSound("Item Use Sound");
                                 break;
                             case DAMAGE:
                                 //

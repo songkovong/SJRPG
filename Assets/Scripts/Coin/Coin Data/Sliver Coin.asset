@@ -16,5 +16,5 @@ MonoBehaviour:
   coinType: 1
   minCoinValue: 1
   maxCoinValue: 10
-  coinDropRate: 0.5
+  coinDropRate: 0.9
   coinPrefab: {fileID: 100719015017695889, guid: 84c54630b9800e5419439dbfa74de6db, type: 3}

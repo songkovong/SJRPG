@@ -11,6 +11,8 @@ public class HitState : BaseState
     {
         timer = 0f;
 
+        SoundManager.Instance.Play2DSound("Hit Sound");
+
         Debug.Log("Enter Hit");
         player.PlayerAnimator.PlayHit();
         animationDuration = player.PlayerAnimator.GetClipByName("Hit").length;

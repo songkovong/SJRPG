@@ -68,6 +68,8 @@ public class WeaponManager : MonoBehaviour
             SetWeaponImageAndText();
 
             SaveWeapon();
+
+            SoundManager.Instance.Play2DSound("Equip Sound");
         }
     }
 
@@ -84,6 +86,8 @@ public class WeaponManager : MonoBehaviour
                 currentWeaponItem = null;
 
                 SetWeaponImageAndText();
+
+                SoundManager.Instance.Play2DSound("Unequip Sound");
             }
         }
     }

@@ -33,6 +33,7 @@ public class ShopInputNumber : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             OK();
+            SoundManager.Instance.Play2DSound("Buy Sell Sound");
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {

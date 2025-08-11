@@ -86,8 +86,11 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void TakeDamage(int minDamage, int maxDamage)
     {
         // GodMode
-        if(isGodmode) return; 
+        if (isGodmode) return; 
         if (isDead) return;
+
+        var thisEnemy = this.GetType().Name;
+        SoundManager.Instance.Play2DSound(thisEnemy + " Hit Sound");
 
         var getDamage = Random.Range(minDamage, maxDamage);
 

@@ -33,17 +33,14 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
 
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
         clipsDictionary = new Dictionary<string, AudioClip>();
 
         foreach (var clip in preloadClips)
@@ -52,6 +49,11 @@ public class SoundManager : MonoBehaviour
         }
 
         tempSounds = new List<TemporarySoundPlayer>();
+    }
+
+    void Start()
+    {
+        
     }
 
     // Get Audio Clip for name

@@ -78,6 +78,7 @@ public class SpaceSkill : Skill
     public override void UseSkill()
     {
         base.UseSkill();
+        SoundManager.Instance.Play2DSound("Space Skill Sound");
         Debug.Log("SpaceSkill");
     }
 

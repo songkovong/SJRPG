@@ -13,6 +13,9 @@ public class EnemyAttackState : EnemyBaseState
 
         timer = 0f;
 
+        var thisEnemy = enemy.GetType().Name;
+        SoundManager.Instance.Play2DSound(thisEnemy + " Attack Sound");
+
         enemy.EnemyAnimator.PlayAttack();
         animationDuration = enemy.EnemyAnimator.GetClipByName("Attack").length;
 

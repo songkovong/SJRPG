@@ -88,6 +88,8 @@ public class RSkill : Skill
     {
         base.UseSkill();
 
+        SoundManager.Instance.Play2DSound("R Skill Sound");
+
         StartCoroutine(UseSkillCoroutine());
 
         Debug.Log("RSkill");

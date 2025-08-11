@@ -106,6 +106,7 @@ public class CSkill : Skill
         durationTimer = 0;
         isDuration = true;
         StartCoroutine(player.playerStat.BuffDamage());
+        SoundManager.Instance.Play2DSound("C Skill Sound");
     }
 
     public override SkillHitBox HitBox => this.hitBox;

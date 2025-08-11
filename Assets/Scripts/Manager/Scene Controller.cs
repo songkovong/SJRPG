@@ -34,7 +34,16 @@ public class SceneController : MonoBehaviour
 
     public void NewGameScene()
     {
+        // PlayerPrefs.DeleteAll();
+
+        float bgm = PlayerPrefs.GetFloat("BGMVolume", 1f);
+        float effect = PlayerPrefs.GetFloat("EffectVolume", 1f);
+
         PlayerPrefs.DeleteAll();
+
+        PlayerPrefs.SetFloat("BGMVolume", bgm);
+        PlayerPrefs.SetFloat("EffectVolume", effect);
+
         LoadSceneAsync("Game Scene");
     }
 
