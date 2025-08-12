@@ -11,6 +11,9 @@ public class PlayerEnteraction : MonoBehaviour
     private Inventory inventory;
     Player player;
 
+    float checkTimer;
+    float checkInterval = 1f;
+
     void Start()
     {
         player = GetComponent<Player>();

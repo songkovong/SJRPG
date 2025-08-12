@@ -25,6 +25,7 @@ public class GuardState : BaseState
 
         player.GuardTrail.StartTrail();
         player.playerStat.data.isGodmode = true;
+        player.isGuard = true;
 
         manaTickTimer = manaTickInterval;
     }
@@ -73,6 +74,7 @@ public class GuardState : BaseState
 
         player.GuardTrail.EndTrail();
         player.playerStat.data.isGodmode = false;
+        player.isGuard = false;
     }
 
     void ExitGuard()

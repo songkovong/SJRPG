@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
     public int skillCode { get; set; }
     public float skillDamage { get; set; }
 
-    // Weapon value
-    public int weaponCode { get; set; }
+    // Player is Guard?
+    public bool isGuard { get; set; }
 
     // Dead Value
     public bool isDead { get; set; } = false;

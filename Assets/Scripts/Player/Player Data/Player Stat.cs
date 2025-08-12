@@ -56,6 +56,7 @@ public class PlayerStat : MonoBehaviour
     public void TakeDamage(float getDamage)
     {
         if (data.isGodmode) return;
+        if (player.isGuard) return;
 
         getDamage = (int)(getDamage * (1 - Random.Range(data.dependRate * 0.5f, data.dependRate)));
 
@@ -88,6 +89,7 @@ public class PlayerStat : MonoBehaviour
         }
 
         StartCoroutine(HitColorCoroutine());
+        StartCoroutine(HitCoroutine());
 
         Debug.Log("Player current Health = " + data.currentHealth);
     }
@@ -327,6 +329,15 @@ public class PlayerStat : MonoBehaviour
         yield return new WaitForSeconds(data.godmodeDuration);
 
         player.PlayerHitColor.ReChangeColor(player.PlayerHitColor.renderers, player.PlayerHitColor.originalColors);
+    }
+
+    private IEnumerator HitCoroutine()
+    {
+        player.isHit = true;
+
+        yield return new WaitForSeconds(0.1f);
+
+        player.isHit = false;
     }
 
     public IEnumerator BuffDamage()

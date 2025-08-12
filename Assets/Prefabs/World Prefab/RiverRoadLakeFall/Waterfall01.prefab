@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2994551233274764343
 Transform:
@@ -98,7 +98,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2438700325860341499
 Transform:
@@ -185,7 +185,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9208291616002102770
 Transform:
@@ -271,7 +271,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &342332310515835088
 Transform:
@@ -312,7 +312,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7661895120067650135
 Transform:

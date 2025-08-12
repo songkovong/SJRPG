@@ -15,6 +15,9 @@ public class EnemySpawner : MonoBehaviour
     Player player;
     float playerDistance = 30f;
 
+    float checkInterval = 0.5f;
+    float checkTimer;
+
     void Start()
     {
         if (player == null)
@@ -28,36 +31,61 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        // if (player != null)
+        // {
+        //     var dist = Vector3.Distance(player.transform.position, transform.position);
+
+        //     if (dist < playerDistance)
+        //     {
+        //         foreach (GameObject enemy in enemyPool)
+        //         {
+        //             if (!enemy.activeInHierarchy)
+        //             {
+        //                 var e = enemy.GetComponent<Enemy>();
+
+        //                 if (e != null && e.isDead == false)
+        //                 {
+        //                     enemy.SetActive(true);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         foreach (GameObject enemy in enemyPool)
+        //         {
+        //             if (enemy.activeInHierarchy)
+        //             {
+        //                 enemy.SetActive(false);
+        //             }
+        //         }
+        //     }
+        // }
+
+        checkTimer -= Time.deltaTime;
+        if (checkTimer > 0) return;
+        checkTimer = checkInterval;
+
+        if (player == null) return;
+
+        var dist = Vector3.Distance(player.transform.position, transform.position);
+        var inRange = dist < playerDistance;
+
+        foreach (var enemy in enemyPool)
         {
-            var dist = Vector3.Distance(player.transform.position, transform.position);
-
-            if (dist < playerDistance)
+            if (inRange)
             {
-                foreach (GameObject enemy in enemyPool)
+                if (!enemy.activeInHierarchy && !enemy.GetComponent<Enemy>().isDead)
                 {
-                    if (!enemy.activeInHierarchy)
-                    {
-                        var e = enemy.GetComponent<Enemy>();
-
-                        if (e != null && e.isDead == false)
-                        {
-                            enemy.SetActive(true);
-                        }
-                    }
+                    enemy.SetActive(true);
                 }
             }
             else
             {
-                foreach (GameObject enemy in enemyPool)
-                {
-                    if (enemy.activeInHierarchy)
-                    {
-                        enemy.SetActive(false);
-                    }
-                }
+                enemy.SetActive(false);
             }
         }
+        
     }
 
     void InitializePool()

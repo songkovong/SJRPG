@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 60;
         Screen.SetResolution(1920, 1080, true);
     }
 

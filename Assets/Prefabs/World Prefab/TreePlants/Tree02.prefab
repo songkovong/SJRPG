@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2108801109521803317
 Transform:
@@ -102,7 +102,7 @@ GameObject:
   m_TagString: Camera Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1519188697402770169
 Transform:
@@ -181,7 +181,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4850827627678960444
 Transform:

@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04cb3676ed679ca4dbedd73ffcab4f7f, type: 3}
-  m_Name: Test Shop 2 Data
+  m_Name: Shop 2 Data
   m_EditorClassIdentifier: 
-  shopID: Test Shop 2
+  shopID: Shop 2
   sellItems:
   - {fileID: 11400000, guid: 284d887b31d42224e963f280d5f58ecb, type: 2}
   - {fileID: 11400000, guid: 2aa538adecf54ec409223a2b95dc336f, type: 2}
   - {fileID: 11400000, guid: cf7769b71ca91d045b5c503f690e872a, type: 2}
   - {fileID: 11400000, guid: 12063a8d5671b6e489752de51fb7c6aa, type: 2}
-  - {fileID: 11400000, guid: ccd5e9dd76c094a4dbd21f6b50bb8b5a, type: 2}
-  - {fileID: 11400000, guid: ffd419c2391e6464ba5f276fcabb0f55, type: 2}
-  - {fileID: 11400000, guid: 9dfd271ed11a8544f9383e96b3e9a75c, type: 2}
   - {fileID: 11400000, guid: eae04ce6235305849958c61911ab3145, type: 2}
