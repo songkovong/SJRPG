@@ -34,6 +34,11 @@ public class EnemyAnimator
         animator.SetBool("isDead", isDead);
     }
 
+    public void SetAttackIndex(int index)
+    {
+        animator.SetInteger("AttackIndex", index);
+    }
+
     public AnimationClip GetClipByName(string name)
     {
         foreach (var clip in animator.runtimeAnimatorController.animationClips)

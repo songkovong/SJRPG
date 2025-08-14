@@ -12,8 +12,8 @@ public class BossDeadState : BossBaseState
         bossEnemy.DropItem();
         bossEnemy.DropCoin();
         bossEnemy.EnemyAI.ResetMove();
-        bossEnemy.EnemyAnimator.PlayDead(true);
-        animationDuration = bossEnemy.EnemyAnimator.GetClipByName("Dead").length + 0.5f;
+        bossEnemy.BossAnimator.PlayDead(true);
+        animationDuration = bossEnemy.BossAnimator.GetClipByName("Dead").length + 0.5f;
         bossEnemy.ExpUp();
     }
     public override void Update()

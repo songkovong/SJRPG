@@ -10,14 +10,23 @@ public class EnemyAttackState : EnemyBaseState
     public override void Enter()
     {
         Debug.Log("Attack Enter: " + enemy.GetType().Name);
+        var thisEnemy = enemy.GetType().Name;
+
+        if (enemy.isBoss)
+        {
+            var rand = Random.Range(1, 3);
+            enemy.EnemyAnimator.SetAttackIndex(rand);
+            animationDuration = enemy.EnemyAnimator.GetClipByName("Attack " + rand.ToString()).length;
+        }
+        else
+        {
+            animationDuration = enemy.EnemyAnimator.GetClipByName("Attack").length;
+        }
 
         timer = 0f;
 
-        var thisEnemy = enemy.GetType().Name;
         SoundManager.Instance.Play2DSound(thisEnemy + " Attack Sound");
-
         enemy.EnemyAnimator.PlayAttack();
-        animationDuration = enemy.EnemyAnimator.GetClipByName("Attack").length;
 
         enemy.EnemyAI.ResetMove();
     }

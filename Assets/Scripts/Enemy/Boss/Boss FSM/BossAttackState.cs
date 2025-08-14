@@ -15,8 +15,8 @@ public class BossAttackState : BossBaseState
         var thisEnemy = bossEnemy.GetType().Name;
         SoundManager.Instance.Play2DSound(thisEnemy + " Attack Sound");
 
-        bossEnemy.EnemyAnimator.PlayAttack();
-        animationDuration = bossEnemy.EnemyAnimator.GetClipByName("Attack").length;
+        bossEnemy.BossAnimator.PlayRandomAttack(2);
+        animationDuration = bossEnemy.BossAnimator.GetClipByName("Attack").length;
 
         bossEnemy.EnemyAI.ResetMove();
     }

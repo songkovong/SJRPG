@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public bool isHit { get; set; } = false;
     public bool isDead { get; set; }
 
+    public bool isBoss { get; protected set; } = false;
+
     public GameObject hitbox;
     public GameObject damageText;
     public Transform damagePos;

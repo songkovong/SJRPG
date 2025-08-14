@@ -7,7 +7,7 @@ public class BossChaseState : BossBaseState
     public override void Enter()
     {
         Debug.Log("Chase Enter: " + bossEnemy.GetType().Name);
-        bossEnemy.EnemyAnimator.PlayChase(true);
+        bossEnemy.BossAnimator.PlayChase(true);
     }
     public override void Update() 
     {
@@ -38,6 +38,6 @@ public class BossChaseState : BossBaseState
     public override void Exit()
     {
         Debug.Log("Enemy Chase State Enter");
-        bossEnemy.EnemyAnimator.PlayChase(false);
+        bossEnemy.BossAnimator.PlayChase(false);
     }
 }

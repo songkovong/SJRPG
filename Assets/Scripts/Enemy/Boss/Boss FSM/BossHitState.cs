@@ -12,8 +12,8 @@ public class BossHitState : BossBaseState
         Debug.Log("Hit Enter: " + bossEnemy.GetType().Name);
         timer = 0f;
 
-        bossEnemy.EnemyAnimator.PlayHit();
-        animationDuration = bossEnemy.EnemyAnimator.GetClipByName("GetHit").length;
+        bossEnemy.BossAnimator.PlayHit();
+        animationDuration = bossEnemy.BossAnimator.GetClipByName("GetHit").length;
 
         bossEnemy.EnemyAI.ResetMove();
     }

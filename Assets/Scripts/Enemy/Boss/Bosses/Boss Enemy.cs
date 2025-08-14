@@ -7,7 +7,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
     public BossBaseState enemyCurrentState;
     public EnemySpawner spawner;
 
-    EnemyAnimator enemyAnimator;
+    BossAnimator bossAnimator;
     Animator animator;
     EnemyAI enemyAI;
     HitColor enemyHitColor;
@@ -15,8 +15,8 @@ public class BossEnemy : MonoBehaviour, IDamageable
     public int thisEnemyCode { get; protected set; } = -1;
 
     public float attackCooltime { get; protected set; } = 2f;
-    public float detectRadius { get; protected set; } = 10f;
-    public float detectAttackRadius { get; protected set; } = 1.5f;
+    public float detectRadius { get; protected set; } = 20f;
+    public float detectAttackRadius { get; protected set; } = 3f;
     public float moveSpeed { get; protected set; } = 1.2f;
     public float rotationSpeed { get; protected set; } = 2000f;
     public float attackDamage { get; protected set; } = 1f;
@@ -41,7 +41,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
     {
         playerstat = GameObject.FindWithTag("Player")?.GetComponent<PlayerStat>();
         animator = GetComponent<Animator>();
-        enemyAnimator = new EnemyAnimator(animator);
+        bossAnimator = new BossAnimator(animator);
         enemyAI = GetComponent<EnemyAI>();
 
         enemyHitColor = GetComponent<HitColor>();
@@ -189,7 +189,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    public EnemyAnimator EnemyAnimator => enemyAnimator;
+    public BossAnimator BossAnimator => bossAnimator;
     public Animator Animator => animator;
     public EnemyAI EnemyAI => enemyAI;
     public void HitboxOn() => hitbox.SetActive(true);

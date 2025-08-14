@@ -11,7 +11,7 @@ public class BossCoolState : BossBaseState
     {
         timer = 0f;
         Debug.Log("Cool Enter: " + bossEnemy.GetType().Name);
-        bossEnemy.EnemyAnimator.PlayCool(true);
+        bossEnemy.BossAnimator.PlayCool(true);
         cooltime = bossEnemy.attackCooltime;
         Debug.Log("Attack Cooltime " + cooltime);
     }
@@ -47,6 +47,6 @@ public class BossCoolState : BossBaseState
     public override void Exit()
     {
         Debug.Log("Enemy Cool State Enter");
-        bossEnemy.EnemyAnimator.PlayCool(false);
+        bossEnemy.BossAnimator.PlayCool(false);
     }
 }
