@@ -27,8 +27,11 @@ public class EnemyCoolState : EnemyBaseState
 
         if(enemy.isHit)
         {
-            enemy.ChangeState(new EnemyHitState(enemy));
-            return;
+            if (!enemy.isBoss)
+            {
+                enemy.ChangeState(new EnemyHitState(enemy));
+                return;
+            }
         }
 
         timer += Time.deltaTime;

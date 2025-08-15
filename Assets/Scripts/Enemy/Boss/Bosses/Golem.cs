@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Golem : Enemy, IDamageable
 {
+    public GameObject hitboxL;
+    public GameObject hitboxR;
     [SerializeField] private List<GameObject> dropItems;
     [SerializeField] private GameObject dropCoin;
     protected override void Awake()
@@ -20,6 +22,13 @@ public class Golem : Enemy, IDamageable
         godmodeDuration = 1f;
         dependRate = 0.7f;
         isBoss = true;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        HitboxLOff();
+        HitboxROff();
     }
 
     public override void TakeDamage(int minDamage, int maxDamage)
@@ -50,28 +59,22 @@ public class Golem : Enemy, IDamageable
     {
         foreach (GameObject dropItem in dropItems)
         {
-            float rate = Random.Range(0f, 1f);
-            // Item Drop
-            if (dropItem?.GetComponent<ItemPickUp>().item.itemDropRate >= rate)
+            var rotation = Random.Range(0f, 180f);
+            GameObject dropped = Instantiate(dropItem, transform.position, Quaternion.Euler(rotation, 0f, rotation));
+            Rigidbody rb = dropped.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                var rotation = Random.Range(0f, 180f);
-                GameObject dropped = Instantiate(dropItem, transform.position, Quaternion.Euler(rotation, 0f, rotation));
-                Rigidbody rb = dropped.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    var randomUp = 0.05f;
-                    var randomRight = Random.Range(-0.05f, 0.05f);
-                    rb.AddForce(Vector3.up * randomUp + Vector3.right * randomRight, ForceMode.Impulse);
-                }
-                Debug.Log("Item Dropped");
+                var randomUp = 0.05f;
+                var randomRight = Random.Range(-0.05f, 0.05f);
+                rb.AddForce(Vector3.up * randomUp + Vector3.right * randomRight, ForceMode.Impulse);
             }
+            Debug.Log("Item Dropped");
         }
     }
 
     public override void DropCoin()
     {
-        float rate = Random.Range(0f, 1f);
-        if (dropCoin?.GetComponent<CoinPickUp>().coin.coinDropRate >= rate)
+        for (int i = 0; i < 5; i++)
         {
             var rotation = Random.Range(0f, 180f);
             GameObject coindropped = Instantiate(dropCoin, transform.position, Quaternion.Euler(rotation, 0f, rotation));
@@ -86,4 +89,10 @@ public class Golem : Enemy, IDamageable
             Debug.Log("Coin Dropped");
         }
     }
+
+    public void HitboxLOn() => hitboxL.SetActive(true);
+    public void HitboxLOff() => hitboxL.SetActive(false);
+    public void HitboxROn() => hitboxR.SetActive(true);
+    public void HitboxROff() => hitboxR.SetActive(false);
+    public void GolemAttackSoundPlay() => SoundManager.Instance.Play2DSound("Golem Attack Sound");
 }

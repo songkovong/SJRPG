@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject skillPanel;
     public GameObject shopPanel;
     public GameObject pausePanel;
+    public GameObject mapPanel;
     public SlotTooltip itemTooltipPanel;
 
     InputNumber inputNumber;
@@ -50,6 +52,8 @@ public class UIManager : MonoBehaviour
         player.playerInput.UI.Skill.started += OnSkill;
         player.playerInput.UI.Close.started += OnClose;
         player.playerInput.UI.Pause.started += OnPause;
+        player.playerInput.UI.Map.started += OnMap;
+        
     }
 
     void Update()
@@ -64,6 +68,7 @@ public class UIManager : MonoBehaviour
         player.playerInput.UI.Skill.started -= OnSkill;
         player.playerInput.UI.Close.started -= OnClose;
         player.playerInput.UI.Pause.started -= OnPause;
+        player.playerInput.UI.Map.started -= OnMap;
     }
 
     void OnStat(InputAction.CallbackContext ctx)
@@ -84,6 +89,11 @@ public class UIManager : MonoBehaviour
     void OnPause(InputAction.CallbackContext ctx)
     {
         OpenWindow(pausePanel);
+    }
+
+    void OnMap(InputAction.CallbackContext ctx)
+    {
+        OpenWindow(mapPanel);
     }
 
     void OnClose(InputAction.CallbackContext ctx)
@@ -149,6 +159,7 @@ public class UIManager : MonoBehaviour
         skillPanel.SetActive(false);
         shopPanel.SetActive(false);
         pausePanel.SetActive(false);
+        mapPanel.SetActive(false);
     }
 
     void TooltipClose(GameObject panel)

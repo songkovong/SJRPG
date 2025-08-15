@@ -21,8 +21,11 @@ public class EnemyChaseState : EnemyBaseState
         }
 
         if(enemy.isHit) {
-            enemy.ChangeState(new EnemyHitState(enemy)); 
-            return;
+            if (!enemy.isBoss)
+            {
+                enemy.ChangeState(new EnemyHitState(enemy)); 
+                return;
+            }
         }
 
         if(enemy.EnemyAI.isAttack) {

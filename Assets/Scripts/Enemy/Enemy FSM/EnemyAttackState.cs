@@ -21,11 +21,11 @@ public class EnemyAttackState : EnemyBaseState
         else
         {
             animationDuration = enemy.EnemyAnimator.GetClipByName("Attack").length;
+            SoundManager.Instance.Play2DSound(thisEnemy + " Attack Sound");
         }
 
         timer = 0f;
 
-        SoundManager.Instance.Play2DSound(thisEnemy + " Attack Sound");
         enemy.EnemyAnimator.PlayAttack();
 
         enemy.EnemyAI.ResetMove();
@@ -41,7 +41,10 @@ public class EnemyAttackState : EnemyBaseState
 
         if(enemy.isHit) 
         {
-            enemy.ChangeState(new EnemyHitState(enemy));
+            if (!enemy.isBoss)
+            {
+                enemy.ChangeState(new EnemyHitState(enemy));
+            }
         }
         
         timer += Time.deltaTime;

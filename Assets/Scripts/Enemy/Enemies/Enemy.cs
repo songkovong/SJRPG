@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void Awake() { }
 
-    void Start()
+    protected virtual void Start()
     {
         playerstat = GameObject.FindWithTag("Player")?.GetComponent<PlayerStat>();
         animator = GetComponent<Animator>();
