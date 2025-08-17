@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         ChangeState(new MoveState(this));
-        inventory.AcquireCoin(100000);
+        // inventory.AcquireCoin(100000);
     }
 
     void Update()
@@ -299,6 +299,7 @@ public class Player : MonoBehaviour
     public void AttackEnd() => swordHitbox?.HitboxOff();
     public void TrailStart() => swordTrail?.StartTrail();
     public void TrailEnd() => swordTrail?.EndTrail();
+    public void FootStep() => SoundManager.Instance.Play2DSound("Hit Sound");
 
     #endregion
 

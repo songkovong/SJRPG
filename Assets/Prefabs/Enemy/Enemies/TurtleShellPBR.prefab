@@ -611,6 +611,7 @@ MonoBehaviour:
   hitbox: {fileID: 0}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 3320476850326743895}
+  HPBar: {fileID: 3787741749059558977}
   dropItems:
   - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
   dropCoin: {fileID: 4136489873265671971, guid: 1d458be3d78e0714683227df836f4ed4, type: 3}

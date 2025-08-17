@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 7555153515345451942}
   m_Layer: 0
   m_Name: CactusPBR
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,6 +350,7 @@ MonoBehaviour:
   hitbox: {fileID: 1795069815547978554}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 8718036645423305564}
+  HPBar: {fileID: 69003186562685895}
   dropItems:
   - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
   dropCoin: {fileID: 4136489873265671971, guid: 1d458be3d78e0714683227df836f4ed4, type: 3}

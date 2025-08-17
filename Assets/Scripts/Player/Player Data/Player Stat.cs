@@ -118,8 +118,8 @@ public class PlayerStat : MonoBehaviour
             data.exp *= 1.4f;
             data.expCount = 0;
 
-            data.statPoint += 3;
-            data.skillStatPoint++;
+            data.statPoint += 5;
+            data.skillStatPoint += 2;
 
             data.currentHealth = data.maxHealth;
             data.currentMagic = data.maxMagic;
@@ -153,7 +153,7 @@ public class PlayerStat : MonoBehaviour
             data.agility++;
             data.statPoint--;
 
-            float a = 0.1f;
+            float a = 0.05f;
 
             float baseMove = 6f;
             float baseSprint = 10f;

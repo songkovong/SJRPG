@@ -8,7 +8,7 @@ public class Cactus : Enemy, IDamageable
     protected override void Awake()
     {
         base.Awake();
-        thisEnemyCode = 1;
+        thisEnemyCode = 4;
         attackCooltime = 1f;
         detectRadius = 7f;
         detectAttackRadius = 1.5f;

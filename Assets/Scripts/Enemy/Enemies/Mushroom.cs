@@ -8,7 +8,7 @@ public class Mushroom : Enemy, IDamageable
     protected override void Awake()
     {
         base.Awake();
-        thisEnemyCode = 1;
+        thisEnemyCode = 3;
         attackCooltime = 1f;
         detectRadius = 7f;
         detectAttackRadius = 1.5f;

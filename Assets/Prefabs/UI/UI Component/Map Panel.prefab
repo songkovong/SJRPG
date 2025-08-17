@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 2132489069018636618}
   - component: {fileID: 471071197469176540}
   - component: {fileID: 4659003446927915933}
+  - component: {fileID: 2645335719666208604}
   m_Layer: 5
   m_Name: Map Panel
   m_TagString: Untagged
@@ -711,3 +712,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2645335719666208604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403037003055248810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9119ec4051c68c42930521104a5684d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExitButton: {fileID: 3477208128245085148}

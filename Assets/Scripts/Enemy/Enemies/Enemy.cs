@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public GameObject hitbox;
     public GameObject damageText;
     public Transform damagePos;
-    
+    public GameObject HPBar;
 
 
     protected virtual void Awake() { }
@@ -64,6 +64,15 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             enemyAI.DetectPlayer(detectRadius);
             enemyAI.DetectAttackPlayer(detectAttackRadius);
+        }
+
+        if (currentHealth == maxHealth)
+        {
+            HPBar.SetActive(false);
+        }
+        else
+        {
+            HPBar.SetActive(true);
         }
     }
 

@@ -334,10 +334,10 @@ GameObject:
   - component: {fileID: 1077356410}
   - component: {fileID: 1077356409}
   - component: {fileID: 3469859887580739291}
-  - component: {fileID: 6200789819761287311}
   - component: {fileID: 7984760114724287656}
   - component: {fileID: 6153164273924719349}
   - component: {fileID: 8448111601435193030}
+  - component: {fileID: 6200789819761287311}
   m_Layer: 0
   m_Name: Polyart_Golem
   m_TagString: Enemy
@@ -408,37 +408,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &6200789819761287311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077356408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e636a3cd21dc6fb4481d2557e49bd3c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
-  spawner: {fileID: 0}
-  hitbox: {fileID: 0}
-  damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
-  damagePos: {fileID: 6505796765773748257}
-  hitboxL: {fileID: 5821174372901719214}
-  hitboxR: {fileID: 2595969881893289285}
-  dropItems:
-  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
-  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
-  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
-  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
-  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
-  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
-  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
-  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
-  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
-  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
-  dropCoin: {fileID: 1950871307682000, guid: 01348926c7cbb3347a006c37204131c3, type: 3}
 --- !u!114 &7984760114724287656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +455,38 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6200789819761287311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077356408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e636a3cd21dc6fb4481d2557e49bd3c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerstat: {fileID: 0}
+  spawner: {fileID: 0}
+  hitbox: {fileID: 0}
+  damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
+  damagePos: {fileID: 6505796765773748257}
+  HPBar: {fileID: 3321506025758331650}
+  hitboxL: {fileID: 5821174372901719214}
+  hitboxR: {fileID: 2595969881893289285}
+  dropItems:
+  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
+  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
+  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
+  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
+  - {fileID: 455825407762266038, guid: b34eedc44a2a8a94eb160558a4cf90bd, type: 3}
+  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
+  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
+  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
+  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
+  - {fileID: 455825407762266038, guid: 9ab9553e954fed6448ba1d0aed120f07, type: 3}
+  dropCoin: {fileID: 1950871307682000, guid: 01348926c7cbb3347a006c37204131c3, type: 3}
 --- !u!1 &1099011281
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,8 +941,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.6387508, y: -0.64281785, z: 0.0058650514, w: 0.4227863}
   m_LocalPosition: {x: -65.1, y: -54.4, z: 78.2}
-  m_LocalScale: {x: 99.99998, y: 99.999985, z: 99.999985}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 120, y: 120, z: 120}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 739286404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1197,8 +1198,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.08629539, y: -0.52865815, z: -0.55645365, w: 0.63516384}
   m_LocalPosition: {x: -45, y: -44, z: -77}
-  m_LocalScale: {x: 99.99998, y: 99.99998, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 120, y: 120, z: 120}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 763194842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

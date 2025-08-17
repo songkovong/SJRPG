@@ -88,7 +88,7 @@ public class PlayerStatData : ScriptableObject
     {
         // Level
         level = PlayerPrefs.HasKey("Level") ? PlayerPrefs.GetInt("Level") : 1;
-        exp = PlayerPrefs.HasKey("EXP") ? PlayerPrefs.GetFloat("EXP") : 100;
+        exp = PlayerPrefs.HasKey("EXP") ? PlayerPrefs.GetFloat("EXP") : 10;
         expCount = PlayerPrefs.HasKey("EXPCount") ? PlayerPrefs.GetFloat("EXPCount") : 0;
 
         isLevelUp = false;
@@ -123,13 +123,13 @@ public class PlayerStatData : ScriptableObject
         // FindWeapons();
 
         // Stat Point
-        statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 10000;
+        statPoint = PlayerPrefs.HasKey("StatPoint") ? PlayerPrefs.GetInt("StatPoint") : 0;
         strength = PlayerPrefs.HasKey("StrengthPoint") ? PlayerPrefs.GetInt("StrengthPoint") : 1;
         agility = PlayerPrefs.HasKey("AgilityPoint") ? PlayerPrefs.GetInt("AgilityPoint") : 1;
         magic = PlayerPrefs.HasKey("MagicPoint") ? PlayerPrefs.GetInt("MagicPoint") : 1;
         depend = PlayerPrefs.HasKey("DependPoint") ? PlayerPrefs.GetInt("DependPoint") : 1;
 
-        skillStatPoint = PlayerPrefs.HasKey("SkillStatPoint") ? PlayerPrefs.GetInt("SkillStatPoint") : 10000;
+        skillStatPoint = PlayerPrefs.HasKey("SkillStatPoint") ? PlayerPrefs.GetInt("SkillStatPoint") : 0;
     }
 
     public void DeleteAll()

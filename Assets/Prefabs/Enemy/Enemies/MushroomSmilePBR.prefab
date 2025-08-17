@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6474019425818565684}
   m_Layer: 0
   m_Name: MushroomSmilePBR
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   hitbox: {fileID: 3847155577277085413}
   damageText: {fileID: 3077595896292288601, guid: bb0d86997ca455d46aeed3744439c487, type: 3}
   damagePos: {fileID: 6098416042336196367}
+  HPBar: {fileID: 2486373740705515008}
   dropItems:
   - {fileID: 3139048546252957491, guid: 46fec67125d905a44b2b0f881c4d1289, type: 3}
   dropCoin: {fileID: 100719015017695889, guid: 84c54630b9800e5419439dbfa74de6db, type: 3}

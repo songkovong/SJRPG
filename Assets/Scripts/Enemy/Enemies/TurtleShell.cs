@@ -9,7 +9,7 @@ public class TurtleShell : Enemy, IDamageable
     protected override void Awake()
     {
         base.Awake();
-        thisEnemyCode = 1;
+        thisEnemyCode = 2;
         attackCooltime = 1.5f;
         detectRadius = 7f;
         detectAttackRadius = 2.5f;
