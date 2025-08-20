@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Wing Swarm
+  m_Controller: {fileID: 9100000, guid: bdf813bd3ab1e2f4e84f9277449076df, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ced1d66978a144d0b646ff621ebe620c, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: 162c982447ff467a81c63f0c731aed7a, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 5b283b002bf74fc4b827cc4e67b99155, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: 32eabf87c5874ae2b4a1a0cc8b55b52b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: f99c1e532d874b5aa4c470d8aad16a64, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: f9ac037bacb2422eb183ed814e3a6d1d, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 35bb20ecf5de4fdd8dcd8e28e4053f3d, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: c78e4349565c42a8bc257e2133792c35, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 08c3544f7f1144268bcc2a28cb6209e7, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: 085e31323a6b42248f44aff75446a550, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: a3010b0fc7044499ad34afdf5326f623, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: f7764eb5f90623745969e37e03db792e, type: 3}

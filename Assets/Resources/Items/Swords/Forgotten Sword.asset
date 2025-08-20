@@ -17,7 +17,7 @@ MonoBehaviour:
   itemDesc: It is forgotten hero's sword.
   itemType: 0
   itemImage: {fileID: 21300000, guid: 114c13acd690eca48a9ab1503c4e973a, type: 3}
-  itemDropRate: 1
+  itemDropRate: 0
   cooltime: 0
   itemPrefab: {fileID: 3832907126045494399, guid: 774d8d927d4124a4a93faefeda269548, type: 3}
   buyPrice: 1500

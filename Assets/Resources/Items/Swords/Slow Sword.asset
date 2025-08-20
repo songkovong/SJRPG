@@ -17,7 +17,7 @@ MonoBehaviour:
   itemDesc: This sword is too slow but strong.
   itemType: 0
   itemImage: {fileID: 21300000, guid: 4ce68bd00ecc6f64baefd01ce27f33f9, type: 3}
-  itemDropRate: 1
+  itemDropRate: 0
   cooltime: 0
   itemPrefab: {fileID: 6013990982369288243, guid: 0029002b2fada3d4497680a36b12ae3e, type: 3}
   buyPrice: 500

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8929bf2b3a6294cac7184a3756b736, type: 3}
+  m_Name: Blue Sword
+  m_EditorClassIdentifier: 
+  itemCode: 105
+  itemName: Blue Sword
+  itemDesc: This blue sword came from another dimension.
+  itemType: 0
+  itemImage: {fileID: 21300000, guid: d890f7dd6732bc347889ad5b21d51459, type: 3}
+  itemDropRate: 0
+  cooltime: 0
+  itemPrefab: {fileID: 4214597693441333592, guid: 36589f066b25b1b4dab74eb18d6972fd, type: 3}
+  buyPrice: 3800
+  sellPrice: 1800
+  weaponData: {fileID: 11400000, guid: b8ce499a1247eb548b0ead59d6c58fec, type: 2}

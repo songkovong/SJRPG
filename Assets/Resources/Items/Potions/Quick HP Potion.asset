@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8929bf2b3a6294cac7184a3756b736, type: 3}
+  m_Name: Quick HP Potion
+  m_EditorClassIdentifier: 
+  itemCode: 5
+  itemName: Quick HP Potion
+  itemDesc: It's useful quick potion, increase 30 HP.
+  itemType: 1
+  itemImage: {fileID: 21300000, guid: 51c2f19bd5b83c444b9e2076698874bf, type: 3}
+  itemDropRate: 0.1
+  cooltime: 3
+  itemPrefab: {fileID: 3283204077943908410, guid: dc7b7a2cedf6601448d0da6a4a55a96a, type: 3}
+  buyPrice: 120
+  sellPrice: 60
+  weaponData: {fileID: 0}

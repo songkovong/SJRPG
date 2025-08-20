@@ -17,7 +17,7 @@ MonoBehaviour:
   itemDesc: It is hero's sword.
   itemType: 0
   itemImage: {fileID: 21300000, guid: ffa9c656cac7ffb458e861b457ea3ef9, type: 3}
-  itemDropRate: 1
+  itemDropRate: 0
   cooltime: 0
   itemPrefab: {fileID: 5610884078883986163, guid: a7df2afa06133a84991f8a6dbd8a71c5, type: 3}
   buyPrice: 800
