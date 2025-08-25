@@ -384,6 +384,8 @@ public class PlayerStat : MonoBehaviour
         player.inventory.LoadSlots();
         player.inventory.LoadCoin();
 
+        QuestManager.Instance.LoadQuests();
+
         // FindWeapons();
     }
 
@@ -400,11 +402,14 @@ public class PlayerStat : MonoBehaviour
         player.SavePlayerPosAndRot();
         player.inventory.SaveSlots();
         player.inventory.SaveCoin();
+
+        QuestManager.Instance.SaveQuests();
     }
 
     public void DeleteAllData()
     {
         data.DeleteAll();
+        QuestManager.Instance.ResetAllQuests();
     }
 
     IEnumerator LoadDataCoroutine()

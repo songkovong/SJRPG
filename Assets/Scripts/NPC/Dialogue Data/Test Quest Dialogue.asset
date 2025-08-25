@@ -18,6 +18,6 @@ MonoBehaviour:
   - I am Test Quest NPC
   - Can you Accept My quest?
   tirggerQuest: 1
-  questID: Test Quest
+  questID: 1
   openShop: 0
   shopID: 

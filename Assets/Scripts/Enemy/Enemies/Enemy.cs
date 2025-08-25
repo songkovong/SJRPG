@@ -157,6 +157,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void EnemyDie() // In DeadState
     {
+        QuestManager.Instance.UpdateEnemyKill(thisEnemyCode);
+
         if (spawner != null)
         {
             spawner.NotifyEnemyDead(gameObject);

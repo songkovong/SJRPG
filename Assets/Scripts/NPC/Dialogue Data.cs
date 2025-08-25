@@ -9,7 +9,7 @@ public class DialogueData : ScriptableObject
     public List<string> lines;
 
     public bool tirggerQuest;
-    public string questID;
+    public int questID;
     public bool openShop;
     public string shopID;
 }

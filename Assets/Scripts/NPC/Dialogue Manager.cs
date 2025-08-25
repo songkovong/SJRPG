@@ -151,7 +151,9 @@ public class DialogueManager : MonoBehaviour
         {
             if (currentData.tirggerQuest)
             {
-                QuestManager.Instance.AcceptQuest(currentData.questID);
+                bool accept = QuestManager.Instance.AcceptQuest(currentData.questID);
+                if (accept) Debug.Log("Quest Accept");
+                else Debug.Log("Quest is Complete or Accepted");
             }
 
             if (currentData.openShop)
