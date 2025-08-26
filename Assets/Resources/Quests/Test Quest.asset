@@ -17,6 +17,7 @@ MonoBehaviour:
   questDesc: It's for test Quest.
   targetEnemyCode: 1
   targetEnemyCount: 5
+  targetEnemyName: Slime
   targetItem: {fileID: 0}
   targetItemCount: 0
   rewardCoin: 500

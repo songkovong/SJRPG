@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -7,6 +8,11 @@ public class QuestManager : MonoBehaviour
     public List<QuestData> allQuests;
     private Dictionary<int, QuestProgress> activeQuests = new Dictionary<int, QuestProgress>();
     private HashSet<int> completeQuests = new HashSet<int>();
+
+    public QuestUI questUI;
+
+    public GameObject questCompleteTextPrefab;
+    public Transform hudParent;
 
     void Awake()
     {
@@ -27,6 +33,8 @@ public class QuestManager : MonoBehaviour
             currentItemCount = 0,
             isCompleted = false
         });
+
+        UpdateUI();
 
         return true;
     }
@@ -54,6 +62,7 @@ public class QuestManager : MonoBehaviour
                 CheckQuestComplete(quest, progress);
             }
         }
+        UpdateUI();
     }
 
     public void UpdateItemCollect(Item item)
@@ -69,6 +78,7 @@ public class QuestManager : MonoBehaviour
                 CheckQuestComplete(quest, progress);
             }
         }
+        UpdateUI();
     }
 
     private void CheckQuestComplete(QuestData quest, QuestProgress progress)
@@ -82,6 +92,19 @@ public class QuestManager : MonoBehaviour
         {
             progress.isCompleted = true;
             GiveReward(quest);
+
+            if (questCompleteTextPrefab != null && hudParent != null)
+            {
+                GameObject obj = Instantiate(questCompleteTextPrefab, hudParent);
+                TMP_Text tmp = obj.GetComponent<TMP_Text>();
+                if (tmp != null)
+                {
+                    tmp.text = $"{quest.questName} Complete!";
+
+                    Destroy(obj, 2f);
+                }
+            }
+
             activeQuests.Remove(quest.questID);
             completeQuests.Add(quest.questID);
             Debug.Log($"Quest Complete");
@@ -155,6 +178,8 @@ public class QuestManager : MonoBehaviour
                 }
             }
         }
+
+        UpdateUI();
     }
 
     public void ResetAllQuests()
@@ -163,6 +188,15 @@ public class QuestManager : MonoBehaviour
         completeQuests.Clear();
 
         SaveQuests();
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
+        if (questUI != null)
+        {
+            questUI.RefreshUI(activeQuests, completeQuests, allQuests);
+        }
     }
 }
 

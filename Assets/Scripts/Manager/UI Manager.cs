@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject shopPanel;
     public GameObject pausePanel;
     public GameObject mapPanel;
+    public GameObject questPanel;
     public SlotTooltip itemTooltipPanel;
 
     InputNumber inputNumber;
@@ -53,6 +54,7 @@ public class UIManager : MonoBehaviour
         player.playerInput.UI.Close.started += OnClose;
         player.playerInput.UI.Pause.started += OnPause;
         player.playerInput.UI.Map.started += OnMap;
+        player.playerInput.UI.Quest.started += OnQuest;
         
     }
 
@@ -69,6 +71,7 @@ public class UIManager : MonoBehaviour
         player.playerInput.UI.Close.started -= OnClose;
         player.playerInput.UI.Pause.started -= OnPause;
         player.playerInput.UI.Map.started -= OnMap;
+        player.playerInput.UI.Quest.started -= OnQuest;
     }
 
     void OnStat(InputAction.CallbackContext ctx)
@@ -94,6 +97,11 @@ public class UIManager : MonoBehaviour
     void OnMap(InputAction.CallbackContext ctx)
     {
         OpenWindow(mapPanel);
+    }
+
+    void OnQuest(InputAction.CallbackContext ctx)
+    {
+        OpenWindow(questPanel);
     }
 
     void OnClose(InputAction.CallbackContext ctx)
@@ -160,6 +168,7 @@ public class UIManager : MonoBehaviour
         shopPanel.SetActive(false);
         pausePanel.SetActive(false);
         mapPanel.SetActive(false);
+        questPanel.SetActive(false);
     }
 
     void TooltipClose(GameObject panel)

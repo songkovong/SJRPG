@@ -498,6 +498,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Quest"",
+                    ""type"": ""Button"",
+                    ""id"": ""e31130a4-9c20-4ec1-8a5a-e96441d2f2af"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""56b92057-0bfa-49ca-8046-c5006239eadb"",
@@ -912,6 +921,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f886de96-72f2-4679-920d-09020c43c1b3"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Quest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1c5c7fdb-72b7-43fd-90dc-3de6da14da06"",
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
@@ -1156,6 +1176,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_UI_Item = m_UI.FindAction("Item", throwIfNotFound: true);
         m_UI_Skill = m_UI.FindAction("Skill", throwIfNotFound: true);
         m_UI_Map = m_UI.FindAction("Map", throwIfNotFound: true);
+        m_UI_Quest = m_UI.FindAction("Quest", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -1397,6 +1418,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Item;
     private readonly InputAction m_UI_Skill;
     private readonly InputAction m_UI_Map;
+    private readonly InputAction m_UI_Quest;
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_Enter;
     private readonly InputAction m_UI_Point;
@@ -1417,6 +1439,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Item => m_Wrapper.m_UI_Item;
         public InputAction @Skill => m_Wrapper.m_UI_Skill;
         public InputAction @Map => m_Wrapper.m_UI_Map;
+        public InputAction @Quest => m_Wrapper.m_UI_Quest;
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @Enter => m_Wrapper.m_UI_Enter;
         public InputAction @Point => m_Wrapper.m_UI_Point;
@@ -1456,6 +1479,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Map.started += instance.OnMap;
             @Map.performed += instance.OnMap;
             @Map.canceled += instance.OnMap;
+            @Quest.started += instance.OnQuest;
+            @Quest.performed += instance.OnQuest;
+            @Quest.canceled += instance.OnQuest;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -1508,6 +1534,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Map.started -= instance.OnMap;
             @Map.performed -= instance.OnMap;
             @Map.canceled -= instance.OnMap;
+            @Quest.started -= instance.OnQuest;
+            @Quest.performed -= instance.OnQuest;
+            @Quest.canceled -= instance.OnQuest;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -1624,6 +1653,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnItem(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
+        void OnQuest(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnEnter(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);

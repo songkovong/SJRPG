@@ -11,6 +11,7 @@ public class QuestData : ScriptableObject
     [Header("Target enemy")]
     public int targetEnemyCode;
     public int targetEnemyCount;
+    public string targetEnemyName;
 
     [Header("Target item")]
     public Item targetItem;

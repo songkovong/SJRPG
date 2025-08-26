@@ -476,6 +476,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Quest",
+                    "type": "Button",
+                    "id": "e31130a4-9c20-4ec1-8a5a-e96441d2f2af",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "56b92057-0bfa-49ca-8046-c5006239eadb",
@@ -885,6 +894,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
                     "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f886de96-72f2-4679-920d-09020c43c1b3",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Quest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
