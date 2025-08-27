@@ -1,34 +1,28 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class QuestItemUI : MonoBehaviour
+public class QuestItemUI : MonoBehaviour, IPointerClickHandler
 {
     public TMP_Text questNameText;
-    public TMP_Text questDescText;
-    public TMP_Text requirementText;
+
+    private QuestData _data;
+    private QuestProgress _progress;
 
 
     public void Setup(QuestData data, QuestProgress progress)
     {
+        this._data = data;
+        this._progress = progress;
+
         questNameText.text = data.questName;
-        questDescText.text = data.questDesc;
+    }
 
-        string req = "";
-
-        if (data.targetEnemyCount > 0)
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            int cur = progress != null ? progress.currentEnemyCount : data.targetEnemyCount;
-            int max = data.targetEnemyCount;
-            req += $"{data.targetEnemyName}: {cur} / {max}";
+            QuestUI.Instance.ShowQuestDetail(_data, _progress);
         }
-
-        if (data.targetItem != null && data.targetItemCount > 0)
-        {
-            int cur = progress != null ? progress.currentItemCount : data.targetItemCount;
-            int max = data.targetItemCount;
-            req += $"{data.targetItem.itemName}: {cur} / {max}";
-        }
-
-        requirementText.text = req;
     }
 }

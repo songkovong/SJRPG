@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9844a25848666544eac47719afd6de4a, type: 3}
   m_Name: Test Quest Dialogue 1
   m_EditorClassIdentifier: 
-  dialougeID: Test Quest NPC 2
+  dialougeID: Mushroom collecter
   lines:
-  - Hello
-  - I am Test Quest NPC
-  - Can you Accept My quest?
+  - "Hey, I\u2019m a Mushroom Collector!"
+  - Can you take down 5 mushrooms for me?
   tirggerQuest: 1
   questID: 2
   openShop: 0

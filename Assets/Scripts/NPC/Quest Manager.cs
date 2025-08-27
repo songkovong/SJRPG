@@ -123,6 +123,11 @@ public class QuestManager : MonoBehaviour
         {
             Player.instance.inventory.AcquireCoin(quest.rewardCoin);
         }
+
+        if (quest.rewardEXP != 0)
+        {
+            Player.instance.playerStat.data.expCount += quest.rewardEXP;
+        }
     }
 
     [System.Serializable]

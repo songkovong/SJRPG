@@ -35,6 +35,8 @@ public class Mushroom : Enemy, IDamageable
 
     public override void EnemyDie() // In DeadState
     {
+        QuestManager.Instance.UpdateEnemyKill(thisEnemyCode);
+        
         if (spawner != null)
         {
             spawner.NotifyEnemyDead(gameObject);

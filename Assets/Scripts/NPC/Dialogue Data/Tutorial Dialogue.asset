@@ -26,10 +26,13 @@ MonoBehaviour:
   - Press P to return main or quit this game.
   - When you defeat enemies, they sometimes drop items or coins. Press Z to pick
     them up.
-  - Press Z to pick up the left sword. Then open your inventory by pressing I and
-    right mouse click the weapon to equip it.
+  - If you get some items, weapons or potions, then open your inventory by pressing
+    I and right mouse click the weapon to equip it.
+  - "Once you\u2019ve accepted the quest, press Q to view it."
+  - "If you\u2019re not sure where you are, check the minimap in the top right corner
+    or press M to open the map."
   - If you ever forget any of this, just ask me again anytime!
   tirggerQuest: 0
-  questID: 
+  questID: 0
   openShop: 0
   shopID: 

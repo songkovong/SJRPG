@@ -21,4 +21,5 @@ public class QuestData : ScriptableObject
     public int rewardCoin;
     public Item rewardItem;
     public int rewardItemCount;
+    public int rewardEXP;
 }

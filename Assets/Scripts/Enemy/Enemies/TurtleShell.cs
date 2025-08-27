@@ -36,6 +36,8 @@ public class TurtleShell : Enemy, IDamageable
 
     public override void EnemyDie() // In DeadState
     {
+        QuestManager.Instance.UpdateEnemyKill(thisEnemyCode);
+
         if (spawner != null)
         {
             spawner.NotifyEnemyDead(gameObject);
@@ -44,9 +46,6 @@ public class TurtleShell : Enemy, IDamageable
         {
             DestroyEnemy();
         }
-
-        // Item Drop
-        Debug.Log("Item Dropped");
     }
 
     public override void DropItem()
