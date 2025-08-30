@@ -1636,7 +1636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 290316337620508333, guid: aed66dbef465c574db519465f9f6f38c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.51
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 290316337620508333, guid: aed66dbef465c574db519465f9f6f38c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32446,6 +32446,7 @@ MonoBehaviour:
   npcNameText: {fileID: 1083035252}
   dialogueText: {fileID: 94143718}
   acceptText: {fileID: 19291711}
+  currentLines: []
 --- !u!4 &1798479383
 Transform:
   m_ObjectHideFlags: 0
@@ -39573,12 +39574,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quest Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8129465638116961220, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129465638116961220, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129465638116961220, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8816579628108975878, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8816579628108975878, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846933738033158166, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846933738033158166, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846933738033158166, guid: 0fd24aea45b971d4399ab90a5fc8130b, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

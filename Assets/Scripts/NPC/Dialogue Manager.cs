@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TMP_Text acceptText;
 
     private DialogueData currentData;
+    public List<string> currentLines;
     private int currentIndex = 0;
     private bool isPlaying = false;
 
@@ -48,7 +50,7 @@ public class DialogueManager : MonoBehaviour
             if (isTyping)
             {
                 if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-                dialogueText.text = currentData.lines[currentIndex];
+                dialogueText.text = currentLines[currentIndex];
                 isTyping = false;
                 lineEnd = true;
                 return;
@@ -67,6 +69,7 @@ public class DialogueManager : MonoBehaviour
         if (data == null) return;
 
         currentData = data;
+        currentLines = data.GetDialogueLines();
         currentIndex = 0;
         isPlaying = true;
         dialoguePanel.SetActive(true);
@@ -79,7 +82,8 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowLine()
     {
-        if (currentData == null || currentIndex >= currentData.lines.Count)
+        // if (currentData == null || currentIndex >= currentData.lines.Count)
+        if (currentLines == null || currentIndex >= currentLines.Count)
         {
             EndDialogue();
             return;
@@ -89,7 +93,7 @@ public class DialogueManager : MonoBehaviour
         lineEnd = false;
 
         if(typingCoroutine != null) StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeLine(currentData.lines[currentIndex]));
+        typingCoroutine = StartCoroutine(TypeLine(currentLines[currentIndex]));
     }
 
     private IEnumerator TypeLine(string line)
@@ -129,9 +133,9 @@ public class DialogueManager : MonoBehaviour
     {
         currentIndex++;
 
-        if (currentIndex < currentData.lines.Count)
+        if (currentIndex < currentLines.Count)
         {
-            if (currentIndex == currentData.lines.Count - 1 && (currentData.tirggerQuest || currentData.openShop))
+            if (currentIndex == currentLines.Count - 1 && (currentData.tirggerQuest || currentData.openShop))
             {
                 acceptText.text = "Accept: E, Reject: Move";
             }
@@ -165,6 +169,7 @@ public class DialogueManager : MonoBehaviour
 
         npcNameText.text = "";
         currentData = null;
+        currentLines = null;
         CloseDialogue();
     }
 

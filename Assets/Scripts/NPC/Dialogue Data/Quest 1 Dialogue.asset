@@ -16,6 +16,10 @@ MonoBehaviour:
   lines:
   - "Hello, I\u2019m a traveler passing by."
   - Slimes have been swarming this area. Could you help me by defeating 10 of them?
+  questProgressLines:
+  - Help me for hunt slimes.
+  afterQuestLines:
+  - Thank you so much!
   tirggerQuest: 1
   questID: 1
   openShop: 0

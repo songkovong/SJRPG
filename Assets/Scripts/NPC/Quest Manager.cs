@@ -36,6 +36,20 @@ public class QuestManager : MonoBehaviour
 
         UpdateUI();
 
+        var quest = GetQuestData(questID);
+
+        if (questCompleteTextPrefab != null && hudParent != null && quest != null)
+        {
+            GameObject obj = Instantiate(questCompleteTextPrefab, hudParent);
+            TMP_Text tmp = obj.GetComponent<TMP_Text>();
+            if (tmp != null)
+            {
+                tmp.text = $"{quest.questName} Accept!";
+
+                Destroy(obj, 2f);
+            }
+        }
+
         return true;
     }
 
@@ -44,9 +58,19 @@ public class QuestManager : MonoBehaviour
         return activeQuests.ContainsKey(questID);
     }
 
+    public bool IsQuestComplete(int questID)
+    {
+        return completeQuests.Contains(questID);
+    }
+
     public QuestProgress GetQuestProgress(int questID)
     {
         return activeQuests.ContainsKey(questID) ? activeQuests[questID] : null;
+    }
+
+    public QuestData GetQuestData(int questID)
+    {
+        return allQuests.Find(q => q.questID == questID);
     }
 
     public void UpdateEnemyKill(int enemyCode)
