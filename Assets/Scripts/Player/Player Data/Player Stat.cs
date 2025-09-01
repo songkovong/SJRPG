@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
@@ -19,6 +18,12 @@ public class PlayerStat : MonoBehaviour
     public float weaponSpeed { get; set; } = 1f;
 
     public PlayerStatData data;
+
+    // event
+    public event System.Action OnStatChanged;
+
+    // ready?
+    public bool isReady { get; private set; } = false;
 
 
     #region Life Cycle
@@ -41,6 +46,8 @@ public class PlayerStat : MonoBehaviour
 
         // LoadAllData();
         StartCoroutine(LoadDataCoroutine());
+
+        isReady = true;
     }
 
     void Update()
@@ -90,6 +97,8 @@ public class PlayerStat : MonoBehaviour
 
         StartCoroutine(HitColorCoroutine());
         StartCoroutine(HitCoroutine());
+
+        OnStatChanged?.Invoke();
 
         Debug.Log("Player current Health = " + data.currentHealth);
     }
