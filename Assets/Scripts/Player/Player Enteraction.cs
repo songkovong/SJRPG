@@ -4,15 +4,11 @@ public class PlayerEnteraction : MonoBehaviour
 {
     // [SerializeField] private float maxDistance = 0.1f; // Enteraction distance
     private float pickupSphereRadius = 3f;
-    private float enteractiveSphereRadius = 3f;
     // private RaycastHit hitInfo;
     private Transform pickupItem;
     [SerializeField] private LayerMask layerMask;
     private Inventory inventory;
     Player player;
-
-    float checkTimer;
-    float checkInterval = 1f;
 
     void Start()
     {
